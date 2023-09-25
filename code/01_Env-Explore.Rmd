@@ -1,0 +1,48 @@
+---
+title: "01_Env-Explore"
+date: "2023-09-20"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,         # Display code chunks
+  eval = TRUE,        # Evaluate code chunks
+  warning = FALSE,     # Hide warnings
+  message = FALSE,     # Hide messages
+  fig.width = 10,       # Set plot width in inches
+  fig.height = 6,      # Set plot height in inches
+  fig.align = "center" # Align plots to the center
+)
+```
+
+This code is mostly exploratory analysis of WOAC environmental data at bio stations between 2014-2022.
+
+# Import Data
+
+WOAC water chemistry data
+This dataset was acquired from BethElLee Herrmann and is a compilation of mesurements from bottle samples and from the CTD collected at each depth where bottle water was collected. This sheet is the second tab of the raw data spreadsheet. This dataset incluedes data on:
+- pH
+- pCO2
+- CTD pressure
+- CTD temperature
+- CTD salinity
+- CTD oxygen
+- oxygen
+- DIC
+- total alkalinity
+- phosphate
+- silicate
+- aragonite saturation
+- note that this dataset does not have nitrogen-based nutrients.
+
+Read data into R
+```{r}
+Environmental <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/WOAC_Chem_data_2014-2022_all-niskins.csv")
+```
+
+
