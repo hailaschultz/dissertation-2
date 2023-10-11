@@ -22,6 +22,18 @@ knitr::opts_chunk$set(
 
 This code is mostly exploratory analysis of WOAC environmental data at bio stations between 2014-2022.
 
+The report is here: https://rpubs.com/HailaSchultz/Chap2Env-Explore
+
+# Load Packages
+```{r}
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(forcats)
+library(reshape2)
+```
+
+
 # Import Data
 
 WOAC water chemistry data
@@ -43,6 +55,271 @@ This dataset was acquired from BethElLee Herrmann and is a compilation of mesure
 Read data into R
 ```{r}
 Environmental <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/WOAC_Chem_data_2014-2022_all-niskins.csv")
+```
+
+# Temperature Plot
+summarize by depth category
+```{r}
+Temp<-Environmental %>%
+  group_by(Station,Date,Depth) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90))
+```
+
+convert date format
+```{r}
+Temp <- Temp %>% 
+  mutate(date_convert = as.Date(Date, format = "%m/%d/%y"))
+```
+
+
+make plot
+```{r,fig.width=10,fig.height=16}
+temp_plot<-ggplot(data = Temp, aes(date_convert, temp,color=Depth)) +
+  geom_line()+ 
+  geom_point()+
+  facet_grid(Station ~ .) +
+  theme_classic()+
+  xlab("Year") + ylab("Temperature")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")
+temp_plot
+```
+save plot
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/output")
+ggsave(filename = "time-series_temperature.png", plot = temp_plot, width = 10, height = 17, device='png', dpi=700)
+```
+It looks like P12 and P402 have the highest variability in temperatures, and have especially high summer temperatures. This makes sense becasue these are the hood canal stations.
+
+## Average across stations and years
+2014 and 2022 are missing one month, so I will omit those.
+
+```{r}
+#select only surface samples
+Temp_surf<- subset(Temp, Depth=='Surface')
+#extract year
+Temp_surf$year <- format(as.Date(Temp_surf$Date, format="%m/%d/%y"),"%Y")
+#remove 2014 and 2022
+Temp_surf<-subset(Temp_surf,year!="2014")
+Temp_surf<-subset(Temp_surf,year!="2022")
+#average by year
+Temp_surf<-Temp_surf %>%
+  group_by(year) %>%
+  summarise(
+    mean = mean(temp),
+    sd=sd(temp))
+```
+
+plot
+```{r}
+Temp_surf$year<-as.numeric(Temp_surf$year)
+temp_ave<-ggplot(data = Temp_surf, aes(year,mean)) +
+  geom_point()+
+  theme_classic()+
+  xlab("Year") + ylab("Temperature")+ 
+  geom_line()+
+  geom_pointrange(aes(ymin=mean-sd, ymax=mean+sd))
+temp_ave
+```
+
+
+# pH Plot
+remove missing rows and remove weird values
+```{r}
+pH<-Environmental %>% drop_na(pH)
+pH <- subset(pH, pH != 2130.2)
+```
+
+summarize by depth category
+```{r}
+pH<-pH %>%
+  group_by(Station,Date,Depth) %>%
+  summarise(
+    pH = mean(pH))
+```
+
+convert date format
+```{r}
+pH <- pH %>% 
+  mutate(date_convert = as.Date(Date, format = "%m/%d/%y"))
+```
+
+
+make plot
+```{r,fig.width=10,fig.height=16}
+pH_plot<-ggplot(data = pH, aes(date_convert, pH,color=Depth)) +
+  geom_line()+ 
+  geom_point()+
+  facet_grid(Station ~ .) +
+  theme_classic()+
+  xlab("Year") + ylab("pH")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")
+pH_plot
+```
+
+save plot
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/output")
+ggsave(filename = "time-series_pH.png", plot = pH_plot, width = 10, height = 17, device='png', dpi=700)
+```
+
+## average over years
+```{r}
+#select only surface samples
+pH_surf<- subset(pH, Depth=='Surface')
+#extract year
+pH_surf$year <- format(as.Date(pH_surf$Date, format="%m/%d/%y"),"%Y")
+#remove 2014 and 2022
+pH_surf<-subset(pH_surf,year!="2014")
+pH_surf<-subset(pH_surf,year!="2022")
+#average by year
+pH_surf<-pH_surf %>%
+  group_by(year) %>%
+  summarise(
+    mean = mean(pH),
+    sd=sd(pH))
+```
+
+plot
+```{r}
+pH_surf$year<-as.numeric(pH_surf$year)
+pH_ave<-ggplot(data = pH_surf, aes(year,mean)) +
+  geom_point()+
+  theme_classic()+
+  xlab("Year") + ylab("pH")+ 
+  geom_line()+
+  geom_pointrange(aes(ymin=mean-sd, ymax=mean+sd))
+pH_ave
+```
+
+# O2 Plot
+remove missing rows and remove weird values
+```{r}
+Oxygen<-Environmental %>% drop_na(O2.in.mg.l)
+```
+
+summarize by depth category
+```{r}
+Oxygen<-Oxygen %>%
+  group_by(Station,Date,Depth) %>%
+  summarise(
+    Oxygen = mean(O2.in.mg.l))
+```
+
+convert date format
+```{r}
+Oxygen <- Oxygen %>% 
+  mutate(date_convert = as.Date(Date, format = "%m/%d/%y"))
+```
+
+
+make plot
+```{r,fig.width=10,fig.height=16}
+Oxygen_plot<-ggplot(data = Oxygen, aes(date_convert, Oxygen,color=Depth)) +
+  geom_line()+ 
+  geom_point()+
+  facet_grid(Station ~ .) +
+  theme_classic()+
+  xlab("Year") + ylab("Oxygen")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")
+Oxygen_plot
+```
+
+save plot
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/output")
+ggsave(filename = "time-series_Oxygen.png", plot = Oxygen_plot, width = 10, height = 17, device='png', dpi=700)
+```
+## Average across stations and years
+2014 and 2022 are missing one month, so I will omit those.
+
+```{r}
+#select only surface samples
+Oxygen_surf<- subset(Oxygen, Depth=='Surface')
+#extract year
+Oxygen_surf$year <- format(as.Date(Oxygen_surf$Date, format="%m/%d/%y"),"%Y")
+#remove 2014 and 2022
+Oxygen_surf<-subset(Oxygen_surf,year!="2014")
+Oxygen_surf<-subset(Oxygen_surf,year!="2022")
+#average by year
+Oxygen_surf<-Oxygen_surf %>%
+  group_by(year) %>%
+  summarise(
+    mean = mean(Oxygen),
+    sd=sd(Oxygen))
+```
+
+plot
+```{r}
+Oxygen_surf$year<-as.numeric(Oxygen_surf$year)
+Oxygen_ave<-ggplot(data = Oxygen_surf, aes(year,mean)) +
+  geom_point()+
+  theme_classic()+
+  xlab("Year") + ylab("Oxygen")+ 
+  geom_line()+
+  geom_pointrange(aes(ymin=mean-sd, ymax=mean+sd))
+Oxygen_ave
+```
+
+#Time Series Analysis
+I'm struggling with this because of the missing NA values, so I am just going to average over the years
+## detrend temperature
+```{r}
+#select only surface samples
+Temp_timeseries<- subset(Temp, Depth=='Surface')
+#extract month
+Temp_timeseries$month <- format(as.Date(Temp_timeseries$Date, format="%m/%d/%y"),"%m")
+```
+add month column
+```{r}
+Temp_timeseries$month<-fct_recode(Temp_timeseries$month, "Oct"="10", "Apr"="04","Jul"="07","Sep"="09","May"="05","Jun"="06","Oct"="11")
+```
+
+```{r}
+#extract year
+Temp_timeseries$year <- format(as.Date(Temp_timeseries$Date, format="%m/%d/%y"),"%Y")
+```
+
+subset to one station
+```{r}
+Temp_timeseries_p12<-subset(Temp_timeseries,Station=="P12")
+#remove extra row
+Temp_timeseries_p12<-Temp_timeseries_p12[-c(2), ]
+```
+
+convert to time series object
+```{r}
+#remove excess columns
+Temp_timeseries_p12 <- Temp_timeseries_p12[ -c(1:3,5) ]
+p12<-dcast(Temp_timeseries_p12, year ~ month, value.var = "temp")
+#add other months
+p12$Jan<-NA
+p12$Feb<-NA
+p12$Mar<-NA
+p12$May<-NA
+p12$Aug<-NA
+p12$Nov<-NA
+p12$Dec<-NA
+#reorder columns
+p12 <- p12[, c(1,7,8,9,2,10,3,4,11,5,6,12,13)]
+#convert back to long format
+p12<-melt(p12, id.vars=c("year"))
+#sort chronologically
+p12<-p12[
+  order( p12[,1], p12[,2] ),
+]
+#remove year and month columns
+p12 <- p12[ -c(1:2) ]
+str(p12)
+p12_ts<-ts(p12, start=c(2014,1),freq=12)
+```
+
+Because there are missing values, they must be imputed I followed the tutorial here: https://jtr13.github.io/EDAVold/missingTS.html
+
+```{r}
+dev.off()
+p12_ts
+
 ```
 
 
