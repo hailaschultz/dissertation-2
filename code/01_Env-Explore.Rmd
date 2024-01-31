@@ -31,6 +31,8 @@ library(ggplot2)
 library(tidyr)
 library(forcats)
 library(reshape2)
+library(xts)
+library(cowplot)
 ```
 
 
@@ -41,7 +43,7 @@ This dataset was acquired from BethElLee Herrmann and is a compilation of mesure
 - pH
 - pCO2
 - CTD pressure
-- CTD temperature
+- CTD oxygenerature
 - CTD salinity
 - CTD oxygen
 - oxygen
@@ -57,10 +59,10 @@ Read data into R
 Environmental <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/WOAC_Chem_data_2014-2022_all-niskins.csv")
 ```
 
-# Temperature Plot
+# temperature Plot
 summarize by depth category
 ```{r}
-Temp<-Environmental %>%
+temp<-Environmental %>%
   group_by(Station,Date,Depth) %>%
   summarise(
     temp = mean(CTDTMP_DEG_C_ITS90))
@@ -68,19 +70,19 @@ Temp<-Environmental %>%
 
 convert date format
 ```{r}
-Temp <- Temp %>% 
+temp <- temp %>% 
   mutate(date_convert = as.Date(Date, format = "%m/%d/%y"))
 ```
 
 
 make plot
 ```{r,fig.width=10,fig.height=16}
-temp_plot<-ggplot(data = Temp, aes(date_convert, temp,color=Depth)) +
+temp_plot<-ggplot(data = temp, aes(date_convert, temp,color=Depth)) +
   geom_line()+ 
   geom_point()+
   facet_grid(Station ~ .) +
   theme_classic()+
-  xlab("Year") + ylab("Temperature")+
+  xlab("Year") + ylab("temperature")+
   scale_x_date(date_breaks = "1 year", date_labels = "%Y")
 temp_plot
 ```
@@ -91,20 +93,56 @@ ggsave(filename = "time-series_temperature.png", plot = temp_plot, width = 10, h
 ```
 It looks like P12 and P402 have the highest variability in temperatures, and have especially high summer temperatures. This makes sense becasue these are the hood canal stations.
 
-## Average across stations and years
-2014 and 2022 are missing one month, so I will omit those.
+## Try anomaly analysis
+```{r}
+library(anomalize)
+library(tibble)
+```
+
+subset to station, depth
+```{r}
+temp_5m<- subset(temp, Depth=='Deep')
+temp_5m_P402<- subset(temp_5m, Station=='P38')
+temp_5m_P402<- subset(temp_5m_P402, date_convert!='2022-07-01')
+temp_5m_P402<- subset(temp_5m_P402, date_convert!='2022-04-29')
+temp_5m_P402 <- temp_5m_P402[ -c(1:3) ]
+temp_5m_P402<-temp_5m_P402[order(temp_5m_P402$date_convert),]
+```
 
 ```{r}
+P402_ts <- temp_5m_P402 %>% as.tibble() 
+```
+
+decomposition
+```{r,fig.width=5, fig.height=10}
+P402_ts %>% 
+  time_decompose(temp, method = "stl", frequency = "auto", trend = "auto") %>%
+  anomalize(remainder, method = "gesd",  max_anoms = 0.2) %>%
+  plot_anomaly_decomposition()
+```
+
+## Average across stations
+```{r}
 #select only surface samples
-Temp_surf<- subset(Temp, Depth=='Surface')
+temp_surf<- subset(temp, Depth=='Surface')
 #extract year
-Temp_surf$year <- format(as.Date(Temp_surf$Date, format="%m/%d/%y"),"%Y")
-#remove 2014 and 2022
-Temp_surf<-subset(Temp_surf,year!="2014")
-Temp_surf<-subset(Temp_surf,year!="2022")
-#average by year
-Temp_surf<-Temp_surf %>%
-  group_by(year) %>%
+temp_surf$year <- format(as.Date(temp_surf$Date, format="%m/%d/%y"),"%Y")
+#extract month
+temp_surf$month <- format(as.Date(temp_surf$Date, format="%m/%d/%y"),"%m")
+#make season column
+temp_surf$season<-temp_surf$month
+temp_surf$season <- recode(temp_surf$season, 
+                                 "04" = "spring",
+                                 "05" = "spring",
+                                 "06" = "summer",
+                                 "07" = "summer",
+                           "08" = "summer",
+                                "09" = "autumn",
+                                 "10"= "autumn",
+                                 "11"= "autumn")
+#average by year and month
+temp_surf<-temp_surf %>%
+  group_by(year,season) %>%
   summarise(
     mean = mean(temp),
     sd=sd(temp))
@@ -112,13 +150,14 @@ Temp_surf<-Temp_surf %>%
 
 plot
 ```{r}
-Temp_surf$year<-as.numeric(Temp_surf$year)
-temp_ave<-ggplot(data = Temp_surf, aes(year,mean)) +
+temp_surf$year<-as.numeric(temp_surf$year)
+temp_ave<-ggplot(data = temp_surf, aes(year,mean)) +
   geom_point()+
   theme_classic()+
-  xlab("Year") + ylab("Temperature")+ 
+  xlab("Year") + ylab("temperature")+ 
   geom_line()+
-  geom_pointrange(aes(ymin=mean-sd, ymax=mean+sd))
+  geom_pointrange(aes(ymin=mean-sd, ymax=mean+sd))+
+  facet_grid(season ~ .)
 temp_ave
 ```
 
@@ -163,18 +202,64 @@ setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_di
 ggsave(filename = "time-series_pH.png", plot = pH_plot, width = 10, height = 17, device='png', dpi=700)
 ```
 
-## average over years
+## Try anomaly analysis
+```{r}
+library(anomalize)
+library(tibble)
+```
+
+subset to station, depth
+```{r}
+pH_5m<- subset(pH, Depth=='5-m')
+pH_5m_P402<- subset(pH_5m, Station=='P402')
+pH_5m_P402 <- pH_5m_P402[ -c(1:3) ]
+pH_5m_P402<-pH_5m_P402[order(pH_5m_P402$date_convert),]
+```
+
+```{r}
+P402_ts <- pH_5m_P402 %>% as.tibble() 
+```
+
+decomposition
+```{r,fig.width=5, fig.height=10}
+P402_ts %>% 
+  time_decompose(pH, method = "stl", frequency = "auto", trend = "auto") %>%
+  anomalize(remainder, method = "gesd", alpha = 0.05, max_anoms = 0.2) %>%
+  plot_anomaly_decomposition()
+```
+```{r}
+P402_ts %>% 
+  time_decompose(pH) %>%
+  anomalize(remainder) %>%
+  time_recompose() %>%
+  plot_anomalies(time_recomposed = TRUE, ncol = 3, alpha_dots = 0.5)
+```
+
+
+
+
+## Average across stations
 ```{r}
 #select only surface samples
 pH_surf<- subset(pH, Depth=='Surface')
 #extract year
 pH_surf$year <- format(as.Date(pH_surf$Date, format="%m/%d/%y"),"%Y")
-#remove 2014 and 2022
-pH_surf<-subset(pH_surf,year!="2014")
-pH_surf<-subset(pH_surf,year!="2022")
-#average by year
+#extract month
+pH_surf$month <- format(as.Date(pH_surf$Date, format="%m/%d/%y"),"%m")
+#make season column
+pH_surf$season<-pH_surf$month
+pH_surf$season <- recode(pH_surf$season, 
+                                 "04" = "spring",
+                                 "05" = "spring",
+                                 "06" = "summer",
+                                 "07" = "summer",
+                           "08" = "summer",
+                                "09" = "autumn",
+                                 "10"= "autumn",
+                                 "11"= "autumn")
+#average by year and month
 pH_surf<-pH_surf %>%
-  group_by(year) %>%
+  group_by(year,season) %>%
   summarise(
     mean = mean(pH),
     sd=sd(pH))
@@ -188,7 +273,8 @@ pH_ave<-ggplot(data = pH_surf, aes(year,mean)) +
   theme_classic()+
   xlab("Year") + ylab("pH")+ 
   geom_line()+
-  geom_pointrange(aes(ymin=mean-sd, ymax=mean+sd))
+  geom_pointrange(aes(ymin=mean-sd, ymax=mean+sd))+
+  facet_grid(season ~ .)
 pH_ave
 ```
 
@@ -230,20 +316,28 @@ save plot
 setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/output")
 ggsave(filename = "time-series_Oxygen.png", plot = Oxygen_plot, width = 10, height = 17, device='png', dpi=700)
 ```
-## Average across stations and years
-2014 and 2022 are missing one month, so I will omit those.
-
+## Average across stations
 ```{r}
 #select only surface samples
-Oxygen_surf<- subset(Oxygen, Depth=='Surface')
+oxygen_surf<- subset(Oxygen, Depth=='Surface')
 #extract year
-Oxygen_surf$year <- format(as.Date(Oxygen_surf$Date, format="%m/%d/%y"),"%Y")
-#remove 2014 and 2022
-Oxygen_surf<-subset(Oxygen_surf,year!="2014")
-Oxygen_surf<-subset(Oxygen_surf,year!="2022")
-#average by year
-Oxygen_surf<-Oxygen_surf %>%
-  group_by(year) %>%
+oxygen_surf$year <- format(as.Date(oxygen_surf$Date, format="%m/%d/%y"),"%Y")
+#extract month
+oxygen_surf$month <- format(as.Date(oxygen_surf$Date, format="%m/%d/%y"),"%m")
+#make season column
+oxygen_surf$season<-oxygen_surf$month
+oxygen_surf$season <- recode(oxygen_surf$season, 
+                                 "04" = "spring",
+                                 "05" = "spring",
+                                 "06" = "summer",
+                                 "07" = "summer",
+                           "08" = "summer",
+                                "09" = "autumn",
+                                 "10"= "autumn",
+                                 "11"= "autumn")
+#average by year and month
+oxygen_surf<-oxygen_surf %>%
+  group_by(year,season) %>%
   summarise(
     mean = mean(Oxygen),
     sd=sd(Oxygen))
@@ -251,14 +345,15 @@ Oxygen_surf<-Oxygen_surf %>%
 
 plot
 ```{r}
-Oxygen_surf$year<-as.numeric(Oxygen_surf$year)
-Oxygen_ave<-ggplot(data = Oxygen_surf, aes(year,mean)) +
+oxygen_surf$year<-as.numeric(oxygen_surf$year)
+oxygen_ave<-ggplot(data = oxygen_surf, aes(year,mean)) +
   geom_point()+
   theme_classic()+
-  xlab("Year") + ylab("Oxygen")+ 
+  xlab("Year") + ylab("oxygen")+ 
   geom_line()+
-  geom_pointrange(aes(ymin=mean-sd, ymax=mean+sd))
-Oxygen_ave
+  geom_pointrange(aes(ymin=mean-sd, ymax=mean+sd))+
+  facet_grid(season ~ .)
+oxygen_ave
 ```
 
 #Time Series Analysis
@@ -266,32 +361,32 @@ I'm struggling with this because of the missing NA values, so I am just going to
 ## detrend temperature
 ```{r}
 #select only surface samples
-Temp_timeseries<- subset(Temp, Depth=='Surface')
+temp_timeseries<- subset(temp, Depth=='Surface')
 #extract month
-Temp_timeseries$month <- format(as.Date(Temp_timeseries$Date, format="%m/%d/%y"),"%m")
+temp_timeseries$month <- format(as.Date(temp_timeseries$Date, format="%m/%d/%y"),"%m")
 ```
 add month column
 ```{r}
-Temp_timeseries$month<-fct_recode(Temp_timeseries$month, "Oct"="10", "Apr"="04","Jul"="07","Sep"="09","May"="05","Jun"="06","Oct"="11")
+temp_timeseries$month<-fct_recode(temp_timeseries$month, "Oct"="10", "Apr"="04","Jul"="07","Sep"="09","May"="05","Jun"="06","Oct"="11")
 ```
 
 ```{r}
 #extract year
-Temp_timeseries$year <- format(as.Date(Temp_timeseries$Date, format="%m/%d/%y"),"%Y")
+temp_timeseries$year <- format(as.Date(temp_timeseries$Date, format="%m/%d/%y"),"%Y")
 ```
 
 subset to one station
 ```{r}
-Temp_timeseries_p12<-subset(Temp_timeseries,Station=="P12")
+temp_timeseries_p12<-subset(temp_timeseries,Station=="P12")
 #remove extra row
-Temp_timeseries_p12<-Temp_timeseries_p12[-c(2), ]
+temp_timeseries_p12<-temp_timeseries_p12[-c(2), ]
 ```
 
 convert to time series object
 ```{r}
 #remove excess columns
-Temp_timeseries_p12 <- Temp_timeseries_p12[ -c(1:3,5) ]
-p12<-dcast(Temp_timeseries_p12, year ~ month, value.var = "temp")
+temp_timeseries_p12 <- temp_timeseries_p12[ -c(1:3,5) ]
+p12<-dcast(temp_timeseries_p12, year ~ month, value.var = "temp")
 #add other months
 p12$Jan<-NA
 p12$Feb<-NA
@@ -317,9 +412,588 @@ p12_ts<-ts(p12, start=c(2014,1),freq=12)
 Because there are missing values, they must be imputed I followed the tutorial here: https://jtr13.github.io/EDAVold/missingTS.html
 
 ```{r}
-dev.off()
 p12_ts
 
 ```
 
+subset to one station
+```{r}
+temp_timeseries_p12<-subset(temp_timeseries,Station=="P12")
+#remove extra row
+temp_timeseries_p12<-temp_timeseries_p12[-c(2), ]
+```
 
+convert to time series object
+```{r}
+#remove excess columns
+temp_timeseries_p12 <- temp_timeseries_p12[ -c(1:3,6:7) ]
+xt1 <- xts(temp_timeseries_p12$temp, order.by = as.Date(temp_timeseries_p12$date_convert))
+plot(xt1)
+```
+
+# Individual station plots
+
+## P402
+
+remove missing rows and remove weird values
+```{r}
+Environmental_sum<-Environmental %>% drop_na(pH)
+Environmental_sum <- subset(Environmental_sum, pH != 2130.2)
+```
+
+```{r}
+Environmental_sum<-Environmental_sum %>% drop_na(O2.in.mg.l)
+```
+
+summarize by depth category
+```{r}
+Environmental_sum<-Environmental_sum %>%
+  group_by(Station,Date,Depth) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90),
+    pH = mean(pH),
+    Oxygen = mean(O2.in.mg.l))
+```
+
+convert date format
+```{r}
+Environmental_sum <- Environmental_sum %>% 
+  mutate(date_convert = as.Date(Date, format = "%m/%d/%y"))
+```
+
+subset to station and depth
+```{r}
+Environmental_sum_P402<-subset(Environmental_sum,Station=="P402")
+Environmental_sum_P402<-subset(Environmental_sum_P402,Depth!="Surface")
+Environmental_sum_P402<-subset(Environmental_sum_P402,Depth!="Mid")
+```
+
+convert to long format
+```{r}
+Environmental_sum_P402<-melt(Environmental_sum_P402, na.rm = FALSE,  id = c("Station","Date","Depth","date_convert"))
+```
+
+make plot
+```{r,fig.width=5,fig.height=2.5}
+#change factor order
+Environmental_sum_P402$Depth <- factor(Environmental_sum_P402$Depth, levels = c("5-m","Deep"))
+
+P402_temp<-subset(Environmental_sum_P402,variable=="temp")
+
+P402_temp<-ggplot(data = P402_temp, aes(date_convert, value,color=Depth)) +
+  geom_line()+ 
+  geom_point() +
+  scale_y_continuous(breaks = c(5,10,15,20), limits = c(5,20), expand = c(0,0))+
+  theme_classic()+
+  xlab("Year") +
+  ylab("Temperature (C)")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+    theme(axis.text=element_text(size=11))+
+  theme(axis.title.x = element_blank())
+P402_temp
+
+P402_pH<-subset(Environmental_sum_P402,variable=="pH")
+
+P402_pH<-ggplot(data = P402_pH, aes(date_convert, value,color=Depth)) +
+  geom_line()+ 
+  geom_point() +
+  scale_y_continuous(breaks = c(7,7.5,8,8.5), limits = c(7,8.5), expand = c(0,0))+
+  theme_classic()+
+  xlab("Year") +
+  ylab("pH")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+    theme(axis.text=element_text(size=11))+
+  theme(axis.title.x = element_blank())
+P402_pH
+
+P402_Oxy<-subset(Environmental_sum_P402,variable=="Oxygen")
+
+P402_Oxy<-ggplot(data = P402_Oxy, aes(date_convert, value,color=Depth)) +
+  geom_line()+ 
+  geom_point() +
+  scale_y_continuous(breaks = c(0,5,10,15), limits = c(0,15), expand = c(0,0))+
+  theme_classic()+
+  xlab("Year") +
+  ylab("Oxygen mg/l")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+    theme(axis.text=element_text(size=11))+
+  theme(axis.title.x = element_blank())
+P402_Oxy
+```
+
+save plots
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/output")
+ggsave(filename = "P402_temp.png", plot = P402_temp, height = 2.5, width = 5, units="in", device='png', dpi=600)
+
+ggsave(filename = "P402_pH.png", plot = P402_pH, height = 2.5, width = 5, units="in", device='png', dpi=600)
+
+ggsave(filename = "P402_Oxy.png", plot = P402_Oxy, height = 2.5, width = 5, units="in", device='png', dpi=600)
+```
+
+
+## P22
+
+remove missing rows and remove weird values
+```{r}
+Environmental_sum<-Environmental %>% drop_na(pH)
+Environmental_sum <- subset(Environmental_sum, pH != 2130.2)
+```
+
+```{r}
+Environmental_sum<-Environmental_sum %>% drop_na(O2.in.mg.l)
+```
+
+summarize by depth category
+```{r}
+Environmental_sum<-Environmental_sum %>%
+  group_by(Station,Date,Depth) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90),
+    pH = mean(pH),
+    Oxygen = mean(O2.in.mg.l))
+```
+
+convert date format
+```{r}
+Environmental_sum <- Environmental_sum %>% 
+  mutate(date_convert = as.Date(Date, format = "%m/%d/%y"))
+```
+
+subset to station and depth
+```{r}
+Environmental_sum_P22<-subset(Environmental_sum,Station=="P22")
+Environmental_sum_P22<-subset(Environmental_sum_P22,Depth!="Surface")
+Environmental_sum_P22<-subset(Environmental_sum_P22,Depth!="Mid")
+```
+
+convert to long format
+```{r}
+Environmental_sum_P22<-melt(Environmental_sum_P22, na.rm = FALSE,  id = c("Station","Date","Depth","date_convert"))
+```
+
+make plot
+```{r,fig.width=5,fig.height=2.5}
+#change factor order
+Environmental_sum_P22$Depth <- factor(Environmental_sum_P22$Depth, levels = c("5-m","Deep"))
+
+P22_temp<-subset(Environmental_sum_P22,variable=="temp")
+
+P22_temp<-ggplot(data = P22_temp, aes(date_convert, value,color=Depth)) +
+  geom_line()+ 
+  geom_point() +
+  scale_y_continuous(breaks = c(5,10,15,20), limits = c(5,20), expand = c(0,0))+
+  theme_classic()+
+  xlab("Year") +
+  ylab("Temperature (C)")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+    theme(axis.text=element_text(size=11))+
+  theme(axis.title.x = element_blank())
+P22_temp
+
+P22_pH<-subset(Environmental_sum_P22,variable=="pH")
+
+P22_pH<-ggplot(data = P22_pH, aes(date_convert, value,color=Depth)) +
+  geom_line()+ 
+  geom_point() +
+  scale_y_continuous(breaks = c(7,7.5,8,8.5), limits = c(7,8.5), expand = c(0,0))+
+  theme_classic()+
+  xlab("Year") +
+  ylab("pH")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+    theme(axis.text=element_text(size=11))+
+  theme(axis.title.x = element_blank())
+P22_pH
+
+P22_Oxy<-subset(Environmental_sum_P22,variable=="Oxygen")
+
+P22_Oxy<-ggplot(data = P22_Oxy, aes(date_convert, value,color=Depth)) +
+  geom_line()+ 
+  geom_point() +
+  scale_y_continuous(breaks = c(0,5,10,15), limits = c(0,15), expand = c(0,0))+
+  theme_classic()+
+  xlab("Year") +
+  ylab("Oxygen mg/l")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+    theme(axis.text=element_text(size=11))+
+  theme(axis.title.x = element_blank())
+P22_Oxy
+```
+
+save plots
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/output")
+ggsave(filename = "P22_temp.png", plot = P22_temp, height = 2.5, width = 5, units="in", device='png', dpi=600)
+
+ggsave(filename = "P22_pH.png", plot = P22_pH, height = 2.5, width = 5, units="in", device='png', dpi=600)
+
+ggsave(filename = "P22_Oxy.png", plot = P22_Oxy, height = 2.5, width = 5, units="in", device='png', dpi=600)
+```
+
+
+## P28
+
+remove missing rows and remove weird values
+```{r}
+Environmental_sum<-Environmental %>% drop_na(pH)
+Environmental_sum <- subset(Environmental_sum, pH != 2130.2)
+```
+
+```{r}
+Environmental_sum<-Environmental_sum %>% drop_na(O2.in.mg.l)
+```
+
+summarize by depth category
+```{r}
+Environmental_sum<-Environmental_sum %>%
+  group_by(Station,Date,Depth) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90),
+    pH = mean(pH),
+    Oxygen = mean(O2.in.mg.l))
+```
+
+convert date format
+```{r}
+Environmental_sum <- Environmental_sum %>% 
+  mutate(date_convert = as.Date(Date, format = "%m/%d/%y"))
+```
+
+subset to station and depth
+```{r}
+Environmental_sum_P28<-subset(Environmental_sum,Station=="P28")
+Environmental_sum_P28<-subset(Environmental_sum_P28,Depth!="Surface")
+Environmental_sum_P28<-subset(Environmental_sum_P28,Depth!="Mid")
+```
+
+convert to long format
+```{r}
+Environmental_sum_P28<-melt(Environmental_sum_P28, na.rm = FALSE,  id = c("Station","Date","Depth","date_convert"))
+```
+
+make plot
+```{r,fig.width=5,fig.height=2.5}
+#change factor order
+Environmental_sum_P28$Depth <- factor(Environmental_sum_P28$Depth, levels = c("5-m","Deep"))
+
+P28_temp<-subset(Environmental_sum_P28,variable=="temp")
+
+P28_temp<-ggplot(data = P28_temp, aes(date_convert, value,color=Depth)) +
+  geom_line()+ 
+  geom_point() +
+  scale_y_continuous(breaks = c(5,10,15,20), limits = c(5,20), expand = c(0,0))+
+  theme_classic()+
+  xlab("Year") +
+  ylab("Temperature (C)")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+    theme(axis.text=element_text(size=11))+
+  theme(axis.title.x = element_blank())
+P28_temp
+
+P28_pH<-subset(Environmental_sum_P28,variable=="pH")
+
+P28_pH<-ggplot(data = P28_pH, aes(date_convert, value,color=Depth)) +
+  geom_line()+ 
+  geom_point() +
+  scale_y_continuous(breaks = c(7,7.5,8,8.5), limits = c(7,8.5), expand = c(0,0))+
+  theme_classic()+
+  xlab("Year") +
+  ylab("pH")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+    theme(axis.text=element_text(size=11))+
+  theme(axis.title.x = element_blank())
+P28_pH
+
+P28_Oxy<-subset(Environmental_sum_P28,variable=="Oxygen")
+
+P28_Oxy<-ggplot(data = P28_Oxy, aes(date_convert, value,color=Depth)) +
+  geom_line()+ 
+  geom_point() +
+  scale_y_continuous(breaks = c(0,5,10,15), limits = c(0,15), expand = c(0,0))+
+  theme_classic()+
+  xlab("Year") +
+  ylab("Oxygen mg/l")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+    theme(axis.text=element_text(size=11))+
+  theme(axis.title.x = element_blank())
+P28_Oxy
+```
+
+save plots
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/output")
+ggsave(filename = "P28_temp.png", plot = P28_temp, height = 2.5, width = 5, units="in", device='png', dpi=600)
+
+ggsave(filename = "P28_pH.png", plot = P28_pH, height = 2.5, width = 5, units="in", device='png', dpi=600)
+
+ggsave(filename = "P28_Oxy.png", plot = P28_Oxy, height = 2.5, width = 5, units="in", device='png', dpi=600)
+```
+
+
+### P402 April
+
+remove missing rows and remove weird values
+```{r}
+Environmental_sum<-Environmental %>% drop_na(pH)
+Environmental_sum <- subset(Environmental_sum, pH != 2130.2)
+```
+
+```{r}
+Environmental_sum<-Environmental_sum %>% drop_na(O2.in.mg.l)
+```
+
+summarize by depth category
+```{r}
+Environmental_sum<-Environmental_sum %>%
+  group_by(Station,Date,Depth, Month) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90),
+    pH = mean(pH),
+    Oxygen = mean(O2.in.mg.l))
+```
+
+convert date format
+```{r}
+Environmental_sum <- Environmental_sum %>% 
+  mutate(date_convert = as.Date(Date, format = "%m/%d/%y"))
+```
+
+subset to station and depth
+```{r}
+Environmental_sum_P402<-subset(Environmental_sum,Station=="P402")
+Environmental_sum_P402<-subset(Environmental_sum_P402,Depth!="Surface")
+Environmental_sum_P402<-subset(Environmental_sum_P402,Depth!="Mid")
+Environmental_sum_P402<-subset(Environmental_sum_P402,Month=="APR")
+```
+
+convert to long format
+```{r}
+Environmental_sum_P402<-melt(Environmental_sum_P402, na.rm = FALSE,  id = c("Station","Date","Depth","date_convert","Month"))
+```
+
+make plot
+```{r,fig.width=5,fig.height=2.5}
+#change factor order
+Environmental_sum_P402$Depth <- factor(Environmental_sum_P402$Depth, levels = c("5-m","Deep"))
+
+P402_temp<-subset(Environmental_sum_P402,variable=="temp")
+
+P402_temp<-ggplot(data = P402_temp, aes(date_convert, value,color=Depth)) +
+  geom_line()+ 
+  geom_point() +
+  scale_y_continuous(breaks = c(5,10,15,20), limits = c(5,20), expand = c(0,0))+
+  theme_classic()+
+  xlab("Year") +
+  ylab("Temperature (C)")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+    theme(axis.text=element_text(size=11))+
+  theme(axis.title.x = element_blank())
+P402_temp
+
+P402_pH<-subset(Environmental_sum_P402,variable=="pH")
+
+P402_pH<-ggplot(data = P402_pH, aes(date_convert, value,color=Depth)) +
+  geom_line()+ 
+  geom_point() +
+  scale_y_continuous(breaks = c(7,7.5,8,8.5), limits = c(7,8.5), expand = c(0,0))+
+  theme_classic()+
+  xlab("Year") +
+  ylab("pH")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+    theme(axis.text=element_text(size=11))+
+  theme(axis.title.x = element_blank())
+P402_pH
+
+P402_Oxy<-subset(Environmental_sum_P402,variable=="Oxygen")
+
+P402_Oxy<-ggplot(data = P402_Oxy, aes(date_convert, value,color=Depth)) +
+  geom_line()+ 
+  geom_point() +
+  scale_y_continuous(breaks = c(0,5,10,15), limits = c(0,15), expand = c(0,0))+
+  theme_classic()+
+  xlab("Year") +
+  ylab("Oxygen mg/l")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+    theme(axis.text=element_text(size=11))+
+  theme(axis.title.x = element_blank())
+P402_Oxy
+```
+
+
+### P28 July
+
+remove missing rows and remove weird values
+```{r}
+Environmental_sum<-Environmental %>% drop_na(pH)
+Environmental_sum <- subset(Environmental_sum, pH != 2130.2)
+```
+
+```{r}
+Environmental_sum<-Environmental_sum %>% drop_na(O2.in.mg.l)
+```
+
+summarize by depth category
+```{r}
+Environmental_sum<-Environmental_sum %>%
+  group_by(Station,Date,Depth, Month) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90),
+    pH = mean(pH),
+    Oxygen = mean(O2.in.mg.l))
+```
+
+convert date format
+```{r}
+Environmental_sum <- Environmental_sum %>% 
+  mutate(date_convert = as.Date(Date, format = "%m/%d/%y"))
+```
+
+subset to station and depth
+```{r}
+Environmental_sum_P402<-subset(Environmental_sum,Station=="P402")
+Environmental_sum_P402<-subset(Environmental_sum_P402,Depth!="Surface")
+Environmental_sum_P402<-subset(Environmental_sum_P402,Depth!="Mid")
+Environmental_sum_P402<-subset(Environmental_sum_P402,Month=="JUL")
+```
+
+convert to long format
+```{r}
+Environmental_sum_P402<-melt(Environmental_sum_P402, na.rm = FALSE,  id = c("Station","Date","Depth","date_convert","Month"))
+```
+
+make plot
+```{r,fig.width=5,fig.height=2.5}
+#change factor order
+Environmental_sum_P402$Depth <- factor(Environmental_sum_P402$Depth, levels = c("5-m","Deep"))
+
+P402_temp<-subset(Environmental_sum_P402,variable=="temp")
+
+P402_temp<-ggplot(data = P402_temp, aes(date_convert, value,color=Depth)) +
+  geom_line()+ 
+  geom_point() +
+  scale_y_continuous(breaks = c(5,10,15,20), limits = c(5,20), expand = c(0,0))+
+  theme_classic()+
+  xlab("Year") +
+  ylab("Temperature (C)")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+    theme(axis.text=element_text(size=11))+
+  theme(axis.title.x = element_blank())
+P402_temp
+
+P402_pH<-subset(Environmental_sum_P402,variable=="pH")
+
+P402_pH<-ggplot(data = P402_pH, aes(date_convert, value,color=Depth)) +
+  geom_line()+ 
+  geom_point() +
+  scale_y_continuous(breaks = c(7,7.5,8,8.5), limits = c(7,8.5), expand = c(0,0))+
+  theme_classic()+
+  xlab("Year") +
+  ylab("pH")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+    theme(axis.text=element_text(size=11))+
+  theme(axis.title.x = element_blank())
+P402_pH
+
+P402_Oxy<-subset(Environmental_sum_P402,variable=="Oxygen")
+
+P402_Oxy<-ggplot(data = P402_Oxy, aes(date_convert, value,color=Depth)) +
+  geom_line()+ 
+  geom_point() +
+  scale_y_continuous(breaks = c(0,5,10,15), limits = c(0,15), expand = c(0,0))+
+  theme_classic()+
+  xlab("Year") +
+  ylab("Oxygen mg/l")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+    theme(axis.text=element_text(size=11))+
+  theme(axis.title.x = element_blank())
+P402_Oxy
+```
+
+### P402 Sep
+
+remove missing rows and remove weird values
+```{r}
+Environmental_sum<-Environmental %>% drop_na(pH)
+Environmental_sum <- subset(Environmental_sum, pH != 2130.2)
+```
+
+```{r}
+Environmental_sum<-Environmental_sum %>% drop_na(O2.in.mg.l)
+```
+
+summarize by depth category
+```{r}
+Environmental_sum<-Environmental_sum %>%
+  group_by(Station,Date,Depth, Month) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90),
+    pH = mean(pH),
+    Oxygen = mean(O2.in.mg.l))
+```
+
+convert date format
+```{r}
+Environmental_sum <- Environmental_sum %>% 
+  mutate(date_convert = as.Date(Date, format = "%m/%d/%y"))
+```
+
+subset to station and depth
+```{r}
+Environmental_sum_P402<-subset(Environmental_sum,Station=="P402")
+Environmental_sum_P402<-subset(Environmental_sum_P402,Depth!="Surface")
+Environmental_sum_P402<-subset(Environmental_sum_P402,Depth!="Mid")
+Environmental_sum_P402<-subset(Environmental_sum_P402,Month=="SEP")
+```
+
+convert to long format
+```{r}
+Environmental_sum_P402<-melt(Environmental_sum_P402, na.rm = FALSE,  id = c("Station","Date","Depth","date_convert","Month"))
+```
+
+make plot
+```{r,fig.width=5,fig.height=2.5}
+#change factor order
+Environmental_sum_P402$Depth <- factor(Environmental_sum_P402$Depth, levels = c("5-m","Deep"))
+
+P402_temp<-subset(Environmental_sum_P402,variable=="temp")
+
+P402_temp<-ggplot(data = P402_temp, aes(date_convert, value,color=Depth)) +
+  geom_line()+ 
+  geom_point() +
+  scale_y_continuous(breaks = c(5,10,15,20), limits = c(5,20), expand = c(0,0))+
+  theme_classic()+
+  xlab("Year") +
+  ylab("Temperature (C)")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+    theme(axis.text=element_text(size=11))+
+  theme(axis.title.x = element_blank())
+P402_temp
+
+P402_pH<-subset(Environmental_sum_P402,variable=="pH")
+
+P402_pH<-ggplot(data = P402_pH, aes(date_convert, value,color=Depth)) +
+  geom_line()+ 
+  geom_point() +
+  scale_y_continuous(breaks = c(7,7.5,8,8.5), limits = c(7,8.5), expand = c(0,0))+
+  theme_classic()+
+  xlab("Year") +
+  ylab("pH")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+    theme(axis.text=element_text(size=11))+
+  theme(axis.title.x = element_blank())
+P402_pH
+
+P402_Oxy<-subset(Environmental_sum_P402,variable=="Oxygen")
+
+P402_Oxy<-ggplot(data = P402_Oxy, aes(date_convert, value,color=Depth)) +
+  geom_line()+ 
+  geom_point() +
+  scale_y_continuous(breaks = c(0,5,10,15), limits = c(0,15), expand = c(0,0))+
+  theme_classic()+
+  xlab("Year") +
+  ylab("Oxygen mg/l")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+    theme(axis.text=element_text(size=11))+
+  theme(axis.title.x = element_blank())
+P402_Oxy
+```

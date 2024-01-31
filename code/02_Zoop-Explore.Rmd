@@ -20,10 +20,187 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Zooplankton Data
+load packages
+```{r}
+library(vegan)
+library(EcolUtils)
+```
+
+
+# Load Zooplankton Data
 This dataset is from our WOAC zooplankton database and includes morphological abundance and biomass data for each species identified in each sample collected. Vertical and oblique tows are included and represent samples that are integrated through the water column.
 
 Read data into R
 ```{r}
 Zooplankton <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/WOAC_Species_Densities_2014-2022.csv")
+```
+
+# NMDS plots
+NMDS is chosen based on advice on this webpage:https://www.researchgate.net/post/How-to-choose-ordination-method-such-as-PCA-CA-PCoA-and-NMDS
+
+"If you have a dataset that include null values (e.g. most dataset from genotyping using fingerprinting methods include null values, when for example a bacterial OTU is present in some samples and not in others), I would advise you to use Bray-Curtis similarity matrix and nMDS ordination. Bray-Curtis distance is chosen because it is not affected by the number of null values between samples like Euclidean distance, and nMDS is chosen because you can choose any similarity matrix, not like PCA."
+
+Since the data have null values, I am using nMDS with Bray-Curtis distance
+
+subset to stations sampled during WOAC cruises
+```{r}
+unique(Zooplankton$Station)
+Zoop_sub<-subset(Zooplankton,Station!="PEFS1d")
+Zoop_sub<-subset(Zoop_sub,Station!="PEFN1d")
+Zoop_sub<-subset(Zoop_sub,Station!="PEFN2")
+Zoop_sub<-subset(Zoop_sub,Station!="PEFS2")
+Zoop_sub<-subset(Zoop_sub,Station!="P381")
+Zoop_sub<-subset(Zoop_sub,Station!="P105")
+Zoop_sub<-subset(Zoop_sub,Station!="P136")
+Zoop_sub<-subset(Zoop_sub,Station!="P7")
+Zoop_sub<-subset(Zoop_sub,Station!="P123")
+Zoop_sub<-subset(Zoop_sub,Station!="P132")
+unique(Zoop_sub$Station)
+#remove october and november samples
+Zoop_sub<-subset(Zoop_sub,Month!="NOV")
+Zoop_sub<-subset(Zoop_sub,Month!="OCT")
+Zoop_sub<-subset(Zoop_sub,Month!="MAR")
+#recode p4
+Zoop_sub$Station <- recode(Zoop_sub$Station, 
+                                 "p4" = "P4")
+#recode month names to match
+unique(Zoop_sub$Month)
+Zoop_sub$Month <- recode(Zoop_sub$Month, 
+                                 "Jul" = "JUL",
+                         "Sep"="SEP")
+```
+
+examine taxa present
+```{r}
+unique(Zoop_sub$Genus.species)
+```
+add up multiple lines per station
+```{r}
+Zoop_sub <- Zoop_sub %>%
+  group_by(Code,Station,Basin,Year,Month,Genus.species) %>%
+  summarise(
+    zoop_density = sum(Density....m3.))
+```
+
+change from long to wide format
+```{r}
+colnames(Zoop_sub)
+Zoop_sub_wide<-dcast(Zoop_sub, Code+Station+Basin+Year+Month~ Genus.species,value.var = "zoop_density")
+#make sure factors are formatted right
+Zoop_sub_wide$Year=as.factor(Zoop_sub_wide$Year)
+Zoop_sub_wide$Station=as.factor(Zoop_sub_wide$Station)
+Zoop_sub_wide$Month=as.factor(Zoop_sub_wide$Month)
+Zoop_sub_wide$Basin=as.factor(Zoop_sub_wide$Basin)
+#remove station without data
+Zoop_sub_wide <- Zoop_sub_wide[-c(195), ]
+```
+
+remove non-data columns, convert to proportionas, and arcsine sqrt transformation
+```{r}
+RE2<- Zoop_sub_wide[,6:ncol(Zoop_sub_wide)]
+#replace N/A with 0
+RE2[is.na(RE2)] <- 0
+#convert to proportions
+RE2<-RE2/rowSums(RE2)
+#arcsine sqrt transformation
+RE2<-asin(sqrt(RE2))
+RE3<-as.matrix(RE2)
+```
+
+## PERMANOVA
+```{r}
+dist<-vegdist(RE2, method='bray')
+dist
+perm<-adonis2(dist~Year*Month*Station, data=Zoop_sub_wide, permutations = 999, method="bray")
+perm
+```
+See pairwise differences
+```{r}
+adonis.pair(vegdist(RE2),Zoop_sub_wide$Station)
+adonis.pair(vegdist(RE2),Zoop_sub_wide$Year)
+adonis.pair(vegdist(RE2),Zoop_sub_wide$Month)
+```
+
+## PERMDISPR
+Station: check for dispersion
+```{r}
+Zoop.bd <- betadisper(dist, Zoop_sub_wide$Station)
+Zoop.bd
+anova(Zoop.bd)
+permutest(Zoop.bd)
+```
+yes, differences in dispersion
+
+Year: check for dispersion
+```{r}
+Zoop.bd <- betadisper(dist, Zoop_sub_wide$Year)
+Zoop.bd
+anova(Zoop.bd)
+permutest(Zoop.bd)
+```
+yes, differences in dispersion
+
+Month: check for dispersion
+```{r}
+Zoop.bd <- betadisper(dist, Zoop_sub_wide$Month)
+Zoop.bd
+anova(Zoop.bd)
+permutest(Zoop.bd)
+```
+yes, differences in dispersion
+
+## Run NMDS
+```{r}
+NMDSmodel <- metaMDS(RE2, distance = "bray",trymax = 200)
+NMDSmodel
+```
+
+```{r}
+plot(NMDSmodel)
+```
+
+get datascores
+```{r}
+data.scores<-scores(NMDSmodel,display="sites")
+data.scores<- as.data.frame(data.scores)
+```
+
+```{r}
+data.scores$Station = Zoop_sub_wide$Station
+data.scores$Year = Zoop_sub_wide$Year
+data.scores$Month = Zoop_sub_wide$Month
+```
+
+plot data scores
+```{r}
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Station)) +stat_ellipse()+geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+xx
+```
+
+```{r}
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Year)) +stat_ellipse()+geom_point(aes(colour = Year)+theme_bw()+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")))
+xx
+```
+
+```{r}
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Month)) +stat_ellipse()+geom_point(aes(colour = Month)+theme_bw()+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")))
+xx
+```
+
+## Species fitting
+```{r}
+vf <- envfit(NMDSmodel, RE3, perm = 999)
+vf
+spp.scrs <- as.data.frame(scores(vf, display = "vectors"))
+spp.scrs <- cbind(spp.scrs, Species = rownames(spp.scrs))
+####for ggplot
+arrow_factor <- ordiArrowMul(vf)
+spp.scrs <- as.data.frame(scores(vf, display = "vectors")) * arrow_factor
+spp.scrs <- cbind(spp.scrs, Species = rownames(spp.scrs), Pvalues = vf$vectors$pvals, R_squared = vf$vectors$r)
+
+# select significance similarly to `plot(vf, p.max = 0.01)`
+spp.scrs <- subset(spp.scrs, Pvalues < 0.05)
+
+
 ```
