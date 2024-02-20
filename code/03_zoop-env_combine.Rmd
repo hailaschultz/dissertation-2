@@ -8,6 +8,8 @@ output:
     toc_float: true
 ---
 
+The purpose of this code is to combine the environmental and zooplankton WOAC datasets and examine differences in communities.
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   echo = TRUE,         # Display code chunks
@@ -22,7 +24,12 @@ knitr::opts_chunk$set(
 load packages
 ```{r}
 library(ggrepel)
-library("scales")   
+library("scales") 
+library(dplyr)
+library(tidyr)
+library(reshape2)
+library(vegan)
+library(EcolUtils)
 ```
 
 Read zooplanton data into R
@@ -87,7 +94,7 @@ temp<-Environmental %>%
     temp = mean(CTDTMP_DEG_C_ITS90))
 
 #subset to surface samples
-temp_surf<-subset(temp,Depth=="Deep")
+temp_surf<-subset(temp,Depth=="Surface")
 #make unique column
 temp_surf$code<-paste(temp_surf$Station, temp_surf$Year,temp_surf$Month,sep="-")
 ```
@@ -105,7 +112,7 @@ pH<-pH %>%
   summarise(
     pH = mean(pH))
 #subset to surface samples
-pH_surf<-subset(pH,Depth=="Deep")
+pH_surf<-subset(pH,Depth=="Surface")
 #make unique column
 pH_surf$code<-paste(pH_surf$Station, pH_surf$Year,pH_surf$Month,sep="-")
 ```
@@ -123,7 +130,7 @@ Oxygen<-Oxygen %>%
   summarise(
     Oxygen = mean(O2.in.mg.l))
 #subset to surface samples
-Oxygen_surf<-subset(Oxygen,Depth=="Deep")
+Oxygen_surf<-subset(Oxygen,Depth=="Surface")
 #make unique column
 Oxygen_surf$code<-paste(Oxygen_surf$Station, Oxygen_surf$Year,Oxygen_surf$Month,sep="-")
 ```
@@ -213,8 +220,6 @@ Zoop_env <- merge(env_joined,Zoop_sub_wide, by.x = "code",
 Zoop_env <- Zoop_env[ -c(11,13:14) ]
 #remove rows with NA
 Zoop_env<-Zoop_env[!is.na(Zoop_env$Year.x),]
-#remove 2022
-Zoop_env<-subset(Zoop_env,Year.x!="2022")
 ```
 
 # NMDS
@@ -319,7 +324,7 @@ hull.data
 ```
 create environmetal fit table
 ```{r}
-Zoo.env <- data.frame(matrix(ncol = 0, nrow=115))
+Zoo.env <- data.frame(matrix(ncol = 0, nrow=156))
 Zoo.env$pH<-as.numeric(data.scores$pH)
 Zoo.env$temp<-as.numeric(data.scores$temp)
 Zoo.env$Oxygen<-as.numeric(data.scores$Oxygen)
