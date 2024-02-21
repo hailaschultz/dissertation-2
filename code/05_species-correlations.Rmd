@@ -1,0 +1,295 @@
+---
+title: "04_species-correlations"
+date: "2023-10-19"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,         # Display code chunks
+  eval = TRUE,        # Evaluate code chunks
+  warning = FALSE,     # Hide warnings
+  message = FALSE,     # Hide messages
+  fig.width = 10,       # Set plot width in inches
+  fig.height = 6,      # Set plot height in inches
+  fig.align = "center" # Align plots to the center
+)
+```
+load packages
+```{r}
+library(ggrepel)
+library("scales")   
+```
+
+Read zooplanton data into R
+```{r}
+Zooplankton <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/WOAC_Species_Densities_2014-2022.csv")
+```
+Read environmental data into R
+```{r}
+Environmental <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/WOAC_Chem_data_2014-2022_all-niskins.csv")
+```
+
+# Environmental Data Summary
+recode months to match with zooplankton data
+```{r}
+unique(Environmental$Month)
+Environmental$Month <- recode(Environmental$Month, 
+                                 "Jul" = "JUL",
+                         "Sep"="SEP",
+                         "Oct"="SEP",
+                         "Apr"="APR",
+                         "May"="MAY",
+                         "Nov"="NOV",
+                         "Aug"="AUG",
+                         "Jun"="JUL",
+                         "OCT"="SEP")
+#remove unnecessary sample dates
+unique(Environmental$Date)
+unique(Zooplankton$Date)
+Environmental<-subset(Environmental,Date!="10/30/14")
+Environmental<-subset(Environmental,Date!="10/31/14")
+Environmental<-subset(Environmental,Date!="10/23/14")
+Environmental<-subset(Environmental,Date!="10/29/14")
+Environmental<-subset(Environmental,Date!="5/24/15")
+Environmental<-subset(Environmental,Date!="11/18/15")
+Environmental<-subset(Environmental,Date!="11/16/15")
+Environmental<-subset(Environmental,Date!="11/17/15")
+Environmental<-subset(Environmental,Date!="10/27/16")
+Environmental<-subset(Environmental,Date!="5/3/17")
+Environmental<-subset(Environmental,Date!="5/4/17")
+Environmental<-subset(Environmental,Date!="10/18/17")
+Environmental<-subset(Environmental,Date!="5/24/18")
+Environmental<-subset(Environmental,Date!="10/18/18")
+Environmental<-subset(Environmental,Date!="10/19/18")
+Environmental<-subset(Environmental,Date!="5/23/19")
+Environmental<-subset(Environmental,Date!="8/31/20")
+Environmental<-subset(Environmental,Date!="10/1/21")
+Environmental<-subset(Environmental,Date!="5/6/22")
+Environmental<-subset(Environmental,Date!="10/14/22")
+Environmental<-subset(Environmental,Date!="10/15/22")
+Environmental<-subset(Environmental,Date!="9/29/21")
+Environmental<-subset(Environmental,Date!="7/4/20")
+Environmental<-subset(Environmental,Date!="9/30/20")
+Environmental<-subset(Environmental,Date!="9/18/17")
+```
+
+
+Temp: summarize by depth category
+```{r}
+temp<-Environmental %>%
+  group_by(Station,Date,Depth,Year,Month) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90))
+
+#subset to surface samples
+temp_surf<-subset(temp,Depth=="Deep")
+#make unique column
+temp_surf$code<-paste(temp_surf$Station, temp_surf$Year,temp_surf$Month,sep="-")
+```
+
+
+pH: remove missing rows and remove weird values
+```{r}
+pH<-Environmental %>% drop_na(pH)
+pH <- subset(pH, pH != 2130.2)
+```
+summarize by depth category
+```{r}
+pH<-pH %>%
+  group_by(Station,Date,Depth,Year,Month) %>%
+  summarise(
+    pH = mean(pH))
+#subset to surface samples
+pH_surf<-subset(pH,Depth=="Deep")
+#make unique column
+pH_surf$code<-paste(pH_surf$Station, pH_surf$Year,pH_surf$Month,sep="-")
+```
+
+
+O2: remove missing rows and remove weird values
+```{r}
+Oxygen<-Environmental %>% drop_na(O2.in.mg.l)
+```
+
+summarize by depth category
+```{r}
+Oxygen<-Oxygen %>%
+  group_by(Station,Date,Depth,Year,Month) %>%
+  summarise(
+    Oxygen = mean(O2.in.mg.l))
+#subset to surface samples
+Oxygen_surf<-subset(Oxygen,Depth=="Deep")
+#make unique column
+Oxygen_surf$code<-paste(Oxygen_surf$Station, Oxygen_surf$Year,Oxygen_surf$Month,sep="-")
+```
+
+Merge environmental tables
+```{r}
+joined <- merge(temp_surf, pH_surf, by.x = "code", 
+             by.y = "code", all.x = TRUE, all.y = TRUE)
+joined <- merge(joined, Oxygen_surf, by.x = "code", 
+             by.y = "code", all.x = TRUE, all.y = TRUE)
+#remove excess columns
+env_joined <- joined[ -c(8:12,14:18) ]
+```
+
+
+# Zooplankton Data
+subset to stations sampled during WOAC cruises
+```{r}
+unique(Zooplankton$Station)
+Zoop_sub<-subset(Zooplankton,Station!="PEFS1d")
+Zoop_sub<-subset(Zoop_sub,Station!="PEFN1d")
+Zoop_sub<-subset(Zoop_sub,Station!="PEFN2")
+Zoop_sub<-subset(Zoop_sub,Station!="PEFS2")
+Zoop_sub<-subset(Zoop_sub,Station!="P381")
+Zoop_sub<-subset(Zoop_sub,Station!="P105")
+Zoop_sub<-subset(Zoop_sub,Station!="P136")
+Zoop_sub<-subset(Zoop_sub,Station!="P7")
+Zoop_sub<-subset(Zoop_sub,Station!="P123")
+Zoop_sub<-subset(Zoop_sub,Station!="P132")
+unique(Zoop_sub$Date)
+#remove unnecessary dates
+Zoop_sub<-subset(Zoop_sub,Date!="10/30/14")
+Zoop_sub<-subset(Zoop_sub,Date!="10/31/14")
+Zoop_sub<-subset(Zoop_sub,Date!="10/29/14")
+Zoop_sub<-subset(Zoop_sub,Date!="9/14/22")
+Zoop_sub<-subset(Zoop_sub,Date!="9/16/22")
+Zoop_sub<-subset(Zoop_sub,Date!="9/13/22")
+Zoop_sub<-subset(Zoop_sub,Date!="9/12/22")
+Zoop_sub<-subset(Zoop_sub,Date!="11/16/15")
+Zoop_sub<-subset(Zoop_sub,Date!="3/17/16")
+Zoop_sub<-subset(Zoop_sub,Date!="3/18/16")
+Zoop_sub<-subset(Zoop_sub,Date!="11/18/15")
+#recode p4
+Zoop_sub$Station <- recode(Zoop_sub$Station, 
+                                 "p4" = "P4")
+#recode month names to match
+unique(Zoop_sub$Month)
+Zoop_sub$Month <- recode(Zoop_sub$Month, 
+                                 "Jul" = "JUL",
+                         "Sep"="SEP",
+                         "OCT"="SEP")
+#remove ethanol samples
+Zoop_sub<-Zoop_sub[!grepl('_EtOH', Zoop_sub$Code),]
+#remove oblique samples
+Zoop_sub<-subset(Zoop_sub,Tow.Type!="Oblique")
+```
+
+add up multiple lines per station
+```{r}
+Zoop_sub <- Zoop_sub %>%
+  group_by(Code,Station,Basin,Year,Month,Genus.species) %>%
+  summarise(
+    zoop_density = sum(Density....m3.))
+```
+
+change from long to wide format
+```{r}
+colnames(Zoop_sub)
+Zoop_sub_wide<-dcast(Zoop_sub, Code+Station+Basin+Year+Month~ Genus.species,value.var = "zoop_density")
+#make sure factors are formatted right
+Zoop_sub_wide$Year=as.factor(Zoop_sub_wide$Year)
+Zoop_sub_wide$Station=as.factor(Zoop_sub_wide$Station)
+Zoop_sub_wide$Month=as.factor(Zoop_sub_wide$Month)
+Zoop_sub_wide$Basin=as.factor(Zoop_sub_wide$Basin)
+```
+```{r}
+#make unique column
+Zoop_sub_wide$code<-paste(Zoop_sub_wide$Station, Zoop_sub_wide$Year,Zoop_sub_wide$Month,sep="-")
+unique(Zoop_sub$Code)
+```
+
+# Combine env and zoop
+```{r}
+Zoop_env <- merge(env_joined,Zoop_sub_wide, by.x = "code", 
+             by.y = "code", all.x = TRUE, all.y = TRUE)
+#remove excess columns
+Zoop_env <- Zoop_env[ -c(11,13:14) ]
+#remove rows with NA
+Zoop_env<-Zoop_env[!is.na(Zoop_env$Year.x),]
+```
+
+remove non-data columns, convert to proportionas, and arcsine sqrt transformation
+```{r}
+RE2<- Zoop_env[,12:ncol(Zoop_env)]
+#replace N/A with 0
+RE2[is.na(RE2)] <- 0
+#convert to proportions
+RE2<-RE2/rowSums(RE2)
+```
+
+add columns back in
+```{r}
+RE2$code = Zoop_env$code
+RE2$Station.x = Zoop_env$Station.x
+RE2$Year.x = Zoop_env$Year.x
+RE2$Month.x = Zoop_env$Month.x
+RE2$pH = Zoop_env$pH
+RE2$temp = Zoop_env$temp
+RE2$Oxygen = Zoop_env$Oxygen
+```
+
+```{r}
+Zoop_env_prop<-RE2
+```
+
+
+# change format
+```{r}
+Zoop_env_long<-melt(Zoop_env_prop, na.rm = FALSE, c("code", "Station.x","Year.x","Month.x","temp","pH","Oxygen"))
+```
+
+```{r}
+Zoop_env_long$value[Zoop_env_long$value == 0] <- NA
+
+Zoop_env_long<-Zoop_env_long[complete.cases(Zoop_env_long), ]
+```
+
+
+subset to bivalves
+```{r}
+bivalves<-subset(Zoop_env_long,variable=="ACARTIA LONGIREMIS")
+bivalves$Year.x<-as.factor(bivalves$Year.x)
+```
+
+```{r}
+#change factor order
+bivalves$Station.x <- factor(bivalves$Station.x, levels = c("P22", "P4", "P8","P28","P12","P402","P38"))
+```
+
+
+```{r,fig.width=4,fig.height=3,color=Station.x}
+bivalve_plot<-ggplot(bivalves, aes(x=pH, y=value))+geom_point(aes(colour = Station.x))+xlab("Deep Oxygen mg/l")+ylab("Oithona similis Relative Abundance")+theme_bw()+theme(panel.grid.major = element_blank(),                panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7"))
+bivalve_plot
+```
+
+save plot
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/output")
+ggsave(filename = "oithona-oxygen-deep.png", plot = bivalve_plot, height = 3, width = 4, units="in", device='png', dpi=600)
+```
+
+subset to pseudocalanus
+```{r}
+pseudocalanus<-subset(Zoop_env_long,variable=="POLYCHAETA")
+pseudocalanus<-subset(pseudocalanus,Station.x=="P402")
+pseudocalanus$Year.x<-as.factor(pseudocalanus$Year.x)
+```
+
+```{r}
+#change factor order
+pseudocalanus$Station.x <- factor(pseudocalanus$Station.x, levels = c("P402", "P12", "P8","P22","P4","P28","P38"))
+```
+
+
+```{r,fig.width=4,fig.height=3,color=Station.x}
+pseudocalanus_plot<-ggplot(pseudocalanus, aes(x=pH, y=value))+geom_point(aes(colour = Month.x))+xlab("Surface pH")+ylab("Bivalve Abundance")+
+  ylim(0, 1000)
+pseudocalanus_plot
+```

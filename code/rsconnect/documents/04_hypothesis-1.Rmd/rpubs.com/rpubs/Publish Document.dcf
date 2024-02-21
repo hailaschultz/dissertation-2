@@ -1,0 +1,11 @@
+name: Publish Document
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/1146858/046c1ed79dc94c69a8ef37e5d5e4363d
+bundleId: https://api.rpubs.com/api/v1/document/1146858/046c1ed79dc94c69a8ef37e5d5e4363d
+url: http://rpubs.com/HailaSchultz/1146858
+when: 1707429200.51999
+lastSyncTime: 1707429200.52

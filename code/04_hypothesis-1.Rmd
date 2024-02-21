@@ -1,0 +1,666 @@
+---
+title: "04_hypothesis-1"
+date: "2024-02-08"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,         # Display code chunks
+  eval = TRUE,        # Evaluate code chunks
+  warning = FALSE,     # Hide warnings
+  message = FALSE,     # Hide messages
+  fig.width = 10,       # Set plot width in inches
+  fig.height = 6,      # Set plot height in inches
+  fig.align = "center" # Align plots to the center
+)
+```
+
+This markdown file details analyses done for hypothesis 1 of chapter 2 of my dissertation: Gelatinous zooplankton will be more abundant than crustaceans during marine heatwave years.
+
+load packages
+```{r}
+library(ggrepel)
+library("scales")   
+library(dplyr)
+library(tidyr)
+library(data.table)
+library(ggeffects)
+```
+
+Read zooplanton data into R
+```{r}
+Zooplankton <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/WOAC_Species_Densities_2014-2022.csv")
+```
+Read environmental data into R
+```{r}
+Environmental <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/WOAC_Chem_data_2014-2022_all-niskins.csv")
+```
+
+# Environmental Data Summary
+recode months to match with zooplankton data
+```{r}
+unique(Environmental$Month)
+Environmental$Month <- recode(Environmental$Month, 
+                                 "Jul" = "JUL",
+                         "Sep"="SEP",
+                         "Oct"="SEP",
+                         "Apr"="APR",
+                         "May"="MAY",
+                         "Nov"="NOV",
+                         "Aug"="AUG",
+                         "Jun"="JUL",
+                         "OCT"="SEP")
+#remove unnecessary sample dates
+unique(Environmental$Date)
+unique(Zooplankton$Date)
+Environmental<-subset(Environmental,Date!="10/30/14")
+Environmental<-subset(Environmental,Date!="10/31/14")
+Environmental<-subset(Environmental,Date!="10/23/14")
+Environmental<-subset(Environmental,Date!="10/29/14")
+Environmental<-subset(Environmental,Date!="5/24/15")
+Environmental<-subset(Environmental,Date!="11/18/15")
+Environmental<-subset(Environmental,Date!="11/16/15")
+Environmental<-subset(Environmental,Date!="11/17/15")
+Environmental<-subset(Environmental,Date!="10/27/16")
+Environmental<-subset(Environmental,Date!="5/3/17")
+Environmental<-subset(Environmental,Date!="5/4/17")
+Environmental<-subset(Environmental,Date!="10/18/17")
+Environmental<-subset(Environmental,Date!="5/24/18")
+Environmental<-subset(Environmental,Date!="10/18/18")
+Environmental<-subset(Environmental,Date!="10/19/18")
+Environmental<-subset(Environmental,Date!="5/23/19")
+Environmental<-subset(Environmental,Date!="8/31/20")
+Environmental<-subset(Environmental,Date!="10/1/21")
+Environmental<-subset(Environmental,Date!="5/6/22")
+Environmental<-subset(Environmental,Date!="10/14/22")
+Environmental<-subset(Environmental,Date!="10/15/22")
+Environmental<-subset(Environmental,Date!="9/29/21")
+Environmental<-subset(Environmental,Date!="7/4/20")
+Environmental<-subset(Environmental,Date!="9/30/20")
+Environmental<-subset(Environmental,Date!="9/18/17")
+```
+
+Temp: summarize by depth category
+```{r}
+temp<-Environmental %>%
+  group_by(Station,Date,Depth,Year,Month) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90))
+
+#subset to surface samples
+temp_surf<-subset(temp,Depth=="Surface")
+#make unique column
+temp_surf$code<-paste(temp_surf$Station, temp_surf$Year,temp_surf$Month,sep="-")
+```
+
+pH: remove missing rows and remove weird values
+```{r}
+pH<-Environmental %>% drop_na(pH)
+pH <- subset(pH, pH != 2130.2)
+```
+summarize by depth category
+```{r}
+pH<-pH %>%
+  group_by(Station,Date,Depth,Year,Month) %>%
+  summarise(
+    pH = mean(pH))
+#subset to surface samples
+pH_surf<-subset(pH,Depth=="Surface")
+#make unique column
+pH_surf$code<-paste(pH_surf$Station, pH_surf$Year,pH_surf$Month,sep="-")
+```
+
+O2: remove missing rows and remove weird values
+```{r}
+Oxygen<-Environmental %>% drop_na(O2.in.mg.l)
+```
+
+summarize by depth category
+```{r}
+Oxygen<-Oxygen %>%
+  group_by(Station,Date,Depth,Year,Month) %>%
+  summarise(
+    Oxygen = mean(O2.in.mg.l))
+#subset to surface samples
+Oxygen_surf<-subset(Oxygen,Depth=="Surface")
+#make unique column
+Oxygen_surf$code<-paste(Oxygen_surf$Station, Oxygen_surf$Year,Oxygen_surf$Month,sep="-")
+```
+
+
+Merge environmental tables
+```{r}
+joined <- merge(temp_surf, pH_surf, by.x = "code", 
+             by.y = "code", all.x = TRUE, all.y = TRUE)
+joined <- merge(joined, Oxygen_surf, by.x = "code", 
+             by.y = "code", all.x = TRUE, all.y = TRUE)
+#remove excess columns
+env_joined <- joined[ -c(8:12,14:18) ]
+```
+
+
+# Zooplankton Data
+subset to stations sampled during WOAC cruises
+```{r}
+unique(Zooplankton$Station)
+Zoop_sub<-subset(Zooplankton,Station!="PEFS1d")
+Zoop_sub<-subset(Zoop_sub,Station!="PEFN1d")
+Zoop_sub<-subset(Zoop_sub,Station!="PEFN2")
+Zoop_sub<-subset(Zoop_sub,Station!="PEFS2")
+Zoop_sub<-subset(Zoop_sub,Station!="P381")
+Zoop_sub<-subset(Zoop_sub,Station!="P105")
+Zoop_sub<-subset(Zoop_sub,Station!="P136")
+Zoop_sub<-subset(Zoop_sub,Station!="P7")
+Zoop_sub<-subset(Zoop_sub,Station!="P123")
+Zoop_sub<-subset(Zoop_sub,Station!="P132")
+unique(Zoop_sub$Date)
+#remove unnecessary dates
+Zoop_sub<-subset(Zoop_sub,Date!="10/30/14")
+Zoop_sub<-subset(Zoop_sub,Date!="10/31/14")
+Zoop_sub<-subset(Zoop_sub,Date!="10/29/14")
+Zoop_sub<-subset(Zoop_sub,Date!="9/14/22")
+Zoop_sub<-subset(Zoop_sub,Date!="9/16/22")
+Zoop_sub<-subset(Zoop_sub,Date!="9/13/22")
+Zoop_sub<-subset(Zoop_sub,Date!="9/12/22")
+Zoop_sub<-subset(Zoop_sub,Date!="11/16/15")
+Zoop_sub<-subset(Zoop_sub,Date!="3/17/16")
+Zoop_sub<-subset(Zoop_sub,Date!="3/18/16")
+Zoop_sub<-subset(Zoop_sub,Date!="11/18/15")
+#recode p4
+Zoop_sub$Station <- recode(Zoop_sub$Station, 
+                                 "p4" = "P4")
+#recode month names to match
+unique(Zoop_sub$Month)
+Zoop_sub$Month <- recode(Zoop_sub$Month, 
+                                 "Jul" = "JUL",
+                         "Sep"="SEP",
+                         "OCT"="SEP")
+#remove ethanol samples
+Zoop_sub<-Zoop_sub[!grepl('_EtOH', Zoop_sub$Code),]
+#remove oblique samples
+Zoop_sub<-subset(Zoop_sub,Tow.Type!="Oblique")
+```
+
+add up multiple lines per station, categorize by crustaceans and gelatinous
+```{r}
+Zoop_sub <- Zoop_sub %>%
+  group_by(Code,Station,Basin,Year,Month,Crustaceans.vs.Gelatinous) %>%
+  summarise(
+    zoop_density = sum(Density....m3.))
+```
+
+change from long to wide format
+```{r}
+colnames(Zoop_sub)
+Zoop_sub_wide<-dcast(Zoop_sub, Code+Station+Basin+Year+Month~ Crustaceans.vs.Gelatinous,value.var = "zoop_density")
+#make sure factors are formatted right
+Zoop_sub_wide$Year=as.factor(Zoop_sub_wide$Year)
+Zoop_sub_wide$Station=as.factor(Zoop_sub_wide$Station)
+Zoop_sub_wide$Month=as.factor(Zoop_sub_wide$Month)
+Zoop_sub_wide$Basin=as.factor(Zoop_sub_wide$Basin)
+```
+
+```{r}
+#make unique column
+Zoop_sub_wide$code<-paste(Zoop_sub_wide$Station, Zoop_sub_wide$Year,Zoop_sub_wide$Month,sep="-")
+unique(Zoop_sub$Code)
+```
+
+
+# Combine env and zoop
+```{r}
+Zoop_env <- merge(env_joined,Zoop_sub_wide, by.x = "code", 
+             by.y = "code", all.x = TRUE, all.y = TRUE)
+#remove excess columns
+Zoop_env <- Zoop_env[ -c(11,13:14) ]
+#remove rows with NA
+Zoop_env<-Zoop_env[!is.na(Zoop_env$Year.x),]
+```
+
+## Proportions
+remove non-data columns, convert to proportions
+```{r}
+RE2<- Zoop_env[,12:ncol(Zoop_env)]
+#replace N/A with 0
+RE2[is.na(RE2)] <- 0
+#convert to proportions
+RE2<-RE2/rowSums(RE2)
+```
+
+add columns back in
+```{r}
+RE2$code = Zoop_env$code
+RE2$Station.x = Zoop_env$Station.x
+RE2$Year.x = Zoop_env$Year.x
+RE2$Month.x = Zoop_env$Month.x
+RE2$pH = Zoop_env$pH
+RE2$temp = Zoop_env$temp
+RE2$Oxygen = Zoop_env$Oxygen
+```
+
+```{r}
+Zoop_env_prop<-RE2
+```
+
+
+### change format
+```{r}
+Zoop_env_long<-melt(Zoop_env_prop, na.rm = FALSE, c("code", "Station.x","Year.x","Month.x","temp","pH","Oxygen"))
+```
+
+```{r}
+Zoop_env_long$value[Zoop_env_long$value == 0] <- NA
+
+Zoop_env_long<-Zoop_env_long[complete.cases(Zoop_env_long), ]
+```
+
+### subset to gelatinous
+```{r}
+Gelatinous<-subset(Zoop_env_long,variable=="Gelatinous")
+Gelatinous$Year.x<-as.factor(Gelatinous$Year.x)
+```
+
+```{r}
+#change factor order
+Gelatinous$Station.x <- factor(Gelatinous$Station.x, levels = c("P22", "P4", "P8","P28","P12","P402","P38"))
+```
+
+```{r,fig.width=4,fig.height=3}
+Gelatinous_plot<-ggplot(Gelatinous, aes(x=temp, y=value))+geom_point(aes(colour = Station.x))+xlab("Temperature")+ylab("Gelatinous Zooplankton Relative Abundance")+theme_bw()+theme(panel.grid.major = element_blank(),                panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7"))
+Gelatinous_plot
+```
+
+matrix of plots - surface values
+```{r}
+pairs(Gelatinous[,c(5:7,9)], pch = 19)
+```
+
+### subset to crustacean
+```{r}
+Crustacean<-subset(Zoop_env_long,variable=="Crustaceans")
+Crustacean$Year.x<-as.factor(Crustacean$Year.x)
+```
+
+```{r}
+#change factor order
+Crustacean$Station.x <- factor(Crustacean$Station.x, levels = c("P22", "P4", "P8","P28","P12","P402","P38"))
+```
+
+```{r,fig.width=4,fig.height=3}
+Crustacean_plot<-ggplot(Crustacean, aes(x=temp, y=value))+geom_point(aes(colour = Station.x))+xlab("Temperature")+ylab("Crustacean Zooplankton Relative Abundance")+theme_bw()+theme(panel.grid.major = element_blank(),                panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7"))
+Crustacean_plot
+```
+matrix of plots - surface values
+```{r}
+pairs(Crustacean[,c(5:7,9)], pch = 19)
+```
+
+## Abundance
+### change format
+```{r}
+#subset columns
+Zoop_env<-select(Zoop_env, Gelatinous,Crustaceans, code, Station.x, Year.x, Month.x, temp, pH, Oxygen)
+
+
+Zoop_env_long<-melt(Zoop_env, na.rm = FALSE, c("code", "Station.x","Year.x","Month.x","temp","pH","Oxygen"))
+```
+
+```{r}
+#remove NA rows
+Zoop_env_long$value[Zoop_env_long$value == 0] <- NA
+
+Zoop_env_long<-Zoop_env_long[complete.cases(Zoop_env_long), ]
+```
+
+# subset to gelatinous
+```{r}
+Gelatinous<-subset(Zoop_env_long,variable=="Gelatinous")
+Gelatinous$Year.x<-as.factor(Gelatinous$Year.x)
+```
+
+```{r}
+#change factor order
+Gelatinous$Station.x <- factor(Gelatinous$Station.x, levels = c("P22", "P4", "P8","P28","P12","P402","P38"))
+```
+
+```{r,fig.width=4,fig.height=3}
+Gelatinous_plot<-ggplot(Gelatinous, aes(x=temp, y=value))+geom_point(aes(colour = Station.x))+xlab("Temperature")+ylab("Gelatinous Zooplankton Abundance")+theme_bw()+theme(panel.grid.major = element_blank(),                panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7"))
+Gelatinous_plot
+```
+
+matrix of plots - surface values
+```{r}
+pairs(Gelatinous[,c(5:7,9)], pch = 19)
+```
+
+
+# subset to crustacean
+```{r}
+Crustacean<-subset(Zoop_env_long,variable=="Crustaceans")
+Crustacean$Year.x<-as.factor(Crustacean$Year.x)
+```
+
+```{r}
+#change factor order
+Crustacean$Station.x <- factor(Crustacean$Station.x, levels = c("P22", "P4", "P8","P28","P12","P402","P38"))
+```
+
+```{r,fig.width=4,fig.height=3}
+Crustacean_plot<-ggplot(Crustacean, aes(x=temp, y=value))+geom_point(aes(colour = Station.x))+xlab("Temperature")+ylab("Crustacean Zooplankton Abundance")+theme_bw()+theme(panel.grid.major = element_blank(),                panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7"))
+Crustacean_plot
+```
+
+matrix of plots - surface values
+```{r}
+pairs(Crustacean[,c(5:7,9)], pch = 19)
+```
+
+
+
+## Calculate temperature anomalies
+Taken from BethElLee's methods: 
+Average by season, subtract datapoint from average, divide by standard deviaiton of the average to standardize
+
+### Surface
+
+month and station averages
+```{r}
+temp_ave<-Environmental %>%
+  group_by(Depth,Month,Station) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90),
+    stdev = sd(CTDTMP_DEG_C_ITS90))
+
+#subset to surface samples
+temp_surf_ave<-subset(temp_ave,Depth=="Surface")
+
+#unique station-month combo
+temp_surf_ave$station_month<-paste(temp_surf_ave$Station, temp_surf_ave$Month,sep="-")
+```
+
+temperatures
+```{r}
+temp<-Environmental %>%
+  group_by(Station,Date,Depth,Year,Month) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90))
+#subset to surface samples
+temp_surf<-subset(temp,Depth=="Surface")
+#unique station-month combo
+temp_surf$station_month<-paste(temp_surf$Station, temp_surf$Month,sep="-")
+```
+
+anomalies
+```{r}
+#add average column 
+temp_surf$Ave <- temp_surf_ave$temp[match(temp_surf$station_month, temp_surf_ave$station_month)]
+
+#add statndard deviation column
+temp_surf$stdev <- temp_surf_ave$stdev[match(temp_surf$station_month, temp_surf_ave$station_month)]
+
+# calculate anomalies
+temp_surf$anomaly<-(temp_surf$temp-temp_surf$Ave)/temp_surf$stdev
+```
+
+convert date format
+```{r}
+temp_surf <- temp_surf %>% 
+  mutate(date_convert = as.Date(Date, format = "%m/%d/%y"))
+```
+
+plot
+```{r,fig.width=5,fig.height=9}
+temp_plot<-ggplot(data = temp_surf, aes(date_convert, anomaly)) +
+  geom_bar(aes(fill = anomaly < 0),stat='identity',width=30)+
+  facet_grid(Station ~ .) +
+  theme_classic()+
+  xlab("Year") + ylab("temperature anomaly")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+  scale_fill_manual(guide = FALSE, breaks = c(TRUE, FALSE), values=c("blue", "red"))
+temp_plot
+```
+
+
+### 5-m
+
+month and station averages
+```{r}
+temp_ave<-Environmental %>%
+  group_by(Depth,Month,Station) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90),
+    stdev = sd(CTDTMP_DEG_C_ITS90))
+
+#subset to surface samples
+temp_surf_ave<-subset(temp_ave,Depth=="5-m")
+
+#unique station-month combo
+temp_surf_ave$station_month<-paste(temp_surf_ave$Station, temp_surf_ave$Month,sep="-")
+```
+
+temperatures
+```{r}
+temp<-Environmental %>%
+  group_by(Station,Date,Depth,Year,Month) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90))
+#subset to surface samples
+temp_surf<-subset(temp,Depth=="5-m")
+#unique station-month combo
+temp_surf$station_month<-paste(temp_surf$Station, temp_surf$Month,sep="-")
+```
+
+anomalies
+```{r}
+#add average column 
+temp_surf$Ave <- temp_surf_ave$temp[match(temp_surf$station_month, temp_surf_ave$station_month)]
+
+#add statndard deviation column
+temp_surf$stdev <- temp_surf_ave$stdev[match(temp_surf$station_month, temp_surf_ave$station_month)]
+
+# calculate anomalies
+temp_surf$anomaly<-(temp_surf$temp-temp_surf$Ave)/temp_surf$stdev
+```
+
+convert date format
+```{r}
+temp_surf <- temp_surf %>% 
+  mutate(date_convert = as.Date(Date, format = "%m/%d/%y"))
+```
+
+plot
+```{r,fig.width=5,fig.height=9}
+temp_plot<-ggplot(data = temp_surf, aes(date_convert, anomaly)) +
+  geom_bar(aes(fill = anomaly < 0),stat='identity',width=30)+
+  facet_grid(Station ~ .) +
+  theme_classic()+
+  xlab("Year") + ylab("temperature anomaly")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+  scale_fill_manual(guide = FALSE, breaks = c(TRUE, FALSE), values=c("blue", "red"))
+temp_plot
+```
+
+### Deep
+
+month and station averages
+```{r}
+temp_ave<-Environmental %>%
+  group_by(Depth,Month,Station) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90),
+    stdev = sd(CTDTMP_DEG_C_ITS90))
+
+#subset to surface samples
+temp_surf_ave<-subset(temp_ave,Depth=="Deep")
+
+#unique station-month combo
+temp_surf_ave$station_month<-paste(temp_surf_ave$Station, temp_surf_ave$Month,sep="-")
+```
+
+temperatures
+```{r}
+temp<-Environmental %>%
+  group_by(Station,Date,Depth,Year,Month) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90))
+#subset to surface samples
+temp_surf<-subset(temp,Depth=="Deep")
+#unique station-month combo
+temp_surf$station_month<-paste(temp_surf$Station, temp_surf$Month,sep="-")
+```
+
+anomalies
+```{r}
+#add average column 
+temp_surf$Ave <- temp_surf_ave$temp[match(temp_surf$station_month, temp_surf_ave$station_month)]
+
+#add statndard deviation column
+temp_surf$stdev <- temp_surf_ave$stdev[match(temp_surf$station_month, temp_surf_ave$station_month)]
+
+# calculate anomalies
+temp_surf$anomaly<-(temp_surf$temp-temp_surf$Ave)/temp_surf$stdev
+```
+
+convert date format
+```{r}
+temp_surf <- temp_surf %>% 
+  mutate(date_convert = as.Date(Date, format = "%m/%d/%y"))
+```
+
+plot
+```{r,fig.width=5,fig.height=9}
+temp_plot<-ggplot(data = temp_surf, aes(date_convert, anomaly)) +
+  geom_bar(aes(fill = anomaly < 0),stat='identity',width=30)+
+  facet_grid(Station ~ .) +
+  theme_classic()+
+  xlab("Year") + ylab("temperature anomaly")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+  scale_fill_manual(guide = FALSE, breaks = c(TRUE, FALSE), values=c("blue", "red"))
+temp_plot
+```
+
+
+# GLM Gelatinous
+```{r}
+hist(Gelatinous$value) 
+```
+Dependent variable is heavily zero-skewed
+
+```{r}
+hist(Gelatinous$temp) 
+hist(Gelatinous$pH) 
+hist(Gelatinous$Oxygen)
+```
+Independent variables are normally distributed
+
+```{r}
+ggplot(Gelatinous, aes(x=temp, y=value)) + geom_point()
+```
+
+
+Gaussian distribution
+```{r}
+gelatinous_gaussian<-glm(value~temp, data= Gelatinous, family="gaussian")
+summary(gelatinous_gaussian)
+plot(gelatinous_gaussian)
+```
+pretty bad outliers
+
+Gamma distribution
+```{r}
+gelatinous_gamma<-glm(value~temp, data= Gelatinous, family="Gamma")
+summary(gelatinous_gamma)
+plot(gelatinous_gamma)
+```
+better but not perfect
+
+Gamma with log link
+```{r}
+gelatinous_gamma_log<-glm(value~temp, data= Gelatinous, family="Gamma"(link="log"))
+summary(gelatinous_gamma_log)
+plot(gelatinous_gamma_log)
+```
+slightly better
+
+check for multicollinearity
+```{r}
+DAData1 = subset(Gelatinous, select = c(temp, pH,Oxygen,value) )
+pairs(DAData1 , panel = panel.smooth)
+
+```
+Oxygen and pH are correlated, choose only one
+
+Gamma, log link, month, temp, oxygen
+```{r}
+Full_mod_1<-glm(value~Month.x+temp+Oxygen, data= Gelatinous, family="Gamma"(link="log"))
+summary(Full_mod_1)
+plot(Full_mod_1)
+```
+Month is not significant
+
+Gamma, log link, month,station, temp, oxygen
+```{r}
+Full_mod_1<-glm(value~Month.x+Station.x+temp+Oxygen, data= Gelatinous, family="Gamma"(link="log"))
+summary(Full_mod_1)
+plot(Full_mod_1)
+```
+looks much better! Include station.
+
+
+Gamma, log link,station, temp, oxygen
+```{r}
+Full_mod_1<-glm(value~Station.x+temp+Oxygen, data= Gelatinous, family="Gamma"(link="log"))
+summary(Full_mod_1)
+plot(Full_mod_1)
+```
+AIC is the same without month
+
+Gamma, log link,station, temp
+```{r}
+Full_mod_1<-glm(value~Station.x+temp, data= Gelatinous, family="Gamma"(link="log"))
+summary(Full_mod_1)
+plot(Full_mod_1)
+```
+AIC is even better when I take out oxygen. Slightly better with month in, but since month is insignificant, I don't think it's necessary
+P28 and P12 are significantly different than the other months
+
+
+
+Use predict function to predict model values
+
+```{r}
+predictmod<-ggpredict(
+  Full_mod_1,
+  terms=c("temp","Station.x"),
+  ci.lvl = 0.95,
+  type = "fe",
+  typical = "mean",
+  condition = NULL,
+  back.transform = TRUE,
+  ppd = FALSE,
+  vcov.fun = NULL,
+  vcov.type = NULL,
+  vcov.args = NULL,
+  interval = "confidence")
+```
+
+```{r}
+Plot<-plot(predictmod,add.data = TRUE,dot.size=1.5,dot.alpha=0.65)+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"))+theme_classic() +
+  geom_line(linewidth=1.5) +
+  geom_ribbon( aes(ymin = conf.low, ymax = conf.high), alpha = .15)+
+  xlab(bquote('Temperature'))+ylab(bquote('Gelatinous Zooplankton Density'))+
+  theme(axis.text=element_text(size=15,colour="black"),
+        legend.position="none",
+        axis.title=element_text(size=15,colour="black"),
+        axis.line = element_line(colour = "black"))+theme(plot.title = element_blank())+
+  theme(plot.margin=margin(0.7, 0.7, 0.7, 0.7, unit = "cm"))+
+  facet_grid(group ~ .)
+Plot
+```
+

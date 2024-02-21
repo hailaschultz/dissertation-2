@@ -126,9 +126,8 @@ ggsave(filename = "time-series_temperature.png", plot = temp_plot, width = 10, h
 ```
 It looks like P12 and P402 have the highest variability in temperatures, and have especially high summer temperatures. This makes sense becasue these are the hood canal stations.
 
-#Current editing point
 
-## Average across stations
+## Average temperature across stations
 ```{r}
 temp<-Environmental %>%
   group_by(Station,Date,Depth) %>%
@@ -178,6 +177,17 @@ temp_ave<-ggplot(data = temp_surf, aes(year,mean)) +
   facet_grid(season ~ .)
 temp_ave
 ```
+
+save plot
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/output/Temperature")
+ggsave(filename = "temperature_seasonal-average.png", plot = temp_ave, width = 10, height = 6, device='png', dpi=700)
+```
+
+I'm not seeing any super clear patterns here - this is probably due the the high variability in temperatures among stations.
+
+# Editing progress
+
 ## Try anomaly analysis
 
 ### P402, 5 m

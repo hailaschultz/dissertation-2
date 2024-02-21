@@ -1,0 +1,315 @@
+---
+title: "06_env-cluster"
+date: "2024-02-20"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,         # Display code chunks
+  eval = TRUE,        # Evaluate code chunks
+  warning = FALSE,     # Hide warnings
+  message = FALSE,     # Hide messages
+  fig.width = 10,       # Set plot width in inches
+  fig.height = 6,      # Set plot height in inches
+  fig.align = "center" # Align plots to the center
+)
+```
+
+The purpose of this code is to conduct cluster analysis on the WOAC stations based on their environmental variables. I am interested in seeing if there are groups of stations that are environmentally similar which I can cluster together. This analysis is based on the workflow documented here: https://jtr13.github.io/cc21fall2/tutorial-on-cluster-analysis-1.html
+
+
+load packages
+```{r}
+library(ggrepel)
+library("scales")   
+library(corrplot)
+library(factoextra)
+```
+
+
+Read environmental data into R
+```{r}
+Environmental <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/WOAC_Chem_data_2014-2022_all-niskins.csv")
+```
+
+# Environmental Data Summary
+recode months to match with zooplankton data
+```{r}
+unique(Environmental$Month)
+Environmental$Month <- recode(Environmental$Month, 
+                                 "Jul" = "JUL",
+                         "Sep"="SEP",
+                         "Oct"="SEP",
+                         "Apr"="APR",
+                         "May"="MAY",
+                         "Nov"="NOV",
+                         "Aug"="AUG",
+                         "Jun"="JUL",
+                         "OCT"="SEP")
+#remove unnecessary sample dates
+unique(Environmental$Date)
+unique(Zooplankton$Date)
+Environmental<-subset(Environmental,Date!="10/30/14")
+Environmental<-subset(Environmental,Date!="10/31/14")
+Environmental<-subset(Environmental,Date!="10/23/14")
+Environmental<-subset(Environmental,Date!="10/29/14")
+Environmental<-subset(Environmental,Date!="5/24/15")
+Environmental<-subset(Environmental,Date!="11/18/15")
+Environmental<-subset(Environmental,Date!="11/16/15")
+Environmental<-subset(Environmental,Date!="11/17/15")
+Environmental<-subset(Environmental,Date!="10/27/16")
+Environmental<-subset(Environmental,Date!="5/3/17")
+Environmental<-subset(Environmental,Date!="5/4/17")
+Environmental<-subset(Environmental,Date!="10/18/17")
+Environmental<-subset(Environmental,Date!="5/24/18")
+Environmental<-subset(Environmental,Date!="10/18/18")
+Environmental<-subset(Environmental,Date!="10/19/18")
+Environmental<-subset(Environmental,Date!="5/23/19")
+Environmental<-subset(Environmental,Date!="8/31/20")
+Environmental<-subset(Environmental,Date!="10/1/21")
+Environmental<-subset(Environmental,Date!="5/6/22")
+Environmental<-subset(Environmental,Date!="10/14/22")
+Environmental<-subset(Environmental,Date!="10/15/22")
+Environmental<-subset(Environmental,Date!="9/29/21")
+Environmental<-subset(Environmental,Date!="7/4/20")
+Environmental<-subset(Environmental,Date!="9/30/20")
+Environmental<-subset(Environmental,Date!="9/18/17")
+```
+
+get variable names
+```{r}
+colnames(Environmental)
+```
+
+
+
+## Surface
+
+Temp: summarize by depth category
+```{r}
+temp<-Environmental %>%
+  group_by(Station,Date,Depth,Year,Month) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90))
+
+#subset to surface samples
+temp_surf<-subset(temp,Depth=="Surface")
+#make unique column
+temp_surf$code<-paste(temp_surf$Station, temp_surf$Year,temp_surf$Month,sep="-")
+```
+
+
+pH: remove missing rows and remove weird values
+```{r}
+pH<-Environmental %>% drop_na(pH)
+pH <- subset(pH, pH != 2130.2)
+```
+summarize by depth category
+```{r}
+pH<-pH %>%
+  group_by(Station,Date,Depth,Year,Month) %>%
+  summarise(
+    pH = mean(pH))
+#subset to surface samples
+pH_surf<-subset(pH,Depth=="Surface")
+#make unique column
+pH_surf$code<-paste(pH_surf$Station, pH_surf$Year,pH_surf$Month,sep="-")
+```
+
+
+O2: remove missing rows and remove weird values
+```{r}
+Oxygen<-Environmental %>% drop_na(O2.in.mg.l)
+```
+
+summarize by depth category
+```{r}
+Oxygen<-Oxygen %>%
+  group_by(Station,Date,Depth,Year,Month) %>%
+  summarise(
+    Oxygen = mean(O2.in.mg.l))
+#subset to surface samples
+Oxygen_surf<-subset(Oxygen,Depth=="Surface")
+#make unique column
+Oxygen_surf$code<-paste(Oxygen_surf$Station, Oxygen_surf$Year,Oxygen_surf$Month,sep="-")
+```
+
+Salinity: remove missing rows and remove weird values
+```{r}
+Salinity<-Environmental %>% drop_na(CTD.Salinity..PSU.)
+```
+
+summarize by depth category
+```{r}
+Salinity<-Salinity %>%
+  group_by(Station,Date,Depth,Year,Month) %>%
+  summarise(
+    Salinity = mean(CTD.Salinity..PSU.))
+#subset to surface samples
+Salinity_surf<-subset(Salinity,Depth=="Surface")
+#make unique column
+Salinity_surf$code<-paste(Salinity_surf$Station, Salinity_surf$Year,Salinity_surf$Month,sep="-")
+```
+
+Salinity: remove missing rows and remove weird values
+```{r}
+Salinity<-Environmental %>% drop_na(CTD.Salinity..PSU.)
+```
+
+summarize by depth category
+```{r}
+Salinity<-Salinity %>%
+  group_by(Station,Date,Depth,Year,Month) %>%
+  summarise(
+    Salinity = mean(CTD.Salinity..PSU.))
+#subset to surface samples
+Salinity_surf<-subset(Salinity,Depth=="Surface")
+#make unique column
+Salinity_surf$code<-paste(Salinity_surf$Station, Salinity_surf$Year,Salinity_surf$Month,sep="-")
+```
+
+
+Phosphate: remove missing rows and remove weird values
+```{r}
+Phosphate<-Environmental %>% drop_na(PHOSPHATE.umol_kg)
+```
+
+summarize by depth category
+```{r}
+Phosphate<-Phosphate %>%
+  group_by(Station,Date,Depth,Year,Month) %>%
+  summarise(
+    Phosphate = mean(PHOSPHATE.umol_kg))
+#subset to surface samples
+Phosphate_surf<-subset(Phosphate,Depth=="Surface")
+#make unique column
+Phosphate_surf$code<-paste(Phosphate_surf$Station, Phosphate_surf$Year,Phosphate_surf$Month,sep="-")
+```
+
+Silicate: remove missing rows and remove weird values
+```{r}
+Silicate<-Environmental %>% drop_na(SILICATE.umol_kg)
+```
+
+summarize by depth category
+```{r}
+Silicate<-Silicate %>%
+  group_by(Station,Date,Depth,Year,Month) %>%
+  summarise(
+    Silicate = mean(SILICATE.umol_kg))
+#subset to surface samples
+Silicate_surf<-subset(Silicate,Depth=="Surface")
+#make unique column
+Silicate_surf$code<-paste(Silicate_surf$Station, Silicate_surf$Year,Silicate_surf$Month,sep="-")
+```
+
+
+Merge environmental tables
+```{r}
+joined <- merge(temp_surf, pH_surf, by.x = "code", 
+             by.y = "code", all.x = TRUE, all.y = TRUE)
+joined <- merge(joined, Oxygen_surf, by.x = "code", 
+             by.y = "code", all.x = TRUE, all.y = TRUE)
+joined <- merge(joined, Salinity_surf, by.x = "code", 
+             by.y = "code", all.x = TRUE, all.y = TRUE)
+joined <- merge(joined, Phosphate_surf, by.x = "code", 
+             by.y = "code", all.x = TRUE, all.y = TRUE)
+joined <- merge(joined, Silicate_surf, by.x = "code", 
+             by.y = "code", all.x = TRUE, all.y = TRUE)
+#remove excess columns and na rows
+env_joined <- joined[ -c(2:6,8:12,14:18,20:24,26:30,32:36) ]
+```
+
+Note: unfortunately, not all stations have nutrient data, so when nutrients are included, a lot of stations are dropped. I have decided to proceed, omitting the nutrients.
+
+drop nutrient columns and remove na rows
+```{r}
+env_joined <- env_joined[ -c(6:7) ]
+env_joined<-env_joined %>% drop_na(pH)
+```
+
+
+standardize variables
+```{r}
+#convert station column to rownames
+env_joined<-env_joined %>% remove_rownames %>% column_to_rownames(var="code")
+env_joined_standard <- env_joined %>% mutate_all(~(scale(.) %>% as.vector))
+cor_matrix <- cor(env_joined_standard)
+corrplot(cor_matrix, method = "number", type = "lower", tl.pos = 'd')
+```
+remove pH because Oxygen and pH are highly correlated
+```{r}
+env_joined_standard <- subset(env_joined_standard, select = -c(Oxygen))
+```
+
+
+### Centroid Based
+gap statistic: do this to determine number of clusters
+```{r}
+res.km<-eclust(env_joined_standard, FUNcluster = "kmeans", hc_metric = "euclidean", graph = FALSE)
+fviz_gap_stat(res.km$gap_stat)
+
+#silhouette plot
+fviz_silhouette(res.km)
+```
+this determined that two clusters were optimal
+
+elbow method
+```{r}
+fviz_nbclust(env_joined_standard, FUNcluster = kmeans, method = "wss") + labs(subtitle = "Elbow method") 
+```
+looks like there is an elbow at 2, indicating 2 clusters as optimal
+
+cluster plot
+```{r}
+eclust(env_joined_standard, FUNcluster = "kmeans", k = 2, hc_metric = "euclidean")
+```
+
+### Heirarchical
+```{r,fig.width=6,fig.height=8}
+res.hclust <- eclust(env_joined_standard, FUNcluster = "hclust", hc_metric = "euclidean")
+fviz_dend(res.hclust, rect = TRUE,repel=phylogenic)
+fviz_cluster(res.hclust, labelsize = 10)
+```
+
+### Agglomerative clustering
+```{r,fig.width=6,fig.height=8}
+res.aclust <- eclust(env_joined_standard, FUNcluster = "hclust", hc_metric = "euclidean", hc_method = "ward.D2")
+fviz_dend(res.aclust, rect = TRUE)
+fviz_cluster(res.aclust, labelsize = 10)
+```
+the last two methods gave the same result
+
+### visualize the strength of the variables
+```{r}
+df_clusters <- res.km$centers
+res.km
+```
+
+```{r}
+melt_df <- melt(df_clusters)
+
+heatmap <- ggplot(melt_df, aes(Var2, Var1)) +
+  scale_fill_continuous(type = "viridis", direction = -1) +
+  geom_tile(aes(fill = value)) +
+  geom_text(aes(label = round(value, 1))) +
+  theme_bw() +
+  ggtitle("Strength of Each of the Variables in the Clusters") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(x="Variable", y="Cluster")
+heatmap
+```
+It looks like cluster 1 is driven by higher pH and lower salinity, cluster 2 is driven by lower pH and higher salinity
+
+### list of statons and clusters
+```{r}
+env_joined["Cluster"] <- res.km$cluster
+df_out <- env_joined[order(-env_joined$Cluster), ]
+knitr::kable(df_out)
+```
+
