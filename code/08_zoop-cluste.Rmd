@@ -1,0 +1,119 @@
+---
+title: "08_zoop-cluster"
+date: "2024-02-22"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,         # Display code chunks
+  eval = TRUE,        # Evaluate code chunks
+  warning = FALSE,     # Hide warnings
+  message = FALSE,     # Hide messages
+  fig.width = 10,       # Set plot width in inches
+  fig.height = 6,      # Set plot height in inches
+  fig.align = "center" # Align plots to the center
+)
+```
+
+load packages
+```{r}
+library(ggrepel)
+library("scales")   
+library(corrplot)
+library(factoextra)
+```
+
+Read zooplanton data into R
+```{r}
+Zooplankton <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/WOAC_Species_Densities_2014-2022.csv")
+```
+
+# Zooplankton Data
+subset to stations sampled during WOAC cruises
+```{r}
+unique(Zooplankton$Station)
+Zoop_sub<-subset(Zooplankton,Station!="PEFS1d")
+Zoop_sub<-subset(Zoop_sub,Station!="PEFN1d")
+Zoop_sub<-subset(Zoop_sub,Station!="PEFN2")
+Zoop_sub<-subset(Zoop_sub,Station!="PEFS2")
+Zoop_sub<-subset(Zoop_sub,Station!="P381")
+Zoop_sub<-subset(Zoop_sub,Station!="P105")
+Zoop_sub<-subset(Zoop_sub,Station!="P136")
+Zoop_sub<-subset(Zoop_sub,Station!="P7")
+Zoop_sub<-subset(Zoop_sub,Station!="P123")
+Zoop_sub<-subset(Zoop_sub,Station!="P132")
+unique(Zoop_sub$Date)
+#remove unnecessary dates
+Zoop_sub<-subset(Zoop_sub,Date!="10/30/14")
+Zoop_sub<-subset(Zoop_sub,Date!="10/31/14")
+Zoop_sub<-subset(Zoop_sub,Date!="10/29/14")
+Zoop_sub<-subset(Zoop_sub,Date!="9/14/22")
+Zoop_sub<-subset(Zoop_sub,Date!="9/16/22")
+Zoop_sub<-subset(Zoop_sub,Date!="9/13/22")
+Zoop_sub<-subset(Zoop_sub,Date!="9/12/22")
+Zoop_sub<-subset(Zoop_sub,Date!="11/16/15")
+Zoop_sub<-subset(Zoop_sub,Date!="3/17/16")
+Zoop_sub<-subset(Zoop_sub,Date!="3/18/16")
+Zoop_sub<-subset(Zoop_sub,Date!="11/18/15")
+#recode p4
+Zoop_sub$Station <- recode(Zoop_sub$Station, 
+                                 "p4" = "P4")
+#recode month names to match
+unique(Zoop_sub$Month)
+Zoop_sub$Month <- recode(Zoop_sub$Month, 
+                                 "Jul" = "JUL",
+                         "Sep"="SEP",
+                         "OCT"="SEP")
+#remove ethanol samples
+Zoop_sub<-Zoop_sub[!grepl('_EtOH', Zoop_sub$Code),]
+#remove oblique samples
+Zoop_sub<-subset(Zoop_sub,Tow.Type!="Oblique")
+```
+
+add up multiple lines per station
+```{r}
+Zoop_sub <- Zoop_sub %>%
+  group_by(Code,Station,Basin,Year,Month,Genus.species) %>%
+  summarise(
+    zoop_density = sum(Density....m3.))
+```
+
+change from long to wide format
+```{r}
+colnames(Zoop_sub)
+Zoop_sub_wide<-dcast(Zoop_sub, Code+Station+Basin+Year+Month~ Genus.species,value.var = "zoop_density")
+#make sure factors are formatted right
+Zoop_sub_wide$Year=as.factor(Zoop_sub_wide$Year)
+Zoop_sub_wide$Station=as.factor(Zoop_sub_wide$Station)
+Zoop_sub_wide$Month=as.factor(Zoop_sub_wide$Month)
+Zoop_sub_wide$Basin=as.factor(Zoop_sub_wide$Basin)
+
+#make unique column
+Zoop_sub_wide$code<-paste(Zoop_sub_wide$Station, Zoop_sub_wide$Year,Zoop_sub_wide$Month,sep="-")
+unique(Zoop_sub$Code)
+```
+remove non-data columns, convert to proportionas, and arcsine sqrt transformation
+```{r}
+RE2<- Zoop_sub_wide[,6:ncol(Zoop_sub_wide)]
+RE2 <- RE2[ -c(211) ]
+#replace N/A with 0
+RE2[is.na(RE2)] <- 0
+#convert to proportions
+RE2<-RE2/rowSums(RE2)
+#arcsine sqrt transformation
+RE2<-asin(sqrt(RE2))
+RE3<-as.matrix(RE2)
+```
+add back in code as rownames
+```{r}
+RE2$code = Zoop_sub_wide$code
+#remove duplicate rows
+167,91,168
+RE2<-RE2 %>% remove_rownames %>% column_to_rownames(var="code")
+```
+
+

@@ -1,0 +1,142 @@
+---
+title: "07_regime-shift_detection"
+date: "2024-02-22"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+The purpose of this code is to attempt to detect temperature regime shifts in WOAC data
+
+Read environmental data into R
+```{r}
+Environmental <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/WOAC_Chem_data_2014-2022_all-niskins.csv")
+```
+
+# Install packages
+```{r}
+library(rshift)
+```
+
+# Environmental Data Summary
+recode months to match with zooplankton data
+```{r}
+unique(Environmental$Month)
+Environmental$Month <- recode(Environmental$Month, 
+                                 "Jul" = "JUL",
+                         "Sep"="SEP",
+                         "Oct"="SEP",
+                         "Apr"="APR",
+                         "May"="MAY",
+                         "Nov"="NOV",
+                         "Aug"="AUG",
+                         "Jun"="JUL",
+                         "OCT"="SEP")
+#remove unnecessary sample dates
+unique(Environmental$Date)
+unique(Zooplankton$Date)
+Environmental<-subset(Environmental,Date!="10/30/14")
+Environmental<-subset(Environmental,Date!="10/31/14")
+Environmental<-subset(Environmental,Date!="10/23/14")
+Environmental<-subset(Environmental,Date!="10/29/14")
+Environmental<-subset(Environmental,Date!="5/24/15")
+Environmental<-subset(Environmental,Date!="11/18/15")
+Environmental<-subset(Environmental,Date!="11/16/15")
+Environmental<-subset(Environmental,Date!="11/17/15")
+Environmental<-subset(Environmental,Date!="10/27/16")
+Environmental<-subset(Environmental,Date!="5/3/17")
+Environmental<-subset(Environmental,Date!="5/4/17")
+Environmental<-subset(Environmental,Date!="10/18/17")
+Environmental<-subset(Environmental,Date!="5/24/18")
+Environmental<-subset(Environmental,Date!="10/18/18")
+Environmental<-subset(Environmental,Date!="10/19/18")
+Environmental<-subset(Environmental,Date!="5/23/19")
+Environmental<-subset(Environmental,Date!="8/31/20")
+Environmental<-subset(Environmental,Date!="10/1/21")
+Environmental<-subset(Environmental,Date!="5/6/22")
+Environmental<-subset(Environmental,Date!="10/14/22")
+Environmental<-subset(Environmental,Date!="10/15/22")
+Environmental<-subset(Environmental,Date!="9/29/21")
+Environmental<-subset(Environmental,Date!="7/4/20")
+Environmental<-subset(Environmental,Date!="9/30/20")
+Environmental<-subset(Environmental,Date!="9/18/17")
+```
+# Get temperature data
+
+summarize by depth category
+```{r}
+temp<-Environmental %>%
+  group_by(Station,Date,Depth,Year,Month) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90))
+
+#subset to deep samples
+temp_deep<-subset(temp,Depth=="Deep")
+#make unique column
+temp_deep$code<-paste(temp_deep$Station, temp_deep$Year,temp_deep$Month,sep="-")
+```
+
+test out on P28
+```{r}
+temp_deep_P28<-subset(temp_deep,Station=="P28")
+#convert date
+temp_deep_P28 <- temp_deep_P28 %>% 
+  mutate(date_convert = as.Date(Date, format = "%m/%d/%y"))
+#order by date
+temp_deep_P28 <- temp_deep_P28[order(temp_deep_P28$date_convert),]
+```
+
+
+Regime shift detection
+```{r}
+RSI_data<-Rodionov(temp_deep_P28, "temp", "date_convert",10, merge=TRUE)
+```
+visualize
+```{r}
+graph<-RSI_graph(RSI_data, "temp", "date_convert", "...10")
+graph
+```
+It looks like I will need to look at anomalies due to the large variation in temperature
+
+# Anomaly analysis
+month and station averages
+```{r}
+temp_ave<-Environmental %>%
+  group_by(Depth,Month,Station) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90),
+    stdev = sd(CTDTMP_DEG_C_ITS90))
+
+#subset to deep samples
+temp_deep_ave<-subset(temp_ave,Depth=="Deep")
+
+```
+
+subset to P28
+```{r}
+temp_deep_ave_P28<-subset(temp_deep_ave,Station=="P28")
+```
+
+anomalies
+```{r}
+#add average column 
+temp_deep_P28$Ave <- temp_deep_ave_P28$temp[match(temp_deep_P28$Month, temp_deep_ave_P28$Month)]
+
+#add statndard deviation column
+temp_deep_P28$stdev <- temp_deep_ave_P28$stdev[match(temp_deep_P28$Month, temp_deep_ave_P28$Month)]
+
+# calculate anomalies
+temp_deep_P28$anomaly<-(temp_deep_P28$temp-temp_deep_P28$Ave)/temp_deep_P28$stdev
+```
+
+Regime shift detection
+```{r}
+RSI_data<-Rodionov(temp_deep_P28, "anomaly", "date_convert",5, merge=TRUE)
+```
+visualize
+```{r}
+graph<-RSI_graph(RSI_data, "anomaly", "date_convert", "...13")
+graph
+```

@@ -366,6 +366,70 @@ pairs(Crustacean[,c(5:7,9)], pch = 19)
 Taken from BethElLee's methods: 
 Average by season, subtract datapoint from average, divide by standard deviaiton of the average to standardize
 
+### Average over all stations
+Deep temperatures
+```{r}
+temp<-Environmental %>%
+  group_by(Depth,Year,Month,DateCat) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90))
+#subset to surface samples
+temp_surf<-subset(temp,Depth=="Deep")
+```
+month averages
+```{r}
+temp_ave<-Environmental %>%
+  group_by(Month,Depth) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90),
+    stdev = sd(CTDTMP_DEG_C_ITS90))
+
+#subset to surface samples
+temp_surf_ave<-subset(temp_ave,Depth=="Deep")
+```
+anomalies
+```{r}
+#add average column 
+temp_surf$Ave <- temp_surf_ave$temp[match(temp_surf$Month, temp_surf_ave$Month)]
+
+#add statndard deviation column
+temp_surf$stdev <- temp_surf_ave$stdev[match(temp_surf$Month, temp_surf_ave$Month)]
+
+# calculate anomalies
+temp_surf$anomaly<-(temp_surf$temp-temp_surf$Ave)/temp_surf$stdev
+```
+
+convert date format
+```{r}
+temp_surf <- temp_surf %>% 
+  mutate(date_convert = as.Date(DateCat, format = "%m/%d/%y"))
+```
+
+
+
+plot
+```{r}
+temp_plot<-ggplot(data = temp_surf, aes(date_convert, anomaly)) +
+  geom_bar(aes(fill = anomaly < 0),stat='identity',width=30)+
+  theme_classic()+
+  xlab("Year") + ylab("temperature anomaly")+
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")+
+  scale_fill_manual(guide = FALSE, breaks = c(TRUE, FALSE), values=c("blue", "red"))
+temp_plot
+```
+regime shift detection
+```{r}
+RSI_data<-Rodionov(temp_surf, "anomaly", "date_convert",3, merge=TRUE)
+```
+visualize
+```{r}
+graph<-RSI_graph(RSI_data, "anomaly", "date_convert", "...10")
+graph
+```
+
+
+
+
 ### Surface
 
 month and station averages

@@ -35,6 +35,8 @@ library(xts)
 library(cowplot)
 library(anomalize)
 library(tibble)
+library(tidyverse)
+library(purrr)
 ```
 
 
@@ -184,85 +186,40 @@ setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_di
 ggsave(filename = "temperature_seasonal-average.png", plot = temp_ave, width = 10, height = 6, device='png', dpi=700)
 ```
 
-I'm not seeing any super clear patterns here - this is probably due the the high variability in temperatures among stations.
-
-# Editing progress
+I'm not seeing any super clear patterns here - this is probably due the the high variability in temperatures among stations. Try to parse out differences.
 
 ## Try anomaly analysis
-
-### P402, 5 m
-
-subset to station, depth
 ```{r}
-temp_5m<- subset(temp, Depth=='5-m')
-temp_5m_P402<- subset(temp_5m, Station=='P402')
-temp_5m_P402<- subset(temp_5m_P402, date_convert!='2022-07-01')
-temp_5m_P402<- subset(temp_5m_P402, date_convert!='2022-04-29')
-temp_5m_P402 <- temp_5m_P402[ -c(1,3) ]
-temp_5m_P402<-temp_5m_P402[order(temp_5m_P402$date_convert),]
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/output/Temperature")
+#recode 5-m to 5m
+temp$Depth <- gsub("-m", "m", temp$Depth)
+#add combo column
+temp$var_name <- paste(temp$Depth, "_", temp$Station, sep = "")
+#rename table
+Temperature<-temp
+#get order of output plots
+unique(Temperature$var_name)
+# Assuming 'Temperature' is your dataset
+Temperature <- Temperature[order(Temperature$date_convert),]
+
+
+
+Temperature %>%
+  group_by(var_name) %>%
+  group_map(~ {
+    p <- .x %>%
+      as.tibble() %>%
+      time_decompose(temp, method = "stl", frequency = "auto", trend = "auto") %>%
+      anomalize(remainder, method = "gesd",  max_anoms = 0.2) %>%
+      plot_anomaly_decomposition()
+    
+    print(p)
+  })
+
 ```
+I can't really figure out how to label each graph, but that will need to be put on hold for now...
 
-
-
-decomposition
-```{r,fig.width=5, fig.height=10}
-P402_ts <- temp_5m_P402 %>% as.tibble() 
-P402_ts %>% 
-  time_decompose(temp, method = "stl", frequency = "auto", trend = "auto") %>%
-  anomalize(remainder, method = "gesd",  max_anoms = 0.2) %>%
-  plot_anomaly_decomposition()
-```
-
-### P28, 5 m
-
-subset to station, depth
-```{r}
-temp_5m<- subset(temp, Depth=='5-m')
-temp_5m_P28<- subset(temp_5m, Station=='P28')
-temp_5m_P28<- subset(temp_5m_P28, date_convert!='2022-07-01')
-temp_5m_P28<- subset(temp_5m_P28, date_convert!='2022-04-29')
-temp_5m_P28 <- temp_5m_P28[ -c(1,3) ]
-temp_5m_P28<-temp_5m_P28[order(temp_5m_P28$date_convert),]
-```
-
-```{r}
-P28_ts <- temp_5m_P28 %>% as.tibble() 
-```
-
-decomposition
-```{r,fig.width=5, fig.height=10}
-P28_ts %>% 
-  time_decompose(temp, method = "stl", frequency = "auto", trend = "auto") %>%
-  anomalize(remainder, method = "gesd",  max_anoms = 0.2) %>%
-  plot_anomaly_decomposition()
-```
-
-
-### P12, 5 m
-
-subset to station, depth
-
-```{r}
-temp_5m<- subset(temp, Depth=='5-m')
-temp_5m_P12<- subset(temp_5m, Station=='P12')
-temp_5m_P12<- subset(temp_5m_P12, date_convert!='2022-07-01')
-temp_5m_P12<- subset(temp_5m_P12, date_convert!='2022-04-29')
-temp_5m_P12 <- temp_5m_P12[ -c(1,3) ]
-temp_5m_P12<-temp_5m_P12[order(temp_5m_P12$date_convert),]
-```
-
-```{r}
-P12_ts <- temp_5m_P12 %>% as.tibble() 
-```
-
-decomposition
-```{r,fig.width=5, fig.height=10}
-P12_ts %>% 
-  time_decompose(temp, method = "stl", frequency = "auto", trend = "auto") %>%
-  anomalize(remainder, method = "gesd",  max_anoms = 0.2) %>%
-  plot_anomaly_decomposition()
-```
-
+####### Editing Point
 
 
 # pH Plot
