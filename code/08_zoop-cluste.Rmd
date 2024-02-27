@@ -112,8 +112,69 @@ add back in code as rownames
 ```{r}
 RE2$code = Zoop_sub_wide$code
 #remove duplicate rows
-167,91,168
+RE2<-RE2[-c(167,91,168),]
 RE2<-RE2 %>% remove_rownames %>% column_to_rownames(var="code")
+#remove columns with all zeroes
+RE2<-RE2[,-(which(colSums(RE2)==0))]
 ```
 
+### Centroid Based
+gap statistic: do this to determine number of clusters
+```{r}
+res.km<-eclust(RE2, FUNcluster = "kmeans", hc_metric = "euclidean", graph = FALSE)
+fviz_gap_stat(res.km$gap_stat)
 
+#silhouette plot
+fviz_silhouette(res.km)
+```
+It looks like nine clusters are identified
+elbow method
+```{r}
+fviz_nbclust(RE2, FUNcluster = kmeans, method = "wss") + labs(subtitle = "Elbow method") 
+```
+There are elbows at 2, 5 and 9
+
+cluster plot
+```{r}
+eclust(env_joined_standard, FUNcluster = "kmeans", k = 9, hc_metric = "euclidean")
+```
+### Heirarchical
+```{r,fig.width=6,fig.height=8}
+res.hclust <- eclust(RE2, FUNcluster = "hclust", hc_metric = "euclidean")
+fviz_dend(res.hclust, rect = TRUE,repel=phylogenic)
+fviz_cluster(res.hclust, labelsize = 10)
+```
+
+### Agglomerative clustering
+```{r,fig.width=6,fig.height=8}
+res.aclust <- eclust(RE2, FUNcluster = "hclust", hc_metric = "euclidean", hc_method = "ward.D2")
+fviz_dend(res.aclust, rect = TRUE)
+fviz_cluster(res.aclust, labelsize = 10)
+```
+same results
+
+### visualize the strength of the variables
+```{r}
+df_clusters <- res.km$centers
+res.km
+```
+
+```{r}
+melt_df <- melt(df_clusters)
+
+heatmap <- ggplot(melt_df, aes(Var2, Var1)) +
+  scale_fill_continuous(type = "viridis", direction = -1) +
+  geom_tile(aes(fill = value))  +
+  theme_bw() +
+  ggtitle("Strength of Each of the Variables in the Clusters") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(x="Variable", y="Cluster")
+heatmap
+```
+
+### list of statons and clusters
+```{r}
+RE2["Cluster"] <- res.km$cluster
+df_out <- RE2[order(-RE2$Cluster), ]
+knitr::kable(df_out)
+```
