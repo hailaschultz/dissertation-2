@@ -116,6 +116,10 @@ RE2<-RE2[-c(167,91,168),]
 RE2<-RE2 %>% remove_rownames %>% column_to_rownames(var="code")
 #remove columns with all zeroes
 RE2<-RE2[,-(which(colSums(RE2)==0))]
+#remove columns with fewer than 9 rows with nonzero numbers
+non_zero_counts <- colSums(RE2 != 0)
+RE2 <- RE2[, non_zero_counts >= 9]
+
 ```
 
 ### Centroid Based
