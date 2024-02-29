@@ -29,6 +29,11 @@ library(ggrepel)
 library("scales")   
 library(corrplot)
 library(factoextra)
+library(dplyr)
+library(tidyr)
+library(data.table)
+library(tidyverse)
+library(stats)
 ```
 
 
@@ -97,10 +102,11 @@ temp<-Environmental %>%
   summarise(
     temp = mean(CTDTMP_DEG_C_ITS90))
 
-#subset to surface samples
-temp_surf<-subset(temp,Depth=="Deep")
+#subset to surface and deep
+temp<-subset(temp,Depth!="5-m")
+temp<-subset(temp,Depth!="Mid")
 #make unique column
-temp_surf$code<-paste(temp_surf$Station, temp_surf$Year,temp_surf$Month,sep="-")
+temp$code<-paste(temp$Station, temp$Year,temp$Month,temp$Depth,sep="-")
 ```
 
 
@@ -115,10 +121,11 @@ pH<-pH %>%
   group_by(Station,Date,Depth,Year,Month) %>%
   summarise(
     pH = mean(pH))
-#subset to surface samples
-pH_surf<-subset(pH,Depth=="Deep")
+#subset 
+pH<-subset(pH,Depth!="5-m")
+pH<-subset(pH,Depth!="Mid")
 #make unique column
-pH_surf$code<-paste(pH_surf$Station, pH_surf$Year,pH_surf$Month,sep="-")
+pH$code<-paste(pH$Station, pH$Year,pH$Month,pH$Depth,sep="-")
 ```
 
 
@@ -133,10 +140,11 @@ Oxygen<-Oxygen %>%
   group_by(Station,Date,Depth,Year,Month) %>%
   summarise(
     Oxygen = mean(O2.in.mg.l))
-#subset to surface samples
-Oxygen_surf<-subset(Oxygen,Depth=="Deep")
+#subset 
+Oxygen<-subset(Oxygen,Depth!="5-m")
+Oxygen<-subset(Oxygen,Depth!="Mid")
 #make unique column
-Oxygen_surf$code<-paste(Oxygen_surf$Station, Oxygen_surf$Year,Oxygen_surf$Month,sep="-")
+Oxygen$code<-paste(Oxygen$Station, Oxygen$Year,Oxygen$Month,Salinity$Depth,sep="-")
 ```
 
 Salinity: remove missing rows and remove weird values
@@ -151,86 +159,41 @@ Salinity<-Salinity %>%
   summarise(
     Salinity = mean(CTD.Salinity..PSU.))
 #subset to surface samples
-Salinity_surf<-subset(Salinity,Depth=="Deep")
+Salinity<-subset(Salinity,Depth!="5-m")
+Salinity<-subset(Salinity,Depth!="Mid")
 #make unique column
-Salinity_surf$code<-paste(Salinity_surf$Station, Salinity_surf$Year,Salinity_surf$Month,sep="-")
+Salinity$code<-paste(Salinity$Station, Salinity$Year,Salinity$Month,Salinity$Depth,sep="-")
 ```
 
-Salinity: remove missing rows and remove weird values
-```{r}
-Salinity<-Environmental %>% drop_na(CTD.Salinity..PSU.)
-```
-
-summarize by depth category
-```{r}
-Salinity<-Salinity %>%
-  group_by(Station,Date,Depth,Year,Month) %>%
-  summarise(
-    Salinity = mean(CTD.Salinity..PSU.))
-#subset to surface samples
-Salinity_surf<-subset(Salinity,Depth=="Deep")
-#make unique column
-Salinity_surf$code<-paste(Salinity_surf$Station, Salinity_surf$Year,Salinity_surf$Month,sep="-")
-```
-
-
-Phosphate: remove missing rows and remove weird values
-```{r}
-Phosphate<-Environmental %>% drop_na(PHOSPHATE.umol_kg)
-```
-
-summarize by depth category
-```{r}
-Phosphate<-Phosphate %>%
-  group_by(Station,Date,Depth,Year,Month) %>%
-  summarise(
-    Phosphate = mean(PHOSPHATE.umol_kg))
-#subset to surface samples
-Phosphate_surf<-subset(Phosphate,Depth=="Surface")
-#make unique column
-Phosphate_surf$code<-paste(Phosphate_surf$Station, Phosphate_surf$Year,Phosphate_surf$Month,sep="-")
-```
-
-Silicate: remove missing rows and remove weird values
-```{r}
-Silicate<-Environmental %>% drop_na(SILICATE.umol_kg)
-```
-
-summarize by depth category
-```{r}
-Silicate<-Silicate %>%
-  group_by(Station,Date,Depth,Year,Month) %>%
-  summarise(
-    Silicate = mean(SILICATE.umol_kg))
-#subset to surface samples
-Silicate_surf<-subset(Silicate,Depth=="Deep")
-#make unique column
-Silicate_surf$code<-paste(Silicate_surf$Station, Silicate_surf$Year,Silicate_surf$Month,sep="-")
-```
 
 
 Merge environmental tables
 ```{r}
-joined <- merge(temp_surf, pH_surf, by.x = "code", 
+joined <- merge(temp, pH, by.x = "code", 
              by.y = "code", all.x = TRUE, all.y = TRUE)
-joined <- merge(joined, Oxygen_surf, by.x = "code", 
+joined <- merge(joined, Oxygen, by.x = "code", 
              by.y = "code", all.x = TRUE, all.y = TRUE)
-joined <- merge(joined, Salinity_surf, by.x = "code", 
+joined <- merge(joined, Salinity, by.x = "code", 
              by.y = "code", all.x = TRUE, all.y = TRUE)
-joined <- merge(joined, Phosphate_surf, by.x = "code", 
-             by.y = "code", all.x = TRUE, all.y = TRUE)
-joined <- merge(joined, Silicate_surf, by.x = "code", 
-             by.y = "code", all.x = TRUE, all.y = TRUE)
+
 #remove excess columns and na rows
-env_joined <- joined[ -c(2:6,8:12,14:18,20:24,26:30,32:36) ]
+env_joined <- joined[ -c(2:3,5:6,8:12,14:18,20:24) ]
+#remove deep or joined
+env_joined$code <- gsub("-Deep$", "", env_joined$code)
+env_joined$code <- gsub("-Surface$", "", env_joined$code)
+#make surface and deep variables separate
+env_joined <- env_joined %>%
+  pivot_wider(names_from = Depth.x, values_from = c(temp, pH, Oxygen, Salinity)) 
 ```
 
 Note: unfortunately, not all stations have nutrient data, so when nutrients are included, a lot of stations are dropped. I have decided to proceed, omitting the nutrients.
 
-drop nutrient columns and remove na rows
+
 ```{r}
-env_joined <- env_joined[ -c(6:7) ]
-env_joined<-env_joined %>% drop_na(pH)
+#drop pH column
+env_joined<-subset(env_joined, select = -c(pH_Deep,pH_Surface))
+#drop na
+env_joined <- env_joined[complete.cases(env_joined), ]
 ```
 
 
@@ -241,10 +204,6 @@ env_joined<-env_joined %>% remove_rownames %>% column_to_rownames(var="code")
 env_joined_standard <- env_joined %>% mutate_all(~(scale(.) %>% as.vector))
 cor_matrix <- cor(env_joined_standard)
 corrplot(cor_matrix, method = "number", type = "lower", tl.pos = 'd')
-```
-remove pH because Oxygen and pH are highly correlated
-```{r}
-env_joined_standard <- subset(env_joined_standard, select = -c(Oxygen))
 ```
 
 
@@ -257,24 +216,32 @@ fviz_gap_stat(res.km$gap_stat)
 #silhouette plot
 fviz_silhouette(res.km)
 ```
-this determined that two clusters were optimal
+this determined that 10 clusters were optimal
 
 elbow method
 ```{r}
 fviz_nbclust(env_joined_standard, FUNcluster = kmeans, method = "wss") + labs(subtitle = "Elbow method") 
 ```
-looks like there is an elbow at 2, indicating 2 clusters as optimal
+looks like there is an elbow at 2, 4, 6 and 9
 
 cluster plot
 ```{r}
-eclust(env_joined_standard, FUNcluster = "kmeans", k = 4, hc_metric = "euclidean")
+eclust(env_joined_standard, FUNcluster = "kmeans", k = 10, hc_metric = "euclidean")
 ```
 
 ### Heirarchical
 ```{r,fig.width=6,fig.height=8}
 res.hclust <- eclust(env_joined_standard, FUNcluster = "hclust", hc_metric = "euclidean")
-fviz_dend(res.hclust, rect = TRUE,repel=phylogenic)
+env_dend<-fviz_dend(res.hclust, rect = TRUE,repel=phylogenic)
+env_dend
 fviz_cluster(res.hclust, labelsize = 10)
+```
+detected 9 clusters
+
+save dendogram
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "env_heirarchical_dend.png", plot = env_dend, width = 30, height = 17, device='png', dpi=700)
 ```
 
 ### Agglomerative clustering
@@ -304,7 +271,7 @@ heatmap <- ggplot(melt_df, aes(Var2, Var1)) +
   labs(x="Variable", y="Cluster")
 heatmap
 ```
-It looks like cluster 1 is driven by higher pH and lower salinity, cluster 2 is driven by lower pH and higher salinity
+
 
 ### list of statons and clusters
 ```{r}
@@ -312,4 +279,10 @@ env_joined["Cluster"] <- res.km$cluster
 df_out <- env_joined[order(-env_joined$Cluster), ]
 knitr::kable(df_out)
 ```
+save table
+
+```{r, eval=FALSE}
+write.csv(df_out, "/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/output/env_cluster.csv", row.names=TRUE)
+```
+
 

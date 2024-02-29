@@ -145,10 +145,16 @@ eclust(env_joined_standard, FUNcluster = "kmeans", k = 9, hc_metric = "euclidean
 ### Heirarchical
 ```{r,fig.width=6,fig.height=8}
 res.hclust <- eclust(RE2, FUNcluster = "hclust", hc_metric = "euclidean")
-fviz_dend(res.hclust, rect = TRUE,repel=phylogenic)
+zoop_dend<-fviz_dend(res.hclust, rect = TRUE,repel=phylogenic)
+zoop_dend
 fviz_cluster(res.hclust, labelsize = 10)
-```
 
+```
+save dendogram
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "zoop_heirarchical_dend.png", plot = zoop_dend, width = 30, height = 17, device='png', dpi=700)
+```
 ### Agglomerative clustering
 ```{r,fig.width=6,fig.height=8}
 res.aclust <- eclust(RE2, FUNcluster = "hclust", hc_metric = "euclidean", hc_method = "ward.D2")
@@ -165,7 +171,7 @@ res.km
 
 ```{r}
 melt_df <- melt(df_clusters)
-
+melt_df
 heatmap <- ggplot(melt_df, aes(Var2, Var1)) +
   scale_fill_continuous(type = "viridis", direction = -1) +
   geom_tile(aes(fill = value))  +
@@ -182,3 +188,10 @@ RE2["Cluster"] <- res.km$cluster
 df_out <- RE2[order(-RE2$Cluster), ]
 knitr::kable(df_out)
 ```
+save table
+
+```{r, eval=FALSE}
+write.csv(df_out, "/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/output/zoop_cluster.csv", row.names=TRUE)
+```
+
+

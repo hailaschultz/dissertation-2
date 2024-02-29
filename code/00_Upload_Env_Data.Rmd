@@ -1,0 +1,22 @@
+---
+title: "00_Upload_Env_Data"
+output: html_document
+date: "2024-02-28"
+---
+
+Download data from NANOOS website:
+I first went to https://nvs.nanoos.org/CruiseSalish and downloaded all relevant files. I moved them to the NANOOS-files folder. I unzipped them manually
+```{bash}
+#find current directory
+pwd
+```
+
+move all upcast files to the upcast folder
+```{bash}
+#move directories
+cd /Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/NANOOS_files
+
+find . -name '*labupcast.xlsx' -exec mv {} ../NANOOS_files/upcasts/ \;
+```
+
+
