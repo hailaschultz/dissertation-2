@@ -148,7 +148,7 @@ res.hclust <- eclust(RE2, FUNcluster = "hclust", hc_metric = "euclidean")
 zoop_dend<-fviz_dend(res.hclust, rect = TRUE,repel=phylogenic)
 zoop_dend
 fviz_cluster(res.hclust, labelsize = 10)
-
+res.hclust
 ```
 save dendogram
 ```{r, eval=FALSE}
@@ -178,9 +178,15 @@ heatmap <- ggplot(melt_df, aes(Var2, Var1)) +
   theme_bw() +
   ggtitle("Strength of Each of the Variables in the Clusters") +
   theme(plot.title = element_text(hjust = 0.5)) +
-  labs(x="Variable", y="Cluster")
+  labs(x="Variable", y="Cluster")+ theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 heatmap
 ```
+save dendogram
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "zoop_cluster_heatmap.png", plot = heatmap, width = 30, height = 17, device='png', dpi=700)
+```
+
 
 ### list of statons and clusters
 ```{r}
