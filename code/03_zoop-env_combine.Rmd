@@ -225,6 +225,11 @@ Zoop_env<-Zoop_env[!is.na(Zoop_env$Year.x),]
 # NMDS
 remove non-data columns, convert to proportionas, and arcsine sqrt transformation
 ```{r}
+#subset to only cluster 1 stations (P4, P12, P402)
+Zoop_env<-subset(Zoop_env, Station.x != "P22")
+Zoop_env<-subset(Zoop_env, Station.x != "P38")
+Zoop_env<-subset(Zoop_env, Station.x != "P8")
+Zoop_env<-subset(Zoop_env, Station.x != "P28")
 RE2<- Zoop_env[,12:ncol(Zoop_env)]
 #replace N/A with 0
 RE2[is.na(RE2)] <- 0
@@ -232,6 +237,10 @@ RE2[is.na(RE2)] <- 0
 RE2<-RE2/rowSums(RE2)
 #arcsine sqrt transformation
 RE2<-asin(sqrt(RE2))
+#remove columns with fewer than 9 rows with nonzero numbers
+non_zero_counts <- colSums(RE2 != 0)
+RE2 <- RE2[, non_zero_counts >= 9]
+
 RE3<-as.matrix(RE2)
 ```
 
@@ -324,7 +333,7 @@ hull.data
 ```
 create environmetal fit table
 ```{r}
-Zoo.env <- data.frame(matrix(ncol = 0, nrow=156))
+Zoo.env <- data.frame(matrix(ncol = 0, nrow=72))
 Zoo.env$pH<-as.numeric(data.scores$pH)
 Zoo.env$temp<-as.numeric(data.scores$temp)
 Zoo.env$Oxygen<-as.numeric(data.scores$Oxygen)

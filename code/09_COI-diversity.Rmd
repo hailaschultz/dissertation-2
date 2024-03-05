@@ -1,0 +1,46 @@
+---
+title: "09_COI-diversity"
+date: "2024-03-04"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,         # Display code chunks
+  eval = TRUE,        # Evaluate code chunks
+  warning = FALSE,     # Hide warnings
+  message = FALSE,     # Hide messages
+  fig.width = 10,       # Set plot width in inches
+  fig.height = 6,      # Set plot height in inches
+  fig.align = "center" # Align plots to the center
+)
+```
+
+read data into R
+note: I first had to convert the taxonomy table from text into csv for this to work
+```{r}
+COI <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018/COI/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv", sep = "\t")
+
+COI_tax <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018/COI/ASVTaxonomyTable.csv")
+```
+
+add taxonomy assignments to COI dataframe
+```{r}
+#rename column
+COI<-COI %>% 
+  rename(
+    ASV = x,
+    )
+
+COI <- merge(COI_tax,COI, by="ASV", all.x=FALSE)
+```
+
+Convert to present (1) vs absent (0)
+```{r}
+COI_pa<-COI %>%
+  mutate(across(where(is.numeric), ~ifelse(.x >0, 1, 0)))
+```
+
