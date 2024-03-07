@@ -22,9 +22,9 @@ knitr::opts_chunk$set(
 read data into R
 note: I first had to convert the taxonomy table from text into csv for this to work
 ```{r}
-COI <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018/COI/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv", sep = "\t")
+COI <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018/COI/ASVs_counts_mergedOnTaxonomy.tsv", sep = "\t")
 
-COI_tax <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018/COI/ASVTaxonomyTable.csv")
+COI_tax <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018/COI/COI_Tax_Assignment.csv")
 ```
 
 add taxonomy assignments to COI dataframe
@@ -40,7 +40,39 @@ COI <- merge(COI_tax,COI, by="ASV", all.x=FALSE)
 
 Convert to present (1) vs absent (0)
 ```{r}
-COI_pa<-COI %>%
+#remove non-species rows
+COI_complete<- COI[complete.cases(COI), ]
+
+
+COI_pa<-COI_complete %>%
   mutate(across(where(is.numeric), ~ifelse(.x >0, 1, 0)))
+
 ```
+
+wide to long format
+```{r}
+#remove exces columns
+COI_pa <- COI_pa[ -c(2,5:8,11,13,16:18) ]
+COI_pa<-melt(COI_pa, id.vars=c("Phylum", "Class","ASV"))
+```
+
+summarize by phylum
+```{r}
+COI_pa_sum<-COI_pa %>%
+  group_by(Phylum, variable) %>%
+  summarise(
+    ASVs = sum(value))
+```
+
+make bar graph
+```{r}
+ggplot(COI_pa_sum, aes(x = variable, y = ASVs, fill = Phylum)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Stacked Bar Plot",
+       x = "Category",
+       y = "Value") +
+  theme_minimal()+
+  scale_x_discrete(guide = guide_axis(angle = 90)) 
+```
+
 
