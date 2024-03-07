@@ -1,0 +1,1071 @@
+ASV	Kingdom	Phylum	Class	Order	Family	Genus	Species
+ASV_1	Eukaryota	Arthropoda	Malacostraca	Euphausiacea	Euphausiidae	Euphausia	Euphausia pacifica
+ASV_10	Eukaryota	Chordata	Actinopteri	Perciformes	Liparidae	Liparis	Liparis pulchellus
+ASV_100	Eukaryota	Arthropoda	Malacostraca	Euphausiacea	Euphausiidae	Euphausia	Euphausia pacifica
+ASV_1000	Eukaryota	Arthropoda	Malacostraca	Amphipoda	Calliopiidae	Calliopius	Calliopius laeviusculus
+ASV_1002	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Archaeobalanidae	Solidobalanus	Solidobalanus engbergi
+ASV_1003	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Pagurus	Pagurus hirsutiusculus
+ASV_1004	Eukaryota	Bryozoa	Gymnolaemata	Cheilostomatida	NA	NA	NA
+ASV_1005	Eukaryota	Arthropoda	Malacostraca	Decapoda	Crangonidae	Crangon	NA
+ASV_1006	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus rostratus
+ASV_1008	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Diphyidae	NA	NA
+ASV_1010	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	NA	NA	NA
+ASV_1011	Eukaryota	Cnidaria	Anthozoa	Pennatulacea	Pennatulidae	Ptilosarcus	Ptilosarcus gurneyi
+ASV_1012	Eukaryota	Arthropoda	Insecta	Diptera	NA	NA	NA
+ASV_1015	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Bougainvilliidae	Bougainvillia	Bougainvillia muscus
+ASV_1016	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	NA	NA
+ASV_1017	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Clausocalanidae	Pseudocalanus	Pseudocalanus mimus
+ASV_1019	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	Eualus suckleyi
+ASV_102	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus rostratus
+ASV_1020	Eukaryota	Arthropoda	Hexanauplia	NA	NA	NA	NA
+ASV_1021	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Clausocalanidae	Pseudocalanus	NA
+ASV_1022	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_1025	Eukaryota	Bacillariophyta	Mediophyceae	Lithodesmiales	NA	NA	NA
+ASV_1026	Eukaryota	Arthropoda	Insecta	NA	NA	NA	NA
+ASV_1027	Eukaryota	Echinodermata	Echinoidea	Spatangoida	Schizasteridae	Brisaster	Brisaster latifrons
+ASV_1028	Eukaryota	Mollusca	Gastropoda	Peltospiridae__o	NA	NA	NA
+ASV_1029	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Spirontocaris	Spirontocaris snyderi
+ASV_103	Eukaryota	Chordata	Actinopteri	Pleuronectiformes	Pleuronectidae	Platichthys	Platichthys stellatus
+ASV_1030	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	NA
+ASV_1031	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	NA	NA	NA
+ASV_1032	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Lacunidae	Lacuna	Lacuna variegata
+ASV_1034	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Archaeobalanidae	Solidobalanus	Solidobalanus engbergi
+ASV_1035	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Mitrella	Mitrella gausapata
+ASV_1037	Eukaryota	Mollusca	Gastropoda	Trochida	NA	NA	NA
+ASV_1039	Eukaryota	Chlorophyta	Mamiellophyceae	Mamiellales	Mamiellaceae	Micromonas	Micromonas pusilla
+ASV_104	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Apolemiidae	NA	NA
+ASV_1040	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	NA	NA	NA
+ASV_1041	Eukaryota	Annelida	Polychaeta	Phyllodocida	Syllidae	Proceraea	Proceraea nigropunctata
+ASV_1042	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	NA
+ASV_1043	Eukaryota	Bacillariophyta	Bacillariophyceae	NA	NA	NA	NA
+ASV_1044	Eukaryota	Annelida	Polychaeta	Phyllodocida	Syllidae	Proceraea	Proceraea okadai
+ASV_1046	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Heptacarpus	Heptacarpus tridens
+ASV_1047	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	NA	NA
+ASV_1048	Eukaryota	Arthropoda	Malacostraca	Decapoda	Crangonidae	Crangon	Crangon communis
+ASV_1049	Eukaryota	Arthropoda	Malacostraca	Euphausiacea	Euphausiidae	Euphausia	NA
+ASV_105	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_1050	Eukaryota	Chordata	Actinopteri	Perciformes	Stichaeidae	Anoplarchus	NA
+ASV_1051	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	NA	NA
+ASV_1053	Eukaryota	Echinodermata	Holothuroidea	Dendrochirotida	Phyllophoridae	Thyonidium	Thyonidium kurilensis
+ASV_1054	Eukaryota	Chordata	Actinopteri	Gadiformes	Gadidae	Microgadus	Microgadus proximus
+ASV_1055	Eukaryota	Annelida	Polychaeta	Sabellida	Oweniidae	Galathowenia	Galathowenia oculata
+ASV_1056	Eukaryota	Annelida	Polychaeta	Phyllodocida	Phyllodocidae	NA	NA
+ASV_1057	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Mitrella	Mitrella gausapata
+ASV_1058	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	NA	NA
+ASV_1059	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	NA	NA
+ASV_106	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1060	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_1061	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Heptacarpus	Heptacarpus sitchensis
+ASV_1062	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Spirontocaris	NA
+ASV_1063	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	NA
+ASV_1065	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	NA	NA
+ASV_1066	Eukaryota	Chordata	Actinopteri	Labriformes	NA	NA	NA
+ASV_1067	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Pagurus	Pagurus beringanus
+ASV_107	Eukaryota	Bacillariophyta	Fragilariophyceae	Fragilariales	NA	NA	NA
+ASV_1070	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Obeliidae	Obelia	Obelia dichotoma
+ASV_1071	Eukaryota	Arthropoda	Arachnida	NA	NA	NA	NA
+ASV_1073	Eukaryota	Bacillariophyta	Coscinodiscophyceae	Thalassiosirales	NA	NA	NA
+ASV_1074	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	NA	NA
+ASV_1075	Eukaryota	Arthropoda	Hexanauplia	NA	NA	NA	NA
+ASV_1076	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_1077	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_1078	Eukaryota	Phaeophyceae__p	Phaeophyceae	Ectocarpales	NA	NA	NA
+ASV_1079	Eukaryota	Arthropoda	Insecta	NA	NA	NA	NA
+ASV_108	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pandalidae	Pandalus	Pandalus danae
+ASV_1080	Eukaryota	Chordata	Actinopteri	Perciformes	Cryptacanthodidae	Cryptacanthodes	Cryptacanthodes aleutensis
+ASV_1081	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_1082	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_1083	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Obeliidae	Obelia	NA
+ASV_1084	Eukaryota	Arthropoda	Malacostraca	Decapoda	Crangonidae	NA	NA
+ASV_1086	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Tortanidae	Tortanus	NA
+ASV_1088	Eukaryota	Chordata	Actinopteri	Perciformes	Liparidae	Liparis	Liparis dennyi
+ASV_1089	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_109	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_1090	Eukaryota	Arthropoda	Malacostraca	Decapoda	Crangonidae	NA	NA
+ASV_1091	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Eirenidae	Eutonina	Eutonina indicans
+ASV_1093	Eukaryota	Chordata	Actinopteri	Perciformes	Stichaeidae	Lumpenus	Lumpenus sagitta
+ASV_1094	Eukaryota	Annelida	Polychaeta	Phyllodocida	Polynoidae	Arctonoe	Arctonoe pulchra
+ASV_1096	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pisidae	Scyra	Scyra acutifrons
+ASV_1097	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus crenatus
+ASV_1098	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Chthamalidae	Chthamalus	Chthamalus dalli
+ASV_1099	Eukaryota	Arthropoda	Malacostraca	Amphipoda	NA	NA	NA
+ASV_11	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Clausocalanidae	Pseudocalanus	Pseudocalanus newmani
+ASV_110	Eukaryota	Cnidaria	Scyphozoa	Semaeostomeae	Ulmaridae	Aurelia	Aurelia labiata
+ASV_1101	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Clausocalanidae	Pseudocalanus	Pseudocalanus mimus
+ASV_1102	Eukaryota	Cnidaria	Scyphozoa	Semaeostomeae	Ulmaridae	Aurelia	Aurelia labiata
+ASV_1103	Eukaryota	Annelida	Polychaeta	Phyllodocida	Goniadidae	NA	NA
+ASV_1104	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Proboscidactylidae	Proboscidactyla	Proboscidactyla flavicirrata
+ASV_1105	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Lacunidae	Lacuna	Lacuna vincta
+ASV_1106	Eukaryota	Bacillariophyta	Coscinodiscophyceae	Rhizosoleniales	Rhizosoleniaceae	NA	NA
+ASV_1107	Eukaryota	Mollusca	Gastropoda	Neogastropoda	NA	NA	NA
+ASV_1108	Eukaryota	Bryozoa	Gymnolaemata	Cheilostomatida	NA	NA	NA
+ASV_1109	Eukaryota	Echinodermata	Ophiuroidea	Amphilepidida	Amphiuridae	Amphipholis	Amphipholis squamata
+ASV_111	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Diphyidae	NA	NA
+ASV_1110	Eukaryota	Annelida	Polychaeta	Sabellida	Sabellariidae	Neosabellaria	Neosabellaria cementarium
+ASV_1111	Eukaryota	Arthropoda	Malacostraca	Decapoda	Panopeidae	Lophopanopeus	Lophopanopeus bellus
+ASV_1112	Eukaryota	Arthropoda	Malacostraca	Decapoda	Varunidae	Hemigrapsus	Hemigrapsus oregonensis
+ASV_1113	Eukaryota	Oomycota	Peronosporales__c	Peronosporales	NA	NA	NA
+ASV_1115	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pisidae	Chorilia	Chorilia longipes
+ASV_1116	Eukaryota	Arthropoda	Malacostraca	Isopoda	Bopyridae	Argeia	Argeia pugettensis
+ASV_1118	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Pandeidae	Leuckartiara	NA
+ASV_1119	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pandalidae	Pandalus	Pandalus platyceros
+ASV_1120	Eukaryota	Arthropoda	Insecta	Lepidoptera	NA	NA	NA
+ASV_1121	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_1122	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	NA	NA
+ASV_1124	Eukaryota	Mollusca	Polyplacophora	NA	NA	NA	NA
+ASV_1126	Eukaryota	Arthropoda	Insecta	Diptera	NA	NA	NA
+ASV_1128	Eukaryota	Mollusca	Gastropoda	Planorbidae__o	NA	NA	NA
+ASV_1129	Eukaryota	Platyhelminthes	Rhabditophora	Polycladida	NA	NA	NA
+ASV_113	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_1131	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	NA
+ASV_1132	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Clausocalanidae	Pseudocalanus	Pseudocalanus mimus
+ASV_1133	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_1134	Eukaryota	Bacillariophyta	Mediophyceae	Hemiaulales	NA	NA	NA
+ASV_1135	Eukaryota	Echinodermata	Echinoidea	NA	NA	NA	NA
+ASV_1136	Eukaryota	Arthropoda	Insecta	Diptera	NA	NA	NA
+ASV_1137	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	Pinnixa	Pinnixa faba
+ASV_114	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_1140	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_1142	Eukaryota	Chordata	Actinopteri	Pleuronectiformes	Pleuronectidae	Psettichthys	Psettichthys melanostictus
+ASV_1143	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_1144	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Corynidae	Sarsia	Sarsia tubulosa
+ASV_1147	Eukaryota	Arthropoda	Malacostraca	Decapoda	Majidae	Hyas	NA
+ASV_1148	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	Eualus subtilis
+ASV_1149	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	Gastropteridae	Gastropteron	Gastropteron pacificum
+ASV_1152	Eukaryota	Oomycota	Peronosporales__c	Peronosporales	NA	NA	NA
+ASV_1153	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Obeliidae	NA	NA
+ASV_1154	Eukaryota	Oomycota	Saprolegniales__c	Saprolegniales	Saprolegniaceae	NA	NA
+ASV_1155	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	NA	NA	NA
+ASV_1156	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_1157	Eukaryota	Annelida	Clitellata	Rhynchobdellida	NA	NA	NA
+ASV_1158	Eukaryota	Annelida	Polychaeta	Phyllodocida	Polynoidae	Harmothoe	Harmothoe extenuata
+ASV_1159	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_1160	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus crenatus
+ASV_1161	Eukaryota	Oomycota	Peronosporales__c	Peronosporales	NA	NA	NA
+ASV_1162	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	Sagittidae	Sagitta	NA
+ASV_1163	Eukaryota	Arthropoda	Malacostraca	Mysida	NA	NA	NA
+ASV_1164	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Spirontocaris	Spirontocaris spinus
+ASV_1166	Eukaryota	Phoronida	Phoronopsis__f__o__c	Phoronopsis__f__o	Phoronopsis__f	Phoronopsis	Phoronopsis harmeri
+ASV_1167	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pisidae	Chorilia	Chorilia longipes
+ASV_1168	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Clausocalanidae	NA	NA
+ASV_1169	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Spirontocaris	Spirontocaris snyderi
+ASV_117	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Centropagidae	Centropages	Centropages abdominalis
+ASV_1170	Eukaryota	Arthropoda	Malacostraca	Decapoda	Crangonidae	Crangon	NA
+ASV_1172	Eukaryota	Arthropoda	Insecta	Diptera	NA	NA	NA
+ASV_1173	Eukaryota	Annelida	Polychaeta	Chaetopteridae__o	Chaetopteridae	Mesochaetopterus	Mesochaetopterus taylori
+ASV_1174	Eukaryota	Bryozoa	Gymnolaemata	Ctenostomatida	NA	NA	NA
+ASV_1176	Eukaryota	Bacillariophyta	Mediophyceae	Lithodesmiales	NA	NA	NA
+ASV_1178	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_1179	Eukaryota	Chordata	Actinopteri	Pleuronectiformes	Cyclopsettidae	Citharichthys	Citharichthys stigmaeus
+ASV_118	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Acartiidae	Acartia	Acartia longiremis
+ASV_1180	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	Gastropteridae	Gastropteron	Gastropteron pacificum
+ASV_1181	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Discorsopagurus	NA
+ASV_1182	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_1183	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_1184	Eukaryota	Bacillariophyta	Coscinodiscophyceae	Rhizosoleniales	NA	NA	NA
+ASV_1185	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Clausocalanidae	Pseudocalanus	NA
+ASV_1186	Eukaryota	Arthropoda	Insecta	Diptera	NA	NA	NA
+ASV_1187	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_1188	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_1189	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	Sagittidae	Sagitta	NA
+ASV_119	Eukaryota	Annelida	Polychaeta	Chaetopteridae__o	Chaetopteridae	Chaetopterus	Chaetopterus variopedatus
+ASV_1190	Eukaryota	Arthropoda	Malacostraca	Euphausiacea	Euphausiidae	NA	NA
+ASV_1191	Eukaryota	Ascomycota	Sordariomycetes	Hypocreales	NA	NA	NA
+ASV_1193	Eukaryota	Annelida	Polychaeta	Phyllodocida	Polynoidae	NA	NA
+ASV_1195	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Mitrella	Mitrella gausapata
+ASV_1197	Eukaryota	Arthropoda	Malacostraca	Decapoda	Crangonidae	Crangon	NA
+ASV_1198	Eukaryota	Mollusca	Gastropoda	Nudibranchia	NA	NA	NA
+ASV_1199	Eukaryota	Rhodophyta	Florideophyceae	NA	NA	NA	NA
+ASV_12	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_120	Eukaryota	Chordata	Actinopteri	Uranoscopiformes	Ammodytidae	Ammodytes	NA
+ASV_1200	Eukaryota	Mollusca	Gastropoda	NA	NA	NA	NA
+ASV_1201	Eukaryota	Annelida	Polychaeta	Terebellida	NA	NA	NA
+ASV_1202	Eukaryota	Zoopagomycota	Entomophthoromycetes	Entomophthorales	NA	NA	NA
+ASV_1203	Eukaryota	Ctenophora	Tentaculata	Cydippida	Pleurobrachiidae	Pleurobrachia	Pleurobrachia bachei
+ASV_1205	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Spirontocaris	Spirontocaris spinus
+ASV_1206	Eukaryota	Chordata	Actinopteri	Perciformes	Liparidae	Liparis	Liparis fucensis
+ASV_1207	Eukaryota	Bacillariophyta	Coscinodiscophyceae	Thalassiosirales	NA	NA	NA
+ASV_1208	Eukaryota	Arthropoda	Malacostraca	Decapoda	Crangonidae	Crangon	NA
+ASV_1209	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	NA	NA
+ASV_121	Eukaryota	Arthropoda	Arachnida	NA	NA	NA	NA
+ASV_1210	Eukaryota	Arthropoda	Malacostraca	Amphipoda	Hyperiidae	Parathemisto	Parathemisto pacifica
+ASV_1211	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_1212	Eukaryota	Arthropoda	Malacostraca	Decapoda	Lithodidae	Oedignathus	NA
+ASV_1213	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Pagurus	Pagurus kennerlyi
+ASV_1214	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	NA	NA
+ASV_1215	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Pagurus	NA
+ASV_1217	Eukaryota	Arthropoda	Malacostraca	Amphipoda	Calliopiidae	Calliopius	Calliopius laeviusculus
+ASV_1218	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Chthamalidae	Chthamalus	Chthamalus dalli
+ASV_1219	Eukaryota	Mollusca	Gastropoda	Trochida	NA	NA	NA
+ASV_122	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_1220	Eukaryota	Bacillariophyta	Fragilariophyceae	Fragilariales	Fragilariaceae	NA	NA
+ASV_1221	Eukaryota	Rhodophyta	Florideophyceae	Gigartinales	NA	NA	NA
+ASV_1222	Eukaryota	Bacillariophyta	Mediophyceae	Lithodesmiales	NA	NA	NA
+ASV_1224	Eukaryota	Phaeophyceae__p	Phaeophyceae	Laminariales	NA	NA	NA
+ASV_1225	Eukaryota	Arthropoda	Insecta	NA	NA	NA	NA
+ASV_1226	Eukaryota	Chordata	Actinopteri	Pleuronectiformes	Cyclopsettidae	Citharichthys	NA
+ASV_1227	Eukaryota	Annelida	Polychaeta	Phyllodocida	Goniadidae	Glycinde	Glycinde picta
+ASV_1228	Eukaryota	Annelida	Polychaeta	Terebellida	Pectinariidae	Pectinaria	Pectinaria californiensis
+ASV_1229	Eukaryota	Mollusca	Gastropoda	NA	NA	NA	NA
+ASV_1230	Eukaryota	Bacillariophyta	Mediophyceae	Cymatosirales	Cymatosiraceae	NA	NA
+ASV_1231	Eukaryota	Arthropoda	Malacostraca	Stomatopoda	NA	NA	NA
+ASV_1233	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1234	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1237	Eukaryota	Oomycota	Saprolegniales__c	NA	NA	NA	NA
+ASV_1238	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Ctenocalanus	Ctenocalanus vanus
+ASV_1239	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Clausocalanidae	Pseudocalanus	NA
+ASV_1240	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Tortanidae	Tortanus	NA
+ASV_1241	Eukaryota	Annelida	Polychaeta	Terebellida	NA	NA	NA
+ASV_1242	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Naticidae	Cryptonatica	Cryptonatica aleutica
+ASV_1244	Eukaryota	Arthropoda	Malacostraca	Euphausiacea	Euphausiidae	Euphausia	Euphausia pacifica
+ASV_1245	Eukaryota	Mollusca	Gastropoda	Trochida	NA	NA	NA
+ASV_1246	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	NA	NA
+ASV_1247	Eukaryota	Arthropoda	Malacostraca	Decapoda	Porcellanidae	Petrolisthes	Petrolisthes eriomerus
+ASV_1248	Eukaryota	Annelida	Polychaeta	Phyllodocida	Polynoidae	NA	NA
+ASV_1249	Eukaryota	Chaetognatha	Sagittoidea	NA	NA	NA	NA
+ASV_125	Eukaryota	Arthropoda	Malacostraca	Decapoda	Panopeidae	Lophopanopeus	Lophopanopeus bellus
+ASV_1250	Eukaryota	Chordata	Mammalia	Primates	Hominidae	Homo	Homo sapiens
+ASV_1251	Eukaryota	Annelida	Polychaeta	Phyllodocida	Polynoidae	NA	NA
+ASV_1254	Eukaryota	Bacillariophyta	Coscinodiscophyceae	Chaetocerotales	Attheyaceae	Attheya	Attheya longicornis
+ASV_1255	Eukaryota	Rhodophyta	Florideophyceae	NA	NA	NA	NA
+ASV_1258	Eukaryota	Arthropoda	Malacostraca	Decapoda	Axiidae	Calocarides	Calocarides spinulicauda
+ASV_1259	Eukaryota	Mollusca	Gastropoda	Nudibranchia	Aeolidiidae	Cerberilla	Cerberilla mosslandica
+ASV_126	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Diphyidae	NA	NA
+ASV_1260	Eukaryota	Annelida	Clitellata	Crassiclitellata	NA	NA	NA
+ASV_1262	Eukaryota	Nemertea	Pilidiophora	Heteronemertea	Cerebratulidae	Cerebratulus	Cerebratulus herculeus
+ASV_1263	Eukaryota	Echinodermata	Asteroidea	Forcipulatida	Asteriidae	Pycnopodia	Pycnopodia helianthoides
+ASV_1264	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Mitrella	Mitrella gausapata
+ASV_1265	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	Eualus subtilis
+ASV_1267	Eukaryota	Oomycota	NA	NA	NA	NA	NA
+ASV_1269	Eukaryota	Arthropoda	Malacostraca	Euphausiacea	Euphausiidae	Euphausia	NA
+ASV_127	Eukaryota	Echinodermata	Echinoidea	Clypeasteroida	Dendrasteridae	Dendraster	Dendraster excentricus
+ASV_1270	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_1272	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	NA	NA
+ASV_1273	Eukaryota	Bryozoa	Gymnolaemata	Cheilostomatida	Membraniporidae	NA	NA
+ASV_1274	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1275	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Pleopis	Pleopis polyphemoides
+ASV_1276	Eukaryota	Arthropoda	Malacostraca	Decapoda	Epialtidae	Pugettia	Pugettia producta
+ASV_1277	Eukaryota	Chordata	Actinopteri	Clupeiformes	Clupeidae	Clupea	NA
+ASV_1278	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	NA
+ASV_1279	Eukaryota	Phaeophyceae__p	Phaeophyceae	Dictyotales	NA	NA	NA
+ASV_128	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_1280	Eukaryota	Phaeophyceae__p	Phaeophyceae	Ectocarpales	NA	NA	NA
+ASV_1281	Eukaryota	Bacillariophyta	Coscinodiscophyceae	Rhizosoleniales	Rhizosoleniaceae	Rhizosolenia	Rhizosolenia setigera
+ASV_1284	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Prayidae	NA	NA
+ASV_1285	Eukaryota	Oomycota	Pythiales__c	Pythiales	NA	NA	NA
+ASV_1286	Eukaryota	Oomycota	Saprolegniales__c	Saprolegniales	NA	NA	NA
+ASV_1287	Eukaryota	Bryozoa	Gymnolaemata	Cheilostomatida	NA	NA	NA
+ASV_1288	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Pagurus	Pagurus granosimanus
+ASV_1289	Eukaryota	Arthropoda	Insecta	Diptera	NA	NA	NA
+ASV_129	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Cancer	NA
+ASV_1290	Eukaryota	Bryozoa	Gymnolaemata	Ctenostomatida	NA	NA	NA
+ASV_1291	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Velutinidae	Velutina	Velutina velutina
+ASV_1293	Eukaryota	Annelida	Polychaeta	Spionida	Spionidae	Spiophanes	Spiophanes hakaiensis
+ASV_1294	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1298	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	NA	NA	NA
+ASV_1299	Eukaryota	Bacillariophyta	Coscinodiscophyceae	Chaetocerotales	NA	NA	NA
+ASV_13	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Diphyidae	NA	NA
+ASV_1300	Eukaryota	Bacillariophyta	Mediophyceae	Lithodesmiales	NA	NA	NA
+ASV_1301	Eukaryota	Arthropoda	Insecta	Diptera	Chironomidae	Paratanytarsus	Paratanytarsus natvigi
+ASV_1303	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	NA	NA
+ASV_1304	Eukaryota	Oomycota	Saprolegniales__c	Saprolegniales	NA	NA	NA
+ASV_1305	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	NA	NA
+ASV_1307	Eukaryota	Annelida	Clitellata	NA	NA	NA	NA
+ASV_1308	Eukaryota	Arthropoda	Malacostraca	Decapoda	Axiidae	Leonardsaxius	NA
+ASV_1309	Eukaryota	Rotifera	Eurotatoria	Ploima	NA	NA	NA
+ASV_131	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pandalidae	Pandalus	Pandalus danae
+ASV_1310	Eukaryota	Arthropoda	Insecta	Ephemeroptera	NA	NA	NA
+ASV_1311	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Pandeidae	Catablema	Catablema multicirratum
+ASV_1312	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Ctenocalanus	Ctenocalanus vanus
+ASV_1313	Eukaryota	Oomycota	Saprolegniales__c	Saprolegniales	NA	NA	NA
+ASV_1314	Eukaryota	Bacillariophyta	Coscinodiscophyceae	Rhizosoleniales	NA	NA	NA
+ASV_1315	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Scolecitrichidae	NA	NA
+ASV_1316	Eukaryota	Bacillariophyta	Mediophyceae	Hemiaulales	Hemiaulaceae	NA	NA
+ASV_1317	Eukaryota	Bacillariophyta	Mediophyceae	Cymatosirales	Cymatosiraceae	NA	NA
+ASV_1318	Eukaryota	Bacillariophyta	Bacillariophyceae	NA	NA	NA	NA
+ASV_1319	Eukaryota	Discosea	Himatismenida__c	Himatismenida	NA	NA	NA
+ASV_132	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_1320	Eukaryota	Oomycota	Peronosporales__c	Peronosporales	NA	NA	NA
+ASV_134	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Glebocarcinus	Glebocarcinus oregonensis
+ASV_135	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_137	Eukaryota	Arthropoda	Malacostraca	Decapoda	Panopeidae	Lophopanopeus	Lophopanopeus bellus
+ASV_139	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Pandeidae	Leuckartiara	NA
+ASV_14	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_140	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Glebocarcinus	Glebocarcinus oregonensis
+ASV_142	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Corynidae	Sarsia	NA
+ASV_144	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Acartiidae	Acartia	Acartia longiremis
+ASV_146	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Agalmatidae	NA	NA
+ASV_147	Eukaryota	Mollusca	Cephalopoda	Teuthida	NA	NA	NA
+ASV_148	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Diphyidae	NA	NA
+ASV_149	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_15	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_151	Eukaryota	Echinodermata	Echinoidea	Clypeasteroida	Dendrasteridae	Dendraster	Dendraster excentricus
+ASV_153	Eukaryota	Ctenophora	Tentaculata	Lobata	Bolinopsidae	Bolinopsis	Bolinopsis aff_ infundibulum LMC_2021
+ASV_154	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Centropagidae	Centropages	Centropages abdominalis
+ASV_156	Eukaryota	Mollusca	Cephalopoda	Teuthida	NA	NA	NA
+ASV_157	Eukaryota	Echinodermata	Echinoidea	Camarodonta	Strongylocentrotidae	Strongylocentrotus	Strongylocentrotus droebachiensis
+ASV_158	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Eirenidae	Eutonina	Eutonina indicans
+ASV_16	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_160	Eukaryota	Chordata	Actinopteri	Pleuronectiformes	Pleuronectidae	Platichthys	Platichthys stellatus
+ASV_161	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	Eualus subtilis
+ASV_162	Eukaryota	Arthropoda	Hexanauplia	Poecilostomatoida	NA	NA	NA
+ASV_163	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Eirenidae	Eutonina	Eutonina indicans
+ASV_164	Eukaryota	Arthropoda	Malacostraca	Decapoda	Crangonidae	Crangon	NA
+ASV_165	Eukaryota	Nemertea	Pilidiophora	NA	NA	NA	NA
+ASV_166	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	NA	NA
+ASV_167	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Cancer	Cancer productus
+ASV_169	Eukaryota	Arthropoda	Malacostraca	Decapoda	Crangonidae	Crangon	Crangon franciscorum
+ASV_17	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_171	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus crenatus
+ASV_172	Eukaryota	Arthropoda	Malacostraca	Decapoda	Panopeidae	Lophopanopeus	Lophopanopeus bellus
+ASV_173	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	NA	NA
+ASV_175	Eukaryota	Echinodermata	Echinoidea	Clypeasteroida	Dendrasteridae	Dendraster	Dendraster excentricus
+ASV_177	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Obeliidae	Obelia	Obelia dichotoma
+ASV_178	Eukaryota	Arthropoda	Insecta	Lepidoptera	NA	NA	NA
+ASV_179	Eukaryota	Arthropoda	Malacostraca	Decapoda	Panopeidae	Lophopanopeus	Lophopanopeus bellus
+ASV_18	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Cancer	Cancer productus
+ASV_180	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_181	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	Sagittidae	NA	NA
+ASV_182	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Glebocarcinus	Glebocarcinus oregonensis
+ASV_183	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_185	Eukaryota	Arthropoda	Insecta	NA	NA	NA	NA
+ASV_188	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_19	Eukaryota	Arthropoda	Insecta	Diptera	NA	NA	NA
+ASV_191	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_193	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_194	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_195	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_196	Eukaryota	Onychophora	Udeonychophora	Euonychophora	NA	NA	NA
+ASV_197	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_198	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus crenatus
+ASV_2	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Centropagidae	Centropages	Centropages abdominalis
+ASV_20	Eukaryota	Arthropoda	Insecta	Diptera	NA	NA	NA
+ASV_200	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_201	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_202	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	Fabia	Fabia subquadrata
+ASV_203	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	NA
+ASV_204	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Mitrocomidae	Mitrocomella	Mitrocomella polydiademata
+ASV_205	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_207	Eukaryota	Arthropoda	Malacostraca	Mysida	Mysidae	NA	NA
+ASV_208	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	NA	NA
+ASV_21	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Pandeidae	Catablema	Catablema vesicarium
+ASV_210	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Paracalanidae	NA	NA
+ASV_211	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_212	Eukaryota	Arthropoda	Malacostraca	Decapoda	Crangonidae	Crangon	NA
+ASV_213	Eukaryota	Arthropoda	Malacostraca	Decapoda	Panopeidae	Lophopanopeus	Lophopanopeus bellus
+ASV_214	Eukaryota	Arthropoda	Malacostraca	Euphausiacea	Euphausiidae	Euphausia	Euphausia pacifica
+ASV_215	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_216	Eukaryota	Echinodermata	Ophiuroidea	Amphilepidida	Amphiuridae	Amphiodia	Amphiodia cf_ urtica EAC_2010
+ASV_217	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Proboscidactylidae	Proboscidactyla	Proboscidactyla flavicirrata
+ASV_218	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pisidae	Chorilia	Chorilia longipes
+ASV_22	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Campanulariidae	NA	NA
+ASV_221	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_222	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pandalidae	Pandalus	Pandalus stenolepis
+ASV_225	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Agalmatidae	Nanomia	Nanomia bijuga
+ASV_226	Eukaryota	Arthropoda	Hexanauplia	Poecilostomatoida	NA	NA	NA
+ASV_227	Eukaryota	Arthropoda	Insecta	Diptera	NA	NA	NA
+ASV_228	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Paracalanidae	NA	NA
+ASV_229	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_23	Eukaryota	Arthropoda	Hexanauplia	Poecilostomatoida	NA	NA	NA
+ASV_231	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_232	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	Eualus subtilis
+ASV_233	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_235	Eukaryota	Arthropoda	Malacostraca	Decapoda	Panopeidae	Lophopanopeus	Lophopanopeus bellus
+ASV_238	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	Eualus avinus
+ASV_239	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_24	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_240	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	NA	NA	NA
+ASV_241	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_242	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Centropagidae	Centropages	Centropages abdominalis
+ASV_243	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_245	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_246	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_247	Eukaryota	Arthropoda	Malacostraca	Decapoda	Panopeidae	Lophopanopeus	Lophopanopeus bellus
+ASV_249	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Metacarcinus	Metacarcinus gracilis
+ASV_25	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_250	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_251	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_252	Eukaryota	Echinodermata	Echinoidea	Clypeasteroida	Dendrasteridae	Dendraster	Dendraster excentricus
+ASV_253	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Glebocarcinus	Glebocarcinus oregonensis
+ASV_254	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_255	Eukaryota	Mollusca	Gastropoda	NA	NA	NA	NA
+ASV_256	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_257	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_258	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_26	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Diphyidae	Muggiaea	NA
+ASV_260	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Cancer	NA
+ASV_261	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Glebocarcinus	Glebocarcinus oregonensis
+ASV_263	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_265	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_27	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Diphyidae	NA	NA
+ASV_271	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_272	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Proboscidactylidae	Proboscidactyla	Proboscidactyla flavicirrata
+ASV_273	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	Eualus subtilis
+ASV_274	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Clausocalanidae	Pseudocalanus	Pseudocalanus minutus
+ASV_275	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Acartiidae	Acartia	Acartia longiremis
+ASV_276	Eukaryota	Arthropoda	Malacostraca	Decapoda	Panopeidae	Lophopanopeus	Lophopanopeus bellus
+ASV_277	Eukaryota	Chordata	Actinopteri	Pleuronectiformes	Pleuronectidae	Lyopsetta	Lyopsetta exilis
+ASV_278	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_279	Eukaryota	Arthropoda	Insecta	NA	NA	NA	NA
+ASV_28	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Metacarcinus	Metacarcinus gracilis
+ASV_283	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_284	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Eirenidae	Eutonina	Eutonina indicans
+ASV_286	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_287	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Glebocarcinus	Glebocarcinus oregonensis
+ASV_289	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Proboscidactylidae	Proboscidactyla	Proboscidactyla flavicirrata
+ASV_29	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Centropagidae	Centropages	Centropages abdominalis
+ASV_290	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Pandeidae	Leuckartiara	NA
+ASV_291	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Clausocalanidae	Pseudocalanus	Pseudocalanus newmani
+ASV_292	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Pandeidae	NA	NA
+ASV_293	Eukaryota	Annelida	Polychaeta	Chaetopteridae__o	Chaetopteridae	Mesochaetopterus	Mesochaetopterus taylori
+ASV_296	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Amphissa	Amphissa columbiana
+ASV_297	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Rathkeidae	Rathkea	Rathkea octopunctata
+ASV_298	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	Gastropteridae	Gastropteron	Gastropteron pacificum
+ASV_299	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Clausocalanidae	Pseudocalanus	Pseudocalanus mimus
+ASV_3	Eukaryota	Chordata	Actinopteri	Gadiformes	Merlucciidae	Merluccius	Merluccius productus
+ASV_30	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Metacarcinus	Metacarcinus gracilis
+ASV_300	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Eirenidae	Eutonina	Eutonina indicans
+ASV_301	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Glebocarcinus	Glebocarcinus oregonensis
+ASV_303	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pandalidae	NA	NA
+ASV_304	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Pandeidae	Stomotoca	Stomotoca atra
+ASV_306	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	NA	NA
+ASV_307	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_308	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_309	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Agalmatidae	Nanomia	Nanomia bijuga
+ASV_31	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	Eualus subtilis
+ASV_310	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Clausocalanidae	Pseudocalanus	NA
+ASV_311	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_313	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_314	Eukaryota	Arthropoda	Ostracoda	Halocyprida	NA	NA	NA
+ASV_315	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	NA	NA	NA
+ASV_318	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Agalmatidae	NA	NA
+ASV_319	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_32	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Metacarcinus	Metacarcinus gracilis
+ASV_320	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Metacarcinus	Metacarcinus gracilis
+ASV_321	Eukaryota	Arthropoda	Insecta	Diptera	NA	NA	NA
+ASV_322	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Centropagidae	Centropages	Centropages abdominalis
+ASV_323	Eukaryota	Arthropoda	Insecta	NA	NA	NA	NA
+ASV_324	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Cancer	Cancer oregonensis
+ASV_325	Eukaryota	Chordata	Actinopteri	Uranoscopiformes	Ammodytidae	Ammodytes	Ammodytes hexapterus
+ASV_327	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_329	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_33	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	NA	NA	NA
+ASV_330	Eukaryota	Arthropoda	Malacostraca	Decapoda	Panopeidae	Lophopanopeus	Lophopanopeus bellus
+ASV_331	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pandalidae	Pandalus	Pandalus danae
+ASV_332	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_333	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Acartiidae	Acartia	Acartia longiremis
+ASV_336	Eukaryota	Arthropoda	Malacostraca	Mysida	Mysidae	NA	NA
+ASV_337	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus crenatus
+ASV_338	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Agalmatidae	Nanomia	Nanomia bijuga
+ASV_339	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	Eualus subtilis
+ASV_34	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	NA	NA	NA
+ASV_340	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Diphyidae	NA	NA
+ASV_341	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_343	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	NA	NA	NA
+ASV_345	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_347	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Proboscidactylidae	Proboscidactyla	Proboscidactyla flavicirrata
+ASV_348	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_349	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_35	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	NA	NA
+ASV_350	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_351	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus crenatus
+ASV_352	Eukaryota	Arthropoda	Malacostraca	Euphausiacea	Euphausiidae	Thysanoessa	Thysanoessa raschii
+ASV_353	Eukaryota	Chordata	Actinopteri	Uranoscopiformes	Ammodytidae	Ammodytes	Ammodytes hexapterus
+ASV_354	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	Eualus avinus
+ASV_355	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_356	Eukaryota	Bryozoa	Gymnolaemata	Cheilostomatida	Membraniporidae	NA	NA
+ASV_358	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Centropagidae	Centropages	Centropages abdominalis
+ASV_359	Eukaryota	Bryozoa	Gymnolaemata	Cheilostomatida	Membraniporidae	NA	NA
+ASV_36	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Mitrocomidae	Mitrocoma	Mitrocoma cellularia
+ASV_360	Eukaryota	Echinodermata	Ophiuroidea	Amphilepidida	Amphiuridae	Amphiodia	NA
+ASV_361	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Cancer	NA
+ASV_362	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_363	Eukaryota	Arthropoda	Malacostraca	Decapoda	Panopeidae	Lophopanopeus	Lophopanopeus bellus
+ASV_364	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_366	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_367	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Glebocarcinus	Glebocarcinus oregonensis
+ASV_368	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Cancer	Cancer productus
+ASV_37	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Cancer	NA
+ASV_370	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Acartiidae	Acartia	Acartia longiremis
+ASV_371	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Centropagidae	Centropages	Centropages abdominalis
+ASV_372	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Pandeidae	Leuckartiara	NA
+ASV_373	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_377	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Clausocalanidae	Pseudocalanus	Pseudocalanus mimus
+ASV_378	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_381	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Pandeidae	Leuckartiara	NA
+ASV_382	Eukaryota	Arthropoda	Insecta	NA	NA	NA	NA
+ASV_383	Eukaryota	Arthropoda	Malacostraca	Decapoda	Crangonidae	Crangon	NA
+ASV_384	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus crenatus
+ASV_386	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_388	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Spirontocaris	NA
+ASV_39	Eukaryota	Arthropoda	Insecta	Coleoptera	NA	NA	NA
+ASV_390	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_391	Eukaryota	Arthropoda	Malacostraca	Mysida	Mysidae	NA	NA
+ASV_392	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_394	Eukaryota	Arthropoda	NA	NA	NA	NA	NA
+ASV_395	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_396	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_397	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_398	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Podon	Podon leuckartii
+ASV_399	Eukaryota	Arthropoda	Malacostraca	Decapoda	Epialtidae	Pugettia	Pugettia producta
+ASV_4	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Obeliidae	NA	NA
+ASV_40	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_400	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_401	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Spirontocaris	Spirontocaris arcuata
+ASV_402	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_403	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_404	Eukaryota	Arthropoda	Malacostraca	Decapoda	Panopeidae	Lophopanopeus	Lophopanopeus bellus
+ASV_405	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_406	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_407	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Cancer	Cancer oregonensis
+ASV_409	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_41	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_410	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus rostratus
+ASV_411	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus crenatus
+ASV_412	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_413	Eukaryota	Bacillariophyta	Mediophyceae	Lithodesmiales	NA	NA	NA
+ASV_414	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Proboscidactylidae	Proboscidactyla	Proboscidactyla flavicirrata
+ASV_416	Eukaryota	Arthropoda	Malacostraca	Decapoda	Varunidae	Hemigrapsus	Hemigrapsus oregonensis
+ASV_417	Eukaryota	Annelida	Polychaeta	Phyllodocida	Polynoidae	Lepidasthenia	Lepidasthenia berkeleyae
+ASV_418	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_42	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Bougainvilliidae	Bougainvillia	Bougainvillia superciliaris
+ASV_420	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus crenatus
+ASV_422	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	NA	NA
+ASV_423	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_424	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_425	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Diphyidae	NA	NA
+ASV_426	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Metacarcinus	Metacarcinus gracilis
+ASV_427	Eukaryota	Arthropoda	Malacostraca	Decapoda	Atelecyclidae	Telmessus	Telmessus cheiragonus
+ASV_43	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Obeliidae	Obelia	Obelia dichotoma
+ASV_430	Eukaryota	NA	NA	NA	NA	NA	NA
+ASV_431	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Proboscidactylidae	Proboscidactyla	Proboscidactyla flavicirrata
+ASV_433	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Chthamalidae	Chthamalus	Chthamalus dalli
+ASV_434	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_435	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_436	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Centropagidae	Centropages	Centropages abdominalis
+ASV_437	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_438	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	NA	NA
+ASV_439	Eukaryota	Arthropoda	Malacostraca	Decapoda	Munididae	Munida	Munida quadrispina
+ASV_44	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_440	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Bougainvilliidae	Bougainvillia	Bougainvillia superciliaris
+ASV_441	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	NA	NA
+ASV_442	Eukaryota	Ctenophora	Tentaculata	Cydippida	Pleurobrachiidae	Pleurobrachia	Pleurobrachia bachei
+ASV_443	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Mitrocomidae	Mitrocoma	Mitrocoma cellularia
+ASV_444	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Corynidae	Sarsia	Sarsia bella
+ASV_445	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Clausocalanidae	Pseudocalanus	Pseudocalanus moultoni
+ASV_446	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_447	Eukaryota	Arthropoda	Malacostraca	Decapoda	Panopeidae	Lophopanopeus	Lophopanopeus bellus
+ASV_448	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_449	Eukaryota	Annelida	Polychaeta	Phyllodocida	Pholoidae	Pholoides	Pholoides asperus
+ASV_45	Eukaryota	Arthropoda	Malacostraca	Decapoda	Oregoniidae	Oregonia	Oregonia gracilis
+ASV_451	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Paracalanidae	NA	NA
+ASV_452	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Elassochirus	Elassochirus tenuimanus
+ASV_453	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Euchaetidae	Paraeuchaeta	Paraeuchaeta elongata
+ASV_454	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_455	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	NA	NA
+ASV_456	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_457	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Diphyidae	NA	NA
+ASV_458	Eukaryota	Chordata	Actinopteri	Pleuronectiformes	Pleuronectidae	Psettichthys	Psettichthys melanostictus
+ASV_46	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	Sagittidae	Sagitta	NA
+ASV_460	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	NA	NA
+ASV_461	Eukaryota	Annelida	Polychaeta	Phyllodocida	NA	NA	NA
+ASV_462	Eukaryota	Annelida	Polychaeta	Phyllodocida	NA	NA	NA
+ASV_463	Eukaryota	Cnidaria	Anthozoa	Actiniaria	Edwardsiidae	Edwardsianthus	NA
+ASV_464	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_465	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Metacarcinus	Metacarcinus gracilis
+ASV_466	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Pandeidae	Leuckartiara	Leuckartiara longicalcar
+ASV_467	Eukaryota	Arthropoda	Arachnida	NA	NA	NA	NA
+ASV_468	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Spirontocaris	Spirontocaris holmesi
+ASV_469	Eukaryota	Echinodermata	Holothuroidea	Dendrochirotida	Cucumariidae	Cucumaria	Cucumaria piperata
+ASV_47	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_470	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_471	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus crenatus
+ASV_472	Eukaryota	Annelida	Polychaeta	Phyllodocida	Polynoidae	Lepidasthenia	Lepidasthenia berkeleyae
+ASV_473	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_474	Eukaryota	Chordata	Actinopteri	Gadiformes	Gadidae	Gadus	Gadus chalcogrammus
+ASV_475	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Proboscidactylidae	Proboscidactyla	Proboscidactyla flavicirrata
+ASV_477	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_478	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Calyptraeidae	Crepipatella	Crepipatella lingulata
+ASV_48	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_480	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_481	Eukaryota	Mollusca	Gastropoda	Limapontiidae__o	Limapontiidae	Placida	Placida dendritica
+ASV_482	Eukaryota	Arthropoda	Malacostraca	Amphipoda	NA	NA	NA
+ASV_483	Eukaryota	Arthropoda	Malacostraca	Decapoda	Panopeidae	Lophopanopeus	Lophopanopeus bellus
+ASV_484	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	NA	NA
+ASV_485	Eukaryota	Arthropoda	Ostracoda	Halocyprida	NA	NA	NA
+ASV_486	Eukaryota	Arthropoda	Malacostraca	Mysida	NA	NA	NA
+ASV_489	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_49	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	NA
+ASV_491	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Heptacarpus	Heptacarpus brevirostris
+ASV_493	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_494	Eukaryota	Oomycota	Pythiales__c	NA	NA	NA	NA
+ASV_495	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_496	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Heptacarpus	Heptacarpus brevirostris
+ASV_497	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_498	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_499	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_5	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_50	Eukaryota	Arthropoda	Hexanauplia	Poecilostomatoida	NA	NA	NA
+ASV_500	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Centropagidae	Centropages	Centropages abdominalis
+ASV_501	Eukaryota	Annelida	Polychaeta	Phyllodocida	Goniadidae	Glycinde	Glycinde armigera
+ASV_502	Eukaryota	Annelida	Polychaeta	Phyllodocida	Glyceridae	Glycera	Glycera capitata
+ASV_505	Eukaryota	Annelida	Polychaeta	Chaetopteridae__o	Chaetopteridae	Chaetopterus	Chaetopterus variopedatus
+ASV_506	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Obeliidae	Obelia	Obelia dichotoma
+ASV_507	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Pandeidae	Leuckartiara	NA
+ASV_508	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Agalmatidae	NA	NA
+ASV_509	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	NA	NA
+ASV_51	Eukaryota	Cnidaria	Scyphozoa	Semaeostomeae	Ulmaridae	Phacellophora	Phacellophora camtschatica
+ASV_510	Eukaryota	Arthropoda	Malacostraca	Mysida	Mysidae	NA	NA
+ASV_511	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_512	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Clausocalanidae	Pseudocalanus	Pseudocalanus mimus
+ASV_513	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Acartiidae	Acartia	Acartia longiremis
+ASV_514	Eukaryota	Bacillariophyta	Coscinodiscophyceae	Thalassiosirales	Skeletonemataceae	NA	NA
+ASV_516	Eukaryota	Echinodermata	Echinoidea	Clypeasteroida	Dendrasteridae	Dendraster	Dendraster excentricus
+ASV_518	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus nubilus
+ASV_519	Eukaryota	Arthropoda	Malacostraca	Decapoda	Crangonidae	Crangon	NA
+ASV_52	Eukaryota	Bacillariophyta	Coscinodiscophyceae	Coscinodiscales	Coscinodiscaceae	Coscinodiscus	Coscinodiscus wailesii
+ASV_520	Eukaryota	Arthropoda	Malacostraca	NA	NA	NA	NA
+ASV_521	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_522	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_523	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_524	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	NA	NA
+ASV_525	Eukaryota	Bryozoa	Gymnolaemata	Cheilostomatida	Membraniporidae	NA	NA
+ASV_526	Eukaryota	Phoronida	Phoronopsis__f__o__c	Phoronopsis__f__o	Phoronopsis__f	Phoronopsis	Phoronopsis harmeri
+ASV_527	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Pandeidae	Leuckartiara	Leuckartiara longicalcar
+ASV_528	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_529	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	Sagittidae	NA	NA
+ASV_53	Eukaryota	Arthropoda	Malacostraca	Decapoda	Panopeidae	Lophopanopeus	Lophopanopeus bellus
+ASV_530	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_532	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_533	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_534	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus rostratus
+ASV_536	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Discorsopagurus	Discorsopagurus schmitti
+ASV_537	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_538	Eukaryota	Arthropoda	Insecta	Diptera	NA	NA	NA
+ASV_539	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	Fabia	Fabia subquadrata
+ASV_54	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	NA	NA	NA
+ASV_540	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_541	Eukaryota	Arthropoda	Malacostraca	Decapoda	Oregoniidae	Oregonia	NA
+ASV_542	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_543	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_544	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	NA	NA	NA
+ASV_545	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pisidae	Chorilia	Chorilia longipes
+ASV_546	Eukaryota	Arthropoda	Malacostraca	Decapoda	Majidae	Hyas	NA
+ASV_547	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Cancer	Cancer oregonensis
+ASV_548	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_549	Eukaryota	Mollusca	Gastropoda	Stylommatophora	NA	NA	NA
+ASV_550	Eukaryota	Echinodermata	Holothuroidea	Dendrochirotida	Cucumariidae	Cucumaria	Cucumaria piperata
+ASV_551	Eukaryota	Arthropoda	Malacostraca	Mysida	Mysidae	NA	NA
+ASV_552	Eukaryota	Arthropoda	Malacostraca	Mysida	Mysidae	NA	NA
+ASV_555	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Elassochirus	Elassochirus tenuimanus
+ASV_556	Eukaryota	Bacillariophyta	Coscinodiscophyceae	Chaetocerotales	NA	NA	NA
+ASV_557	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_558	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pandalidae	Pandalus	Pandalus danae
+ASV_559	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_56	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_560	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_561	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Pandeidae	Leuckartiara	NA
+ASV_562	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Chthamalidae	Chthamalus	Chthamalus dalli
+ASV_563	Eukaryota	Mollusca	Gastropoda	Trochida	NA	NA	NA
+ASV_565	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_566	Eukaryota	Arthropoda	Malacostraca	NA	NA	NA	NA
+ASV_568	Eukaryota	Mollusca	Cephalopoda	Teuthida	NA	NA	NA
+ASV_569	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pisidae	Scyra	Scyra acutifrons
+ASV_57	Eukaryota	Porifera	Demospongiae	Haplosclerida	Petrosiidae	NA	NA
+ASV_570	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_571	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Acartiidae	Acartia	Acartia longiremis
+ASV_572	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Chthamalidae	Chthamalus	Chthamalus dalli
+ASV_573	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	Sagittidae	Sagitta	NA
+ASV_574	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	NA	NA	NA
+ASV_575	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_576	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pandalidae	Pandalus	Pandalus borealis
+ASV_577	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Obeliidae	NA	NA
+ASV_578	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_579	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Obeliidae	Obelia	Obelia dichotoma
+ASV_58	Eukaryota	Arthropoda	Insecta	Diptera	Chironomidae	Chironomus	Chironomus bifurcatus
+ASV_580	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Acartiidae	Acartia	Acartia longiremis
+ASV_581	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Discorsopagurus	Discorsopagurus schmitti
+ASV_582	Eukaryota	Annelida	Polychaeta	NA	NA	NA	NA
+ASV_583	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_584	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_586	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	NA
+ASV_587	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus rostratus
+ASV_588	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_589	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_59	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Centropagidae	Centropages	Centropages abdominalis
+ASV_590	Eukaryota	Bacillariophyta	Mediophyceae	Lithodesmiales	NA	NA	NA
+ASV_591	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_594	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Pagurus	Pagurus hirsutiusculus
+ASV_595	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_596	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Metacarcinus	Metacarcinus gracilis
+ASV_597	Eukaryota	Arthropoda	Insecta	Lepidoptera	NA	NA	NA
+ASV_598	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Eirenidae	Eutonina	Eutonina indicans
+ASV_599	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Pandeidae	Leuckartiara	Leuckartiara longicalcar
+ASV_6	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_60	Eukaryota	Arthropoda	Malacostraca	Amphipoda	Hyperiidae	Parathemisto	Parathemisto pacifica
+ASV_600	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus crenatus
+ASV_601	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Eirenidae	NA	NA
+ASV_602	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_603	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	NA
+ASV_604	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_605	Eukaryota	Annelida	Polychaeta	Phyllodocida	Polynoidae	Lepidasthenia	Lepidasthenia longicirrata
+ASV_606	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Clausocalanidae	Pseudocalanus	Pseudocalanus mimus
+ASV_607	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_609	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_61	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Metacarcinus	Metacarcinus gracilis
+ASV_610	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia lucens
+ASV_612	Eukaryota	Bacillariophyta	Mediophyceae	Cymatosirales	Cymatosiraceae	NA	NA
+ASV_613	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus rostratus
+ASV_614	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_615	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	Eualus pusiolus
+ASV_616	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_617	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	NA	NA
+ASV_619	Eukaryota	Annelida	Polychaeta	Phyllodocida	Polynoidae	Lepidasthenia	Lepidasthenia berkeleyae
+ASV_62	Eukaryota	Arthropoda	Insecta	Coleoptera	NA	NA	NA
+ASV_620	Eukaryota	Arthropoda	Insecta	Diptera	NA	NA	NA
+ASV_621	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	NA	NA
+ASV_622	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	NA	NA
+ASV_623	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_624	Eukaryota	Arthropoda	Malacostraca	Decapoda	Oregoniidae	Oregonia	Oregonia gracilis
+ASV_625	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Clausocalanidae	Pseudocalanus	Pseudocalanus moultoni
+ASV_626	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pandalidae	NA	NA
+ASV_627	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_628	Eukaryota	Arthropoda	Malacostraca	Mysida	Mysidae	NA	NA
+ASV_629	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Metacarcinus	Metacarcinus magister
+ASV_63	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_630	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_631	Eukaryota	Arthropoda	Malacostraca	Euphausiacea	Euphausiidae	NA	NA
+ASV_632	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_633	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_634	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	Fabia	Fabia subquadrata
+ASV_638	Eukaryota	Mollusca	Gastropoda	Stylommatophora	NA	NA	NA
+ASV_64	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Campanulariidae	NA	NA
+ASV_640	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Corymorphidae	Euphysa	Euphysa flammea
+ASV_641	Eukaryota	Annelida	Polychaeta	Phyllodocida	NA	NA	NA
+ASV_642	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_643	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	Eualus subtilis
+ASV_645	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_646	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_647	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Discorsopagurus	Discorsopagurus schmitti
+ASV_648	Eukaryota	Arthropoda	Ostracoda	Halocyprida	NA	NA	NA
+ASV_649	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Corynidae	Sarsia	NA
+ASV_65	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pasiphaeidae	Pasiphaea	Pasiphaea pacifica
+ASV_650	Eukaryota	Arthropoda	Malacostraca	Euphausiacea	Euphausiidae	Thysanoessa	Thysanoessa raschii
+ASV_651	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	NA	NA
+ASV_652	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Heptacarpus	Heptacarpus brevirostris
+ASV_653	Eukaryota	Arthropoda	Malacostraca	Mysida	Mysidae	NA	NA
+ASV_655	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus nubilus
+ASV_656	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_658	Eukaryota	Echinodermata	Holothuroidea	Dendrochirotida	Phyllophoridae	NA	NA
+ASV_659	Eukaryota	Arthropoda	Insecta	Lepidoptera	NA	NA	NA
+ASV_66	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_660	Eukaryota	Arthropoda	Malacostraca	Euphausiacea	Euphausiidae	Thysanoessa	Thysanoessa spinifera
+ASV_661	Eukaryota	Bryozoa	Gymnolaemata	Cheilostomatida	Membraniporidae	NA	NA
+ASV_662	Eukaryota	Arthropoda	Malacostraca	NA	NA	NA	NA
+ASV_664	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	NA
+ASV_665	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	Eualus subtilis
+ASV_666	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus crenatus
+ASV_667	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	NA	NA
+ASV_668	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	Fabia	Fabia subquadrata
+ASV_669	Eukaryota	Arthropoda	Malacostraca	Decapoda	Epialtidae	Pugettia	Pugettia gracilis
+ASV_67	Eukaryota	Chordata	Actinopteri	Pleuronectiformes	Pleuronectidae	Isopsetta	Isopsetta isolepis
+ASV_670	Eukaryota	Echinodermata	Holothuroidea	Dendrochirotida	Cucumariidae	Cucumaria	Cucumaria piperata
+ASV_671	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Proboscidactylidae	Proboscidactyla	Proboscidactyla flavicirrata
+ASV_672	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_673	Eukaryota	Echinodermata	Holothuroidea	Dendrochirotida	Phyllophoridae	Thyone	Thyone benti
+ASV_674	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	NA	NA
+ASV_675	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	Sagittidae	Sagitta	NA
+ASV_676	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_677	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pandalidae	Pandalus	Pandalus stenolepis
+ASV_678	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_679	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Heterorhabdidae	NA	NA
+ASV_68	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus crenatus
+ASV_680	Eukaryota	Mollusca	Gastropoda	Neogastropoda	NA	NA	NA
+ASV_681	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_682	Eukaryota	Arthropoda	Malacostraca	Mysida	Mysidae	NA	NA
+ASV_683	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	NA	NA
+ASV_684	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Pagurus	Pagurus caurinus
+ASV_685	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	NA	NA
+ASV_686	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_687	Eukaryota	Arthropoda	Insecta	NA	NA	NA	NA
+ASV_688	Eukaryota	Bryozoa	Gymnolaemata	Cheilostomatida	NA	NA	NA
+ASV_689	Eukaryota	Arthropoda	Malacostraca	Decapoda	Oregoniidae	Oregonia	Oregonia gracilis
+ASV_69	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_690	Eukaryota	Arthropoda	Ostracoda	Halocyprida	NA	NA	NA
+ASV_691	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Mitrella	Mitrella gausapata
+ASV_692	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	NA
+ASV_693	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Archaeobalanidae	Semibalanus	Semibalanus cariosus
+ASV_694	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Eirenidae	Eutonina	NA
+ASV_695	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	Gastropteridae	Gastropteron	Gastropteron pacificum
+ASV_696	Eukaryota	Annelida	Clitellata	Enchytraeida	NA	NA	NA
+ASV_697	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus rostratus
+ASV_698	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Eirenidae	Eutonina	Eutonina indicans
+ASV_7	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_70	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_700	Eukaryota	Echinodermata	Holothuroidea	Dendrochirotida	Cucumariidae	Cucumaria	Cucumaria piperata
+ASV_701	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Tortanidae	Tortanus	NA
+ASV_702	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Alia	Alia carinata
+ASV_703	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_704	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus rostratus
+ASV_705	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Eirenidae	Eutonina	Eutonina indicans
+ASV_706	Eukaryota	Arthropoda	Malacostraca	Decapoda	Munididae	Munida	Munida quadrispina
+ASV_707	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus crenatus
+ASV_709	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	Eualus subtilis
+ASV_710	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Pagurus	Pagurus beringanus
+ASV_711	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	NA	NA	NA
+ASV_712	Eukaryota	Arthropoda	Malacostraca	NA	NA	NA	NA
+ASV_713	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Proboscidactylidae	Proboscidactyla	Proboscidactyla flavicirrata
+ASV_714	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Acartiidae	Acartia	Acartia longiremis
+ASV_716	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus rostratus
+ASV_717	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_718	Eukaryota	Chordata	Actinopteri	Perciformes	Liparidae	Liparis	Liparis dennyi
+ASV_72	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_720	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus crenatus
+ASV_721	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Obeliidae	NA	NA
+ASV_722	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Heptacarpus	Heptacarpus brevirostris
+ASV_723	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Heptacarpus	Heptacarpus brevirostris
+ASV_725	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_727	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Amphissa	Amphissa columbiana
+ASV_728	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Acartiidae	Acartia	Acartia longiremis
+ASV_729	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_730	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Metacarcinus	Metacarcinus magister
+ASV_731	Eukaryota	Arthropoda	Malacostraca	Mysida	Mysidae	NA	NA
+ASV_732	Eukaryota	Chordata	Actinopteri	Pleuronectiformes	Pleuronectidae	Parophrys	Parophrys vetulus
+ASV_733	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Pagurus	Pagurus beringanus
+ASV_734	Eukaryota	Annelida	Polychaeta	Phyllodocida	Polynoidae	Lepidasthenia	Lepidasthenia berkeleyae
+ASV_735	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pandalidae	Pandalus	Pandalus jordani
+ASV_736	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_738	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_739	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pandalidae	Pandalus	Pandalus stenolepis
+ASV_74	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Metacarcinus	Metacarcinus gracilis
+ASV_740	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_741	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	NA	NA
+ASV_742	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_744	Eukaryota	Echinodermata	Ophiuroidea	Amphilepidida	Ophiactidae	Ophiopholis	Ophiopholis aculeata
+ASV_746	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pisidae	Scyra	Scyra acutifrons
+ASV_75	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_750	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus nubilus
+ASV_751	Eukaryota	Arthropoda	Malacostraca	Decapoda	Munididae	Munida	Munida quadrispina
+ASV_752	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_753	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Discorsopagurus	Discorsopagurus schmitti
+ASV_754	Eukaryota	Bacillariophyta	Coscinodiscophyceae	Thalassiosirales	Skeletonemataceae	NA	NA
+ASV_755	Eukaryota	Arthropoda	Malacostraca	Euphausiacea	Euphausiidae	Thysanoessa	Thysanoessa raschii
+ASV_756	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus crenatus
+ASV_757	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	NA	NA	NA
+ASV_758	Eukaryota	Ctenophora	Tentaculata	Cydippida	Pleurobrachiidae	Pleurobrachia	Pleurobrachia bachei
+ASV_759	Eukaryota	Arthropoda	Malacostraca	Mysida	Mysidae	NA	NA
+ASV_76	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_760	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_761	Eukaryota	Echinodermata	Holothuroidea	Dendrochirotida	Cucumariidae	Cucumaria	Cucumaria miniata
+ASV_762	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_764	Eukaryota	Echinodermata	Holothuroidea	Dendrochirotida	Phyllophoridae	Thyone	Thyone benti
+ASV_766	Eukaryota	Arthropoda	Arachnida	Sarcoptiformes	NA	NA	NA
+ASV_767	Eukaryota	Arthropoda	Malacostraca	NA	NA	NA	NA
+ASV_768	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Heptacarpus	Heptacarpus brevirostris
+ASV_769	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus nubilus
+ASV_770	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_771	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Heptacarpus	Heptacarpus tridens
+ASV_772	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Obeliidae	Obelia	NA
+ASV_773	Eukaryota	Arthropoda	Insecta	Lepidoptera	NA	NA	NA
+ASV_774	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_775	Eukaryota	Echinodermata	Holothuroidea	Dendrochirotida	Phyllophoridae	Thyone	Thyone benti
+ASV_776	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_777	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_778	Eukaryota	Arthropoda	Malacostraca	Mysida	Mysidae	NA	NA
+ASV_779	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_78	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_780	Eukaryota	Onychophora	Udeonychophora	Euonychophora	NA	NA	NA
+ASV_781	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Obeliidae	Obelia	NA
+ASV_782	Eukaryota	Nemertea	Palaeonemertea	Cephalothricidae__o	Cephalothricidae	Cephalothrix	Cephalothrix major
+ASV_783	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Proboscidactylidae	Proboscidactyla	Proboscidactyla flavicirrata
+ASV_784	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus nubilus
+ASV_785	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Spirontocaris	Spirontocaris snyderi
+ASV_787	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Obeliidae	Obelia	NA
+ASV_788	Eukaryota	Phoronida	Phoronopsis__f__o__c	Phoronopsis__f__o	Phoronopsis__f	Phoronopsis	Phoronopsis harmeri
+ASV_789	Eukaryota	Arthropoda	Insecta	Diptera	NA	NA	NA
+ASV_790	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	NA	NA
+ASV_791	Eukaryota	Arthropoda	Insecta	Diptera	NA	NA	NA
+ASV_792	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_794	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_795	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	NA	NA
+ASV_796	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_798	Eukaryota	Arthropoda	Malacostraca	Decapoda	Oregoniidae	Oregonia	Oregonia gracilis
+ASV_799	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Obeliidae	Obelia	Obelia dichotoma
+ASV_8	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Diphyidae	NA	NA
+ASV_80	Eukaryota	Bacillariophyta	Mediophyceae	Lithodesmiales	Lithodesmiaceae	Ditylum	Ditylum brightwellii
+ASV_800	Eukaryota	Mollusca	Cephalopoda	Sepiida	NA	NA	NA
+ASV_801	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_802	Eukaryota	Bacillariophyta	Mediophyceae	Hemiaulales	Hemiaulaceae	Hemiaulus	Hemiaulus sinensis
+ASV_803	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_805	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pisidae	Scyra	Scyra acutifrons
+ASV_806	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Obeliidae	Obelia	Obelia dichotoma
+ASV_807	Eukaryota	Arthropoda	Insecta	Diptera	NA	NA	NA
+ASV_808	Eukaryota	Arthropoda	Malacostraca	Decapoda	Porcellanidae	Petrolisthes	Petrolisthes eriomerus
+ASV_809	Eukaryota	Bacillariophyta	Bacillariophyceae	Bacillariales	Bacillariaceae	Pseudo_nitzschia	Pseudo_nitzschia delicatissima
+ASV_811	Eukaryota	Arthropoda	Malacostraca	Decapoda	Crangonidae	NA	NA
+ASV_813	Eukaryota	Chordata	Actinopteri	Perciformes	Cottidae	Leptocottus	Leptocottus armatus
+ASV_814	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_815	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_816	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Corynidae	Sarsia	NA
+ASV_817	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Pagurus	NA
+ASV_819	Eukaryota	Annelida	Polychaeta	Phyllodocida	Polynoidae	Harmothoe	Harmothoe extenuata
+ASV_82	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Clytiidae	Clytia	Clytia gregaria
+ASV_821	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_823	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Agalmatidae	NA	NA
+ASV_824	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_825	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_827	Eukaryota	Arthropoda	Malacostraca	Decapoda	Munididae	Munida	Munida quadrispina
+ASV_828	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Diphyidae	NA	NA
+ASV_829	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Heptacarpus	Heptacarpus brevirostris
+ASV_83	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Centropagidae	Centropages	Centropages abdominalis
+ASV_830	Eukaryota	Arthropoda	Hexanauplia	NA	NA	NA	NA
+ASV_831	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_833	Eukaryota	Arthropoda	Malacostraca	Mysida	NA	NA	NA
+ASV_834	Eukaryota	Arthropoda	Insecta	NA	NA	NA	NA
+ASV_835	Eukaryota	Arthropoda	Insecta	NA	NA	NA	NA
+ASV_836	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_837	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Eirenidae	Eutonina	Eutonina indicans
+ASV_838	Eukaryota	Bryozoa	Gymnolaemata	Cheilostomatida	Membraniporidae	NA	NA
+ASV_839	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_84	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Eirenidae	Eutonina	Eutonina indicans
+ASV_840	Eukaryota	Phoronida	Phoronopsis__f__o__c	Phoronopsis__f__o	Phoronopsis__f	Phoronopsis	Phoronopsis harmeri
+ASV_841	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Heptacarpus	Heptacarpus brevirostris
+ASV_843	Eukaryota	Echinodermata	Holothuroidea	Dendrochirotida	Cucumariidae	Cucumaria	Cucumaria piperata
+ASV_844	Eukaryota	Arthropoda	Malacostraca	Decapoda	Crangonidae	Crangon	Crangon crangon
+ASV_845	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pandalidae	Pandalus	Pandalus danae
+ASV_846	Eukaryota	Arthropoda	Malacostraca	Decapoda	Panopeidae	Lophopanopeus	Lophopanopeus bellus
+ASV_847	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_848	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Nassariidae	Nassarius	Nassarius mendicus
+ASV_849	Eukaryota	Annelida	Polychaeta	Phyllodocida	Polynoidae	Harmothoe	Harmothoe aff_ imbricata CMC03
+ASV_85	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	Diphyidae	Muggiaea	NA
+ASV_850	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_851	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_852	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus crenatus
+ASV_853	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Clausocalanidae	Pseudocalanus	Pseudocalanus mimus
+ASV_855	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_856	Eukaryota	Bryozoa	Gymnolaemata	Cheilostomatida	Membraniporidae	NA	NA
+ASV_857	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_858	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Pagurus	Pagurus kennerlyi
+ASV_86	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Proboscidactylidae	Proboscidactyla	Proboscidactyla flavicirrata
+ASV_860	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_861	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_862	Eukaryota	Arthropoda	Malacostraca	Decapoda	Lithodidae	Hapalogaster	Hapalogaster mertensii
+ASV_863	Eukaryota	Arthropoda	Ostracoda	Halocyprida	NA	NA	NA
+ASV_865	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_866	Eukaryota	Platyhelminthes	Rhabditophora	Polycladida	NA	NA	NA
+ASV_867	Eukaryota	Arthropoda	Malacostraca	Decapoda	Munididae	Munida	Munida quadrispina
+ASV_868	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_869	Eukaryota	Arthropoda	Insecta	Lepidoptera	NA	NA	NA
+ASV_870	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	Sagittidae	NA	NA
+ASV_871	Eukaryota	Chordata	Actinopteri	Clupeiformes	Clupeidae	Clupea	Clupea pallasii
+ASV_872	Eukaryota	Mollusca	Polyplacophora	NA	NA	NA	NA
+ASV_873	Eukaryota	Chordata	Actinopteri	Pleuronectiformes	Pleuronectidae	Parophrys	Parophrys vetulus
+ASV_874	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_875	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_877	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	NA	NA	NA
+ASV_878	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Clausocalanidae	Clausocalanus	Clausocalanus parapergens
+ASV_879	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_880	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_881	Eukaryota	Mollusca	Gastropoda	Neogastropoda	NA	NA	NA
+ASV_882	Eukaryota	Arthropoda	Malacostraca	Euphausiacea	Euphausiidae	Euphausia	Euphausia pacifica
+ASV_883	Eukaryota	Echinodermata	Holothuroidea	Dendrochirotida	Cucumariidae	Cucumaria	Cucumaria miniata
+ASV_884	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	NA	NA
+ASV_885	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus rostratus
+ASV_886	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	NA	NA
+ASV_887	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	Eualus subtilis
+ASV_889	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	NA	NA
+ASV_890	Eukaryota	Mollusca	Gastropoda	NA	NA	NA	NA
+ASV_891	Eukaryota	Arthropoda	Malacostraca	Decapoda	Cancridae	Glebocarcinus	Glebocarcinus oregonensis
+ASV_892	Eukaryota	Arthropoda	Insecta	Coleoptera	NA	NA	NA
+ASV_893	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Eirenidae	Eutonina	Eutonina indicans
+ASV_894	Eukaryota	Mollusca	Gastropoda	NA	NA	NA	NA
+ASV_895	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	NA	NA	NA
+ASV_896	Eukaryota	Bacillariophyta	Coscinodiscophyceae	Rhizosoleniales	Rhizosoleniaceae	Rhizosolenia	Rhizosolenia setigera
+ASV_897	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Archaeobalanidae	Solidobalanus	Solidobalanus engbergi
+ASV_898	Eukaryota	Bacillariophyta	Coscinodiscophyceae	Melosirales	Stephanopyxidaceae	Stephanopyxis	Stephanopyxis turris
+ASV_899	Eukaryota	Arthropoda	Insecta	Diptera	NA	NA	NA
+ASV_9	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Acartiidae	Acartia	Acartia longiremis
+ASV_90	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_900	Eukaryota	Arthropoda	Malacostraca	Amphipoda	Hyperiidae	Parathemisto	Parathemisto pacifica
+ASV_902	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Lacunidae	Lacuna	Lacuna vincta
+ASV_903	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	NA	NA
+ASV_904	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Acartiidae	Acartia	Acartia hudsonica
+ASV_905	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus crenatus
+ASV_906	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_909	Eukaryota	Arthropoda	Insecta	Diptera	NA	NA	NA
+ASV_91	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_910	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Nassariidae	Nassarius	Nassarius mendicus
+ASV_911	Eukaryota	Arthropoda	Insecta	Lepidoptera	NA	NA	NA
+ASV_912	Eukaryota	Phoronida	Phoronopsis__f__o__c	Phoronopsis__f__o	Phoronopsis__f	Phoronopsis	Phoronopsis harmeri
+ASV_913	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Lacunidae	Lacuna	Lacuna vincta
+ASV_914	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	NA	NA	NA
+ASV_915	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Bougainvilliidae	NA	NA
+ASV_916	Eukaryota	Annelida	Polychaeta	Phyllodocida	Polynoidae	Harmothoe	Harmothoe aff_ imbricata CMC01
+ASV_917	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_918	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	NA	NA	NA
+ASV_919	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus crenatus
+ASV_92	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_920	Eukaryota	Annelida	Polychaeta	Phyllodocida	Polynoidae	Harmothoe	Harmothoe aff_ imbricata CMC03
+ASV_921	Eukaryota	Mollusca	Gastropoda	NA	NA	NA	NA
+ASV_923	Eukaryota	Cnidaria	Hydrozoa	Siphonophorae	NA	NA	NA
+ASV_924	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Discorsopagurus	Discorsopagurus schmitti
+ASV_925	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_926	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_927	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_928	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Pagurus	Pagurus beringanus
+ASV_929	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	Pagurus	Pagurus caurinus
+ASV_93	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_930	Eukaryota	Arthropoda	Malacostraca	Decapoda	Lithodidae	Rhinolithodes	Rhinolithodes wosnessenskii
+ASV_931	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pandalidae	Pandalus	Pandalus danae
+ASV_932	Eukaryota	Arthropoda	Insecta	Diptera	NA	NA	NA
+ASV_933	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Spirontocaris	NA
+ASV_934	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_936	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_937	Eukaryota	Bacillariophyta	Coscinodiscophyceae	Chaetocerotales	NA	NA	NA
+ASV_938	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Spirontocaris	Spirontocaris sica
+ASV_939	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Heptacarpus	Heptacarpus brevirostris
+ASV_94	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Clausocalanidae	Pseudocalanus	Pseudocalanus moultoni
+ASV_942	Bacteria	Proteobacteria	Alphaproteobacteria	Hyphomicrobiales	NA	NA	NA
+ASV_943	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_944	Eukaryota	Chordata	Actinopteri	Perciformes	Cottidae	Leptocottus	Leptocottus armatus
+ASV_945	Eukaryota	Arthropoda	Malacostraca	Euphausiacea	Euphausiidae	Euphausia	Euphausia pacifica
+ASV_947	Eukaryota	Echinodermata	Echinoidea	Spatangoida	Schizasteridae	Brisaster	Brisaster latifrons
+ASV_949	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Amphissa	Amphissa columbiana
+ASV_950	Eukaryota	Mollusca	Polyplacophora	NA	NA	NA	NA
+ASV_951	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Paracalanidae	NA	NA
+ASV_952	Eukaryota	Arthropoda	Insecta	Diptera	NA	NA	NA
+ASV_953	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Obeliidae	Obelia	Obelia dichotoma
+ASV_957	Eukaryota	Annelida	Polychaeta	Phyllodocida	Polynoidae	Harmothoe	Harmothoe extenuata
+ASV_958	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Lacunidae	Lacuna	Lacuna vincta
+ASV_959	Eukaryota	Bacillariophyta	Coscinodiscophyceae	Thalassiosirales	Thalassiosiraceae	Thalassiosira	Thalassiosira nordenskioeldii
+ASV_96	Eukaryota	Arthropoda	Ostracoda	Halocyprida	NA	NA	NA
+ASV_960	Eukaryota	Bacillariophyta	Mediophyceae	Lithodesmiales	NA	NA	NA
+ASV_962	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_963	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Mangeliidae	Propebela	Propebela turricula
+ASV_964	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pinnotheridae	NA	NA
+ASV_965	Eukaryota	Haptista	Haptophyta	Phaeocystales	Phaeocystaceae	NA	NA
+ASV_966	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_969	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_97	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Proboscidactylidae	Proboscidactyla	Proboscidactyla flavicirrata
+ASV_970	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pandalidae	Pandalus	NA
+ASV_972	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Proboscidactylidae	Proboscidactyla	Proboscidactyla flavicirrata
+ASV_973	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_974	Eukaryota	Arthropoda	Malacostraca	Decapoda	Axiidae	Calocarides	Calocarides spinulicauda
+ASV_975	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_977	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	NA
+ASV_978	Eukaryota	Arthropoda	Insecta	Coleoptera	NA	NA	NA
+ASV_979	Eukaryota	Mollusca	Gastropoda	Neogastropoda	NA	NA	NA
+ASV_98	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus glandula
+ASV_980	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Nassariidae	NA	NA
+ASV_983	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Spirontocaris	Spirontocaris lamellicornis
+ASV_984	Eukaryota	Mollusca	Gastropoda	NA	NA	NA	NA
+ASV_985	Eukaryota	Arthropoda	Arachnida	NA	NA	NA	NA
+ASV_987	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_988	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_991	Eukaryota	Echinodermata	Asteroidea	Forcipulatida	Asteriidae	Evasterias	Evasterias troschelii
+ASV_992	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Amphissa	Amphissa columbiana
+ASV_993	Eukaryota	Annelida	Polychaeta	Phyllodocida	Polynoidae	NA	NA
+ASV_994	Eukaryota	Arthropoda	Hexanauplia	Sessilia	Balanidae	Balanus	Balanus crenatus
+ASV_995	Bacteria	Bacteroidetes	Flavobacteriia	Flavobacteriales	Flavobacteriaceae	NA	NA
+ASV_997	Eukaryota	Phoronida	Phoronopsis__f__o__c	Phoronopsis__f__o	Phoronopsis__f	Phoronopsis	Phoronopsis harmeri
+ASV_999	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	Eualus avinus
