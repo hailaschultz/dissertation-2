@@ -230,44 +230,169 @@ Zoop_env<-subset(Zoop_env, Station.x != "P22")
 Zoop_env<-subset(Zoop_env, Station.x != "P38")
 Zoop_env<-subset(Zoop_env, Station.x != "P8")
 Zoop_env<-subset(Zoop_env, Station.x != "P28")
-RE2<- Zoop_env[,12:ncol(Zoop_env)]
 #replace N/A with 0
-RE2[is.na(RE2)] <- 0
+Zoop_env[is.na(Zoop_env)] <- 0
 #remove columns with fewer than 9 rows with nonzero numbers
-non_zero_counts <- colSums(RE2 != 0)
-RE2 <- RE2[, non_zero_counts >= 9]
+non_zero_counts <- colSums(Zoop_env != 0)
+Zoop_env <- Zoop_env[, non_zero_counts >= 9]
 
-RE3<-as.matrix(RE2)
+RE3<-as.matrix(Zoop_env)
 ```
 
 
 # Anomaly analysis
 month and station averages
 ```{r}
-Zoop_env[is.na(Zoop_env)] <- 0
 zoop_ave<-Zoop_env %>%
   group_by(Month.x,Station.x) %>%
-  summarise(across("ACARTIA":"XENACANTHOMYSIS PSEUDOMACROPSIS", list(mean)))
+  summarise(across("ACARTIA HUDSONICA":"UNKNOWN", list(mean)))
+```
+
+standard deviation
+```{r}
+zoop_stdev<-Zoop_env %>%
+  group_by(Month.x,Station.x) %>%
+  summarise(across("ACARTIA HUDSONICA":"UNKNOWN", list(sd)))
+```
+
+min
+```{r}
+zoop_min<-Zoop_env %>%
+  group_by(Month.x,Station.x) %>%
+  summarise(across("ACARTIA HUDSONICA":"UNKNOWN", list(min)))
+```
+max
+```{r}
+zoop_max<-Zoop_env %>%
+  group_by(Month.x,Station.x) %>%
+  summarise(across("ACARTIA HUDSONICA":"UNKNOWN", list(max)))
 ```
 
 
-anomalies
+mean anomalies
 ```{r}
 #add averages column
 #make station-month column
 Zoop_env$stationmonth<-paste(Zoop_env$Station.x, Zoop_env$Month.x,sep="-")
 zoop_ave$stationmonth<-paste(zoop_ave$Station.x, zoop_ave$Month.x,sep="-")
+zoop_stdev$stationmonth<-paste(zoop_stdev$Station.x, zoop_stdev$Month.x,sep="-")
 
 Zoop_env_ave <- merge(Zoop_env,zoop_ave, by="stationmonth", all.x=TRUE)
+Zoop_env_stdev <- merge(Zoop_env_ave,zoop_stdev, by="stationmonth", all.x=TRUE)
+
+#calculate anomalies
+Zoop_anom <- (Zoop_env_stdev[, 13:96] - Zoop_env_stdev[, 99:182])/Zoop_env_stdev[, 185:268]
+```
+
+min max 
+```{r}
+#add averages column
+#make station-month column
+Zoop_env$stationmonth<-paste(Zoop_env$Station.x, Zoop_env$Month.x,sep="-")
+zoop_min$stationmonth<-paste(zoop_min$Station.x, zoop_min$Month.x,sep="-")
+zoop_max$stationmonth<-paste(zoop_max$Station.x, zoop_max$Month.x,sep="-")
+
+Zoop_env_min <- merge(Zoop_env,zoop_min, by="stationmonth", all.x=TRUE)
+Zoop_env_max <- merge(Zoop_env_min,zoop_max, by="stationmonth", all.x=TRUE)
+
+#calculate anomalies
+Zoop_scaled <- (Zoop_env_max[, 16:137] - Zoop_env_max[,141:262])/(Zoop_env_max[, 265:386]-Zoop_env_max[, 141:262])
+
+#convert nan to zero
+is.nan.data.frame <- function(x)
+do.call(cbind, lapply(x, is.nan))
+Zoop_scaled[is.nan(Zoop_scaled)] <- 0
+```
+
+add regime
+```{r}
+Zoop_env_min$regime=Zoop_env_min$Year.x
+Zoop_env_min$regime <- recode_factor(Zoop_env_min$regime, 
+                              '2014' = "two",'2015'="one", '2016' = "mid", 
+                              '2017' = "mid", '2018' = "two", '2019' = "one",
+                              '2020' = "one", '2021' = "two", '2022' = "one")
+
+```
+
+minmax NDMS
+PERMANOVA
+```{r}
+dist<-vegdist(Zoop_scaled, method='bray')
+dist
+perm<-adonis2(dist~regime*Station.x.x*Month.x.x, data=Zoop_env_min, permutations = 999, method="bray")
+perm
+```
+See pairwise differences
+```{r}
+#make sure factors are formatted right
+Zoop_env_min$regime=as.factor(Zoop_env_min$regime)
+Zoop_env_min$Station.x.x=as.factor(Zoop_env_min$Station.x.x)
+adonis.pair(vegdist(Zoop_scaled),Zoop_env_min$Station.x.x)
+adonis.pair(vegdist(Zoop_scaled),Zoop_env_min$regime)
+```
+
+## Run NMDS
+```{r}
+NMDSmodel <- metaMDS(Zoop_scaled, distance = "bray",trymax = 200)
+NMDSmodel
+```
+
+get datascores
+```{r}
+data.scores<-scores(NMDSmodel,display="sites")
+data.scores<- as.data.frame(data.scores)
+```
+
+```{r}
+data.scores$Station = Zoop_env_min$Station.x.x
+data.scores$regime = Zoop_env_min$regime
+data.scores$Month = Zoop_env_min$Month.x.x
+```
+
+plot data scores
+```{r}
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Month)) +stat_ellipse()+geom_point(aes(colour = Month))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+xx
+```
 
 
-####need to figure out how to calculate anomalies still...
+convert NaN to zero
+```{r}
+is.nan.data.frame <- function(x)
+do.call(cbind, lapply(x, is.nan))
+Zoop_anom[is.nan(Zoop_anom)] <- 0
 
-temp_deep_P28$Ave <- temp_deep_ave_P28$temp[match(temp_deep_P28$Month, temp_deep_ave_P28$Month)]
+#convert to matrix
+RE3<-as.matrix(Zoop_anom)
+```
 
-#add statndard deviation column
-temp_deep_P28$stdev <- temp_deep_ave_P28$stdev[match(temp_deep_P28$Month, temp_deep_ave_P28$Month)]
+# Zoop cluster analysis
+add back in code as rownames
+```{r}
+Zoop_scaled$code = Zoop_env_min$code
+Zoop_scaled<-Zoop_scaled %>% remove_rownames %>% column_to_rownames(var="code")
+```
 
-# calculate anomalies
-temp_deep_P28$anomaly<-(temp_deep_P28$temp-temp_deep_P28$Ave)/temp_deep_P28$stdev
+### Centroid Based
+gap statistic: do this to determine number of clusters
+```{r}
+res.km<-eclust(Zoop_scaled, FUNcluster = "kmeans", hc_metric = "euclidean", graph = FALSE)
+fviz_gap_stat(res.km$gap_stat)
+
+#silhouette plot
+fviz_silhouette(res.km)
+```
+cluster plot
+```{r}
+eclust(Zoop_scaled, FUNcluster = "kmeans", k = 4, hc_metric = "euclidean")
+```
+
+### Heirarchical
+```{r,fig.width=6,fig.height=8}
+res.hclust <- eclust(Zoop_anom, FUNcluster = "hclust", hc_metric = "euclidean")
+zoop_dend<-fviz_dend(res.hclust, rect = TRUE,repel=phylogenic)
+zoop_dend
+fviz_cluster(res.hclust, labelsize = 10)
+res.hclust
 ```

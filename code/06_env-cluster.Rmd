@@ -177,7 +177,7 @@ joined <- merge(joined, Salinity, by.x = "code",
              by.y = "code", all.x = TRUE, all.y = TRUE)
 
 #remove excess columns and na rows
-env_joined <- joined[ -c(2:3,5:6,8:12,14:18,20:24) ]
+env_joined <- joined[ -c(3,8:12,14:18,20:24) ]
 #remove deep or joined
 env_joined$code <- gsub("-Deep$", "", env_joined$code)
 env_joined$code <- gsub("-Surface$", "", env_joined$code)
@@ -196,13 +196,41 @@ env_joined<-subset(env_joined, select = -c(pH_Deep,pH_Surface))
 env_joined <- env_joined[complete.cases(env_joined), ]
 ```
 
+# Anomaly analysis
+month and station averages
+```{r}
+env_ave<-env_joined %>%
+  group_by(Month.x,Station.x) %>%
+  summarise(across("temp_Deep":"Salinity_Surface", list(mean)))
+```
 
-standardize variables
+standard deviation
+```{r}
+env_stdev<-env_joined %>%
+  group_by(Month.x,Station.x) %>%
+  summarise(across("temp_Deep":"Salinity_Surface", list(sd)))
+```
+
+mean anomalies
+```{r}
+#add averages column
+#make station-month column
+env_joined$stationmonth<-paste(env_joined$Station.x, env_joined$Month.x,sep="-")
+env_ave$stationmonth<-paste(env_ave$Station.x, env_ave$Month.x,sep="-")
+env_stdev$stationmonth<-paste(env_stdev$Station.x, env_stdev$Month.x,sep="-")
+
+env_joined_ave <- merge(env_joined,env_ave, by="stationmonth", all.x=TRUE)
+env_joined_stdev <- merge(env_joined_ave,env_stdev, by="stationmonth", all.x=TRUE)
+
+#calculate anomalies
+env_joined_anom <- (env_joined_stdev[, 6:11] - env_joined_stdev[, 14:19])/env_joined_stdev[, 22:27]
+```
+
 ```{r}
 #convert station column to rownames
-env_joined<-env_joined %>% remove_rownames %>% column_to_rownames(var="code")
-env_joined_standard <- env_joined %>% mutate_all(~(scale(.) %>% as.vector))
-cor_matrix <- cor(env_joined_standard)
+env_joined_anom$code=env_joined$code
+env_joined_anom<-env_joined_anom %>% remove_rownames %>% column_to_rownames(var="code")
+cor_matrix <- cor(env_joined_anom)
 corrplot(cor_matrix, method = "number", type = "lower", tl.pos = 'd')
 ```
 
@@ -210,7 +238,7 @@ corrplot(cor_matrix, method = "number", type = "lower", tl.pos = 'd')
 ### Centroid Based
 gap statistic: do this to determine number of clusters
 ```{r}
-res.km<-eclust(env_joined_standard, FUNcluster = "kmeans", hc_metric = "euclidean", graph = FALSE)
+res.km<-eclust(env_joined_anom, FUNcluster = "kmeans", hc_metric = "euclidean", graph = FALSE)
 fviz_gap_stat(res.km$gap_stat)
 
 #silhouette plot
@@ -220,18 +248,18 @@ this determined that 10 clusters were optimal
 
 elbow method
 ```{r}
-fviz_nbclust(env_joined_standard, FUNcluster = kmeans, method = "wss") + labs(subtitle = "Elbow method") 
+fviz_nbclust(env_joined_anom, FUNcluster = kmeans, method = "wss") + labs(subtitle = "Elbow method") 
 ```
 looks like there is an elbow at 2, 4, 6 and 9
 
 cluster plot
 ```{r}
-eclust(env_joined_standard, FUNcluster = "kmeans", k = 10, hc_metric = "euclidean")
+eclust(env_joined_anom, FUNcluster = "kmeans", k = 2, hc_metric = "euclidean")
 ```
 
 ### Heirarchical
 ```{r,fig.width=6,fig.height=8}
-res.hclust <- eclust(env_joined_standard, FUNcluster = "hclust", hc_metric = "euclidean")
+res.hclust <- eclust(env_joined_anom, FUNcluster = "hclust", hc_metric = "euclidean")
 env_dend<-fviz_dend(res.hclust, rect = TRUE,repel=phylogenic)
 env_dend
 fviz_cluster(res.hclust, labelsize = 10)
@@ -246,7 +274,7 @@ ggsave(filename = "env_heirarchical_dend.png", plot = env_dend, width = 30, heig
 
 ### Agglomerative clustering
 ```{r,fig.width=6,fig.height=8}
-res.aclust <- eclust(env_joined_standard, FUNcluster = "hclust", hc_metric = "euclidean", hc_method = "ward.D2")
+res.aclust <- eclust(env_joined_anom, FUNcluster = "hclust", hc_metric = "euclidean", hc_method = "ward.D2")
 fviz_dend(res.aclust, rect = TRUE)
 fviz_cluster(res.aclust, labelsize = 10)
 ```
