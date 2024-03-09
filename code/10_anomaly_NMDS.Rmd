@@ -351,7 +351,7 @@ data.scores$Month = Zoop_env_min$Month.x.x
 
 plot data scores
 ```{r}
-xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Month)) +stat_ellipse()+geom_point(aes(colour = Month))+theme_bw()+theme(panel.grid.major = element_blank(),
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = regime)) +stat_ellipse()+geom_point(aes(colour = regime))+theme_bw()+theme(panel.grid.major = element_blank(),
                                                                                            panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 xx
 ```

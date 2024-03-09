@@ -156,3 +156,9 @@ Morph_diversity<-ggplot(Morph_pa_sum, aes(x = variable, y = ASVs, fill = Phylum)
   scale_x_discrete(guide = guide_axis(angle = 90)) 
 Morph_diversity
 ```
+
+save plot
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "Morph_diversity.png", plot = Morph_diversity, width = 10, height = 8, device='png', dpi=700)
+```

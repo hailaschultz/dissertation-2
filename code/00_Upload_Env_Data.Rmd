@@ -3,9 +3,17 @@ title: "00_Upload_Env_Data"
 output: html_document
 date: "2024-02-28"
 ---
+load packages
+```{r}
+library(openxlsx)
+library(dplyr)
+library(lubridate)
+```
+
+
 
 Download data from NANOOS website:
-I first went to https://nvs.nanoos.org/CruiseSalish and downloaded all relevant files. I moved them to the NANOOS-files folder. I unzipped them manually
+I first went to https://nvs.nanoos.org/CruiseSalish and downloaded all relevant files. I moved them to the NANOOS-files folder. I unzipped them manually. 
 ```{bash}
 #find current directory
 pwd
@@ -18,5 +26,129 @@ cd /Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_disser
 
 find . -name '*labupcast.xlsx' -exec mv {} ../NANOOS_files/upcasts/ \;
 ```
+The 2014 and 2015 upcasts were not yet in NANOOS, so I had to download them from NCEI: https://www.ncei.noaa.gov/access/ocean-carbon-acidification-data-system/oceans/SalishCruise_DataPackage.html After downloading, I moved them directly to the upcasts folder and converted from csv to excel
+
+import and merge excel files
+
+```{r}
+excel_dir<-"/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/NANOOS_files/upcasts"
+
+excel_files <- list.files(path = excel_dir, pattern = "\\.xlsx$", full.names = TRUE)
+
+# Initialize an empty list to store the data frames
+dfs <- list()
+
+# Loop through each Excel file and read it into a data frame
+for (file in excel_files) {
+  # Read the Excel file into a data frame
+  df <- read_excel(file)
+  
+  # Store the data frame in the list
+  dfs[[length(dfs) + 1]] <- df
+}
+```
+
+example of how to access dataframes
+```{r}
+dfs[[1]]
+```
+
+See which columns all of the dataframes have in common
+```{r}
+# Get column names of the first data frame
+common_columns <- names(dfs[[1]])
+
+# Loop through the remaining data frames and find common column names
+for (i in 2:length(dfs)) {
+  # Get column names of the current data frame
+  current_columns <- names(dfs[[i]])
+  
+  # Find common column names with previous data frames
+  common_columns <- intersect(common_columns, current_columns)
+}
+
+# 'common_columns' now contains the column names that are common across all data frames
+print(common_columns)
+```
+convert date local format
+```{r}
+# Loop through each dataframe in the list
+for (i in seq_along(dfs)) {
+  # Check if the dataframe has a column labeled "DATE_LOCAL"
+  if ("DATE_LOCAL" %in% names(dfs[[i]])) {
+    # Convert the "DATE_LOCAL" column to character
+    dfs[[i]]$DATE_LOCAL <- as.character(dfs[[i]]$DATE_LOCAL)
+  }
+}
+
+for (i in seq_along(dfs)) {
+  # Check if the dataframe has a column labeled "DATE_LOCAL"
+  if ("DATE_LOCAL" %in% names(dfs[[i]])) {
+    # Convert the "DATE_LOCAL" column to character
+    dfs[[i]]$DATE_UTC <- as.character(dfs[[i]]$DATE_UTC)
+  }
+}
+
+for (i in seq_along(dfs)) {
+  # Check if the dataframe has a column labeled "DATE_LOCAL"
+  if ("DATE_LOCAL" %in% names(dfs[[i]])) {
+    # Convert the "DATE_LOCAL" column to character
+    dfs[[i]]$TIME_UTC <- as.character(dfs[[i]]$TIME_UTC)
+  }
+}
+
+for (i in seq_along(dfs)) {
+  # Check if the dataframe has a column labeled "DATE_LOCAL"
+  if ("DATE_LOCAL" %in% names(dfs[[i]])) {
+    # Convert the "DATE_LOCAL" column to character
+    dfs[[i]]$TIME_LOCAL <- as.character(dfs[[i]]$TIME_LOCAL)
+  }
+}
+```
+
+subset to common columns
+```{r}
+# Loop through each data frame in the list
+for (i in seq_along(dfs)) {
+  # Subset the data frame to only the common columns
+  dfs[[i]] <- dfs[[i]][, common_columns, drop = FALSE]
+}
+```
 
 
+combine datasheets vertically
+```{r}
+combined_df <- do.call(rbind, dfs)
+```
+
+
+convert date from character to date
+```{r}
+combined_df$Date <- ymd(combined_df$DATE_LOCAL)
+```
+
+extract month and year
+```{r}
+combined_df$Month <- month(combined_df$Date)
+combined_df$Year <- year(combined_df$Date)
+unique(combined_df$Month)
+```
+
+recode months
+```{r}
+combined_df$Month <- recode_factor(combined_df$Month, 
+                              '4' = "APR",'3'="APR", '7' = "JUL", 
+                              '6' = "JUL", '9' = "SEP", '10' = "SEP")
+
+```
+
+Subset stations
+```{r}
+unique(combined_df$STATION_NO)
+# Define the seven named stations
+named_stations <- c("4", "8", "12", "28", "38", "402", "22")
+
+# Subset the dataframe based on the named stations
+subset_df <- combined_df[combined_df$STATION_NO %in% named_stations, ]
+```
+Depth categories
