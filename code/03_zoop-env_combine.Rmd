@@ -305,9 +305,19 @@ data.scores$temp = Zoop_env$temp
 data.scores$Oxygen = Zoop_env$Oxygen
 ```
 
+add regime
+```{r}
+data.scores$regime=data.scores$Year
+data.scores$regime <- recode_factor(data.scores$regime, 
+                              '2014' = "one",'2015'="two", '2016' = "three", 
+                              '2017' = "three", '2018' = "four", '2019' = "five",
+                              '2020' = "five", '2021' = "six", '2022' = "six")
+
+```
+
 plot data scores
 ```{r}
-xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Station)) +stat_ellipse()+geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = regime)) +stat_ellipse()+geom_point(aes(colour = regime))+theme_bw()+theme(panel.grid.major = element_blank(),
                                                                                            panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 xx
 ```
