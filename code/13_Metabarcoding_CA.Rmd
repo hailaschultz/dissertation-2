@@ -1,0 +1,482 @@
+---
+title: "13_Metabarcoding_CA"
+date: "2024-03-11"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+correspondence analysis of presence-absence data: https://r.qcbs.ca/workshop09/book-en/correspondence-analysis.html
+
+
+
+```{r}
+COI <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018/COI/ASVs_counts_mergedOnTaxonomy.tsv", sep = "\t")
+
+COI_tax <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018/COI/COI_Tax_Assignment.csv")
+```
+
+add taxonomy assignments to COI dataframe
+```{r}
+#rename column
+COI<-COI %>% 
+  rename(
+    ASV = x,
+    )
+
+COI <- merge(COI_tax,COI, by="ASV", all.x=FALSE)
+```
+
+Convert to present (1) vs absent (0)
+```{r}
+#remove non-species rows
+COI_complete<- COI[complete.cases(COI), ]
+#remove non-zooplankton taxa
+unique(COI_complete$Phylum)
+COI_complete <- droplevels(COI_complete[!COI_complete$Phylum == 'Chlorophyta',])
+COI_complete <- droplevels(COI_complete[!COI_complete$Phylum == 'Bacillariophyta',])
+
+COI_pa<-COI_complete %>%
+  mutate(across(where(is.numeric), ~ifelse(.x >0, 1, 0)))
+
+```
+```{r}
+#remove excess columns including oblique tows
+COI_pa <- COI_pa[ -c(1:7,11,13,16:18) ]
+COI_pa<-melt(COI_pa, id.vars=c("Species"))
+```
+
+back to wide format
+```{r}
+COI_pa_wide<-dcast(COI_pa, variable ~ Species )
+```
+
+delete columns with all zeroes
+```{r}
+#remove first column
+COI_pa_wide_x <- COI_pa_wide[ -c(1) ]
+COI_pa_wide_x  <- COI_pa_wide_x [,-(which(colSums(COI_pa_wide_x ) == 0))]
+COI_pa_wide_y = COI_pa_wide_x
+COI_pa_wide_y$sample=COI_pa_wide$variable
+```
+
+
+Run CA
+```{r}
+spe.ca <- cca(COI_pa_wide_x[, -1])
+```
+
+```{r}
+# Identify the significant axes
+ev <- spe.ca$CA$eig
+
+ev[ev > mean(ev)]
+```
+
+```{r}
+n = length(ev)
+barplot(ev, main = "Eigenvalues", col = "grey", las = 2)
+abline(h = mean(ev), col = "red")
+legend("topright", "Average eigenvalue", lwd = 1, col = 2, bty = "n")
+```
+```{r}
+summary(spe.ca)
+```
+
+```{r,fig.width=20,fig.height=12}
+par(mfrow = c(1, 2))
+
+#### scaling 1
+plot(spe.ca, scaling = 1, type = "none", main = "CA - biplot scaling 1",
+    xlab = c("CA1 (%)", round((spe.ca$CA$eig[1]/sum(spe.ca$CA$eig)) *
+        100, 2)), ylab = c("CA2 (%)", round((spe.ca$CA$eig[2]/sum(spe.ca$CA$eig)) *
+        100, 2)))
+
+points(scores(spe.ca, display = "sites", choices = c(1, 2), scaling = 1),
+    pch = 21, col = "black", bg = "steelblue", cex = 1.2)
+
+text(scores(spe.ca, display = "species", choices = c(1), scaling = 1),
+    scores(spe.ca, display = "species", choices = c(2), scaling = 1),
+    labels = rownames(scores(spe.ca, display = "species", scaling = 1)),
+    col = "red", cex = 0.8)
+
+#### scaling 2
+plot(spe.ca, scaling = 1, type = "none", main = "CA - biplot scaling 2",
+    xlab = c("CA1 (%)", round((spe.ca$CA$eig[1]/sum(spe.ca$CA$eig)) *
+        100, 2)), ylab = c("CA2 (%)", round((spe.ca$CA$eig[2]/sum(spe.ca$CA$eig)) *
+        100, 2)), ylim = c(-2, 3))
+
+points(scores(spe.ca, display = "sites", choices = c(1, 2), scaling = 2),
+    pch = 21, col = "black", bg = "steelblue", cex = 1.2)
+text(scores(spe.ca, display = "species", choices = c(1), scaling = 2),
+    scores(spe.ca, display = "species", choices = c(2), scaling = 2),
+    labels = rownames(scores(spe.ca, display = "species", scaling = 2)),
+    col = "red", cex = 0.8)
+
+```
+
+
+
+# NMDS
+```{r}
+NMDSmodel <- metaMDS(COI_pa_wide_x, distance = "bray",trymax = 200)
+NMDSmodel
+```
+
+
+# Mol16S
+
+```{r}
+MOL <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018-2020/ASV_count_tables/Mol16S_ASVs_counts.tsv", sep = "\t")
+
+MOL_tax <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018-2020/ASV2Taxonomy_Tables/RV_Mol16S_asvTaxonomyTable.csv")
+```
+
+add taxonomy assignments to MOL dataframe
+```{r}
+#rename column
+MOL<-MOL %>% 
+  rename(
+    ASV = x,
+    )
+
+MOL <- merge(MOL_tax,MOL, by="ASV", all.x=FALSE)
+```
+
+Convert to present (1) vs absent (0)
+```{r}
+#remove non-species rows
+MOL_complete<- MOL[complete.cases(MOL), ]
+#remove everything except molluscs, echinoderms
+unique(MOL_complete$Phylum)
+MOL_complete <- droplevels(MOL_complete[!MOL_complete$Phylum == 'Chlorophyta',])
+MOL_complete <- droplevels(MOL_complete[!MOL_complete$Phylum == 'Bacillariophyta',])
+MOL_complete <- droplevels(MOL_complete[!MOL_complete$Phylum == 'Nemertea',])
+MOL_complete <- droplevels(MOL_complete[!MOL_complete$Phylum == 'Arthropoda',])
+MOL_complete <- droplevels(MOL_complete[!MOL_complete$Phylum == 'Chordata',])
+MOL_complete <- droplevels(MOL_complete[!MOL_complete$Phylum == 'Cnidaria',])
+MOL_complete <- droplevels(MOL_complete[!MOL_complete$Phylum == 'Bryozoa',])
+MOL_complete <- droplevels(MOL_complete[!MOL_complete$Phylum == 'Annelida',])
+MOL_complete <- droplevels(MOL_complete[!MOL_complete$Phylum == 'Hemichordata',])
+MOL_complete <- droplevels(MOL_complete[!MOL_complete$Phylum == 'Phoronida',])
+
+MOL_pa<-MOL_complete %>%
+  mutate(across(where(is.numeric), ~ifelse(.x >0, 1, 0)))
+unique(MOL_pa$Phylum)
+```
+
+```{r}
+#remove excess columns including oblique tows
+MOL_pa <- MOL_pa[ -c(1:7) ]
+MOL_pa<-melt(MOL_pa, id.vars=c("Species"))
+```
+add up multiple lines per station
+```{r}
+MOL_pa <- MOL_pa %>%
+  group_by(Species,variable) %>%
+  summarise(
+    value = sum(value))
+
+MOL_pa<-MOL_pa %>%
+  mutate(across(where(is.numeric), ~ifelse(.x >0, 1, 0)))
+```
+split code string up
+```{r}
+MOL_pa$variable<-str_split_fixed(MOL_pa$variable,"_",4)
+```
+
+remove oblique and other replicates
+```{r}
+MOL_pa<-subset(MOL_pa,variable[,4]!="Ob")
+MOL_pa<-subset(MOL_pa,variable[,4]!="ObA")
+MOL_pa<-subset(MOL_pa,variable[,4]!="ObB")
+MOL_pa<-subset(MOL_pa,variable[,4]!="1B")
+MOL_pa<-subset(MOL_pa,variable[,4]!="2B")
+MOL_pa<-subset(MOL_pa,variable[,4]!="3B")
+MOL_pa<-subset(MOL_pa,variable[,4]!="")
+
+
+MOL_pa<-subset(MOL_pa,variable[,3]!="P105")
+MOL_pa<-subset(MOL_pa,variable[,3]!="P123")
+MOL_pa<-subset(MOL_pa,variable[,3]!="P136")
+MOL_pa<-subset(MOL_pa,variable[,3]!="P381")
+MOL_pa<-subset(MOL_pa,variable[,3]!="P7")
+
+MOL_pa<-subset(MOL_pa,variable[,2]!="2010")
+```
+
+
+
+merge replicates
+```{r}
+MOL_pa$sample<-paste(MOL_pa$variable[,2],MOL_pa$variable[,3],sep="")
+
+MOL_pa <- MOL_pa %>%
+  group_by(Species,sample) %>%
+  summarise(
+    value = sum(value))
+
+MOL_pa<-MOL_pa %>%
+  mutate(across(where(is.numeric), ~ifelse(.x >0, 1, 0)))
+```
+back to wide format
+```{r}
+MOL_pa_wide<-dcast(MOL_pa, sample ~ Species )
+```
+
+delete columns with all zeroes
+```{r}
+#remove first column
+MOL_pa_wide_x <- MOL_pa_wide[ -c(1) ]
+MOL_pa_wide_x  <- MOL_pa_wide_x [,-(which(colSums(MOL_pa_wide_x ) == 0))]
+```
+
+Split up station, year, month
+```{r}
+MOL_pa_wide_y<-transform(MOL_pa_wide, Year = substr(sample, 1, 2), Month = substr(sample, 3, 4),Station=substr(sample, 5,7))
+```
+
+recode factors
+```{r}
+MOL_pa_wide_y$Year <- recode(MOL_pa_wide_y$Year, 
+                                 "20" = "2020",
+                         "19"="2019",
+                         "18"="2018")
+
+MOL_pa_wide_y$Month <- recode(MOL_pa_wide_y$Month, 
+                                 "04" = "APR",
+                         "07"="JUL",
+                         "09"="SEP")
+
+MOL_pa_wide_y$Station <- recode(MOL_pa_wide_y$Station, 
+                                 "P40" = "P402")
+MOL_pa_wide_y$code<-paste(MOL_pa_wide_y$Station,MOL_pa_wide_y$Year,MOL_pa_wide_y$Month,sep="-")
+```
+
+add in evironmental data
+```{r}
+MOL_pa_wide_y <- merge(Env_subset,MOL_pa_wide_y, by.x = "code", 
+             by.y = "code", all.x = TRUE, all.y = TRUE)
+
+#remove rows with NA
+MOL_pa_wide_y<-MOL_pa_wide_y[!is.na(MOL_pa_wide_y$"sample"),]
+MOL_pa_wide_y<-MOL_pa_wide_y[!is.na(MOL_pa_wide_y$"Date"),]
+MOL_pa_wide_x<-MOL_pa_wide_y[ , 24:89]
+```
+
+## PERMANOVA
+```{r}
+dist<-vegdist(MOL_pa_wide_x, method='bray')
+perm<-adonis2(dist~STATION_NO*Year.x*Month.x, data=MOL_pa_wide_y, permutations = 999, method="bray")
+perm
+```
+
+```{r}
+MOL_pa_wide_y$Station=as.factor(MOL_pa_wide_y$Station)
+adonis.pair(vegdist(MOL_pa_wide_x),MOL_pa_wide_y$Station)
+```
+P12 is similar to P28,P38,P4, P402
+P22 is similar to P28,P38,P4,P402,P8
+P28 is similar to 
+
+```{r}
+NMDSmodel <- metaMDS(MOL_pa_wide_x, distance = "bray",trymax = 200)
+NMDSmodel
+```
+
+get datascores
+```{r}
+data.scores<-scores(NMDSmodel,display="sites")
+data.scores<- as.data.frame(data.scores)
+```
+
+
+
+add environmental variables back in
+```{r}
+colnames(MOL_pa_wide_y)
+data.scores$Month = MOL_pa_wide_y$Month.x
+data.scores$Year = MOL_pa_wide_y$Year.x
+data.scores$Station = MOL_pa_wide_y$Station
+data.scores$temp_deep = MOL_pa_wide_y$CTDTMP_DEG_C_ITS90_Deep...6
+data.scores$temp_surface = MOL_pa_wide_y$CTDTMP_DEG_C_ITS90_Surface...7
+data.scores$salinity_deep = MOL_pa_wide_y$CTDSAL_PSS78_Deep...8
+data.scores$salinity_surface = MOL_pa_wide_y$CTDSAL_PSS78_Surface...9
+data.scores$oxygen_deep = MOL_pa_wide_y$OXYGEN_MG_L_1_Deep...19
+data.scores$oxygen_surface = MOL_pa_wide_y$OXYGEN_MG_L_1_Surface...20
+data.scores$nitrate_deep = MOL_pa_wide_y$NITRATE_UMOL_L_Deep...21
+data.scores$nitrate_surface = MOL_pa_wide_y$NITRATE_UMOL_L_Surface...22
+```
+
+
+plot datascores
+```{r}
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Station)) +geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+xx
+```
+
+## environmental fitting
+create environmetal fit table
+```{r}
+#check for correlation among environmental variables.
+#remove nutrients other than nitrate because of autocorrelation
+
+data.scores.cor<- data.scores[ -c(1:5,13) ]
+cor_matrix <- cor(data.scores.cor)
+corrplot(cor_matrix, method = "number", type = "lower", tl.pos = 'd')
+
+Zoo.env <- data.frame(matrix(ncol = 0, nrow=53))
+Zoo.env$temp_deep<-as.numeric(data.scores$temp_deep)
+Zoo.env$temp_surface<-as.numeric(data.scores$temp_surface)
+Zoo.env$salinity_deep<-as.numeric(data.scores$salinity_deep)
+Zoo.env$salinity_surface<-as.numeric(data.scores$salinity_surface)
+Zoo.env$oxygen_deep<-as.numeric(data.scores$oxygen_deep)
+Zoo.env$oxygen_surface<-as.numeric(data.scores$oxygen_surface)
+
+env <- envfit(NMDSmodel, Zoo.env, na.rm = TRUE,perm = 999)
+env
+
+
+env.scrs <- as.data.frame(scores(env, display = "vectors")) 
+env.scrs <- cbind(env.scrs, Species = rownames(env.scrs), Pvalues = env$vectors$pvals, R_squared = env$vectors$r)
+env.scrs <- subset(env.scrs, Pvalues < 0.05)
+env.scrs <- subset(env.scrs, R_squared > 0.3)
+env.scrs
+```
+
+## Species fitting
+```{r}
+vf <- envfit(NMDSmodel, MOL_pa_wide_x, perm = 999)
+
+spp.scrs <- as.data.frame(scores(vf, display = "vectors"))
+spp.scrs <- cbind(spp.scrs, Species = rownames(spp.scrs))
+####for ggplot
+arrow_factor <- ordiArrowMul(vf)
+spp.scrs <- as.data.frame(scores(vf, display = "vectors")) * arrow_factor
+spp.scrs <- cbind(spp.scrs, Species = rownames(spp.scrs), Pvalues = vf$vectors$pvals, R_squared = vf$vectors$r)
+
+# select significance similarly to `plot(vf, p.max = 0.01)`
+spp.scrs <- subset(spp.scrs, Pvalues < 0.05)
+spp.scrs <- subset(spp.scrs, R_squared > 0.3)
+spp.scrs
+
+```
+ extract hulls
+```{r}
+P12 <- data.scores[data.scores$Station == "P12", ][chull(data.scores[data.scores$Station ==                                                           "P12", c("NMDS1", "NMDS2")]), ]  
+P22 <- data.scores[data.scores$Station == "P22", ][chull(data.scores[data.scores$Station ==                                                           "P22", c("NMDS1", "NMDS2")]), ]  
+P28 <- data.scores[data.scores$Station == "P28", ][chull(data.scores[data.scores$Station ==                                                           "P28", c("NMDS1", "NMDS2")]), ]
+P38 <- data.scores[data.scores$Station == "P38", ][chull(data.scores[data.scores$Station ==                                                           "P38", c("NMDS1", "NMDS2")]), ]  
+P4 <- data.scores[data.scores$Station == "P4", ][chull(data.scores[data.scores$Station ==                                                           "P4", c("NMDS1", "NMDS2")]), ]  
+P402 <- data.scores[data.scores$Station == "P402", ][chull(data.scores[data.scores$Station ==                                                           "P402", c("NMDS1", "NMDS2")]), ]  
+P8 <- data.scores[data.scores$Station == "P8", ][chull(data.scores[data.scores$Station ==                                                           "P8", c("NMDS1", "NMDS2")]), ]  
+```
+
+get hull data
+```{r}
+hull.data <- rbind(P12, P22, P28,P38,P4,P402,P8)  #combine grp.a and grp.b
+hull.data
+```
+ 
+```{r}
+
+data.scores$Station <- factor(data.scores$Station, levels = c("P22", "P4", "P8","P28","P12","P402","P38"))
+data.scores$Station <- recode(data.scores$Station, 
+                                 "P22" = "Juan de Fuca",
+                         "P4"="Whidbey Basin",
+                         "P8"="HC Sill",
+                         "P28"="Main Basin",
+                         "P12"="Hood Canal 1",
+                         "P402"="Hood Canal 2",
+                         "P38"="South Sound")
+
+hull.data$Station <- factor(hull.data$Station, levels = c("P22", "P4", "P8","P28","P12","P402","P38"))
+hull.data$Station <- recode(hull.data$Station, 
+                                 "P22" = "Juan de Fuca",
+                         "P4"="Whidbey Basin",
+                         "P8"="HC Sill",
+                         "P28"="Main Basin",
+                         "P12"="Hood Canal 1",
+                         "P402"="Hood Canal 2",
+                         "P38"="South Sound")
+```
+
+```{r,fig.width=6.5,fig.height=5, dpi=600}
+
+Species_plot <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour =  Station))+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7")) +
+  scale_fill_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7"))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ 
+  geom_polygon(data=hull.data,aes(x=NMDS1,y=NMDS2,fill=Station,group=Station),alpha=0.20, size=0.1, linetype=1, colour="black") +
+  geom_segment(data = spp.scrs,size=0.4,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.2, "cm")), colour = "darkgrey")+
+  geom_segment(data = env.scrs,size=0.4,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.2, "cm")), colour = "black")+
+  annotate("text", label = "2D Stress: 0.2", x = 0.6, y = 1.5, size = 5, colour = "black")+
+  geom_label_repel(data = spp.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
+                  size = 3, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), box.padding = unit(0.16, "lines"), label.size = 0.05)
+Species_plot
+```
+save dendogram
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "PA_Mol_nmds.png", plot = Species_plot, width = 7, height = 5.5, device='png', dpi=700)
+```
+#cca
+Run CA
+```{r}
+spe.ca <- cca(MOL_pa_wide_x)
+```
+
+```{r}
+# Identify the significant axes
+ev <- spe.ca$CA$eig
+
+ev[ev > mean(ev)]
+```
+
+```{r}
+n = length(ev)
+barplot(ev, main = "Eigenvalues", col = "grey", las = 2)
+abline(h = mean(ev), col = "red")
+legend("topright", "Average eigenvalue", lwd = 1, col = 2, bty = "n")
+```
+```{r}
+summary(spe.ca)
+```
+
+```{r,fig.width=20,fig.height=12}
+par(mfrow = c(1, 2))
+
+#### scaling 1
+plot(spe.ca, scaling = 1, type = "none", main = "CA - biplot scaling 1",
+    xlab = c("CA1 (%)", round((spe.ca$CA$eig[1]/sum(spe.ca$CA$eig)) *
+        100, 2)), ylab = c("CA2 (%)", round((spe.ca$CA$eig[2]/sum(spe.ca$CA$eig)) *
+        100, 2)))
+
+points(scores(spe.ca, display = "sites", choices = c(1, 2), scaling = 1),
+    pch = 21, col = "black", bg = "steelblue", cex = 1.2)
+
+text(scores(spe.ca, display = "species", choices = c(1), scaling = 1),
+    scores(spe.ca, display = "species", choices = c(2), scaling = 1),
+    labels = rownames(scores(spe.ca, display = "species", scaling = 1)),
+    col = "red", cex = 0.8)
+
+#### scaling 2
+plot(spe.ca, scaling = 1, type = "none", main = "CA - biplot scaling 2",
+    xlab = c("CA1 (%)", round((spe.ca$CA$eig[1]/sum(spe.ca$CA$eig)) *
+        100, 2)), ylab = c("CA2 (%)", round((spe.ca$CA$eig[2]/sum(spe.ca$CA$eig)) *
+        100, 2)), ylim = c(-2, 3))
+
+points(scores(spe.ca, display = "sites", choices = c(1, 2), scaling = 2),
+    pch = 21, col = "black", bg = "steelblue", cex = 1.2)
+text(scores(spe.ca, display = "species", choices = c(1), scaling = 2),
+    scores(spe.ca, display = "species", choices = c(2), scaling = 2),
+    labels = rownames(scores(spe.ca, display = "species", scaling = 2)),
+    col = "red", cex = 0.8)
+
+```

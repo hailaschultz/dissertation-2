@@ -22,9 +22,9 @@ knitr::opts_chunk$set(
 read data into R
 note: I first had to convert the taxonomy table from text into csv for this to work
 ```{r}
-COI <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018/COI/ASVs_counts_mergedOnTaxonomy.tsv", sep = "\t")
+COI <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018-2020/ASV_count_tables/COI_ASVs_counts.tsv", sep = "\t")
 
-COI_tax <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018/COI/COI_Tax_Assignment.csv")
+COI_tax <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018-2020/ASV2Taxonomy_Tables/RV_COI_asvTaxonomyTable.csv")
 ```
 
 add taxonomy assignments to COI dataframe
@@ -46,41 +46,129 @@ COI_complete<- COI[complete.cases(COI), ]
 unique(COI_complete$Phylum)
 COI_complete <- droplevels(COI_complete[!COI_complete$Phylum == 'Chlorophyta',])
 COI_complete <- droplevels(COI_complete[!COI_complete$Phylum == 'Bacillariophyta',])
+COI_complete <- droplevels(COI_complete[!COI_complete$Phylum == 'Rhodophyta',])
+COI_complete <- droplevels(COI_complete[!COI_complete$Phylum == 'Cryptophyceae__p',])
+COI_complete <- droplevels(COI_complete[!COI_complete$Phylum == 'Haptophyta',])
+COI_complete <- droplevels(COI_complete[!COI_complete$Phylum == 'Basidiomycota',])
+COI_complete <- droplevels(COI_complete[!COI_complete$Phylum == 'Tubulinea',])
+COI_complete <- droplevels(COI_complete[!COI_complete$Phylum == 'Dictyochophyceae__p',])
+COI_complete <- droplevels(COI_complete[!COI_complete$Phylum == 'Ascomycota',])
+COI_complete <- droplevels(COI_complete[!COI_complete$Phylum == 'Phaeophyceae__p',])
+COI_complete <- droplevels(COI_complete[!COI_complete$Phylum == 'Pelagophyceae__p',])
+COI_complete <- droplevels(COI_complete[!COI_complete$Phylum == 'Dinophyceae__p',])
 
 COI_pa<-COI_complete %>%
   mutate(across(where(is.numeric), ~ifelse(.x >0, 1, 0)))
 
 ```
 
-wide to long format
 ```{r}
-#remove exces columns
-COI_pa <- COI_pa[ -c(2,5:8,11,13,16:18) ]
-COI_pa<-melt(COI_pa, id.vars=c("Phylum", "Class","ASV"))
+COI_pa <- COI_complete[ -c(1:2,4:7) ]
+COI_pa<-melt(COI_pa, id.vars=c("Phylum","Species"))
+```
+
+
+#####editing point
+
+split code string up
+```{r}
+COI_pa$code<-COI_pa$variable
+COI_pa$variable<-str_split_fixed(COI_pa$variable,"_",4)
+```
+
+remove oblique and other replicates
+```{r}
+COI_pa<-subset(COI_pa,variable[,4]!="Ob")
+COI_pa<-subset(COI_pa,variable[,4]!="ObA")
+COI_pa<-subset(COI_pa,variable[,4]!="ObB")
+COI_pa<-subset(COI_pa,variable[,4]!="1B")
+COI_pa<-subset(COI_pa,variable[,4]!="2B")
+COI_pa<-subset(COI_pa,variable[,4]!="3B")
+COI_pa<-subset(COI_pa,variable[,4]!="")
+
+
+COI_pa<-subset(COI_pa,variable[,3]!="P105")
+COI_pa<-subset(COI_pa,variable[,3]!="P123")
+COI_pa<-subset(COI_pa,variable[,3]!="P136")
+COI_pa<-subset(COI_pa,variable[,3]!="P381")
+COI_pa<-subset(COI_pa,variable[,3]!="P7")
+
+COI_pa<-subset(COI_pa,variable[,2]!="2010")
+```
+
+merge replicates
+```{r}
+COI_pa$sample<-paste(COI_pa$variable[,2],COI_pa$variable[,3],sep="")
+
+COI_pa <- COI_pa %>%
+  group_by(Phylum,Species,sample) %>%
+  summarise(
+    value = sum(value))
+
+COI_pa<-COI_pa %>%
+  mutate(across(where(is.numeric), ~ifelse(.x >0, 1, 0)))
 ```
 
 summarize by phylum
 ```{r}
 COI_pa_sum<-COI_pa %>%
-  group_by(Phylum, variable) %>%
+  group_by(Phylum, sample) %>%
   summarise(
     ASVs = sum(value))
 ```
 
-make bar graph
 ```{r}
-COI_diversity<-ggplot(COI_pa_sum, aes(x = variable, y = ASVs, fill = Phylum)) +
+COI_pa_sum<-transform(COI_pa_sum, Year = substr(sample, 1, 2), Month = substr(sample, 3, 4),Station=substr(sample, 5,7))
+```
+just July 2020
+```{r}
+COI_pa_jul2020<-subset(COI_pa_sum,Year=="20")
+COI_pa_jul2020<-subset(COI_pa_jul2020,Month=="09")
+```
+
+
+```{r}
+library(scales)
+n2 <- 16                                                # Higher amount of hex colors
+hex_codes2 <- hue_pal()(n2)                             # Identify hex codes
+show_col(hex_codes2)   
+hex_codes2
+```
+
+```{r}
+#change factor order
+COI_pa_jul2020$Station <- factor(COI_pa_jul2020$Station, levels = c("P22", "P4", "P8","P28","P12","P40","P38"))
+COI_pa_jul2020$Station <- recode(COI_pa_jul2020$Station, 
+                                 "P22" = "Juan de Fuca",
+                         "P4"="Whidbey Basin",
+                         "P8"="HC Sill",
+                         "P28"="Main Basin",
+                         "P12"="Hood Canal 1",
+                         "P40"="Hood Canal 2",
+                         "P38"="South Sound")
+
+```
+
+```{r}
+
+COI_barplot<-ggplot(COI_pa_jul2020, aes(x = Station, y = ASVs, fill = Phylum)) +
   geom_bar(stat = "identity") +
-  labs(title = "COI",
+  labs(
        x = "Station",
-       y = "number of species") +
+       y = "Number of Species") +
   theme_minimal()+
-  scale_x_discrete(guide = guide_axis(angle = 90)) + scale_x_discrete(labels=c('P22', 'P4', 'P28', 'P402','P12'))
-COI_diversity
+  scale_x_discrete(guide = guide_axis(angle = 90)) +theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ scale_colour_manual(values=c("#F8766D", "#E68613", "#CD9600", "#ABA300", "#7CAE00", "#0CB702", "#00BE67", "#00C19A", "#00BFC4", "#00B8E7", "#00A9FF", "#8494FF",
+"#C77CFF", "#ED68ED", "#FF61CC", "#FF68A1")) +
+  scale_fill_manual(values=c("#F8766D", "#E68613", "#CD9600", "#ABA300", "#7CAE00", "#0CB702", "#00BE67", "#00C19A", "#00BFC4", "#00B8E7", "#00A9FF", "#8494FF",
+"#C77CFF", "#ED68ED", "#FF61CC", "#FF68A1"))+theme(axis.text=element_text(size=15),
+        axis.title=element_text(size=15,face="bold"))+ylim(0,50)
+
+COI_barplot
 ```
 save plot
 ```{r, eval=FALSE}
 setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
-ggsave(filename = "COI_diversity.png", plot = COI_diversity, width = 10, height = 8, device='png', dpi=700)
+ggsave(filename = "COI_barplot.png", plot = COI_barplot, width = 10, height = 8, device='png', dpi=700)
 ```
 

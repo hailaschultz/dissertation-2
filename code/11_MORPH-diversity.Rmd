@@ -80,7 +80,12 @@ MORPH_pa_sum<-MORPH_pa %>%
 
 subset to 2018
 ```{r}
-MORPH_pa_sum<-subset(MORPH_pa_sum,Year=="2018")
+MORPH_pa_sum<-subset(MORPH_pa_sum,Year!="2014")
+MORPH_pa_sum<-subset(MORPH_pa_sum,Year!="2015")
+MORPH_pa_sum<-subset(MORPH_pa_sum,Year!="2016")
+MORPH_pa_sum<-subset(MORPH_pa_sum,Year!="2017")
+MORPH_pa_sum<-subset(MORPH_pa_sum,Year!="2021")
+MORPH_pa_sum<-subset(MORPH_pa_sum,Year!="2022")
 ```
 
 
@@ -92,7 +97,7 @@ MORPH_diversity<-ggplot(MORPH_pa_sum, aes(x = Station, y = species, fill = Broad
        x = "Station",
        y = "number of species") +
   theme_minimal()+
-  scale_x_discrete(guide = guide_axis(angle = 90)) + facet_wrap(~ Month)
+  scale_x_discrete(guide = guide_axis(angle = 90)) + facet_wrap(~ Month*Year)
 MORPH_diversity
 ```
 
@@ -101,9 +106,9 @@ MORPH_diversity
 read data into R
 note: I first had to convert the taxonomy table from text into csv for this to work
 ```{r}
-Morph <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018/Morphology/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv", sep = "\t")
+Morph <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018-2020/ASV_count_tables/Morphdensity_ASVs_counts.tsv", sep = "\t")
 
-Morph_tax <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018/Morphology/morphology_tax_id.csv")
+Morph_tax <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018-2020/ASV2Taxonomy_Tables/morphology_asvTaxonomyTable.csv")
 ```
 
 add taxonomy assignments to COI dataframe
@@ -133,8 +138,32 @@ Morph_pa<-Morph_complete %>%
 wide to long format
 ```{r}
 #remove exces columns
-Morph_pa <- Morph_pa[ -c(2,5:8,13:26) ]
-Morph_pa<-melt(Morph_pa, id.vars=c("Phylum", "Class","ASV"))
+Morph_pa <- Morph_pa[ -c(2,4:7) ]
+Morph_pa<-melt(Morph_pa, id.vars=c("Phylum", "Species","ASV"))
+```
+split code string up
+```{r}
+Morph_pa$code<-Morph_pa$variable
+Morph_pa$variable<-str_split_fixed(Morph_pa$variable,"_",4)
+```
+remove oblique and other replicates
+```{r}
+Morph_pa<-subset(Morph_pa,variable[,4]!="Ob")
+Morph_pa<-subset(Morph_pa,variable[,4]!="ObA")
+Morph_pa<-subset(Morph_pa,variable[,4]!="ObB")
+Morph_pa<-subset(Morph_pa,variable[,4]!="1B")
+Morph_pa<-subset(Morph_pa,variable[,4]!="2B")
+Morph_pa<-subset(Morph_pa,variable[,4]!="3B")
+Morph_pa<-subset(Morph_pa,variable[,4]!="")
+
+
+Morph_pa<-subset(Morph_pa,variable[,3]!="P105")
+Morph_pa<-subset(Morph_pa,variable[,3]!="P123")
+Morph_pa<-subset(Morph_pa,variable[,3]!="P136")
+Morph_pa<-subset(Morph_pa,variable[,3]!="P381")
+Morph_pa<-subset(Morph_pa,variable[,3]!="P7")
+
+Morph_pa<-subset(Morph_pa,variable[,2]!="2010")
 ```
 
 summarize by phylum
@@ -144,16 +173,21 @@ Morph_pa_sum<-Morph_pa %>%
   summarise(
     ASVs = sum(value))
 ```
+```{r}
+Morph_pa_sum<-transform(Morph_pa_sum, Year = substr(variable[,2], 1, 2), Month = substr(variable[,2], 3, 4))
+Morph_pa_sum$Station<-Morph_pa_sum$variable[,3]
+```
+
 
 make bar graph
 ```{r}
-Morph_diversity<-ggplot(Morph_pa_sum, aes(x = variable, y = ASVs, fill = Phylum)) +
+Morph_diversity<-ggplot(Morph_pa_sum, aes(x = Station, y = ASVs, fill = Phylum)) +
   geom_bar(stat = "identity") +
   labs(title = "Morphology all species",
        x = "Station",
        y = "number of species") +
   theme_minimal()+
-  scale_x_discrete(guide = guide_axis(angle = 90)) 
+  scale_x_discrete(guide = guide_axis(angle = 90)) + facet_wrap(~ Month*Year)
 Morph_diversity
 ```
 
@@ -161,4 +195,67 @@ save plot
 ```{r, eval=FALSE}
 setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
 ggsave(filename = "Morph_diversity.png", plot = Morph_diversity, width = 10, height = 8, device='png', dpi=700)
+```
+
+
+Average by station
+
+```{r}
+Morph_pa_ave<-Morph_pa_sum %>%
+  group_by(Phylum, Station) %>%
+  summarise(
+    ASVs = mean(ASVs),
+    sd= sd(ASVs))
+```
+```{r}
+Morph_diversity_ave<-ggplot(Morph_pa_ave, aes(x = Station, y = ASVs, fill = Phylum)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Morphology all species",
+       x = "Station",
+       y = "number of species") +
+  theme_minimal()+
+  scale_x_discrete(guide = guide_axis(angle = 90)) 
+Morph_diversity_ave
+```
+just July 2020
+```{r}
+Morph_pa_jul2020<-subset(Morph_pa,variable[,2]=="2009")
+```
+summarize by phylum
+```{r}
+Morph_pa_jul2020<-Morph_pa_jul2020 %>%
+  group_by(Phylum, variable) %>%
+  summarise(
+    ASVs = sum(value))
+```
+```{r}
+#change factor order
+Morph_pa_jul2020$Station<-Morph_pa_jul2020$variable[,3]
+Morph_pa_jul2020$Station <- factor(Morph_pa_jul2020$Station, levels = c("P22", "P4", "P8","P28","P12","P402","P38"))
+Morph_pa_jul2020$Station <- recode(Morph_pa_jul2020$Station, 
+                                 "P22" = "Juan de Fuca",
+                         "P4"="Whidbey Basin",
+                         "P8"="HC Sill",
+                         "P28"="Main Basin",
+                         "P12"="Hood Canal 1",
+                         "P402"="Hood Canal 2",
+                         "P38"="South Sound")
+
+Morph_barplot<-ggplot(Morph_pa_jul2020, aes(x = Station, y = ASVs, fill = Phylum)) +
+  geom_bar(stat = "identity") +
+  labs(
+       x = "Station",
+       y = "Number of Species") +
+  theme_minimal()+
+  scale_x_discrete(guide = guide_axis(angle = 90)) +theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ scale_colour_manual(values=c("#F8766D", "#E68613","#0CB702", "#00BE67","#00BFC4")) +
+  scale_fill_manual(values=c("#F8766D", "#E68613","#0CB702", "#00BE67","#00BFC4"))+theme(axis.text=element_text(size=15),
+        axis.title=element_text(size=15,face="bold"))+ylim(0,50)
+Morph_barplot
+```
+
+save plot
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "Morph_barplot.png", plot = Morph_barplot, width = 10, height = 8, device='png', dpi=700)
 ```

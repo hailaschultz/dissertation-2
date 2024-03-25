@@ -19,15 +19,19 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r}
+library(stringr)
+```
+
 read data into R
 note: I first had to convert the taxonomy table from text into csv for this to work
 ```{r}
-MOL <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018/Mol16S/Mol16S_ASVs_counts_mergedOnTaxonomy.tsv", sep = "\t")
+MOL <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018-2020/ASV_count_tables/Mol16S_ASVs_counts.tsv", sep = "\t")
 
-MOL_tax <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018/Mol16S/Mol16S_Tax_Assignment.csv")
+MOL_tax <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018-2020/ASV2Taxonomy_Tables/RV_Mol16S_asvTaxonomyTable.csv")
 ```
 
-add taxonomy assignments to COI dataframe
+add taxonomy assignments to MOL dataframe
 ```{r}
 #rename column
 MOL<-MOL %>% 
@@ -46,42 +50,250 @@ MOL_complete<- MOL[complete.cases(MOL), ]
 unique(MOL_complete$Phylum)
 MOL_complete <- droplevels(MOL_complete[!MOL_complete$Phylum == 'Chlorophyta',])
 MOL_complete <- droplevels(MOL_complete[!MOL_complete$Phylum == 'Bacillariophyta',])
-
-MOL_pa<-MOL_complete %>%
-  mutate(across(where(is.numeric), ~ifelse(.x >0, 1, 0)))
-
+MOL_complete <- droplevels(MOL_complete[!MOL_complete$Phylum == 'Hemichordata',])
 ```
 
-
-wide to long format
 ```{r}
-#remove exces columns
-MOL_pa <- MOL_pa[ -c(2,5:8,10,16,18,21,22,24,26) ]
-MOL_pa<-melt(MOL_pa, id.vars=c("Phylum", "Class","ASV"))
+#remove excess columns including oblique tows
+MOL_pa <- MOL_complete[ -c(1:2,4:7) ]
+MOL_pa<-melt(MOL_pa, id.vars=c("Phylum","Species"))
+```
+
+```{r}
+#add up multiple lines per station
+MOL_pa <- MOL_pa %>%
+  group_by(Phylum,Species,variable) %>%
+  summarise(
+    value = sum(value))
+
+MOL_pa<-MOL_pa %>%
+  mutate(across(where(is.numeric), ~ifelse(.x >0, 1, 0)))
+```
+split code string up
+```{r}
+MOL_pa$code<-MOL_pa$variable
+MOL_pa$variable<-str_split_fixed(MOL_pa$variable,"_",4)
+```
+
+remove oblique and other replicates
+```{r}
+MOL_pa<-subset(MOL_pa,variable[,4]!="Ob")
+MOL_pa<-subset(MOL_pa,variable[,4]!="ObA")
+MOL_pa<-subset(MOL_pa,variable[,4]!="ObB")
+MOL_pa<-subset(MOL_pa,variable[,4]!="1B")
+MOL_pa<-subset(MOL_pa,variable[,4]!="2B")
+MOL_pa<-subset(MOL_pa,variable[,4]!="3B")
+MOL_pa<-subset(MOL_pa,variable[,4]!="")
+
+
+MOL_pa<-subset(MOL_pa,variable[,3]!="P105")
+MOL_pa<-subset(MOL_pa,variable[,3]!="P123")
+MOL_pa<-subset(MOL_pa,variable[,3]!="P136")
+MOL_pa<-subset(MOL_pa,variable[,3]!="P381")
+MOL_pa<-subset(MOL_pa,variable[,3]!="P7")
+
+MOL_pa<-subset(MOL_pa,variable[,2]!="2010")
+```
+
+merge replicates
+```{r}
+MOL_pa$sample<-paste(MOL_pa$variable[,2],MOL_pa$variable[,3],sep="")
+
+MOL_pa <- MOL_pa %>%
+  group_by(Phylum,Species,sample) %>%
+  summarise(
+    value = sum(value))
+
+MOL_pa<-MOL_pa %>%
+  mutate(across(where(is.numeric), ~ifelse(.x >0, 1, 0)))
 ```
 
 summarize by phylum
 ```{r}
 MOL_pa_sum<-MOL_pa %>%
-  group_by(Phylum, variable) %>%
+  group_by(Phylum, sample) %>%
   summarise(
     ASVs = sum(value))
 ```
 
+```{r}
+MOL_pa_sum<-transform(MOL_pa_sum, Year = substr(sample, 1, 2), Month = substr(sample, 3, 4),Station=substr(sample, 5,7))
+```
+
 make bar graph
 ```{r}
-MOL_diversity<-ggplot(MOL_pa_sum, aes(x = variable, y = ASVs, fill = Phylum)) +
+MOL_diversity<-ggplot(MOL_pa_sum, aes(x = Station, y = ASVs, fill = Phylum)) +
   geom_bar(stat = "identity") +
   labs(title = "Mol16S all species",
        x = "Station",
        y = "number of species") +
   theme_minimal()+
-  scale_x_discrete(guide = guide_axis(angle = 90)) 
+  scale_x_discrete(guide = guide_axis(angle = 90))+ facet_wrap(~ Month*Year) 
 MOL_diversity
+```
+Average by station
+
+```{r}
+MOL_pa_ave<-MOL_pa_sum %>%
+  group_by(Phylum, Station) %>%
+  summarise(
+    ASVs = mean(ASVs),
+    sd= sd(ASVs))
+```
+
+```{r}
+MOL_diversity_ave<-ggplot(MOL_pa_ave, aes(x = Station, y = ASVs, fill = Phylum)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Mol all species",
+       x = "Station",
+       y = "number of species") +
+  theme_minimal()+
+  scale_x_discrete(guide = guide_axis(angle = 90)) 
+MOL_diversity_ave
+```
+save plot
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "MOL_diversity.png", plot = MOL_diversity, width = 10, height = 8, device='png', dpi=700)
+```
+
+
+average per station and month
+
+subset
+```{r}
+MOL_pa_gastropod<-subset(MOL_pa_sum,Phylum=="Mollusca")
+MOL_pa_gastropod$Station<-as.character(MOL_pa_gastropod$Station)
+```
+
+
+```{r}
+MOL_pa_gastropod_mean<-MOL_pa_gastropod %>%
+  group_by(Station,Month) %>%
+  summarise(
+    mean = mean(ASVs),
+    sd= sd(ASVs))
+```
+```{r}
+ggplot(MOL_pa_gastropod_mean) +
+    geom_bar( aes(x=Station, y=mean), stat="identity", fill="skyblue", alpha=0.7) +
+    geom_errorbar( aes(x=Station, ymin=mean-sd, ymax=mean+sd), width=0.4, alpha=0.9, size=1.3)+facet_wrap(~ Month) 
+```
+```{r}
+library(ggpubr)
+ggboxplot(MOL_pa_gastropod, x = "Month", y = "ASVs", color = "Station")
+
+ggline(MOL_pa_gastropod, x = "Station", y = "ASVs", color = "Month",
+       add = c("mean_se", "dotplot"))
+```
+```{r}
+res.aov2 <- aov(ASVs ~ Month+Station+Year, data = MOL_pa_gastropod)
+summary(res.aov2)
+```
+no statistical difference in diversity
+
+
+
+```{r}
+MOL_pa_gastropod_station<-MOL_pa_gastropod %>%
+  group_by(Station) %>%
+  summarise(
+    mean = mean(ASVs),
+    sd= sd(ASVs))
+```
+
+```{r}
+ggplot(MOL_pa_gastropod_station) +
+    geom_bar( aes(x=Station, y=mean), stat="identity", fill="skyblue", alpha=0.7) +
+    geom_errorbar( aes(x=Station, ymin=mean-sd, ymax=mean+sd), width=0.4, alpha=0.9, size=1.3)
+```
+
+recode factors
+```{r}
+MOL_pa_gastropod$Year <- recode(MOL_pa_gastropod$Year, 
+                                 "20" = "2020",
+                         "19"="2019",
+                         "18"="2018")
+
+MOL_pa_gastropod$Month <- recode(MOL_pa_gastropod$Month, 
+                                 "04" = "APR",
+                         "07"="JUL",
+                         "09"="SEP")
+
+MOL_pa_gastropod$Station <- recode(MOL_pa_gastropod$Station, 
+                                 "P40" = "P402")
+MOL_pa_gastropod$code<-paste(MOL_pa_gastropod$Station,MOL_pa_gastropod$Year,MOL_pa_gastropod$Month,sep="-")
+```
+
+add in environmental
+```{r}
+MOL_pa_gastropod <- merge(Env_subset,MOL_pa_gastropod, by.x = "code", 
+             by.y = "code", all.x = TRUE, all.y = TRUE)
+
+#remove rows with NA
+MOL_pa_gastropod<-MOL_pa_gastropod[!is.na(MOL_pa_gastropod$sample),]
+MOL_pa_gastropod<-MOL_pa_gastropod[!is.na(MOL_pa_gastropod$"Date"),]
+```
+
+```{r}
+colnames(MOL_pa_gastropod)
+ggplot(MOL_pa_gastropod,aes(x=OXYGEN_MG_L_1_Deep,y=ASVs))+geom_point()+
+  stat_smooth(method = "lm")+
+  labs(
+       x = "Deep Disolved Oxygen (mg L-1)",
+       y = "Number of Mollusk Species")+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+
+model2 <- lm(ASVs ~ OXYGEN_MG_L_1_Deep, data = MOL_pa_gastropod)
+summary(model2)
+plot(model2, panel = panel.smooth)
+```
+
+barplot
+just July 2020
+```{r}
+Mol_pa_jul2020<-subset(MOL_pa_sum,Year=="20")
+Mol_pa_jul2020<-subset(Mol_pa_jul2020,Month=="09")
+```
+summarize by phylum
+```{r}
+Mol_pa_jul2020<-Mol_pa_jul2020 %>%
+  group_by(Phylum, Station) %>%
+  summarise(
+    ASVs = sum(ASVs))
+```
+
+```{r}
+#change factor order
+Mol_pa_jul2020$Station <- factor(Mol_pa_jul2020$Station, levels = c("P22", "P4", "P8","P28","P12","P40","P38"))
+Mol_pa_jul2020$Station <- recode(Mol_pa_jul2020$Station, 
+                                 "P22" = "Juan de Fuca",
+                         "P4"="Whidbey Basin",
+                         "P8"="HC Sill",
+                         "P28"="Main Basin",
+                         "P12"="Hood Canal 1",
+                         "P40"="Hood Canal 2",
+                         "P38"="South Sound")
+
+```
+
+```{r}
+
+Mol_barplot<-ggplot(Mol_pa_jul2020, aes(x = Station, y = ASVs, fill = Phylum)) +
+  geom_bar(stat = "identity") +
+  labs(
+       x = "Station",
+       y = "Number of Species") +
+  theme_minimal()+
+  scale_x_discrete(guide = guide_axis(angle = 90)) +theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ scale_colour_manual(values=c("#F8766D", "#E68613", "#CD9600", "#7CAE00", "#0CB702",  "#00C19A", "#00BFC4", "#00A9FF", "#8494FF")) +
+  scale_fill_manual(values=c("#F8766D", "#E68613", "#CD9600", "#7CAE00", "#0CB702",  "#00C19A", "#00BFC4", "#00A9FF", "#8494FF"))+ylim(0,50)+theme(axis.text=element_text(size=15),
+        axis.title=element_text(size=15,face="bold"))
+Mol_barplot
 ```
 
 save plot
 ```{r, eval=FALSE}
 setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
-ggsave(filename = "MOL_diversity.png", plot = MOL_diversity, width = 10, height = 8, device='png', dpi=700)
+ggsave(filename = "Mol_barplot.png", plot = Mol_barplot, width = 10, height = 8, device='png', dpi=700)
 ```

@@ -1,0 +1,356 @@
+---
+title: "14_env-cluster_nanoos"
+date: "2024-03-13"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+the environmental data was created by 00_Upload_Env_Data
+
+subset environmental data to only shallow and deep niskins
+```{r}
+#add P to station numbers
+subset_df$STATION_NO <- paste0("P", subset_df$STATION_NO)
+#make unique code
+subset_df$code<-paste(subset_df$STATION_NO, subset_df$Year,subset_df$Month,sep="-")
+
+# Sort the dataframe by sample and then by depth
+subset_df <- subset_df %>% arrange(sample, NISKIN_NO)
+```
+
+remove unnecessary columns
+```{r}
+Env_subset <- subset_df[ -c(1:7,10,12,14:17,19:25,27:32) ]
+```
+
+remove rows with missing data
+```{r}
+Env_subset<-Env_subset %>% drop_na(OXYGEN_MG_L_1)
+```
+
+
+```{r}
+# Group by sample and filter the shallowest and deepest rows for each sample
+Env_subset <- Env_subset %>%
+  group_by(sample) %>%
+  mutate(row_num = row_number()) %>%
+  filter(row_num == 1 | row_num == n())
+
+# Create a new column to label them as shallow or deep
+Env_subset <- Env_subset %>%
+  mutate(Depth = ifelse(row_num == 1, "Deep","Surface" )) %>%
+  select(-row_num) # Remove the temporary row number column
+```
+
+separate surface and deep samples
+```{r}
+#remove niskin no
+Env_subset <- Env_subset[ -c(2) ]
+#make surface and deep variables separate
+Env_subset <- Env_subset %>%
+  pivot_wider(names_from = Depth, values_from = c(CTDTMP_DEG_C_ITS90, CTDSAL_PSS78, OXYGEN_MG_L_1, NITRATE_UMOL_L)) 
+Env_subset [Env_subset  < 0] <- NA
+Env_subset <- Env_subset[complete.cases(Env_subset), ]
+```
+
+
+# Station Anomalies
+
+```{r}
+colnames(Env_subset)
+env_ave<-Env_subset %>%
+  group_by(STATION_NO) %>%
+  summarise(across("CTDTMP_DEG_C_ITS90_Deep":"NITRATE_UMOL_L_Surface", list(mean)))
+
+```
+
+standard deviation
+```{r}
+env_stdev<-Env_subset %>%
+  group_by(STATION_NO) %>%
+  summarise(across("CTDTMP_DEG_C_ITS90_Deep":"NITRATE_UMOL_L_Surface", list(sd)))
+
+```
+
+mean anomalies
+```{r}
+#add averages column
+env_joined_ave <- merge(Env_subset,env_ave, by="STATION_NO", all.x=TRUE)
+env_joined_stdev <- merge(env_joined_ave,env_stdev, by="STATION_NO", all.x=TRUE)
+
+#calculate anomalies
+env_joined_anom <- (env_joined_stdev[, 7:14] - env_joined_stdev[, 15:22])/env_joined_stdev[, 23:30]
+```
+
+
+```{r,fig.width=10,fig.height=10}
+#convert station column to rownames
+env_joined_anom$code=Env_subset$code
+env_joined_anom<-env_joined_anom %>% remove_rownames %>% column_to_rownames(var="code")
+#remove columns and rows with na
+env_joined_anom <- env_joined_anom[ -c(8) ]
+env_joined_anom <- env_joined_anom[complete.cases(env_joined_anom), ]
+cor_matrix <- cor(env_joined_anom)
+corrplot(cor_matrix, method = "number", type = "lower", tl.pos = 'd')
+```
+no crazy correlations
+
+### Centroid Based
+gap statistic: do this to determine number of clusters
+```{r}
+res.km<-eclust(env_joined_anom, FUNcluster = "kmeans", hc_metric = "euclidean", graph = FALSE)
+fviz_gap_stat(res.km$gap_stat)
+
+#silhouette plot
+fviz_silhouette(res.km)
+```
+2 groups! 
+
+### Heirarchical
+```{r,fig.width=20,fig.height=12}
+res.hclust <- eclust(env_joined_anom, FUNcluster = "hclust", hc_metric = "euclidean")
+env_dend<-fviz_dend(res.hclust, rect = TRUE,repel=phylogenic)
+env_dend
+fviz_cluster(res.hclust, labelsize = 10)
+```
+okay, they are very clearly separating by month now. 
+
+### Agglomerative clustering
+```{r,fig.width=15,fig.height=10}
+res.aclust <- eclust(env_joined_anom, FUNcluster = "hclust", hc_metric = "euclidean", hc_method = "ward.D2")
+fviz_dend(res.aclust, rect = TRUE)
+fviz_cluster(res.aclust, labelsize = 10)
+```
+
+### visualize the strength of the variables
+```{r}
+df_clusters <- res.km$centers
+res.km
+```
+
+```{r}
+melt_df <- melt(df_clusters)
+
+heatmap <- ggplot(melt_df, aes(Var2, Var1)) +
+  scale_fill_continuous(type = "viridis", direction = -1) +
+  geom_tile(aes(fill = value)) +
+  geom_text(aes(label = round(value, 1))) +
+  theme_bw() +
+  ggtitle("Strength of Each of the Variables in the Clusters") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(x="Variable", y="Cluster")
+heatmap
+```
+### list of statons and clusters
+```{r}
+env_joined_anom["Cluster"] <- res.km$cluster
+df_out <- env_joined_anom[order(-env_joined_anom$Cluster), ]
+knitr::kable(df_out)
+```
+
+# Month Anomalies
+
+```{r}
+colnames(Env_subset)
+env_ave<-Env_subset %>%
+  group_by(Month) %>%
+  summarise(across("CTDTMP_DEG_C_ITS90_Deep":"NITRATE_UMOL_L_Surface", list(mean)))
+
+```
+
+standard deviation
+```{r}
+env_stdev<-Env_subset %>%
+  group_by(Month) %>%
+  summarise(across("CTDTMP_DEG_C_ITS90_Deep":"NITRATE_UMOL_L_Surface", list(sd)))
+
+```
+
+mean anomalies
+```{r}
+#add averages column
+env_joined_ave <- merge(Env_subset,env_ave, by="Month", all.x=TRUE)
+env_joined_stdev <- merge(env_joined_ave,env_stdev, by="Month", all.x=TRUE)
+
+#calculate anomalies
+env_joined_anom <- (env_joined_stdev[, 7:14] - env_joined_stdev[, 15:22])/env_joined_stdev[, 23:30]
+```
+
+
+```{r,fig.width=10,fig.height=10}
+#convert station column to rownames
+env_joined_anom$code=Env_subset$code
+env_joined_anom<-env_joined_anom %>% remove_rownames %>% column_to_rownames(var="code")
+#remove columns and rows with na
+env_joined_anom <- env_joined_anom[ -c(8) ]
+env_joined_anom <- env_joined_anom[complete.cases(env_joined_anom), ]
+cor_matrix <- cor(env_joined_anom)
+corrplot(cor_matrix, method = "number", type = "lower", tl.pos = 'd')
+```
+remove deep nitrate
+```{r}
+env_joined_anom <- env_joined_anom[ -c(7) ]
+```
+
+### Centroid Based
+gap statistic: do this to determine number of clusters
+```{r}
+res.km<-eclust(env_joined_anom, FUNcluster = "kmeans", hc_metric = "euclidean", graph = FALSE)
+fviz_gap_stat(res.km$gap_stat)
+
+#silhouette plot
+fviz_silhouette(res.km)
+```
+5 groups (very interesting)
+### Heirarchical
+```{r,fig.width=20,fig.height=12}
+res.hclust <- eclust(env_joined_anom, FUNcluster = "hclust", hc_metric = "euclidean")
+env_dend<-fviz_dend(res.hclust, rect = TRUE,repel=phylogenic)
+env_dend
+fviz_cluster(res.hclust, labelsize = 10)
+```
+8 groups 
+
+### visualize the strength of the variables
+```{r}
+df_clusters <- res.km$centers
+res.km
+```
+```{r}
+melt_df <- melt(df_clusters)
+
+heatmap <- ggplot(melt_df, aes(Var2, Var1)) +
+  scale_fill_continuous(type = "viridis", direction = -1) +
+  geom_tile(aes(fill = value)) +
+  geom_text(aes(label = round(value, 1))) +
+  theme_bw() +
+  ggtitle("Strength of Each of the Variables in the Clusters") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(x="Variable", y="Cluster")
+heatmap
+```
+### list of statons and clusters
+```{r}
+env_joined_anom["Cluster"] <- res.km$cluster
+df_out <- env_joined_anom[order(-env_joined_anom$Cluster), ]
+knitr::kable(df_out)
+```
+
+save table
+
+```{r, eval=FALSE}
+write.csv(df_out, "/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/output/env_cluster_nanoos.csv", row.names=TRUE)
+```
+
+
+# Non-anomaly clusters
+```{r,fig.width=10,fig.height=10}
+#convert station column to rownames
+Env_full <- Env_subset[ -c(1:5) ]
+Env_full<-Env_full %>% remove_rownames %>% column_to_rownames(var="code")
+#remove columns and rows with na
+Env_full <- Env_full[ -c(8,9) ]
+Env_full <- Env_full[complete.cases(Env_full), ]
+# Standardize variables
+Env_full <- Env_full %>% mutate_all(~(scale(.) %>% as.vector))
+cor_matrix <- cor(Env_full)
+corrplot(cor_matrix, method = "number", type = "lower", tl.pos = 'd')
+```
+
+looks like there are some correlations, remove deep nitrate because it's correlated with deep oxygen
+```{r}
+Env_full <- Env_full[ -c(7) ]
+```
+
+### Centroid Based
+gap statistic: do this to determine number of clusters
+```{r}
+res.km<-eclust(Env_full, FUNcluster = "kmeans", hc_metric = "euclidean", graph = FALSE)
+fviz_gap_stat(res.km$gap_stat)
+
+#silhouette plot
+fviz_silhouette(res.km)
+```
+six groups with raw data
+cluster plot
+```{r,fig.width=20,fig.height=20}
+eclust(Env_full, FUNcluster = "kmeans", k = 6, hc_metric = "euclidean")
+```
+April and P22 pretty clearly separate out
+
+### Heirarchical
+```{r,fig.width=20,fig.height=12}
+res.hclust <- eclust(Env_full, FUNcluster = "hclust", hc_metric = "euclidean")
+env_dend<-fviz_dend(res.hclust, rect = TRUE,repel=phylogenic)
+env_dend
+fviz_cluster(res.hclust, labelsize = 10)
+```
+
+gives 9 groups: larger groups of (P402,P12,P4)
+(P22) (P38,P28,P8)
+
+
+### visualize the strength of the variables
+```{r}
+df_clusters <- res.km$centers
+res.km
+```
+
+
+# Month Anomaly by station group
+
+```{r}
+group1<-subset(Env_subset,STATION_NO==c("PP402","PP12","PP4"))
+```
+
+
+```{r}
+colnames(Env_subset)
+env_ave<-group1 %>%
+  group_by(Month) %>%
+  summarise(across("CTDTMP_DEG_C_ITS90_Deep":"NITRATE_UMOL_L_Surface", list(mean)))
+
+```
+
+standard deviation
+```{r}
+env_stdev<-group1 %>%
+  group_by(Month) %>%
+  summarise(across("CTDTMP_DEG_C_ITS90_Deep":"NITRATE_UMOL_L_Surface", list(sd)))
+
+```
+
+mean anomalies
+```{r}
+#add averages column
+env_joined_ave <- merge(group1,env_ave, by="Month", all.x=TRUE)
+env_joined_stdev <- merge(env_joined_ave,env_stdev, by="Month", all.x=TRUE)
+
+#calculate anomalies
+env_joined_anom <- (env_joined_stdev[, 7:14] - env_joined_stdev[, 15:22])/env_joined_stdev[, 23:30]
+```
+
+
+```{r,fig.width=10,fig.height=10}
+#convert station column to rownames
+env_joined_anom$code=group1$code
+env_joined_anom<-env_joined_anom %>% remove_rownames %>% column_to_rownames(var="code")
+#remove columns and rows with na
+env_joined_anom <- env_joined_anom[ -c(8) ]
+env_joined_anom <- env_joined_anom[complete.cases(env_joined_anom), ]
+cor_matrix <- cor(env_joined_anom)
+corrplot(cor_matrix, method = "number", type = "lower", tl.pos = 'd')
+```
+### Centroid Based
+gap statistic: do this to determine number of clusters
+```{r}
+res.km<-eclust(env_joined_anom, FUNcluster = "kmeans", hc_metric = "euclidean", graph = FALSE)
+fviz_gap_stat(res.km$gap_stat)
+
+#silhouette plot
+fviz_silhouette(res.km)
+```
+
+okay, this doesn't work.

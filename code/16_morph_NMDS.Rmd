@@ -1,0 +1,310 @@
+---
+title: "16_morph_nmds"
+date: "2024-03-18"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+```{r}
+Morph <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018-2020/ASV_count_tables/Morphdensity_ASVs_counts.tsv", sep = "\t")
+
+Morph_tax <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018-2020/ASV2Taxonomy_Tables/morphology_asvTaxonomyTable.csv")
+```
+
+add taxonomy assignments to dataframe
+```{r}
+#rename column
+Morph<-Morph %>% 
+  rename(
+    ASV = x,
+    )
+
+Morph <- merge(Morph_tax,Morph, by="ASV", all.x=FALSE)
+```
+
+Convert to present (1) vs absent (0)
+```{r}
+#remove non-species rows
+Morph_complete<- Morph[complete.cases(Morph), ]
+
+Morph_pa<-Morph_complete %>%
+  mutate(across(where(is.numeric), ~ifelse(.x >0, 1, 0)))
+unique(Morph_pa$Phylum)
+```
+
+```{r}
+#remove excess columns including oblique tows
+Morph_pa <- Morph_pa[ -c(1:7) ]
+Morph_pa<-melt(Morph_pa, id.vars=c("Species"))
+```
+
+add up multiple lines per station
+```{r}
+Morph_pa <- Morph_pa %>%
+  group_by(Species,variable) %>%
+  summarise(
+    value = sum(value))
+
+Morph_pa<-Morph_pa %>%
+  mutate(across(where(is.numeric), ~ifelse(.x >0, 1, 0)))
+```
+split code string up
+```{r}
+Morph_pa$variable<-str_split_fixed(Morph_pa$variable,"_",4)
+```
+
+
+remove oblique and other replicates
+```{r}
+Morph_pa<-subset(Morph_pa,variable[,4]!="Ob")
+Morph_pa<-subset(Morph_pa,variable[,4]!="ObA")
+Morph_pa<-subset(Morph_pa,variable[,4]!="ObB")
+Morph_pa<-subset(Morph_pa,variable[,4]!="1B")
+Morph_pa<-subset(Morph_pa,variable[,4]!="2B")
+Morph_pa<-subset(Morph_pa,variable[,4]!="3B")
+Morph_pa<-subset(Morph_pa,variable[,4]!="")
+
+
+Morph_pa<-subset(Morph_pa,variable[,3]!="P105")
+Morph_pa<-subset(Morph_pa,variable[,3]!="P123")
+Morph_pa<-subset(Morph_pa,variable[,3]!="P136")
+Morph_pa<-subset(Morph_pa,variable[,3]!="P381")
+Morph_pa<-subset(Morph_pa,variable[,3]!="P7")
+
+Morph_pa<-subset(Morph_pa,variable[,2]!="2010")
+```
+
+merge replicates
+```{r}
+Morph_pa$sample<-paste(Morph_pa$variable[,2],Morph_pa$variable[,3],sep="")
+
+Morph_pa <- Morph_pa %>%
+  group_by(Species,sample) %>%
+  summarise(
+    value = sum(value))
+
+Morph_pa<-Morph_pa %>%
+  mutate(across(where(is.numeric), ~ifelse(.x >0, 1, 0)))
+```
+
+back to wide format
+```{r}
+Morph_pa_wide<-dcast(Morph_pa, sample ~ Species )
+```
+
+```{r}
+#remove first column
+Morph_pa_wide_x <- Morph_pa_wide[ -c(1) ]
+Morph_pa_wide_x  <- Morph_pa_wide_x [,-(which(colSums(Morph_pa_wide_x ) == 0))]
+```
+
+Split up station, year, month
+```{r}
+Morph_pa_wide_y<-transform(Morph_pa_wide, Year = substr(sample, 1, 2), Month = substr(sample, 3, 4),Station=substr(sample, 5,7))
+```
+
+recode factors
+```{r}
+Morph_pa_wide_y$Year <- recode(Morph_pa_wide_y$Year, 
+                                 "20" = "2020",
+                         "19"="2019",
+                         "18"="2018")
+
+Morph_pa_wide_y$Month <- recode(Morph_pa_wide_y$Month, 
+                                 "04" = "APR",
+                         "07"="JUL",
+                         "09"="SEP")
+
+Morph_pa_wide_y$Station <- recode(Morph_pa_wide_y$Station, 
+                                 "P40" = "P402")
+Morph_pa_wide_y$code<-paste(Morph_pa_wide_y$Station,Morph_pa_wide_y$Year,Morph_pa_wide_y$Month,sep="-")
+```
+
+add in evironmental data
+```{r}
+Morph_pa_wide_y <- merge(Env_subset,Morph_pa_wide_y, by.x = "code", 
+             by.y = "code", all.x = TRUE, all.y = TRUE)
+
+#remove rows with NA
+Morph_pa_wide_y<-Morph_pa_wide_y[!is.na(Morph_pa_wide_y$"Acartia.longiremis"),]
+Morph_pa_wide_y<-Morph_pa_wide_y[!is.na(Morph_pa_wide_y$"Date"),]
+Morph_pa_wide_x<-Morph_pa_wide_y[ , 15:95]
+```
+
+## PERMANOVA
+```{r}
+dist<-vegdist(Morph_pa_wide_x, method='bray')
+perm<-adonis2(dist~STATION_NO*Year.x*Month.x, data=Morph_pa_wide_y, permutations = 999, method="bray")
+perm
+```
+
+```{r}
+Morph_pa_wide_y$Station=as.factor(Morph_pa_wide_y$Station)
+adonis.pair(vegdist(Morph_pa_wide_x),Morph_pa_wide_y$Station)
+```
+
+```{r}
+NMDSmodel <- metaMDS(Morph_pa_wide_x, distance = "bray",trymax = 999)
+NMDSmodel
+```
+
+get datascores
+```{r}
+data.scores<-scores(NMDSmodel,display="sites")
+data.scores<- as.data.frame(data.scores)
+```
+
+add environmental variables back in
+```{r}
+colnames(Morph_pa_wide_y)
+data.scores$Month = Morph_pa_wide_y$Month.x
+data.scores$Year = Morph_pa_wide_y$Year.x
+data.scores$Station = Morph_pa_wide_y$Station
+data.scores$temp_deep = Morph_pa_wide_y$CTDTMP_DEG_C_ITS90_Deep
+data.scores$temp_surface = Morph_pa_wide_y$CTDTMP_DEG_C_ITS90_Surface
+data.scores$salinity_deep = Morph_pa_wide_y$CTDSAL_PSS78_Deep
+data.scores$salinity_surface = Morph_pa_wide_y$CTDSAL_PSS78_Surface
+data.scores$oxygen_deep = Morph_pa_wide_y$OXYGEN_MG_L_1_Deep
+data.scores$oxygen_surface = Morph_pa_wide_y$OXYGEN_MG_L_1_Surface
+data.scores$nitrate_deep = Morph_pa_wide_y$NITRATE_UMorph_L_Deep
+data.scores$nitrate_surface = Morph_pa_wide_y$NITRATE_UMorph_L_Surface
+```
+
+plot datascores
+```{r}
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Station)) +geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+xx
+```
+extract hulls
+```{r}
+P12 <- data.scores[data.scores$Station == "P12", ][chull(data.scores[data.scores$Station ==                                                           "P12", c("NMDS1", "NMDS2")]), ]  
+P22 <- data.scores[data.scores$Station == "P22", ][chull(data.scores[data.scores$Station ==                                                           "P22", c("NMDS1", "NMDS2")]), ]  
+P28 <- data.scores[data.scores$Station == "P28", ][chull(data.scores[data.scores$Station ==                                                           "P28", c("NMDS1", "NMDS2")]), ]
+P38 <- data.scores[data.scores$Station == "P38", ][chull(data.scores[data.scores$Station ==                                                           "P38", c("NMDS1", "NMDS2")]), ]  
+P4 <- data.scores[data.scores$Station == "P4", ][chull(data.scores[data.scores$Station ==                                                           "P4", c("NMDS1", "NMDS2")]), ]  
+P402 <- data.scores[data.scores$Station == "P402", ][chull(data.scores[data.scores$Station ==                                                           "P402", c("NMDS1", "NMDS2")]), ]  
+P8 <- data.scores[data.scores$Station == "P8", ][chull(data.scores[data.scores$Station ==                                                           "P8", c("NMDS1", "NMDS2")]), ]  
+```
+
+get hull data
+```{r}
+hull.data <- rbind(P12, P22, P28,P38,P4,P402,P8)  #combine grp.a and grp.b
+hull.data
+```
+
+
+## environmental fitting
+create environmetal fit table
+```{r}
+#check for correlation among environmental variables.
+#remove nutrients other than nitrate because of autocorrelation
+
+data.scores.cor<- data.scores[ -c(1:5,13) ]
+cor_matrix <- cor(data.scores.cor)
+corrplot(cor_matrix, method = "number", type = "lower", tl.pos = 'd')
+
+Zoo.env <- data.frame(matrix(ncol = 0, nrow=53))
+Zoo.env$temp_deep<-as.numeric(data.scores$temp_deep)
+Zoo.env$temp_surface<-as.numeric(data.scores$temp_surface)
+Zoo.env$salinity_deep<-as.numeric(data.scores$salinity_deep)
+Zoo.env$salinity_surface<-as.numeric(data.scores$salinity_surface)
+Zoo.env$oxygen_deep<-as.numeric(data.scores$oxygen_deep)
+Zoo.env$oxygen_surface<-as.numeric(data.scores$oxygen_surface)
+
+env <- envfit(NMDSmodel, Zoo.env, na.rm = TRUE,perm = 999)
+env
+
+
+env.scrs <- as.data.frame(scores(env, display = "vectors")) 
+env.scrs <- cbind(env.scrs, Species = rownames(env.scrs), Pvalues = env$vectors$pvals, R_squared = env$vectors$r)
+env.scrs <- subset(env.scrs, Pvalues < 0.05)
+env.scrs <- subset(env.scrs, R_squared > 0.3)
+env.scrs
+```
+
+## Species fitting
+```{r}
+vf <- envfit(NMDSmodel,  Morph_pa_wide_x, perm = 999)
+
+spp.scrs <- as.data.frame(scores(vf, display = "vectors"))
+spp.scrs <- cbind(spp.scrs, Species = rownames(spp.scrs))
+####for ggplot
+arrow_factor <- ordiArrowMul(vf)
+spp.scrs <- as.data.frame(scores(vf, display = "vectors")) * arrow_factor
+spp.scrs <- cbind(spp.scrs, Species = rownames(spp.scrs), Pvalues = vf$vectors$pvals, R_squared = vf$vectors$r)
+
+# select significance similarly to `plot(vf, p.max = 0.01)`
+spp.scrs <- subset(spp.scrs, Pvalues < 0.05)
+spp.scrs <- subset(spp.scrs, R_squared > 0.3)
+spp.scrs
+
+```
+```{r}
+morph.data.scores<-data.scores
+morph.data.scores$Station <- factor(morph.data.scores$Station, levels = c("P22", "P4", "P8","P28","P12","P402","P38"))
+morph.data.scores$Station <- recode(morph.data.scores$Station, 
+                                 "P22" = "Juan de Fuca",
+                         "P4"="Whidbey Basin",
+                         "P8"="HC Sill",
+                         "P28"="Main Basin",
+                         "P12"="Hood Canal 1",
+                         "P402"="Hood Canal 2",
+                         "P38"="South Sound")
+
+hull.data$Station <- factor(hull.data$Station, levels = c("P22", "P4", "P8","P28","P12","P402","P38"))
+hull.data$Station <- recode(hull.data$Station, 
+                                 "P22" = "Juan de Fuca",
+                         "P4"="Whidbey Basin",
+                         "P8"="HC Sill",
+                         "P28"="Main Basin",
+                         "P12"="Hood Canal 1",
+                         "P402"="Hood Canal 2",
+                         "P38"="South Sound")
+```
+
+
+```{r,fig.width=7,fig.height=5, dpi=600}
+
+
+Species_plot <- ggplot(morph.data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour =  Station))+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7")) +
+  scale_fill_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7"))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+
+  geom_segment(data = spp.scrs,size=0.4,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.2, "cm")), colour = "darkgrey")+
+  geom_segment(data = env.scrs,size=0.4,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.2, "cm")), colour = "black")+ 
+  geom_polygon(data=hull.data,aes(x=NMDS1,y=NMDS2,fill=Station,group=Station),alpha=0.20, size=0.1, linetype=1, colour="black") +
+  annotate("text", label = "2D Stress: 0.2", x = 0.55, y = 0.67, size = 5, colour = "black")+
+  geom_label_repel(data = spp.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
+                  size = 3, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), box.padding = unit(0.16, "lines"), label.size = 0.05)
+Species_plot
+```
+
+```{r,fig.width=7,fig.height=5, dpi=600}
+
+
+Species_plot <- ggplot(morph.data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour =  Station))+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7")) +
+  scale_fill_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7"))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+
+  geom_segment(data = spp.scrs,size=0.4,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.2, "cm")), colour = "darkgrey")+
+  geom_segment(data = env.scrs,size=0.4,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.2, "cm")), colour = "black")+ 
+  geom_polygon(data=hull.data,aes(x=NMDS1,y=NMDS2,fill=Station,group=Station),alpha=0.20, size=0.1, linetype=1, colour="black") +
+  annotate("text", label = "2D Stress: 0.2", x = 0.6, y = 0.67, size = 5, colour = "black")
+Species_plot
+```
+
+
+save dendogram
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "PA_Morph_nmds.png", plot = Species_plot, width = 7, height = 5.5, device='png', dpi=700)
+```

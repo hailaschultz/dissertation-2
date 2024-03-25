@@ -8,6 +8,7 @@ load packages
 library(openxlsx)
 library(dplyr)
 library(lubridate)
+library(readxl)
 ```
 
 
@@ -150,5 +151,8 @@ named_stations <- c("4", "8", "12", "28", "38", "402", "22")
 
 # Subset the dataframe based on the named stations
 subset_df <- combined_df[combined_df$STATION_NO %in% named_stations, ]
+
+#add P to station numbers
+subset_df$STATION_NO <- paste0("P", subset_df$STATION_NO)
 ```
 Depth categories

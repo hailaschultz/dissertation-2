@@ -7,19 +7,27 @@ output:
     toc_depth: 2
     toc_float: true
 ---
+```{r}
+library(tidyr)
+library(data.table)
+library(vegan)
+library(EcolUtils)
+library(ggplot2)
+library(corrplot)
+library(ggrepel)
+```
 
 # Environmental Data
 the environmental data was created by 00_Upload_Env_Data
 
 subset environmental data to only shallow and deep niskins
 ```{r}
-#add P to station numbers
-subset_df$STATION_NO <- paste0("P", subset_df$STATION_NO)
+
 #make unique code
 subset_df$code<-paste(subset_df$STATION_NO, subset_df$Year,subset_df$Month,sep="-")
 
 # Sort the dataframe by sample and then by depth
-subset_df <- subset_df %>% arrange(sample, NISKIN_NO)
+subset_df <- subset_df %>% arrange(code, NISKIN_NO)
 ```
 
 remove unnecessary columns
@@ -36,7 +44,7 @@ Env_subset<-Env_subset %>% drop_na(OXYGEN_MG_L_1)
 ```{r}
 # Group by sample and filter the shallowest and deepest rows for each sample
 Env_subset <- Env_subset %>%
-  group_by(sample) %>%
+  group_by(code) %>%
   mutate(row_num = row_number()) %>%
   filter(row_num == 1 | row_num == n())
 
@@ -53,8 +61,53 @@ Env_subset <- Env_subset[ -c(2) ]
 #make surface and deep variables separate
 Env_subset <- Env_subset %>%
   pivot_wider(names_from = Depth, values_from = c(CTDTMP_DEG_C_ITS90, CTDSAL_PSS78, OXYGEN_MG_L_1, NITRATE_UMOL_L)) 
-#remove 
 ```
+
+replace negative values with NA
+```{r}
+Env_subset[Env_subset < 0] <- NA
+#remove rows with NA
+Env_subset<-Env_subset[!is.na(Env_subset$NITRATE_UMOL_L_Surface),]
+Env_subset<-Env_subset[!is.na(Env_subset$CTDSAL_PSS78_Surface),]
+```
+
+anomalies
+
+month and station averages
+```{r}
+colnames (Env_subset)
+env_ave<-Env_subset %>%
+  group_by(Month,STATION_NO) %>%
+  summarise(across("CTDTMP_DEG_C_ITS90_Deep":"NITRATE_UMOL_L_Surface", list(mean)))
+```
+
+standard deviation
+```{r}
+env_stdev<- Env_subset  %>%
+  group_by(Month,STATION_NO) %>%
+  summarise(across("CTDTMP_DEG_C_ITS90_Deep":"NITRATE_UMOL_L_Surface", list(sd)))
+```
+
+mean anomalies
+```{r}
+#add averages column
+#make station-month column
+Env_subset$stationmonth<-paste(Env_subset$STATION_NO, Env_subset$Month,sep="-")
+env_ave$stationmonth<-paste(env_ave$STATION_NO, env_ave$Month,sep="-")
+env_stdev$stationmonth<-paste(env_stdev$STATION_NO, env_stdev$Month,sep="-")
+
+env_joined_ave <- merge(Env_subset,env_ave, by="stationmonth", all.x=TRUE)
+env_joined_stdev <- merge(env_joined_ave,env_stdev, by="stationmonth", all.x=TRUE)
+
+#calculate anomalies
+env_joined_anom <- (env_joined_stdev[, 7:14] - env_joined_stdev[, 17:24])/env_joined_stdev[, 27:34]
+```
+
+add anomalies to data
+```{r}
+Env_subset<-cbind(Env_subset, env_joined_anom)
+```
+
 
 # Zooplankton data
 Read zooplanton data into R
@@ -102,6 +155,15 @@ Zoop_sub<-Zoop_sub[!grepl('_EtOH', Zoop_sub$Code),]
 #remove oblique samples
 Zoop_sub<-subset(Zoop_sub,Tow.Type!="Oblique")
 ```
+remove non-species columns
+```{r}
+Zoop_sub$Genus.species <- recode(Zoop_sub$Genus.species, 
+                                 "Cancridae Lg" = "Cancridae",
+                         "Cancridae Sm"="Cancridae",
+                         "PSEUDOCALANUS Lg"="PSEUDOCALANUS",
+                         "PSEUDOCALANUS Sm"="PSEUDOCALANUS")
+```
+
 
 add up multiple lines per station
 ```{r}
@@ -138,44 +200,40 @@ Zoop_env<-Zoop_env[!is.na(Zoop_env$Year.x),]
 ```
 
 
-replace negative values with NA
-```{r}
-Zoop_env[Zoop_env < 0] <- NA
-colnames(Zoop_env)
-#remove rows with NA
-Zoop_env<-Zoop_env[!is.na(Zoop_env$Code),]
-Zoop_env<-Zoop_env[!is.na(Zoop_env$NITRATE_UMOL_L_Surface),]
-Zoop_env<-Zoop_env[!is.na(Zoop_env$CTDSAL_PSS78_Surface),]
-```
+
 
 #remove rows with all zoooplankton NAs
 ```{r}
-rows_to_keep <- apply(Zoop_env[, 19:230], 1, function(row) !all(is.na(row)))
+rows_to_keep <- apply(Zoop_env[, 28:235], 1, function(row) !all(is.na(row)))
 
 Zoop_env <- Zoop_env[rows_to_keep, ]
 ```
-
 
 # NMDS
 
 ## prep data
 remove non-data columns, convert to proportionas, and arcsine sqrt transformation
 ```{r}
-RE2<- Zoop_env[,20:ncol(Zoop_env)]
+RE2<- Zoop_env[,28:ncol(Zoop_env)]
 #replace N/A with 0
 RE2[is.na(RE2)] <- 0
 #convert to proportions
 RE2<-RE2/rowSums(RE2)
 
-
-
-
 #arcsine sqrt transformation
 RE2<-asin(sqrt(RE2))
+
 #remove columns with fewer than 9 rows with nonzero numbers
 non_zero_counts <- colSums(RE2 != 0)
 RE2 <- RE2[, non_zero_counts >= 9]
 ```
+
+indicator species
+```{r}
+inv = multipatt(RE2, Zoop_env$STATION_NO, func = "r.g", control = how(nperm=999))
+summary(inv)
+```
+
 
 ## PERMANOVA
 ```{r}
@@ -198,18 +256,24 @@ adonis.pair(vegdist(RE2),Zoop_env$Month.x)
 
 all stations are different from one another
 
-2014 is similar to 2017
-2014 is similar to 2018
-2014 is similar to 2022
-2015 is similar to 2018
-2015 is similar to 2020
-2015 is similar to 2022
-2016 is similar to 2022
-2017 is similar to 2020
-2017 is similar to 2021
-2017 is similar to 2022
-2018 is similar to 2022
+2014 is similar to 2015
+2014 is similar to 2020
+2014 is similar to 2021
+2015 is similar to 2016
+2015 is similar to 2017
+2015 is similar to 2021
+2016 is similar to 2017
+2016 is similar to 2018
+2016 is similar to 2019
+2017 is similar to 2018
+2017 is similar to 2019
+2018 is similar to 2019
+2018 is similar to 2020
+2018 is similar to 2021
+2019 is similar to 2020
+2019 is similar to 2021
 2019 is similar to 2022
+2020 is similar to 2021
 2020 is similar to 2022
 
 all months are different from one another
@@ -259,21 +323,23 @@ data.scores$Month = Zoop_env$Month.x
 
 add environmental variables back in
 ```{r}
-data.scores$temp_deep = Zoop_env$CTDTMP_DEG_C_ITS90_Deep
-data.scores$temp_surface = Zoop_env$CTDTMP_DEG_C_ITS90_Surface
-data.scores$salinity_deep = Zoop_env$CTDSAL_PSS78_Deep
-data.scores$salinity_surface = Zoop_env$CTDSAL_PSS78_Surface
-data.scores$oxygen_deep = Zoop_env$OXYGEN_MG_L_1_Deep
-data.scores$oxygen_surface = Zoop_env$OXYGEN_MG_L_1_Surface
-data.scores$nitrate_deep = Zoop_env$NITRATE_UMOL_L_Deep
-data.scores$nitrate_surface = Zoop_env$NITRATE_UMOL_L_Surface
-
-
+colnames(Zoop_env)
+data.scores$temp_deep = Zoop_env$CTDTMP_DEG_C_ITS90_Deep...6
+data.scores$temp_surface = Zoop_env$CTDTMP_DEG_C_ITS90_Surface...7
+data.scores$salinity_deep = Zoop_env$CTDSAL_PSS78_Deep...8
+data.scores$salinity_surface = Zoop_env$CTDSAL_PSS78_Surface...9
+data.scores$oxygen_deep = Zoop_env$OXYGEN_MG_L_1_Deep...10
+data.scores$oxygen_surface = Zoop_env$OXYGEN_MG_L_1_Surface...11
+data.scores$nitrate_deep = Zoop_env$NITRATE_UMOL_L_Deep...12
+data.scores$nitrate_surface = Zoop_env$NITRATE_UMOL_L_Surface...13
+data.scores$temp_surf_anom = Zoop_env$CTDTMP_DEG_C_ITS90_Surface...16
+data.scores$temp_deep_anom = Zoop_env$CTDTMP_DEG_C_ITS90_Deep...15
+data.scores$oxy_deep_anom = Zoop_env$OXYGEN_MG_L_1_Deep...19
 ```
 
 plot data scores
 ```{r}
-xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Station)) +stat_ellipse()+geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour=Station)) +stat_ellipse()+geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
                                                                                            panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 xx
 
@@ -306,6 +372,9 @@ Zoo.env$salinity_deep<-as.numeric(data.scores$salinity_deep)
 Zoo.env$salinity_surface<-as.numeric(data.scores$salinity_surface)
 Zoo.env$oxygen_deep<-as.numeric(data.scores$oxygen_deep)
 Zoo.env$oxygen_surface<-as.numeric(data.scores$oxygen_surface)
+Zoo.env$temp_deep_anom<-as.numeric(data.scores$temp_deep_anom)
+Zoo.env$temp_surf_anom<-as.numeric(data.scores$temp_surf_anom)
+Zoo.env$oxy_deep_anom<-as.numeric(data.scores$oxy_deep_anom)
 
 env <- envfit(NMDSmodel, Zoo.env, na.rm = TRUE,perm = 999)
 env
@@ -313,10 +382,73 @@ env
 
 env.scrs <- as.data.frame(scores(env, display = "vectors")) 
 env.scrs <- cbind(env.scrs, Species = rownames(env.scrs), Pvalues = env$vectors$pvals, R_squared = env$vectors$r)
+env.scrs <- subset(env.scrs, Pvalues < 0.05)
+
 
 env.scrs
 ```
-nitrate is correlated with almost everything
+
+## Species fitting
+```{r}
+vf <- envfit(NMDSmodel, RE2, perm = 999)
+
+spp.scrs <- as.data.frame(scores(vf, display = "vectors"))
+spp.scrs <- cbind(spp.scrs, Species = rownames(spp.scrs))
+####for ggplot
+arrow_factor <- ordiArrowMul(vf)
+spp.scrs <- as.data.frame(scores(vf, display = "vectors")) * arrow_factor
+spp.scrs <- cbind(spp.scrs, Species = rownames(spp.scrs), Pvalues = vf$vectors$pvals, R_squared = vf$vectors$r)
+
+# select significance similarly to `plot(vf, p.max = 0.01)`
+spp.scrs <- subset(spp.scrs, Pvalues < 0.05)
+spp.scrs <- subset(spp.scrs, R_squared > 0.3)
+spp.scrs
+
+```
+### all data with species
+extract hulls
+```{r}
+P12 <- data.scores[data.scores$Station == "P12", ][chull(data.scores[data.scores$Station ==                                                           "P12", c("NMDS1", "NMDS2")]), ]  
+P22 <- data.scores[data.scores$Station == "P22", ][chull(data.scores[data.scores$Station ==                                                           "P22", c("NMDS1", "NMDS2")]), ]  
+P28 <- data.scores[data.scores$Station == "P28", ][chull(data.scores[data.scores$Station ==                                                           "P28", c("NMDS1", "NMDS2")]), ]
+P38 <- data.scores[data.scores$Station == "P38", ][chull(data.scores[data.scores$Station ==                                                           "P38", c("NMDS1", "NMDS2")]), ]  
+P4 <- data.scores[data.scores$Station == "P4", ][chull(data.scores[data.scores$Station ==                                                           "P4", c("NMDS1", "NMDS2")]), ]  
+P402 <- data.scores[data.scores$Station == "P402", ][chull(data.scores[data.scores$Station ==                                                           "P402", c("NMDS1", "NMDS2")]), ]  
+P8 <- data.scores[data.scores$Station == "P8", ][chull(data.scores[data.scores$Station ==                                                           "P8", c("NMDS1", "NMDS2")]), ]  
+```
+get hull data
+```{r}
+hull.data <- rbind(P12, P22, P28,P38,P4,P402,P8)  #combine grp.a and grp.b
+hull.data
+
+```
+```{r,fig.width=6.5,fig.height=5, dpi=600}
+
+Species_plot <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ 
+  geom_polygon(data=hull.data,aes(x=NMDS1,y=NMDS2,fill=Station,group=Station),alpha=0.20, size=0.1, linetype=1, colour="black") +
+  annotate("text", label = "2D Stress: 0.16", x = 0.5, y = 0.57, size = 5, colour = "black")+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7")) +
+  scale_fill_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7"))+ geom_segment(data = spp.scrs,size=0.2,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.08, "cm")), colour = "black")+
+  geom_label_repel(data = spp.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
+                  size = 1.5, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), box.padding = unit(0.16, "lines"), label.size = 0.05)
+Species_plot
+```
+```{r,fig.width=6.5,fig.height=5, dpi=600}
+
+Species_plot <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = temp_deep_anom))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ 
+  geom_polygon(data=hull.data,aes(x=NMDS1,y=NMDS2,group=Station),alpha=0.05, size=0.1, linetype=1, colour="black") +
+  annotate("text", label = "2D Stress: 0.16", x = 0.5, y = 0.57, size = 5, colour = "black")+ geom_segment(data = spp.scrs,size=0.2,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.08, "cm")), colour = "black")+
+  geom_label_repel(data = spp.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
+                  size = 1.5, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), box.padding = unit(0.16, "lines"), label.size = 0.05)+scale_color_gradient(low="blue", high="red")+ 
+  geom_polygon(data=apr.hull.data,aes(x=NMDS1,y=NMDS2,group=Station),alpha=0.20, size=0.1, linetype=1, colour="black")
+Species_plot
+```
+
 ## plot only April
 
 subset data scores
@@ -340,10 +472,28 @@ apr.hull.data <- rbind(P12, P22, P28,P38,P4,P402,P8)  #combine grp.a and grp.b
 apr.hull.data
 
 ```
+plot vectors
+```{r,fig.width=5,fig.height=5.5, dpi=600}
+
+Blank <- ggplot(APR_datascores, aes(x = NMDS1, y = NMDS2)) +theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) +
+  annotate("text", label = "2D Stress: 0.18", x = 0.7, y = 1, size = 5, colour = "black")+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7")) +
+  scale_fill_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7"))+
+  theme(axis.text=element_text(size=12),legend.text=element_text(size=12),legend.title=element_text(size=12))+
+  geom_segment(data = env.scrs,size=0.5,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.5, "cm")), colour = "black")+xlim(-0.8, 1)+ylim(-1.3,1)
+Blank
+```
+save dendogram
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "NMDS_blank.png", plot = Blank, width = 5, height = 5.5, device='png', dpi=700)
+```
 
 
 plot data scores
-```{r,fig.width=6.5,fig.height=5, dpi=600}
+```{r,fig.width=5,fig.height=5.5, dpi=600}
 #change factor order
 APR_datascores$Station <- factor(APR_datascores$Station, levels = c("P22", "P4", "P8","P28","P12","P402","P38"))
 apr.hull.data$Station <- factor(apr.hull.data$Station, levels = c("P22", "P4", "P8","P28","P12","P402","P38"))
@@ -351,14 +501,37 @@ apr.hull.data$Station <- factor(apr.hull.data$Station, levels = c("P22", "P4", "
 April <- ggplot(APR_datascores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = Station),size=2.5)+theme_bw()+theme(panel.grid.major = element_blank(),
                                                                                            panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ 
   geom_polygon(data=apr.hull.data,aes(x=NMDS1,y=NMDS2,fill=Station,group=Station),alpha=0.20, size=0.1, linetype=1, colour="black") +
-  annotate("text", label = "2D Stress: 0.16", x = 0.5, y = 0.57, size = 5, colour = "black")+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7")) +
+  annotate("text", label = "2D Stress: 0.18", x = 0.7, y = 1, size = 5, colour = "black")+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7")) +
   scale_fill_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7"))+
+  theme(axis.text=element_text(size=12))+
+  geom_segment(data = env.scrs,size=0.5,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.5, "cm")), colour = "black")+xlim(-0.8, 1)+ylim(-1.3,1)+ theme(legend.position = "none")
+April
+```
+save dendogram
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "NMDS_April.png", plot = April, width = 5, height = 5.5, device='png', dpi=700)
+```
+
+
+color by anomaly
+```{r,fig.width=6.5,fig.height=5, dpi=600}
+#change factor order
+APR_datascores$Station <- factor(APR_datascores$Station, levels = c("P22", "P4", "P8","P28","P12","P402","P38"))
+apr.hull.data$Station <- factor(apr.hull.data$Station, levels = c("P22", "P4", "P8","P28","P12","P402","P38"))
+
+April <- ggplot(APR_datascores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = temp_deep_anom),size=2.5)+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+
+  annotate("text", label = "2D Stress: 0.16", x = 0.5, y = 0.57, size = 5, colour = "black")+ 
   theme(axis.text=element_text(size=12),legend.text=element_text(size=12),legend.title=element_text(size=12))+
   geom_segment(data = env.scrs,size=0.5,
                aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
                arrow = arrow(length = unit(0.5, "cm")), colour = "black")+
   geom_label_repel(data = env.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
-                  size = 5, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), point.padding = unit(15, "lines"), label.size = 0.05)
+                  size = 5, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), point.padding = unit(15, "lines"), label.size = 0.05)+scale_color_gradient(low="blue", high="red")+ 
+  geom_polygon(data=apr.hull.data,aes(x=NMDS1,y=NMDS2,group=Station),alpha=0.20, size=0.1, linetype=1, colour="black")
 April
 ```
 
@@ -387,7 +560,7 @@ jul.hull.data
 ```
 
 plot data scores
-```{r,fig.width=6.5,fig.height=5, dpi=600}
+```{r,fig.width=5,fig.height=5.5, dpi=600}
 #change factor order
 JUL_datascores$Station <- factor(JUL_datascores$Station, levels = c("P22", "P4", "P8","P28","P12","P402","P38"))
 jul.hull.data$Station <- factor(jul.hull.data$Station, levels = c("P22", "P4", "P8","P28","P12","P402","P38"))
@@ -395,15 +568,18 @@ jul.hull.data$Station <- factor(jul.hull.data$Station, levels = c("P22", "P4", "
 July <- ggplot(JUL_datascores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = Station),size=2.5)+theme_bw()+theme(panel.grid.major = element_blank(),
                                                                                            panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ 
   geom_polygon(data=jul.hull.data,aes(x=NMDS1,y=NMDS2,fill=Station,group=Station),alpha=0.20, size=0.1, linetype=1, colour="black") +
-  annotate("text", label = "2D Stress: 0.16", x = 0.5, y = 0.57, size = 5, colour = "black")+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7")) +
+  annotate("text", label = "2D Stress: 0.18", x = 0.7, y = 1, size = 5, colour = "black")+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7")) +
   scale_fill_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7"))+
-  theme(axis.text=element_text(size=12),legend.text=element_text(size=12),legend.title=element_text(size=12))+
+  theme(axis.text=element_text(size=12))+
   geom_segment(data = env.scrs,size=0.5,
                aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
-               arrow = arrow(length = unit(0.5, "cm")), colour = "black")+
-  geom_label_repel(data = env.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
-                  size = 5, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), point.padding = unit(15, "lines"), label.size = 0.05)
+               arrow = arrow(length = unit(0.5, "cm")), colour = "black")+xlim(-0.8, 1)+ylim(-1.3,1)+ theme(legend.position = "none")
 July
+```
+save dendogram
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "NMDS_July.png", plot = July, width = 5, height = 5.5, device='png', dpi=700)
 ```
 
 ## plot only September
@@ -428,8 +604,9 @@ get hull data
 SEP.hull.data <- rbind(P12, P22, P28,P38,P4,P402,P8)  #combine grp.a and grp.b
 SEP.hull.data
 ```
+
 plot data scores
-```{r,fig.width=6.5,fig.height=5, dpi=600}
+```{r,fig.width=5,fig.height=5.5, dpi=600}
 #change factor order
 SEP_datascores$Station <- factor(SEP_datascores$Station, levels = c("P22", "P4", "P8","P28","P12","P402","P38"))
 SEP.hull.data$Station <- factor(SEP.hull.data$Station, levels = c("P22", "P4", "P8","P28","P12","P402","P38"))
@@ -437,13 +614,130 @@ SEP.hull.data$Station <- factor(SEP.hull.data$Station, levels = c("P22", "P4", "
 September <- ggplot(SEP_datascores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = Station),size=2.5)+theme_bw()+theme(panel.grid.major = element_blank(),
                                                                                            panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ 
   geom_polygon(data=SEP.hull.data,aes(x=NMDS1,y=NMDS2,fill=Station,group=Station),alpha=0.20, size=0.1, linetype=1, colour="black") +
-  annotate("text", label = "2D Stress: 0.16", x = 0.5, y = 0.57, size = 5, colour = "black")+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7")) +
+  annotate("text", label = "2D Stress: 0.18", x = 0.7, y = 1, size = 5, colour = "black")+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7")) +
   scale_fill_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7"))+
-  theme(axis.text=element_text(size=12),legend.text=element_text(size=12),legend.title=element_text(size=12))+
+  theme(axis.text=element_text(size=12))+
   geom_segment(data = env.scrs,size=0.5,
                aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
-               arrow = arrow(length = unit(0.5, "cm")), colour = "black")+
-  geom_label_repel(data = env.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
-                  size = 5, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), point.padding = unit(15, "lines"), label.size = 0.05)
+               arrow = arrow(length = unit(0.5, "cm")), colour = "black")+xlim(-0.8, 1)+ylim(-1.3,1)+ theme(legend.position = "none")
 September
+```
+save dendogram
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "NMDS_September.png", plot = September, width = 5, height = 5.5, device='png', dpi=700)
+```
+species scores
+```{r,fig.width=5,fig.height=5.5, dpi=600}
+
+
+September_sp <- ggplot(SEP_datascores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = Station),size=2.5)+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ 
+  geom_polygon(data=SEP.hull.data,aes(x=NMDS1,y=NMDS2,fill=Station,group=Station),alpha=0.20, size=0.1, linetype=1, colour="black") +
+  annotate("text", label = "2D Stress: 0.18", x = 0.7, y = 1, size = 5, colour = "black")+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7")) +
+  scale_fill_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7"))+
+  theme(axis.text=element_text(size=12),legend.text=element_text(size=12),legend.title=element_text(size=12))+
+  geom_segment(data = spp.scrs,size=0.4,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.2, "cm")), colour = "darkgrey")+xlim(-1, 1)+ylim(-1.3,1)+ theme(legend.position = "none")+
+  geom_segment(data = env.scrs,size=0.4,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.2, "cm")), colour = "black")
+
+September_sp
+```
+
+save dendogram
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "NMDS_September_Sp.png", plot = September_sp, width = 5, height = 5.5, device='png', dpi=700)
+```
+
+### try group 1
+remove non-data columns, convert to proportionas, and arcsine sqrt transformation
+```{r}
+group1<-subset(Zoop_env,STATION_NO!="P22")
+group1<-subset(group1,STATION_NO!="P8")
+group1<-subset(group1,STATION_NO!="P38")
+group1<-subset(group1,STATION_NO!="P28")
+RE2<- group1[,28:ncol(group1)]
+#replace N/A with 0
+RE2[is.na(RE2)] <- 0
+#convert to proportions
+RE2<-RE2/rowSums(RE2)
+
+#arcsine sqrt transformation
+RE2<-asin(sqrt(RE2))
+#remove columns with fewer than 9 rows with nonzero numbers
+non_zero_counts <- colSums(RE2 != 0)
+RE2 <- RE2[, non_zero_counts >= 9]
+```
+
+## PERMANOVA
+```{r}
+dist<-vegdist(RE2, method='bray')
+perm<-adonis2(dist~Station*Month.x, data=group1, permutations = 999, method="bray")
+perm
+```
+See pairwise differences
+```{r}
+#make sure factors are formatted right
+group1$STATION_NO=as.factor(group1$Station)
+group1$Month.x=as.factor(group1$Month.x)
+adonis.pair(vegdist(RE2),group1$Station)
+adonis.pair(vegdist(RE2),group1$Month.x)
+```
+## Run NMDS
+```{r}
+NMDSmodel <- metaMDS(RE2, distance = "bray",trymax = 200)
+NMDSmodel
+```
+
+
+
+get datascores
+```{r}
+data.scores<-scores(NMDSmodel,display="sites")
+data.scores<- as.data.frame(data.scores)
+```
+
+add station, month, year back in
+```{r}
+data.scores$Station = group1$STATION_NO
+data.scores$Year = group1$Year.x
+data.scores$Month = group1$Month.x
+```
+
+add environmental variables back in
+```{r}
+data.scores$temp_deep = group1$CTDTMP_DEG_C_ITS90_Deep...6
+data.scores$temp_surface = group1$CTDTMP_DEG_C_ITS90_Surface...7
+data.scores$salinity_deep = group1$CTDSAL_PSS78_Deep...8
+data.scores$salinity_surface = group1$CTDSAL_PSS78_Surface...9
+data.scores$oxygen_deep = group1$OXYGEN_MG_L_1_Deep...10
+data.scores$oxygen_surface = group1$OXYGEN_MG_L_1_Surface...11
+data.scores$nitrate_deep = group1$NITRATE_UMOL_L_Deep...12
+data.scores$nitrate_surface = group1$NITRATE_UMOL_L_Surface...13
+data.scores$temp_surf_anom = group1$CTDTMP_DEG_C_ITS90_Surface...16
+data.scores$temp_deep_anom = group1$CTDTMP_DEG_C_ITS90_Deep...15
+data.scores$oxy_deep_anom = group1$OXYGEN_MG_L_1_Deep...19
+```
+
+plot data scores
+```{r}
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour=Station)) +stat_ellipse()+geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+xx
+
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Year)) +stat_ellipse()+geom_point(aes(colour = Year))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+xx
+
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Month)) +stat_ellipse()+geom_point(aes(colour = Month))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+xx
+
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2))+geom_point(aes(colour = temp_surf_anom))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+scale_color_gradient(low="blue", high="red")
+xx
 ```
