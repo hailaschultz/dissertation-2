@@ -1,0 +1,1675 @@
+ASV	Kingdom	Phylum	Class	Order	Family	Genus	Species
+ASV_1	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_10	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_100	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1000	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1001	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1002	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1003	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1004	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1005	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1006	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Pleuromamma	Pleuromamma scutullata
+ASV_1007	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1008	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1009	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_101	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1010	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1011	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1012	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_1013	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	NA
+ASV_1014	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_1015	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1016	Eukaryota	Phoronida	Phoronidae__o__c	Phoronidae__o	NA	NA	NA
+ASV_1017	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1018	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1019	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_102	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	NA
+ASV_1020	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1021	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_1022	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1023	Eukaryota	Arthropoda	Malacostraca	Isopoda	Bopyridae	Orthione	Orthione mesoamericana
+ASV_1024	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1025	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1026	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1027	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1028	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1029	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_103	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_1030	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Mitrella	Mitrella bicincta
+ASV_1031	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_1032	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1033	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_1034	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1035	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus glacialis
+ASV_1036	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1037	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_1038	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1039	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Terebridae	Hastula	NA
+ASV_104	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1040	Eukaryota	Arthropoda	Malacostraca	Amphipoda	NA	NA	NA
+ASV_1041	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1042	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1043	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus californicus
+ASV_1044	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus californicus
+ASV_1045	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1046	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1047	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_1048	Eukaryota	Nemertea	Palaeonemertea	Tubulaniformes	NA	NA	NA
+ASV_1049	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pasiphaeidae	NA	NA
+ASV_105	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_1050	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1051	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1052	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1053	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1054	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1055	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1056	Eukaryota	Mollusca	Gastropoda	Stylommatophora	NA	NA	NA
+ASV_1057	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1058	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_1059	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_106	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1060	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1061	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1062	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pasiphaeidae	NA	NA
+ASV_1063	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1064	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Terebridae	NA	NA
+ASV_1065	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1066	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea gigas
+ASV_1067	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1068	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1069	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_107	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1070	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Calyptraeidae	Crepipatella	Crepipatella lingulata
+ASV_1071	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1072	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1073	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1074	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1075	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pasiphaeidae	NA	NA
+ASV_1076	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1077	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Pleuromamma	Pleuromamma scutullata
+ASV_1078	Eukaryota	Arthropoda	Malacostraca	Amphipoda	Calliopiidae	NA	NA
+ASV_1079	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_108	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1080	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1081	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1082	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_1083	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1084	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1085	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1086	Eukaryota	Annelida	Polychaeta	Spionida	Spionidae	NA	NA
+ASV_1087	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Pleopis	Pleopis polyphemoides
+ASV_1088	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_1089	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_109	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Pleopis	Pleopis polyphemoides
+ASV_1090	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1091	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1092	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1093	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1094	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus californicus
+ASV_1095	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1096	Eukaryota	Arthropoda	Malacostraca	NA	NA	NA	NA
+ASV_1097	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Rissoidae	NA	NA
+ASV_1098	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_1099	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_11	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Pleopis	Pleopis polyphemoides
+ASV_110	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Lucicutiidae	Lucicutia	Lucicutia flavicornis
+ASV_1100	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_1101	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1102	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1103	Eukaryota	Mollusca	Gastropoda	Neogastropoda	NA	NA	NA
+ASV_1104	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_1105	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1106	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1107	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1108	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1109	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_111	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1110	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Neocalanus	Neocalanus plumchrus
+ASV_1111	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1112	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1113	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1114	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1115	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1116	Eukaryota	Arthropoda	Insecta	Hymenoptera	NA	NA	NA
+ASV_1117	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea californiensis
+ASV_1118	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1119	Unknown	NA	NA	NA	NA	NA	NA
+ASV_112	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_1120	Eukaryota	Cnidaria	Hydrozoa	Narcomedusae	Cuninidae	Solmissus	Solmissus incisa
+ASV_1121	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1122	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	NA	NA
+ASV_1123	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1124	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1125	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_1126	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1127	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1128	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	NA
+ASV_1129	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_113	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1130	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1131	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1132	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1133	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1134	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	NA
+ASV_1135	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_1136	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1137	Eukaryota	Arthropoda	Malacostraca	NA	NA	NA	NA
+ASV_1138	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Rissoidae	NA	NA
+ASV_1139	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_114	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1140	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1141	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1142	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1143	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_1144	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1145	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1146	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1147	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_1148	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1149	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_115	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Pleopis	Pleopis polyphemoides
+ASV_1150	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1151	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1152	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1153	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1154	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	Sagittidae	NA	NA
+ASV_1155	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1156	Eukaryota	Arthropoda	Thecostraca	Balanomorpha	Balanidae	Balanus	Balanus balanus
+ASV_1157	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1158	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Scolecitrichidae	Racovitzanus	Racovitzanus antarcticus
+ASV_1159	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea gigas
+ASV_116	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_1160	Eukaryota	Arthropoda	Malacostraca	NA	NA	NA	NA
+ASV_1161	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1162	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1163	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1164	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1165	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1166	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1167	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1168	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1169	Unknown	NA	NA	NA	NA	NA	NA
+ASV_117	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1170	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1171	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1172	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1173	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea gigas
+ASV_1174	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1175	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_1176	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1177	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1178	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1179	Eukaryota	Annelida	Polychaeta	Phyllodocida	Polynoidae	Harmothoe	Harmothoe cf_ imbricata BCG_2017
+ASV_118	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1180	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1181	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Velutinidae	NA	NA
+ASV_1182	Eukaryota	Arthropoda	Malacostraca	Isopoda	Bopyridae	Orthione	Orthione mesoamericana
+ASV_1183	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Heptacarpus	NA
+ASV_1184	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea thermophila
+ASV_1185	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1186	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus glacialis
+ASV_1187	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea gigas
+ASV_1188	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	NA	NA
+ASV_1189	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	Aglajidae	Melanochlamys	Melanochlamys diomedea
+ASV_119	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1190	Eukaryota	Annelida	Polychaeta	Phyllodocida	Syllidae	Proceraea	Proceraea okadai
+ASV_1191	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Littorinidae	Littorina	Littorina scutulata
+ASV_1192	Eukaryota	Mollusca	Bivalvia	NA	NA	NA	NA
+ASV_1193	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1194	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1195	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1196	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1197	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1198	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1199	Unknown	NA	NA	NA	NA	NA	NA
+ASV_12	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_120	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1200	Eukaryota	Annelida	Polychaeta	Eunicida	NA	NA	NA
+ASV_1201	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1202	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	NA
+ASV_1203	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1204	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1205	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1206	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1207	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1208	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	NA	NA	NA
+ASV_1209	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_121	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1210	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1211	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1212	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_1213	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1214	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_1215	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1216	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1217	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea californiensis
+ASV_1218	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1219	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia lucens
+ASV_122	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1220	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1221	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1222	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1223	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus glacialis
+ASV_1224	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_1225	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Mitrella	Mitrella bicincta
+ASV_1226	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_1227	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1228	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1229	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_123	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1230	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1231	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1232	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_1233	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea californiensis
+ASV_1234	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1235	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1236	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1237	Eukaryota	Annelida	Polychaeta	Phyllodocida	Syllidae	Proceraea	NA
+ASV_1238	Eukaryota	Arthropoda	Thecostraca	Balanomorpha	Balanidae	Balanus	Balanus glandula
+ASV_1239	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_124	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1240	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1241	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Scolecitrichidae	Racovitzanus	Racovitzanus antarcticus
+ASV_1242	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1243	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1244	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1245	Eukaryota	Annelida	Polychaeta	Spionida	Spionidae	NA	NA
+ASV_1246	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1247	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Pleopis	Pleopis polyphemoides
+ASV_1248	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1249	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_125	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_1250	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1251	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1252	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1253	Eukaryota	Arthropoda	Malacostraca	Decapoda	Lithodidae	NA	NA
+ASV_1254	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1255	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1256	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1257	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_1258	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1259	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_126	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1260	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1261	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1262	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Mitrella	Mitrella bicincta
+ASV_1263	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1264	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1265	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1266	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1267	Eukaryota	Arthropoda	Malacostraca	Amphipoda	Calliopiidae	NA	NA
+ASV_1268	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1269	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_127	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1270	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1271	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1272	Eukaryota	Mollusca	Gastropoda	Hermaeidae__o	Hermaeidae	Hermaea	NA
+ASV_1273	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1274	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1275	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	Sagittidae	NA	NA
+ASV_1276	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1277	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1278	Eukaryota	Arthropoda	Malacostraca	Decapoda	Diogenidae	NA	NA
+ASV_1279	Unknown	NA	NA	NA	NA	NA	NA
+ASV_128	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_1280	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1281	Eukaryota	Arthropoda	Malacostraca	Euphausiacea	Euphausiidae	Euphausia	Euphausia pacifica
+ASV_1282	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1283	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Naticidae	Neverita	NA
+ASV_1284	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1285	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1286	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1287	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1288	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_1289	Eukaryota	Arthropoda	Malacostraca	Decapoda	Lithodidae	Lithodes	Lithodes turritus
+ASV_129	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1290	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1291	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1292	Eukaryota	Arthropoda	Hexanauplia	NA	NA	NA	NA
+ASV_1293	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1294	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1295	Eukaryota	Arthropoda	Malacostraca	NA	NA	NA	NA
+ASV_1296	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1297	Eukaryota	Mollusca	Gastropoda	Hermaeidae__o	Hermaeidae	Hermaea	NA
+ASV_1298	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1299	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_13	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_130	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_1300	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1301	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1302	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1303	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1304	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1305	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_1306	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1307	Eukaryota	Annelida	Polychaeta	Capitellidae__o	NA	NA	NA
+ASV_1308	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1309	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_131	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1310	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_1311	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Mitrella	Mitrella bicincta
+ASV_1312	Eukaryota	Annelida	Polychaeta	Spionida	Spionidae	NA	NA
+ASV_1313	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Littorinidae	Littorina	Littorina plena
+ASV_1314	Eukaryota	Annelida	Polychaeta	Phyllodocida	Nephtyidae	Bipalponephtys	Bipalponephtys cornuta
+ASV_1315	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1316	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1317	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1318	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pasiphaeidae	NA	NA
+ASV_1319	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	NA	NA	NA
+ASV_132	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1320	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1321	Eukaryota	Arthropoda	Thecostraca	Balanomorpha	Balanidae	Balanus	NA
+ASV_1322	Eukaryota	Mollusca	Bivalvia	Galeommatida	Montacutidae	Kurtiella	Kurtiella tumida
+ASV_1323	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Heptacarpus	Heptacarpus brevirostris
+ASV_1324	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1325	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1326	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1327	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1328	Eukaryota	Arthropoda	Malacostraca	Isopoda	NA	NA	NA
+ASV_1329	Eukaryota	Arthropoda	Malacostraca	Isopoda	NA	NA	NA
+ASV_133	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1330	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1331	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea gigas
+ASV_1332	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1333	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1334	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	NA	NA	NA
+ASV_1335	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1336	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Candaciidae	Candacia	Candacia columbiae
+ASV_1337	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1338	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1339	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea gigas
+ASV_134	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1340	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1341	Eukaryota	NA	NA	NA	NA	NA	NA
+ASV_1342	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus glacialis
+ASV_1343	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Lacunidae	Lacuna	Lacuna vincta
+ASV_1344	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1345	Eukaryota	Annelida	Polychaeta	Terebellida	NA	NA	NA
+ASV_1346	Eukaryota	Arthropoda	Malacostraca	Isopoda	Bopyridae	Orthione	Orthione mesoamericana
+ASV_1347	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	NA	NA
+ASV_1348	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1349	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	NA
+ASV_135	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1350	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	NA	NA	NA
+ASV_1351	Eukaryota	Annelida	Polychaeta	Phyllodocida	NA	NA	NA
+ASV_1352	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1353	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1354	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1355	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_1356	Eukaryota	Arthropoda	Malacostraca	Isopoda	Bopyridae	Orthione	Orthione mesoamericana
+ASV_1357	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1358	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Rissoidae	Alvania	NA
+ASV_1359	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_136	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1360	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1361	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Terebridae	NA	NA
+ASV_1362	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1363	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea gigas
+ASV_1364	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Candaciidae	Candacia	NA
+ASV_1365	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	NA	NA	NA
+ASV_1366	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1367	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1368	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	NA
+ASV_1369	Eukaryota	Arthropoda	Malacostraca	Isopoda	NA	NA	NA
+ASV_137	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1370	Eukaryota	Mollusca	Gastropoda	Hermaeidae__o	Hermaeidae	Hermaea	NA
+ASV_1371	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	Sagittidae	NA	NA
+ASV_1372	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_1373	Eukaryota	Mollusca	Bivalvia	Cardiida	Cardiidae	NA	NA
+ASV_1374	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1375	Eukaryota	Arthropoda	Insecta	Coleoptera	NA	NA	NA
+ASV_1376	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1377	Eukaryota	Echinodermata	Ophiuroidea	Amphilepidida	NA	NA	NA
+ASV_1378	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	NA
+ASV_1379	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_138	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_1380	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1381	Eukaryota	Annelida	Polychaeta	Spionida	Spionidae	Boccardiella	NA
+ASV_1382	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1383	Eukaryota	Arthropoda	Thecostraca	Balanomorpha	Balanidae	Balanus	NA
+ASV_1384	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1385	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1386	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1387	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea gigas
+ASV_1388	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Candaciidae	Candacia	Candacia columbiae
+ASV_1389	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus glacialis
+ASV_139	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1390	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1391	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1392	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1393	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	NA	NA	NA
+ASV_1394	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1395	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1396	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1397	Eukaryota	Mollusca	Gastropoda	NA	NA	NA	NA
+ASV_1398	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus californicus
+ASV_1399	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_14	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_140	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1400	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1401	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1402	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1403	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Calyptraeidae	Crepipatella	Crepipatella lingulata
+ASV_1404	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	NA
+ASV_1405	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus glacialis
+ASV_1406	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus glacialis
+ASV_1407	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	NA	NA
+ASV_1408	Eukaryota	Annelida	Polychaeta	Phyllodocida	NA	NA	NA
+ASV_1409	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_141	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1410	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	NA	NA
+ASV_1411	Eukaryota	Mollusca	Gastropoda	NA	NA	NA	NA
+ASV_1412	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1413	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1414	Eukaryota	Nematoda	Chromadorea	Rhabditida	NA	NA	NA
+ASV_1415	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1416	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1417	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1418	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1419	Unknown	NA	NA	NA	NA	NA	NA
+ASV_142	Eukaryota	Mollusca	Bivalvia	Myida	Xylophagaidae	Xylophaga	Xylophaga washingtona
+ASV_1420	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1421	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1422	Eukaryota	Annelida	Polychaeta	Phyllodocida	Polynoidae	Arctonoe	NA
+ASV_1423	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1424	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Hippolyte	Hippolyte clarki
+ASV_1425	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1426	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Littorinidae	Littorina	Littorina plena
+ASV_1427	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1428	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_1429	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_143	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1430	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1431	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1432	Eukaryota	Arthropoda	Malacostraca	Amphipoda	NA	NA	NA
+ASV_1433	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	NA	NA
+ASV_1434	Eukaryota	Annelida	Polychaeta	Spionida	Spionidae	Dipolydora	NA
+ASV_1435	Eukaryota	Echinodermata	Ophiuroidea	Amphilepidida	NA	NA	NA
+ASV_1436	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1437	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1438	Eukaryota	Nemertea	Pilidiophora	Heteronemertea	NA	NA	NA
+ASV_1439	Eukaryota	Mollusca	Gastropoda	Acteonidae__o	Acteonidae	Rictaxis	Rictaxis punctocaelatus
+ASV_144	Eukaryota	Arthropoda	Malacostraca	Amphipoda	Cyphocarididae	Cyphocaris	Cyphocaris challengeri
+ASV_1440	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	NA	NA
+ASV_1441	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1442	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1443	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1444	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1445	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Spirontocaris	Spirontocaris sica
+ASV_1446	Eukaryota	Annelida	Polychaeta	Phyllodocida	Phyllodocidae	Pelagobia	Pelagobia longicirrata
+ASV_1447	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1448	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1449	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_145	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1450	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1451	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	NA	NA
+ASV_1452	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1453	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	NA	NA	NA
+ASV_1454	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1455	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	Sagittidae	NA	NA
+ASV_1456	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	NA	NA	NA
+ASV_1457	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1458	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1459	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_146	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1460	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1461	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1462	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1463	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Pleuromamma	Pleuromamma scutullata
+ASV_1464	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	NA	NA
+ASV_1465	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_1466	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Conidae	NA	NA
+ASV_1467	Eukaryota	Arthropoda	Thecostraca	Balanomorpha	Balanidae	Semibalanus	Semibalanus cariosus
+ASV_1468	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1469	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_147	Eukaryota	Mollusca	Gastropoda	Acteonidae__o	NA	NA	NA
+ASV_1470	Eukaryota	Annelida	Polychaeta	Terebellida	NA	NA	NA
+ASV_1471	Eukaryota	Annelida	Polychaeta	Terebellida	NA	NA	NA
+ASV_1472	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Mitrella	Mitrella bicincta
+ASV_1473	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1474	Eukaryota	Arthropoda	Malacostraca	Euphausiacea	Euphausiidae	NA	NA
+ASV_1475	Eukaryota	Annelida	Polychaeta	Phyllodocida	Goniadidae	Glycinde	Glycinde armigera
+ASV_1476	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1477	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1478	Eukaryota	Arthropoda	Malacostraca	Euphausiacea	Euphausiidae	Euphausia	Euphausia pacifica
+ASV_1479	Unknown	NA	NA	NA	NA	NA	NA
+ASV_148	Eukaryota	Arthropoda	Thecostraca	Balanomorpha	Balanidae	Balanus	NA
+ASV_1480	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Rissoidae	Alvania	NA
+ASV_1481	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1482	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1483	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1484	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1485	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	NA	NA	NA
+ASV_1486	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1487	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1488	Eukaryota	Annelida	Polychaeta	Sabellida	NA	NA	NA
+ASV_1489	Eukaryota	Mollusca	Gastropoda	Cocculinidae__o	NA	NA	NA
+ASV_149	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_1490	Eukaryota	Arthropoda	Malacostraca	Decapoda	Pasiphaeidae	NA	NA
+ASV_1491	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1492	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Lacunidae	Lacuna	Lacuna vincta
+ASV_1493	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_1494	Eukaryota	Bryozoa	Gymnolaemata	Cheilostomatida	Membraniporidae	NA	NA
+ASV_1495	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1496	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	NA	NA	NA
+ASV_1497	Eukaryota	Annelida	Polychaeta	Spionida	Trochochaetidae	Trochochaeta	NA
+ASV_1498	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_1499	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Mitrella	Mitrella bicincta
+ASV_15	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_150	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1500	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1501	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1502	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1503	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1504	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1505	Eukaryota	Arthropoda	Malacostraca	Decapoda	Axiidae	Leonardsaxius	Leonardsaxius amurensis
+ASV_1506	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1507	Eukaryota	Nemertea	Enopla	Monostilifera	NA	NA	NA
+ASV_1508	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1509	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_151	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1510	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Candaciidae	Candacia	Candacia columbiae
+ASV_1511	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1512	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1513	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1514	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1515	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1516	Eukaryota	Annelida	Polychaeta	Phyllodocida	Polynoidae	NA	NA
+ASV_1517	Eukaryota	Mollusca	Gastropoda	Hermaeidae__o	Hermaeidae	Hermaea	NA
+ASV_1518	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1519	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	NA
+ASV_152	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1520	Eukaryota	Arthropoda	Malacostraca	Decapoda	Paguridae	NA	NA
+ASV_1521	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1522	Eukaryota	Mollusca	Bivalvia	Mytilida	Mytilidae	Mytilus	NA
+ASV_1523	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1524	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1525	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1526	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_1527	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	NA	NA
+ASV_1528	Eukaryota	Cnidaria	Hydrozoa	Narcomedusae	Cuninidae	Solmissus	Solmissus incisa
+ASV_1529	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_153	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_1530	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Nassariidae	Nassarius	NA
+ASV_1531	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1532	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1533	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_1534	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1535	Eukaryota	Nemertea	Enopla	Monostilifera	Carcinonemertidae	Carcinonemertes	NA
+ASV_1536	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Heptacarpus	NA
+ASV_1537	Eukaryota	Cnidaria	Hydrozoa	Trachymedusae	Rhopalonematidae	Aglantha	Aglantha digitale
+ASV_1538	Eukaryota	Mollusca	Gastropoda	NA	NA	NA	NA
+ASV_1539	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	NA	NA
+ASV_154	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1540	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1541	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1542	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus glacialis
+ASV_1543	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Rissoidae	NA	NA
+ASV_1544	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Mitrella	Mitrella bicincta
+ASV_1545	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	Haminoeidae	Haminoea	Haminoea vesicula
+ASV_1546	Eukaryota	Annelida	Polychaeta	Sabellida	NA	NA	NA
+ASV_1547	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1548	Eukaryota	Annelida	Polychaeta	Spionida	Spionidae	Dipolydora	NA
+ASV_1549	Unknown	NA	NA	NA	NA	NA	NA
+ASV_155	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_1550	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1551	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1552	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea gigas
+ASV_1553	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1554	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1555	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1556	Eukaryota	Annelida	Polychaeta	Phyllodocida	Polynoidae	Harmothoe	Harmothoe cf_ imbricata BCG_2017
+ASV_1557	Eukaryota	Arthropoda	Insecta	Orthoptera	NA	NA	NA
+ASV_1558	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1559	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_156	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1560	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1561	Eukaryota	Arthropoda	Insecta	NA	NA	NA	NA
+ASV_1562	Eukaryota	Annelida	Polychaeta	Sabellida	NA	NA	NA
+ASV_1563	Eukaryota	Arthropoda	Arachnida	NA	NA	NA	NA
+ASV_1564	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Mitrella	Mitrella bicincta
+ASV_1565	Eukaryota	Arthropoda	Malacostraca	Decapoda	NA	NA	NA
+ASV_1566	Eukaryota	Nemertea	Pilidiophora	Heteronemertea	Lineidae	Cerebratulus	Cerebratulus longiceps
+ASV_1567	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1568	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1569	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_157	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_1570	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	NA
+ASV_1571	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Mitrella	Mitrella bicincta
+ASV_1572	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1573	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Lacunidae	Lacuna	Lacuna vincta
+ASV_1574	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1575	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	NA	NA
+ASV_1576	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Acartiidae	Acartia	Acartia tonsa
+ASV_1577	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea californiensis
+ASV_1578	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	NA
+ASV_1579	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Spirontocaris	Spirontocaris holmesi
+ASV_158	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1580	Eukaryota	Mollusca	Bivalvia	Cardiida	NA	NA	NA
+ASV_1581	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1582	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	Sagittidae	NA	NA
+ASV_1583	Eukaryota	Acanthocephala	Palaeacanthocephala	Polymorphida	Polymorphidae	Corynosoma	NA
+ASV_1584	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1585	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1586	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1587	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1588	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1589	Unknown	NA	NA	NA	NA	NA	NA
+ASV_159	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_1590	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	NA	NA	NA
+ASV_1591	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1592	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1593	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1594	Eukaryota	Annelida	Polychaeta	Sabellida	NA	NA	NA
+ASV_1595	Eukaryota	Mollusca	Gastropoda	NA	NA	NA	NA
+ASV_1596	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Velutinidae	Velutina	Velutina velutina
+ASV_1597	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Mitrella	Mitrella bicincta
+ASV_1598	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1599	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_16	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_160	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1600	Eukaryota	Arthropoda	Malacostraca	Isopoda	Bopyridae	Orthione	Orthione mesoamericana
+ASV_1601	Eukaryota	Nemertea	Pilidiophora	Heteronemertea	Lineidae	NA	NA
+ASV_1602	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1603	Eukaryota	Nemertea	Pilidiophora	Heteronemertea	Lineidae	NA	NA
+ASV_1604	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1605	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Neocalanus	Neocalanus plumchrus
+ASV_1606	Eukaryota	Mollusca	Gastropoda	Cocculinidae__o	NA	NA	NA
+ASV_1607	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1608	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1609	Eukaryota	Arthropoda	Thecostraca	Balanomorpha	Balanidae	Balanus	NA
+ASV_161	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_1610	Eukaryota	Mollusca	Gastropoda	NA	NA	NA	NA
+ASV_1611	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1612	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1613	Eukaryota	Platyhelminthes	Trematoda	Plagiorchiida	NA	NA	NA
+ASV_1614	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1615	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_1616	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_1617	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1618	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	NA	NA
+ASV_1619	Eukaryota	Arthropoda	Malacostraca	Amphipoda	Cyphocarididae	Cyphocaris	Cyphocaris challengeri
+ASV_162	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_1620	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Mesocalanus	Mesocalanus tenuicornis
+ASV_1621	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1622	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_1623	Eukaryota	Annelida	Polychaeta	Phyllodocida	Glyceridae	NA	NA
+ASV_1624	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1625	Eukaryota	Annelida	Polychaeta	Phyllodocida	Goniadidae	Glycinde	Glycinde armigera
+ASV_1626	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1627	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus glacialis
+ASV_1628	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1629	Unknown	NA	NA	NA	NA	NA	NA
+ASV_163	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia lucens
+ASV_1630	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1631	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1632	Eukaryota	Mollusca	Bivalvia	Galeommatida	Galeommatidae	Scintillona	Scintillona bellerophon
+ASV_1633	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1634	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1635	Eukaryota	Mollusca	Bivalvia	Galeommatida	Montacutidae	Kurtiella	Kurtiella tumida
+ASV_1636	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1637	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1638	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_1639	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_164	Eukaryota	Mollusca	Gastropoda	Acteonidae__o	NA	NA	NA
+ASV_1640	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1641	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1642	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1643	Eukaryota	Bryozoa	Gymnolaemata	Cheilostomatida	Membraniporidae	Membranipora	Membranipora villosa
+ASV_1644	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1645	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Candaciidae	Candacia	Candacia columbiae
+ASV_1646	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1647	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1648	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1649	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_165	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1650	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_1651	Eukaryota	Nematoda	Chromadorea	Rhabditida	NA	NA	NA
+ASV_1652	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1653	Eukaryota	Arthropoda	Malacostraca	Isopoda	Bopyridae	Orthione	Orthione mesoamericana
+ASV_1654	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1655	Eukaryota	Arthropoda	Thecostraca	Balanomorpha	Balanidae	Balanus	NA
+ASV_1656	Unknown	NA	NA	NA	NA	NA	NA
+ASV_1657	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	NA
+ASV_1658	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1659	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_166	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1660	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_1661	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	NA	NA
+ASV_1662	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea gigas
+ASV_1663	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1664	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_1665	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1666	Eukaryota	Cnidaria	Hydrozoa	Trachymedusae	Rhopalonematidae	Aglantha	Aglantha digitale
+ASV_1667	Eukaryota	Arthropoda	Malacostraca	Euphausiacea	Euphausiidae	Euphausia	Euphausia pacifica
+ASV_1668	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1669	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_167	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1670	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1671	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_1672	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus simillimus
+ASV_1673	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_1674	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_168	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_169	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_17	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_170	Eukaryota	Mollusca	Gastropoda	Acteonidae__o	NA	NA	NA
+ASV_171	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_172	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_173	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_174	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_175	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_176	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_177	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_178	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_179	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_18	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_180	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_181	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_182	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_183	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_184	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_185	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_186	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_187	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_188	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_189	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_19	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_190	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_191	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_192	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_193	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_194	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_195	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_196	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_197	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Calyptraeidae	Crepipatella	Crepipatella lingulata
+ASV_198	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_199	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_2	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_20	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_200	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_201	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_202	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_203	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_204	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus californicus
+ASV_205	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_206	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_207	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_208	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_209	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_21	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_210	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_211	Unknown	NA	NA	NA	NA	NA	NA
+ASV_212	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia lucens
+ASV_213	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_214	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_215	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_216	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_217	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_218	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_219	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_22	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_220	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_221	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_222	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_223	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_224	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_225	Eukaryota	Mollusca	Gastropoda	Acteonidae__o	NA	NA	NA
+ASV_226	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_227	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_228	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_229	Unknown	NA	NA	NA	NA	NA	NA
+ASV_23	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_230	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_231	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_232	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_233	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_234	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_235	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_236	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_237	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_238	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_239	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus californicus
+ASV_24	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_240	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_241	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_242	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_243	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_244	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_245	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_246	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_247	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_248	Eukaryota	Arthropoda	Malacostraca	Isopoda	Bopyridae	Orthione	Orthione mesoamericana
+ASV_249	Unknown	NA	NA	NA	NA	NA	NA
+ASV_25	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_250	Unknown	NA	NA	NA	NA	NA	NA
+ASV_251	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_252	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_253	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea gigas
+ASV_254	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_255	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_256	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_257	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_258	Eukaryota	Nemertea	Palaeonemertea	Archinemertea	Cephalotrichidae	Cephalothrix	Cephalothrix major
+ASV_259	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_26	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_260	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus glacialis
+ASV_261	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_262	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_263	Unknown	NA	NA	NA	NA	NA	NA
+ASV_264	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_265	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_266	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_267	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_268	Unknown	NA	NA	NA	NA	NA	NA
+ASV_269	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_27	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_270	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_271	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_272	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_273	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_274	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_275	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_276	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_277	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_278	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_279	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_28	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_280	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_281	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_282	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_283	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_284	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_285	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_286	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_287	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_288	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_289	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_29	Unknown	NA	NA	NA	NA	NA	NA
+ASV_290	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_291	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_292	Unknown	NA	NA	NA	NA	NA	NA
+ASV_293	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_294	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_295	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_296	Eukaryota	Arthropoda	Malacostraca	NA	NA	NA	NA
+ASV_297	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_298	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_299	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_3	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_30	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_300	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_301	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_302	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Rissoidae	NA	NA
+ASV_303	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_304	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_305	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_306	Unknown	NA	NA	NA	NA	NA	NA
+ASV_307	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_308	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_309	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Lacunidae	Lacuna	Lacuna vincta
+ASV_31	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_310	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_311	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_312	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_313	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea californiensis
+ASV_314	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_315	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_316	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_317	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_318	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_319	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_32	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_320	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_321	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_322	Unknown	NA	NA	NA	NA	NA	NA
+ASV_323	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus glacialis
+ASV_324	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_325	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_326	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_327	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_328	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_329	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_33	Unknown	NA	NA	NA	NA	NA	NA
+ASV_330	Unknown	NA	NA	NA	NA	NA	NA
+ASV_331	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_332	Unknown	NA	NA	NA	NA	NA	NA
+ASV_333	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_334	Unknown	NA	NA	NA	NA	NA	NA
+ASV_335	Eukaryota	Arthropoda	Malacostraca	Decapoda	Axiidae	Leonardsaxius	Leonardsaxius amurensis
+ASV_336	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_337	Eukaryota	Arthropoda	Malacostraca	NA	NA	NA	NA
+ASV_338	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Lacunidae	Lacuna	Lacuna vincta
+ASV_339	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_34	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea californiensis
+ASV_340	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_341	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_342	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	NA
+ASV_343	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_344	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_345	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_346	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_347	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	NA
+ASV_348	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_349	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_35	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_350	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_351	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_352	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_353	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_354	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_355	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	NA
+ASV_356	Unknown	NA	NA	NA	NA	NA	NA
+ASV_357	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_358	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	NA
+ASV_359	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	NA
+ASV_36	Eukaryota	Mollusca	Gastropoda	Acteonidae__o	NA	NA	NA
+ASV_360	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_361	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_362	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_363	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_364	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea gigas
+ASV_365	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Candaciidae	Candacia	Candacia columbiae
+ASV_366	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_367	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_368	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_369	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_37	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_370	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	NA
+ASV_371	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_372	Unknown	NA	NA	NA	NA	NA	NA
+ASV_373	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_374	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_375	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_376	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_377	Eukaryota	Acanthocephala	Palaeacanthocephala	Polymorphida	Polymorphidae	Corynosoma	NA
+ASV_378	Unknown	NA	NA	NA	NA	NA	NA
+ASV_379	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_38	Unknown	NA	NA	NA	NA	NA	NA
+ASV_380	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_381	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Pontellidae	Labidocera	Labidocera jollae
+ASV_382	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea gigas
+ASV_383	Eukaryota	Arthropoda	Thecostraca	Balanomorpha	Balanidae	Balanus	NA
+ASV_384	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_385	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_386	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_387	Eukaryota	Nemertea	Pilidiophora	Heteronemertea	Lineidae	Cerebratulus	NA
+ASV_388	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_389	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_39	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Acartiidae	Acartia	Acartia longiremis
+ASV_390	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_391	Eukaryota	Nemertea	Enopla	Monostilifera	Emplectonematidae	Emplectonema	Emplectonema viride
+ASV_392	Unknown	NA	NA	NA	NA	NA	NA
+ASV_393	Unknown	NA	NA	NA	NA	NA	NA
+ASV_394	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_395	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_396	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_397	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_398	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_399	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia lucens
+ASV_4	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_40	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea gigas
+ASV_400	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_401	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_402	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_403	Eukaryota	Arthropoda	Malacostraca	Isopoda	Bopyridae	Orthione	Orthione mesoamericana
+ASV_404	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_405	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_406	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Rissoidae	Alvania	NA
+ASV_407	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_408	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Acartiidae	Acartia	Acartia longiremis
+ASV_409	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_41	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_410	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_411	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_412	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_413	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_414	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_415	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus glacialis
+ASV_416	Eukaryota	Mollusca	Gastropoda	Neogastropoda	NA	NA	NA
+ASV_417	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_418	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_419	Eukaryota	Mollusca	Bivalvia	Galeommatida	Montacutidae	Kurtiella	Kurtiella tumida
+ASV_42	Unknown	NA	NA	NA	NA	NA	NA
+ASV_420	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_421	Eukaryota	Nemertea	Pilidiophora	Heteronemertea	Lineidae	NA	NA
+ASV_422	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_423	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_424	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_425	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_426	Unknown	NA	NA	NA	NA	NA	NA
+ASV_427	Unknown	NA	NA	NA	NA	NA	NA
+ASV_428	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_429	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_43	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_430	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_431	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_432	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_433	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_434	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_435	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_436	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_437	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_438	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_439	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_44	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_440	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_441	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_442	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_443	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_444	Eukaryota	Arthropoda	Malacostraca	Isopoda	Bopyridae	Orthione	Orthione mesoamericana
+ASV_445	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_446	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_447	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_448	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_449	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_45	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_450	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_451	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_452	Eukaryota	Arthropoda	Malacostraca	NA	NA	NA	NA
+ASV_453	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_454	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_455	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Heptacarpus	Heptacarpus pugettensis
+ASV_456	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_457	Eukaryota	Echinodermata	Ophiuroidea	Amphilepidida	NA	NA	NA
+ASV_458	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_459	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_46	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_460	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_461	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_462	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_463	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_464	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_465	Unknown	NA	NA	NA	NA	NA	NA
+ASV_466	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_467	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea californiensis
+ASV_468	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_469	Eukaryota	Arthropoda	Malacostraca	NA	NA	NA	NA
+ASV_47	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_470	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_471	Eukaryota	Annelida	Polychaeta	Phyllodocida	NA	NA	NA
+ASV_472	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_473	Unknown	NA	NA	NA	NA	NA	NA
+ASV_474	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_475	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_476	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_477	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_478	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_479	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_48	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia lucens
+ASV_480	Unknown	NA	NA	NA	NA	NA	NA
+ASV_481	Unknown	NA	NA	NA	NA	NA	NA
+ASV_482	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_483	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_484	Eukaryota	Arthropoda	Malacostraca	Isopoda	Bopyridae	Orthione	Orthione mesoamericana
+ASV_485	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_486	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_487	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_488	Unknown	NA	NA	NA	NA	NA	NA
+ASV_489	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	NA
+ASV_49	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_490	Unknown	NA	NA	NA	NA	NA	NA
+ASV_491	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_492	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_493	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_494	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia lucens
+ASV_495	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_496	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_497	Unknown	NA	NA	NA	NA	NA	NA
+ASV_498	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_499	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_5	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_50	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_500	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_501	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_502	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_503	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_504	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_505	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_506	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_507	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	NA
+ASV_508	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_509	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_51	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_510	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Trichotropidae	Trichotropis	Trichotropis cancellata
+ASV_511	Eukaryota	Arthropoda	Malacostraca	Isopoda	Bopyridae	Orthione	Orthione mesoamericana
+ASV_512	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_513	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_514	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_515	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_516	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_517	Eukaryota	Arthropoda	Insecta	Coleoptera	NA	NA	NA
+ASV_518	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_519	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Lacunidae	Lacuna	Lacuna vincta
+ASV_52	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	NA
+ASV_520	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_521	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_522	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_523	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_524	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_525	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_526	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_527	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_528	Unknown	NA	NA	NA	NA	NA	NA
+ASV_529	Eukaryota	Arthropoda	Malacostraca	Isopoda	Bopyridae	Orthione	Orthione mesoamericana
+ASV_53	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_530	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	NA	NA	NA
+ASV_531	Unknown	NA	NA	NA	NA	NA	NA
+ASV_532	Unknown	NA	NA	NA	NA	NA	NA
+ASV_533	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_534	Eukaryota	Mollusca	Bivalvia	NA	NA	NA	NA
+ASV_535	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_536	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea californiensis
+ASV_537	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_538	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	NA
+ASV_539	Unknown	NA	NA	NA	NA	NA	NA
+ASV_54	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_540	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_541	Unknown	NA	NA	NA	NA	NA	NA
+ASV_542	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_543	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_544	Eukaryota	Arthropoda	Thecostraca	Balanomorpha	Balanidae	Balanus	Balanus glandula
+ASV_545	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_546	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_547	Unknown	NA	NA	NA	NA	NA	NA
+ASV_548	Eukaryota	Mollusca	Bivalvia	NA	NA	NA	NA
+ASV_549	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Lucicutiidae	Lucicutia	Lucicutia flavicornis
+ASV_55	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_550	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus glacialis
+ASV_551	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_552	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_553	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_554	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_555	Unknown	NA	NA	NA	NA	NA	NA
+ASV_556	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_557	Unknown	NA	NA	NA	NA	NA	NA
+ASV_558	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_559	Unknown	NA	NA	NA	NA	NA	NA
+ASV_56	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_560	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_561	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_562	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_563	Eukaryota	Mollusca	Bivalvia	NA	NA	NA	NA
+ASV_564	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_565	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_566	Unknown	NA	NA	NA	NA	NA	NA
+ASV_567	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_568	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Pleopis	Pleopis polyphemoides
+ASV_569	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_57	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_570	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_571	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Pleopis	Pleopis polyphemoides
+ASV_572	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_573	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_574	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_575	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea californiensis
+ASV_576	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_577	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_578	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	NA
+ASV_579	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_58	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_580	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_581	Unknown	NA	NA	NA	NA	NA	NA
+ASV_582	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_583	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_584	Eukaryota	Nemertea	Pilidiophora	Heteronemertea	Lineidae	NA	NA
+ASV_585	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_586	Unknown	NA	NA	NA	NA	NA	NA
+ASV_587	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_588	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_589	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_59	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Lacunidae	Lacuna	Lacuna vincta
+ASV_590	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_591	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_592	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_593	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_594	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	NA
+ASV_595	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_596	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_597	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_598	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_599	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_6	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_60	Eukaryota	Mollusca	Bivalvia	NA	NA	NA	NA
+ASV_600	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_601	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_602	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_603	Eukaryota	Arthropoda	Thecostraca	Peltogastridae__o	Peltogastridae	NA	NA
+ASV_604	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_605	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	NA
+ASV_606	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_607	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Mitrella	Mitrella bicincta
+ASV_608	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_609	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus californicus
+ASV_61	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_610	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_611	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_612	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_613	Unknown	NA	NA	NA	NA	NA	NA
+ASV_614	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_615	Unknown	NA	NA	NA	NA	NA	NA
+ASV_616	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_617	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_618	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_619	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_62	Unknown	NA	NA	NA	NA	NA	NA
+ASV_620	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus glacialis
+ASV_621	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Lucicutiidae	Lucicutia	Lucicutia flavicornis
+ASV_622	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_623	Unknown	NA	NA	NA	NA	NA	NA
+ASV_624	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_625	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_626	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_627	Eukaryota	Arthropoda	Malacostraca	Isopoda	Bopyridae	Orthione	Orthione mesoamericana
+ASV_628	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_629	Unknown	NA	NA	NA	NA	NA	NA
+ASV_63	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_630	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_631	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_632	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	NA	NA
+ASV_633	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_634	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_635	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_636	Unknown	NA	NA	NA	NA	NA	NA
+ASV_637	Unknown	NA	NA	NA	NA	NA	NA
+ASV_638	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_639	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_64	Unknown	NA	NA	NA	NA	NA	NA
+ASV_640	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_641	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_642	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_643	Unknown	NA	NA	NA	NA	NA	NA
+ASV_644	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_645	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_646	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_647	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_648	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_649	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_65	Unknown	NA	NA	NA	NA	NA	NA
+ASV_650	Eukaryota	Mollusca	Bivalvia	NA	NA	NA	NA
+ASV_651	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_652	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_653	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_654	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_655	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_656	Eukaryota	Annelida	Polychaeta	Spionida	Spionidae	Dipolydora	NA
+ASV_657	Unknown	NA	NA	NA	NA	NA	NA
+ASV_658	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea gigas
+ASV_659	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_66	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_660	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_661	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_662	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_663	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_664	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_665	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_666	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_667	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Lacunidae	Lacuna	Lacuna vincta
+ASV_668	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_669	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_67	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_670	Eukaryota	Mollusca	Gastropoda	Hermaeidae__o	Hermaeidae	Hermaea	NA
+ASV_671	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_672	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_673	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_674	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_675	Eukaryota	Annelida	Polychaeta	Spionida	Spionidae	Boccardia	NA
+ASV_676	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_677	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_678	Eukaryota	Nemertea	Pilidiophora	Heteronemertea	Lineidae	NA	NA
+ASV_679	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_68	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_680	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_681	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_682	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_683	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_684	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Paracalanidae	NA	NA
+ASV_685	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_686	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_687	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_688	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_689	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_69	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_690	Unknown	NA	NA	NA	NA	NA	NA
+ASV_691	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_692	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_693	Unknown	NA	NA	NA	NA	NA	NA
+ASV_694	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_695	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_696	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_697	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_698	Unknown	NA	NA	NA	NA	NA	NA
+ASV_699	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_7	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_70	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_700	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_701	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_702	Unknown	NA	NA	NA	NA	NA	NA
+ASV_703	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_704	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_705	Unknown	NA	NA	NA	NA	NA	NA
+ASV_706	Unknown	NA	NA	NA	NA	NA	NA
+ASV_707	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_708	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_709	Unknown	NA	NA	NA	NA	NA	NA
+ASV_71	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_710	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Lucicutiidae	Lucicutia	Lucicutia flavicornis
+ASV_711	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_712	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_713	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_714	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_715	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_716	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_717	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_718	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_719	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_72	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_720	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_721	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	NA
+ASV_722	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_723	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_724	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	NA	NA
+ASV_725	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_726	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_727	Eukaryota	Annelida	Polychaeta	Spionida	Spionidae	Pygospio	NA
+ASV_728	Unknown	NA	NA	NA	NA	NA	NA
+ASV_729	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_73	Eukaryota	Arthropoda	Malacostraca	Isopoda	Bopyridae	Orthione	Orthione mesoamericana
+ASV_730	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_731	Eukaryota	Arthropoda	Malacostraca	Amphipoda	Calliopiidae	NA	NA
+ASV_732	Unknown	NA	NA	NA	NA	NA	NA
+ASV_733	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Pleopis	Pleopis polyphemoides
+ASV_734	Eukaryota	Arthropoda	Malacostraca	Isopoda	Bopyridae	Orthione	Orthione mesoamericana
+ASV_735	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_736	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_737	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_738	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_739	Unknown	NA	NA	NA	NA	NA	NA
+ASV_74	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_740	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_741	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_742	Eukaryota	Mollusca	Bivalvia	NA	NA	NA	NA
+ASV_743	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_744	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Mitrella	Mitrella bicincta
+ASV_745	Eukaryota	Mollusca	Gastropoda	Acteonidae__o	NA	NA	NA
+ASV_746	Unknown	NA	NA	NA	NA	NA	NA
+ASV_747	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_748	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_749	Eukaryota	Mollusca	Gastropoda	Acteonidae__o	NA	NA	NA
+ASV_75	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_750	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Lacunidae	Lacuna	Lacuna vincta
+ASV_751	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_752	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea gigas
+ASV_753	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Paracalanidae	NA	NA
+ASV_754	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_755	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_756	Eukaryota	Arthropoda	Malacostraca	Isopoda	Bopyridae	Orthione	Orthione mesoamericana
+ASV_757	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_758	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_759	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_76	Eukaryota	Arthropoda	Malacostraca	Isopoda	Bopyridae	Orthione	Orthione mesoamericana
+ASV_760	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_761	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_762	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_763	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_764	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_765	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_766	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Lacunidae	Lacuna	Lacuna vincta
+ASV_767	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia lucens
+ASV_768	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_769	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_77	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_770	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_771	Eukaryota	Mollusca	Gastropoda	Acteonidae__o	NA	NA	NA
+ASV_772	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_773	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_774	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_775	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_776	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_777	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_778	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_779	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_78	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_780	Eukaryota	Bryozoa	Gymnolaemata	Cheilostomatida	Membraniporidae	NA	NA
+ASV_781	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_782	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_783	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_784	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_785	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_786	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_787	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_788	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Pleopis	Pleopis polyphemoides
+ASV_789	Unknown	NA	NA	NA	NA	NA	NA
+ASV_79	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_790	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_791	Eukaryota	NA	NA	NA	NA	NA	NA
+ASV_792	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_793	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Lacunidae	Lacuna	Lacuna vincta
+ASV_794	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_795	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	NA	NA
+ASV_796	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_797	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_798	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_799	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_8	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_80	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_800	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_801	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea gigas
+ASV_802	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Mitrella	Mitrella bicincta
+ASV_803	Eukaryota	Mollusca	Gastropoda	Neogastropoda	NA	NA	NA
+ASV_804	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_805	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_806	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_807	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_808	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_809	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Lacunidae	Lacuna	Lacuna vincta
+ASV_81	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_810	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Pontellidae	Labidocera	Labidocera jollae
+ASV_811	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_812	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_813	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Pleopis	Pleopis polyphemoides
+ASV_814	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_815	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_816	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_817	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_818	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_819	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_82	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_820	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_821	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_822	Unknown	NA	NA	NA	NA	NA	NA
+ASV_823	Eukaryota	Annelida	Polychaeta	Spionida	Spionidae	NA	NA
+ASV_824	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_825	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	NA	NA
+ASV_826	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_827	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Lacunidae	Lacuna	Lacuna vincta
+ASV_828	Unknown	NA	NA	NA	NA	NA	NA
+ASV_829	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_83	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_830	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_831	Unknown	NA	NA	NA	NA	NA	NA
+ASV_832	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_833	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_834	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_835	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_836	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_837	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_838	Eukaryota	Annelida	Polychaeta	NA	NA	NA	NA
+ASV_839	Unknown	NA	NA	NA	NA	NA	NA
+ASV_84	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Rissoidae	NA	NA
+ASV_840	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_841	Eukaryota	Arthropoda	Malacostraca	Amphipoda	NA	NA	NA
+ASV_842	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_843	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_844	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_845	Eukaryota	Annelida	Polychaeta	NA	NA	NA	NA
+ASV_846	Eukaryota	Arthropoda	Malacostraca	NA	NA	NA	NA
+ASV_847	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_848	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_849	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_85	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_850	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_851	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_852	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_853	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_854	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia lucens
+ASV_855	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_856	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_857	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia lucens
+ASV_858	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Rissoidae	NA	NA
+ASV_859	Eukaryota	Annelida	Polychaeta	NA	NA	NA	NA
+ASV_86	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_860	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_861	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Pleopis	Pleopis polyphemoides
+ASV_862	Unknown	NA	NA	NA	NA	NA	NA
+ASV_863	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_864	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_865	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_866	Unknown	NA	NA	NA	NA	NA	NA
+ASV_867	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_868	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_869	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_87	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_870	Eukaryota	Nemertea	Enopla	Monostilifera	Carcinonemertidae	Carcinonemertes	NA
+ASV_871	Eukaryota	Annelida	Polychaeta	Phyllodocida	NA	NA	NA
+ASV_872	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus californicus
+ASV_873	Unknown	NA	NA	NA	NA	NA	NA
+ASV_874	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_875	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_876	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_877	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_878	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_879	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_88	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_880	Eukaryota	Nemertea	Pilidiophora	Heteronemertea	Riseriellidae	Riserius	Riserius pugetensis
+ASV_881	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_882	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Pleopis	Pleopis polyphemoides
+ASV_883	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_884	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea gigas
+ASV_885	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_886	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_887	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_888	Unknown	NA	NA	NA	NA	NA	NA
+ASV_889	Eukaryota	Arthropoda	Malacostraca	Isopoda	NA	NA	NA
+ASV_89	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_890	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_891	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_892	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_893	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_894	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea gigas
+ASV_895	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_896	Eukaryota	Arthropoda	Malacostraca	Isopoda	Bopyridae	Orthione	Orthione mesoamericana
+ASV_897	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_898	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_899	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Acartiidae	Acartia	Acartia longiremis
+ASV_9	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_90	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_900	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_901	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_902	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_903	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_904	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_905	Eukaryota	Arthropoda	Hexanauplia	NA	NA	NA	NA
+ASV_906	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_907	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_908	Unknown	NA	NA	NA	NA	NA	NA
+ASV_909	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_91	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_910	Unknown	NA	NA	NA	NA	NA	NA
+ASV_911	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_912	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Rissoidae	Punctulum	NA
+ASV_913	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_914	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_915	Unknown	NA	NA	NA	NA	NA	NA
+ASV_916	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_917	Unknown	NA	NA	NA	NA	NA	NA
+ASV_918	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Calyptraeidae	Crepipatella	Crepipatella lingulata
+ASV_919	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_92	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_920	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_921	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_922	Unknown	NA	NA	NA	NA	NA	NA
+ASV_923	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_924	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	NA	NA
+ASV_925	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_926	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Acartiidae	Acartia	Acartia longiremis
+ASV_927	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_928	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_929	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_93	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_930	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_931	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_932	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Pleopis	Pleopis polyphemoides
+ASV_933	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_934	Unknown	NA	NA	NA	NA	NA	NA
+ASV_935	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_936	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_937	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Pleopis	Pleopis polyphemoides
+ASV_938	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_939	Unknown	NA	NA	NA	NA	NA	NA
+ASV_94	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea californiensis
+ASV_940	Unknown	NA	NA	NA	NA	NA	NA
+ASV_941	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_942	Eukaryota	Annelida	Polychaeta	Spionida	NA	NA	NA
+ASV_943	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_944	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_945	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_946	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_947	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_948	Eukaryota	Arthropoda	Malacostraca	Decapoda	Callianassidae	Neotrypaea	Neotrypaea californiensis
+ASV_949	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_95	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_950	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_951	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_952	Unknown	NA	NA	NA	NA	NA	NA
+ASV_953	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_954	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne spinifera
+ASV_955	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_956	Eukaryota	Mollusca	Bivalvia	NA	NA	NA	NA
+ASV_957	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Eucalanidae	Eucalanus	Eucalanus bungii
+ASV_958	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_959	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_96	Eukaryota	Mollusca	Gastropoda	Cephalaspidea	NA	NA	NA
+ASV_960	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_961	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_962	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_963	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Acartiidae	Acartia	Acartia longiremis
+ASV_964	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_965	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	NA	NA
+ASV_966	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_967	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_968	Eukaryota	Arthropoda	Malacostraca	Amphipoda	NA	NA	NA
+ASV_969	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_97	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_970	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus glacialis
+ASV_971	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_972	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_973	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_974	Eukaryota	Arthropoda	Malacostraca	Decapoda	Lithodidae	Lithodes	NA
+ASV_975	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus marshallae
+ASV_976	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Lacunidae	Lacuna	Lacuna vincta
+ASV_977	Eukaryota	Annelida	Polychaeta	Phyllodocida	NA	NA	NA
+ASV_978	Eukaryota	Mollusca	Gastropoda	NA	NA	NA	NA
+ASV_979	Eukaryota	Arthropoda	Malacostraca	Decapoda	Hippolytidae	Eualus	Eualus subtilis
+ASV_98	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_980	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_981	Unknown	NA	NA	NA	NA	NA	NA
+ASV_982	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_983	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_984	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_985	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_986	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_987	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus glacialis
+ASV_988	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_989	Eukaryota	Mollusca	Gastropoda	Neogastropoda	Columbellidae	Mitrella	Mitrella bicincta
+ASV_99	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_990	Eukaryota	Arthropoda	Thecostraca	Balanomorpha	Chthamalidae	Chthamalus	Chthamalus dalli
+ASV_991	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Naticidae	Neverita	NA
+ASV_992	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_993	Eukaryota	Mollusca	Gastropoda	Littorinimorpha	Rissoidae	Alvania	NA
+ASV_994	Eukaryota	Arthropoda	Branchiopoda	Diplostraca	Podonidae	Evadne	Evadne nordmanni
+ASV_995	Eukaryota	Chaetognatha	Sagittoidea	Aphragmophora	NA	NA	NA
+ASV_996	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Metridinidae	Metridia	Metridia pacifica
+ASV_997	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
+ASV_998	Eukaryota	Arthropoda	Hexanauplia	Calanoida	NA	NA	NA
+ASV_999	Eukaryota	Arthropoda	Hexanauplia	Calanoida	Calanidae	Calanus	Calanus pacificus
