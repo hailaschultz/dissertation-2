@@ -8,6 +8,12 @@ output:
     toc_float: true
 ---
 
+load packages
+```{r}
+library(dplyr)
+```
+
+
 ```{r}
 COI <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018-2020/ASV_count_tables/COI_ASVs_counts.tsv", sep = "\t")
 
@@ -145,7 +151,7 @@ COI_pa_wide_y <- merge(Env_subset,COI_pa_wide_y, by.x = "code",
 #remove rows with NA
 COI_pa_wide_y<-COI_pa_wide_y[!is.na(COI_pa_wide_y$"Acartia.longiremis"),]
 COI_pa_wide_y<-COI_pa_wide_y[!is.na(COI_pa_wide_y$"Date"),]
-COI_pa_wide_x<-COI_pa_wide_y[ , 15:325]
+COI_pa_wide_x<-COI_pa_wide_y[ , 24:325]
 ```
 
 
@@ -166,7 +172,10 @@ adonis.pair(vegdist(COI_pa_wide_x),COI_pa_wide_y$Station)
 NMDSmodel <- metaMDS(COI_pa_wide_x, distance = "bray",trymax = 999)
 NMDSmodel
 ```
-
+rotate
+```{r}
+NMDSmodel<-MDSrotate(NMDSmodel, COI_pa_wide_y$CTDTMP_DEG_C_ITS90_Surface...7)
+```
 get datascores
 ```{r}
 data.scores<-scores(NMDSmodel,display="sites")
@@ -178,15 +187,15 @@ add environmental variables back in
 colnames(COI_pa_wide_y)
 data.scores$Month = COI_pa_wide_y$Month.x
 data.scores$Year = COI_pa_wide_y$Year.x
-data.scores$Station = COI_pa_wide_y$Station
-data.scores$temp_deep = COI_pa_wide_y$CTDTMP_DEG_C_ITS90_Deep
-data.scores$temp_surface = COI_pa_wide_y$CTDTMP_DEG_C_ITS90_Surface
-data.scores$salinity_deep = COI_pa_wide_y$CTDSAL_PSS78_Deep
-data.scores$salinity_surface = COI_pa_wide_y$CTDSAL_PSS78_Surface
-data.scores$oxygen_deep = COI_pa_wide_y$OXYGEN_MG_L_1_Deep
-data.scores$oxygen_surface = COI_pa_wide_y$OXYGEN_MG_L_1_Surface
-data.scores$nitrate_deep = COI_pa_wide_y$NITRATE_UCOI_L_Deep
-data.scores$nitrate_surface = COI_pa_wide_y$NITRATE_UCOI_L_Surface
+data.scores$Station = COI_pa_wide_y$STATION_NO
+data.scores$temp_deep = COI_pa_wide_y$CTDTMP_DEG_C_ITS90_Deep...6
+data.scores$temp_surface = COI_pa_wide_y$CTDTMP_DEG_C_ITS90_Surface...7
+data.scores$salinity_deep = COI_pa_wide_y$CTDSAL_PSS78_Deep...17
+data.scores$salinity_surface = COI_pa_wide_y$CTDSAL_PSS78_Surface...18
+data.scores$oxygen_deep = COI_pa_wide_y$OXYGEN_MG_L_1_Deep...10
+data.scores$oxygen_surface = COI_pa_wide_y$OXYGEN_MG_L_1_Surface...20
+data.scores$nitrate_deep = COI_pa_wide_y$NITRATE_UMOL_L_Deep...21
+data.scores$nitrate_surface = COI_pa_wide_y$NITRATE_UMOL_L_Surface...22
 ```
 
 plot datascores

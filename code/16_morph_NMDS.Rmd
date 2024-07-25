@@ -7,6 +7,12 @@ output:
     toc_depth: 2
     toc_float: true
 ---
+load packages
+```{r}
+library(stringr)
+```
+
+
 ```{r}
 Morph <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/Barcode_2018-2020/ASV_count_tables/Morphdensity_ASVs_counts.tsv", sep = "\t")
 
@@ -130,7 +136,7 @@ Morph_pa_wide_y <- merge(Env_subset,Morph_pa_wide_y, by.x = "code",
 #remove rows with NA
 Morph_pa_wide_y<-Morph_pa_wide_y[!is.na(Morph_pa_wide_y$"Acartia.longiremis"),]
 Morph_pa_wide_y<-Morph_pa_wide_y[!is.na(Morph_pa_wide_y$"Date"),]
-Morph_pa_wide_x<-Morph_pa_wide_y[ , 15:95]
+Morph_pa_wide_x<-Morph_pa_wide_y[ , 24:95]
 ```
 
 ## PERMANOVA
@@ -149,6 +155,10 @@ adonis.pair(vegdist(Morph_pa_wide_x),Morph_pa_wide_y$Station)
 NMDSmodel <- metaMDS(Morph_pa_wide_x, distance = "bray",trymax = 999)
 NMDSmodel
 ```
+rotate
+```{r}
+NMDSmodel<-MDSrotate(NMDSmodel, Morph_pa_wide_y$CTDTMP_DEG_C_ITS90_Surface...7)
+```
 
 get datascores
 ```{r}
@@ -156,20 +166,30 @@ data.scores<-scores(NMDSmodel,display="sites")
 data.scores<- as.data.frame(data.scores)
 ```
 
+
 add environmental variables back in
 ```{r}
-colnames(Morph_pa_wide_y)
-data.scores$Month = Morph_pa_wide_y$Month.x
-data.scores$Year = Morph_pa_wide_y$Year.x
-data.scores$Station = Morph_pa_wide_y$Station
-data.scores$temp_deep = Morph_pa_wide_y$CTDTMP_DEG_C_ITS90_Deep
-data.scores$temp_surface = Morph_pa_wide_y$CTDTMP_DEG_C_ITS90_Surface
-data.scores$salinity_deep = Morph_pa_wide_y$CTDSAL_PSS78_Deep
-data.scores$salinity_surface = Morph_pa_wide_y$CTDSAL_PSS78_Surface
-data.scores$oxygen_deep = Morph_pa_wide_y$OXYGEN_MG_L_1_Deep
-data.scores$oxygen_surface = Morph_pa_wide_y$OXYGEN_MG_L_1_Surface
-data.scores$nitrate_deep = Morph_pa_wide_y$NITRATE_UMorph_L_Deep
-data.scores$nitrate_surface = Morph_pa_wide_y$NITRATE_UMorph_L_Surface
+# Extract the environmental columns columns from df1
+columns <- Morph_pa_wide_y[, 1:22]
+
+# Combine the first 5 columns from df1 with df2
+data.scores <- cbind(columns, data.scores)
+```
+
+rename factors
+```{r}
+colnames(data.scores)
+data.scores$Month <- data.scores$Month.x
+data.scores$Year <- data.scores$Year.x
+data.scores$Station <- data.scores$STATION_NO
+data.scores$temp_deep <- data.scores$CTDTMP_DEG_C_ITS90_Deep...6
+data.scores$temp_surface <- data.scores$CTDTMP_DEG_C_ITS90_Surface...7
+data.scores$salinity_deep <- data.scores$CTDSAL_PSS78_Deep...17
+data.scores$salinity_surface <- data.scores$CTDSAL_PSS78_Surface...18
+data.scores$oxygen_deep <- data.scores$OXYGEN_MG_L_1_Deep...19
+data.scores$oxygen_surface <- data.scores$OXYGEN_MG_L_1_Surface...20
+data.scores$nitrate_deep <- data.scores$NITRATE_UMOL_L_Deep...12
+data.scores$nitrate_surface <- data.scores$NITRATE_UMOL_L_Surface...13
 ```
 
 plot datascores
@@ -178,22 +198,7 @@ xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Station)) +geom_poin
                                                                                            panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 xx
 ```
-extract hulls
-```{r}
-P12 <- data.scores[data.scores$Station == "P12", ][chull(data.scores[data.scores$Station ==                                                           "P12", c("NMDS1", "NMDS2")]), ]  
-P22 <- data.scores[data.scores$Station == "P22", ][chull(data.scores[data.scores$Station ==                                                           "P22", c("NMDS1", "NMDS2")]), ]  
-P28 <- data.scores[data.scores$Station == "P28", ][chull(data.scores[data.scores$Station ==                                                           "P28", c("NMDS1", "NMDS2")]), ]
-P38 <- data.scores[data.scores$Station == "P38", ][chull(data.scores[data.scores$Station ==                                                           "P38", c("NMDS1", "NMDS2")]), ]  
-P4 <- data.scores[data.scores$Station == "P4", ][chull(data.scores[data.scores$Station ==                                                           "P4", c("NMDS1", "NMDS2")]), ]  
-P402 <- data.scores[data.scores$Station == "P402", ][chull(data.scores[data.scores$Station ==                                                           "P402", c("NMDS1", "NMDS2")]), ]  
-P8 <- data.scores[data.scores$Station == "P8", ][chull(data.scores[data.scores$Station ==                                                           "P8", c("NMDS1", "NMDS2")]), ]  
-```
 
-get hull data
-```{r}
-hull.data <- rbind(P12, P22, P28,P38,P4,P402,P8)  #combine grp.a and grp.b
-hull.data
-```
 
 
 ## environmental fitting
@@ -202,9 +207,6 @@ create environmetal fit table
 #check for correlation among environmental variables.
 #remove nutrients other than nitrate because of autocorrelation
 
-data.scores.cor<- data.scores[ -c(1:5,13) ]
-cor_matrix <- cor(data.scores.cor)
-corrplot(cor_matrix, method = "number", type = "lower", tl.pos = 'd')
 
 Zoo.env <- data.frame(matrix(ncol = 0, nrow=53))
 Zoo.env$temp_deep<-as.numeric(data.scores$temp_deep)
@@ -242,6 +244,24 @@ spp.scrs <- subset(spp.scrs, R_squared > 0.3)
 spp.scrs
 
 ```
+
+extract hulls
+```{r}
+P12 <- data.scores[data.scores$Station == "P12", ][chull(data.scores[data.scores$Station ==                                                           "P12", c("NMDS1", "NMDS2")]), ]  
+P22 <- data.scores[data.scores$Station == "P22", ][chull(data.scores[data.scores$Station ==                                                           "P22", c("NMDS1", "NMDS2")]), ]  
+P28 <- data.scores[data.scores$Station == "P28", ][chull(data.scores[data.scores$Station ==                                                           "P28", c("NMDS1", "NMDS2")]), ]
+P38 <- data.scores[data.scores$Station == "P38", ][chull(data.scores[data.scores$Station ==                                                           "P38", c("NMDS1", "NMDS2")]), ]  
+P4 <- data.scores[data.scores$Station == "P4", ][chull(data.scores[data.scores$Station ==                                                           "P4", c("NMDS1", "NMDS2")]), ]  
+P402 <- data.scores[data.scores$Station == "P402", ][chull(data.scores[data.scores$Station ==                                                           "P402", c("NMDS1", "NMDS2")]), ]  
+P8 <- data.scores[data.scores$Station == "P8", ][chull(data.scores[data.scores$Station ==                                                           "P8", c("NMDS1", "NMDS2")]), ]  
+```
+
+get hull data
+```{r}
+hull.data <- rbind(P12, P22, P28,P38,P4,P402,P8)  #combine grp.a and grp.b
+hull.data
+```
+
 ```{r}
 morph.data.scores<-data.scores
 morph.data.scores$Station <- factor(morph.data.scores$Station, levels = c("P22", "P4", "P8","P28","P12","P402","P38"))
@@ -268,8 +288,7 @@ hull.data$Station <- recode(hull.data$Station,
 
 ```{r,fig.width=7,fig.height=5, dpi=600}
 
-
-Species_plot <- ggplot(morph.data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour =  Station))+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7")) +
+Species_plot <- ggplot(morph.data.scores, aes(NMDS1, NMDS2)) +geom_point(aes(colour =  Station))+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7")) +
   scale_fill_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7"))+theme_bw()+theme(panel.grid.major = element_blank(),
                                                                                            panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+
   geom_segment(data = spp.scrs,size=0.4,
@@ -279,10 +298,11 @@ Species_plot <- ggplot(morph.data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point
                aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
                arrow = arrow(length = unit(0.2, "cm")), colour = "black")+ 
   geom_polygon(data=hull.data,aes(x=NMDS1,y=NMDS2,fill=Station,group=Station),alpha=0.20, size=0.1, linetype=1, colour="black") +
-  annotate("text", label = "2D Stress: 0.2", x = 0.55, y = 0.67, size = 5, colour = "black")+
+  annotate("text", label = "2D Stress: 0.24", x = -0.7, y = 0.8, size = 5, colour = "black")+
   geom_label_repel(data = spp.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
-                  size = 3, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), box.padding = unit(0.16, "lines"), label.size = 0.05)
+                  size =2.5, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), box.padding = unit(0.16, "lines"), label.size = 0.05)
 Species_plot
+
 ```
 
 ```{r,fig.width=7,fig.height=5, dpi=600}
@@ -293,12 +313,12 @@ Species_plot <- ggplot(morph.data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point
                                                                                            panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+
   geom_segment(data = spp.scrs,size=0.4,
                aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
-               arrow = arrow(length = unit(0.2, "cm")), colour = "darkgrey")+
+               arrow = arrow(length = unit(0.15, "cm")), colour = "darkgrey")+
   geom_segment(data = env.scrs,size=0.4,
                aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
                arrow = arrow(length = unit(0.2, "cm")), colour = "black")+ 
   geom_polygon(data=hull.data,aes(x=NMDS1,y=NMDS2,fill=Station,group=Station),alpha=0.20, size=0.1, linetype=1, colour="black") +
-  annotate("text", label = "2D Stress: 0.2", x = 0.6, y = 0.67, size = 5, colour = "black")
+  annotate("text", label = "2D Stress: 0.24", x = 0.38, y = 0.8, size = 5, colour = "black")
 Species_plot
 ```
 
@@ -306,5 +326,5 @@ Species_plot
 save dendogram
 ```{r, eval=FALSE}
 setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
-ggsave(filename = "PA_Morph_nmds.png", plot = Species_plot, width = 7, height = 5.5, device='png', dpi=700)
+ggsave(filename = "Morph_nmds_tempcorrect.png", plot = Species_plot, width = 7, height = 5.5, device='png', dpi=700)
 ```
