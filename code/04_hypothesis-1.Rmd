@@ -419,6 +419,7 @@ temp_plot
 ```
 regime shift detection
 ```{r}
+library(rshift)
 RSI_data<-Rodionov(temp_surf, "anomaly", "date_convert",3, merge=TRUE)
 ```
 visualize

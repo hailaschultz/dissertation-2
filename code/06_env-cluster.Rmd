@@ -144,7 +144,7 @@ Oxygen<-Oxygen %>%
 Oxygen<-subset(Oxygen,Depth!="5-m")
 Oxygen<-subset(Oxygen,Depth!="Mid")
 #make unique column
-Oxygen$code<-paste(Oxygen$Station, Oxygen$Year,Oxygen$Month,Salinity$Depth,sep="-")
+Oxygen$code<-paste(Oxygen$Station, Oxygen$Year,Oxygen$Month,Oxygen$Depth,sep="-")
 ```
 
 Salinity: remove missing rows and remove weird values
@@ -196,12 +196,13 @@ env_joined<-subset(env_joined, select = -c(pH_Deep,pH_Surface))
 env_joined <- env_joined[complete.cases(env_joined), ]
 ```
 
-# Anomaly analysis
+# Anomaly analysis (April)
 month and station averages
 ```{r}
 env_ave<-env_joined %>%
   group_by(Month.x,Station.x) %>%
   summarise(across("temp_Deep":"Salinity_Surface", list(mean)))
+
 ```
 
 standard deviation
@@ -219,6 +220,8 @@ env_joined$stationmonth<-paste(env_joined$Station.x, env_joined$Month.x,sep="-")
 env_ave$stationmonth<-paste(env_ave$Station.x, env_ave$Month.x,sep="-")
 env_stdev$stationmonth<-paste(env_stdev$Station.x, env_stdev$Month.x,sep="-")
 
+
+
 env_joined_ave <- merge(env_joined,env_ave, by="stationmonth", all.x=TRUE)
 env_joined_stdev <- merge(env_joined_ave,env_stdev, by="stationmonth", all.x=TRUE)
 
@@ -228,16 +231,19 @@ env_joined_anom <- (env_joined_stdev[, 6:11] - env_joined_stdev[, 14:19])/env_jo
 
 ```{r}
 #convert station column to rownames
+library(tibble)
 env_joined_anom$code=env_joined$code
 env_joined_anom<-env_joined_anom %>% remove_rownames %>% column_to_rownames(var="code")
 cor_matrix <- cor(env_joined_anom)
 corrplot(cor_matrix, method = "number", type = "lower", tl.pos = 'd')
 ```
 
+subset to April
 
 ### Centroid Based
 gap statistic: do this to determine number of clusters
 ```{r}
+library(factoextra)
 res.km<-eclust(env_joined_anom, FUNcluster = "kmeans", hc_metric = "euclidean", graph = FALSE)
 fviz_gap_stat(res.km$gap_stat)
 
@@ -260,7 +266,7 @@ eclust(env_joined_anom, FUNcluster = "kmeans", k = 2, hc_metric = "euclidean")
 ### Heirarchical
 ```{r,fig.width=6,fig.height=8}
 res.hclust <- eclust(env_joined_anom, FUNcluster = "hclust", hc_metric = "euclidean")
-env_dend<-fviz_dend(res.hclust, rect = TRUE,repel=phylogenic)
+env_dend<-fviz_dend(res.hclust, rect = TRUE,repel=phylogenic,cex=0.5)
 env_dend
 fviz_cluster(res.hclust, labelsize = 10)
 ```

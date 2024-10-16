@@ -173,6 +173,21 @@ Zoop_sub <- Zoop_sub %>%
   summarise(
     zoop_density = sum(Density....m3.))
 ```
+# heatmap
+```{r}
+heatmap <- ggplot(Zoop_sub, aes(Genus.species,Code,fill = "zoop_density")) +
+  geom_tile()
+heatmap
+
+library(pheatmap)
+Zoop_sub_heat<-dcast(Zoop_sub, Code~ Genus.species,value.var = "zoop_density")
+Zoop_sub_heat <- Zoop_sub_heat %>% replace(is.na(.), 0)
+Zoop_sub_heat<-Zoop_sub_heat[rowSums(Zoop_sub_heat[])>0,]
+pheatmap(Zoop_sub_heat)
+
+```
+
+
 
 change from long to wide format
 ```{r}
@@ -190,6 +205,7 @@ Zoop_sub_wide$Basin=as.factor(Zoop_sub_wide$Basin)
 Zoop_sub_wide$code<-paste(Zoop_sub_wide$Station, Zoop_sub_wide$Year,Zoop_sub_wide$Month,sep="-")
 unique(Zoop_sub$Code)
 ```
+
 
 # Combine env and zoop
 ```{r}
@@ -209,6 +225,9 @@ rows_to_keep <- apply(Zoop_env[, 28:235], 1, function(row) !all(is.na(row)))
 
 Zoop_env <- Zoop_env[rows_to_keep, ]
 ```
+
+
+
 
 # NMDS
 
