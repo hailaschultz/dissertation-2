@@ -1,0 +1,35 @@
+---
+title: "18_DOE_data"
+date: "2024-10-17"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+editor_options: 
+  chunk_output_type: console
+---
+```{r}
+library(ncdf4) # package for netcdf manipulation
+library(raster) # package for raster manipulation
+library(ggplot2)
+```
+
+Read in netCDF file
+```{r}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/DOE_data")
+nc_data <- nc_open('MarineWaterProfilesAndNutrientsYear2023.nc')
+# Save the print(nc) dump to a text file
+{
+    sink('DOE_2023.txt')
+ print(nc_data)
+    sink()
+}
+```
+Capture dimensions
+```{r}
+stations <- ncvar_get(nc_data, "stations")
+profiles <- ncvar_get(nc_data, "profiles")
+obs <- ncvar_get(nc_data, "obs")
+```
+

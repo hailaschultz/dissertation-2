@@ -1,11 +1,13 @@
 ---
 title: "12_zoop-seasonal-NMDS"
-date: "2024-03-09"
+Sample.Date: "2024-03-09"
 output:
   html_document:
     toc: true
     toc_depth: 2
     toc_float: true
+editor_options: 
+  chunk_output_type: inline
 ---
 ```{r}
 library(tidyr)
@@ -16,6 +18,7 @@ library(ggplot2)
 library(corrplot)
 library(ggrepel)
 library(indicspecies)
+library(dplyr)
 ```
 
 # Environmental Data
@@ -23,12 +26,11 @@ the environmental data was created by 00_Upload_Env_Data
 
 subset environmental data to only shallow and deep niskins
 ```{r}
-
-#make unique code
-subset_df$code<-paste(subset_df$STATION_NO, subset_df$Year,subset_df$Month,sep="-")
+#make unique Sample.Code
+subset_df$Sample.Code<-paste(subset_df$STATION_NO, subset_df$Year,subset_df$Month,sep="-")
 
 # Sort the dataframe by sample and then by depth
-subset_df <- subset_df %>% arrange(code, NISKIN_NO)
+subset_df <- subset_df %>% arrange(Sample.Code, NISKIN_NO)
 ```
 
 remove unnecessary columns
@@ -45,14 +47,15 @@ Env_subset<-Env_subset %>% drop_na(OXYGEN_MG_L_1)
 ```{r}
 # Group by sample and filter the shallowest and deepest rows for each sample
 Env_subset <- Env_subset %>%
-  group_by(code) %>%
+  group_by(Sample.Code) %>%
   mutate(row_num = row_number()) %>%
   filter(row_num == 1 | row_num == n())
 
 # Create a new column to label them as shallow or deep
 Env_subset <- Env_subset %>%
-  mutate(Depth = ifelse(row_num == 1, "Deep","Surface" )) %>%
-  select(-row_num) # Remove the temporary row number column
+  mutate(Depth = ifelse(row_num == 1, "Deep","Surface" )) 
+#remove row no
+Env_subset <- Env_subset[ -c(11) ]
 ```
 
 separate surface and deep samples
@@ -72,9 +75,9 @@ Env_subset<-Env_subset[!is.na(Env_subset$NITRATE_UMOL_L_Surface),]
 Env_subset<-Env_subset[!is.na(Env_subset$CTDSAL_PSS78_Surface),]
 ```
 
-anomalies
 
-month and station averages
+
+Sample.Month and station averages
 ```{r}
 colnames (Env_subset)
 env_ave<-Env_subset %>%
@@ -92,7 +95,7 @@ env_stdev<- Env_subset  %>%
 mean anomalies
 ```{r}
 #add averages column
-#make station-month column
+#make stationmonth column
 Env_subset$stationmonth<-paste(Env_subset$STATION_NO, Env_subset$Month,sep="-")
 env_ave$stationmonth<-paste(env_ave$STATION_NO, env_ave$Month,sep="-")
 env_stdev$stationmonth<-paste(env_stdev$STATION_NO, env_stdev$Month,sep="-")
@@ -109,17 +112,49 @@ add anomalies to data
 Env_subset<-cbind(Env_subset, env_joined_anom)
 ```
 
+add in fluorescence
+make sample code
+```{r}
+downcasts_combined$Sample.Code<-paste(downcasts_combined$Station,downcasts_combined$Year,downcasts_combined$Month, sep="-")
+```
+
+```{r}
+downcasts_combined$Chlorophyll.Fluorescence <- as.numeric(downcasts_combined$Chlorophyll.Fluorescence)
+```
+
+get max fluorescence
+```{r}
+colnames(downcasts_combined)
+downcast <- downcasts_combined %>%
+  group_by(Sample.Code) %>%
+  summarise(
+    chla = max(Chlorophyll.Fluorescence))
+```
+
+add to other environmental data
+```{r}
+Env_subset <- merge(Env_subset,downcast, by.x = "Sample.Code", 
+             by.y = "Sample.Code", all.x = TRUE, all.y = TRUE)
+
+```
+
+
 
 # Zooplankton data
 Read zooplanton data into R
 ```{r}
-Zooplankton <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/WOAC_Species_Densities_2014-2022.csv")
+Zooplankton <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/WOAC_2014-2022_Species_Data_Keister_Lab.csv")
 ```
-
+remove low quality zooplankton data
+```{r}
+unique(Zooplankton$Confidence)
+Zoop_sub<-subset(Zooplankton,Confidence!="low- flow high")
+Zoop_sub<-subset(Zoop_sub,Confidence!="LOW")
+Zoop_sub<-subset(Zoop_sub,Confidence!="Low-low flow")
+```
 subset to stations sampled during WOAC cruises
 ```{r}
-unique(Zooplankton$Station)
-Zoop_sub<-subset(Zooplankton,Station!="PEFS1d")
+Zoop_sub<-subset(Zoop_sub,Station!="PEFS1d")
 Zoop_sub<-subset(Zoop_sub,Station!="PEFN1d")
 Zoop_sub<-subset(Zoop_sub,Station!="PEFN2")
 Zoop_sub<-subset(Zoop_sub,Station!="PEFS2")
@@ -129,32 +164,34 @@ Zoop_sub<-subset(Zoop_sub,Station!="P136")
 Zoop_sub<-subset(Zoop_sub,Station!="P7")
 Zoop_sub<-subset(Zoop_sub,Station!="P383")
 Zoop_sub<-subset(Zoop_sub,Station!="P132")
-unique(Zoop_sub$Date)
-#remove unnecessary dates
-Zoop_sub<-subset(Zoop_sub,Date!="10/30/14")
-Zoop_sub<-subset(Zoop_sub,Date!="10/31/14")
-Zoop_sub<-subset(Zoop_sub,Date!="10/29/14")
-Zoop_sub<-subset(Zoop_sub,Date!="9/14/22")
-Zoop_sub<-subset(Zoop_sub,Date!="9/16/22")
-Zoop_sub<-subset(Zoop_sub,Date!="9/13/22")
-Zoop_sub<-subset(Zoop_sub,Date!="9/12/22")
-Zoop_sub<-subset(Zoop_sub,Date!="11/16/15")
-Zoop_sub<-subset(Zoop_sub,Date!="3/17/16")
-Zoop_sub<-subset(Zoop_sub,Date!="3/18/16")
-Zoop_sub<-subset(Zoop_sub,Date!="11/18/15")
+unique(Zoop_sub$Sample.Date)
+#remove unnecessary Sample.Dates
+Zoop_sub<-subset(Zoop_sub,Sample.Date!="10/30/14")
+Zoop_sub<-subset(Zoop_sub,Sample.Date!="10/31/14")
+Zoop_sub<-subset(Zoop_sub,Sample.Date!="10/29/14")
+Zoop_sub<-subset(Zoop_sub,Sample.Date!="9/14/22")
+Zoop_sub<-subset(Zoop_sub,Sample.Date!="9/16/22")
+Zoop_sub<-subset(Zoop_sub,Sample.Date!="9/13/22")
+Zoop_sub<-subset(Zoop_sub,Sample.Date!="9/12/22")
+Zoop_sub<-subset(Zoop_sub,Sample.Date!="11/16/15")
+Zoop_sub<-subset(Zoop_sub,Sample.Date!="3/17/16")
+Zoop_sub<-subset(Zoop_sub,Sample.Date!="3/18/16")
+Zoop_sub<-subset(Zoop_sub,Sample.Date!="11/18/15")
 #recode p4
 Zoop_sub$Station <- recode(Zoop_sub$Station, 
                                  "p4" = "P4")
-#recode month names to match
-unique(Zoop_sub$Month)
-Zoop_sub$Month <- recode(Zoop_sub$Month, 
+#recode Sample.Month names to match
+unique(Zoop_sub$Sample.Month)
+Zoop_sub$Sample.Month <- recode(Zoop_sub$Sample.Month, 
                                  "Jul" = "JUL",
                          "Sep"="SEP",
                          "OCT"="SEP")
 #remove ethanol samples
-Zoop_sub<-Zoop_sub[!grepl('_EtOH', Zoop_sub$Code),]
+Zoop_sub<-Zoop_sub[!grepl('_EtOH', Zoop_sub$Sample.Code),]
 #remove oblique samples
 Zoop_sub<-subset(Zoop_sub,Tow.Type!="Oblique")
+#exclude weird taxa
+Zoop_sub<-subset(Zoop_sub,WOAC.Group!="Exclude")
 ```
 remove non-species columns
 ```{r}
@@ -169,51 +206,38 @@ Zoop_sub$Genus.species <- recode(Zoop_sub$Genus.species,
 add up multiple lines per station
 ```{r}
 Zoop_sub <- Zoop_sub %>%
-  group_by(Code,Station,Basin,Year,Month,Genus.species) %>%
+  group_by(Sample.Code,Station,Basin,Sample.Year,Sample.Month,Genus.species) %>%
   summarise(
     zoop_density = sum(Density....m3.))
 ```
-# heatmap
-```{r}
-heatmap <- ggplot(Zoop_sub, aes(Genus.species,Code,fill = "zoop_density")) +
-  geom_tile()
-heatmap
-
-library(pheatmap)
-Zoop_sub_heat<-dcast(Zoop_sub, Code~ Genus.species,value.var = "zoop_density")
-Zoop_sub_heat <- Zoop_sub_heat %>% replace(is.na(.), 0)
-Zoop_sub_heat<-Zoop_sub_heat[rowSums(Zoop_sub_heat[])>0,]
-pheatmap(Zoop_sub_heat)
-
-```
-
-
 
 change from long to wide format
 ```{r}
 colnames(Zoop_sub)
-Zoop_sub_wide<-dcast(Zoop_sub, Code+Station+Basin+Year+Month~ Genus.species,value.var = "zoop_density")
+Zoop_sub_wide<-dcast(Zoop_sub, Sample.Code+Station+Basin+Sample.Year+Sample.Month~ Genus.species,value.var = "zoop_density")
 #make sure factors are formatted right
-Zoop_sub_wide$Year=as.factor(Zoop_sub_wide$Year)
+Zoop_sub_wide$Sample.Year=as.factor(Zoop_sub_wide$Sample.Year)
 Zoop_sub_wide$Station=as.factor(Zoop_sub_wide$Station)
-Zoop_sub_wide$Month=as.factor(Zoop_sub_wide$Month)
+Zoop_sub_wide$Sample.Month=as.factor(Zoop_sub_wide$Sample.Month)
 Zoop_sub_wide$Basin=as.factor(Zoop_sub_wide$Basin)
 ```
 
 ```{r}
 #make unique column
-Zoop_sub_wide$code<-paste(Zoop_sub_wide$Station, Zoop_sub_wide$Year,Zoop_sub_wide$Month,sep="-")
-unique(Zoop_sub$Code)
+Zoop_sub_wide$Sample.Code<-paste(Zoop_sub_wide$Station, Zoop_sub_wide$Sample.Year,Zoop_sub_wide$Sample.Month,sep="-")
+unique(Zoop_sub_wide$Sample.Code)
+unique(Env_subset$Sample.Code)
 ```
 
 
 # Combine env and zoop
 ```{r}
-Zoop_env <- merge(Env_subset,Zoop_sub_wide, by.x = "code", 
-             by.y = "code", all.x = TRUE, all.y = TRUE)
+Zoop_env <- merge(Env_subset,Zoop_sub_wide, by.x = "Sample.Code", 
+             by.y = "Sample.Code", all.x = TRUE, all.y = TRUE)
 
 #remove rows with NA
-Zoop_env<-Zoop_env[!is.na(Zoop_env$Year.x),]
+colnames(Zoop_env)
+Zoop_env<-Zoop_env[!is.na(Zoop_env$STATION_NO),]
 ```
 
 
@@ -221,11 +245,14 @@ Zoop_env<-Zoop_env[!is.na(Zoop_env$Year.x),]
 
 #remove rows with all zoooplankton NAs
 ```{r}
-rows_to_keep <- apply(Zoop_env[, 28:235], 1, function(row) !all(is.na(row)))
+rows_to_keep <- apply(Zoop_env[, 27:234], 1, function(row) !all(is.na(row)))
 
 Zoop_env <- Zoop_env[rows_to_keep, ]
 ```
-
+remove rows with chla NA
+```{r}
+Zoop_env<-Zoop_env[!is.na(Zoop_env$chla),]
+```
 
 
 
@@ -250,28 +277,74 @@ RE2 <- RE2[, non_zero_counts >= 9]
 
 indicator species
 ```{r}
-inv = multipatt(RE2, Zoop_env$Month.x, func = "r.g", control = how(nperm=999))
+inv = multipatt(RE2, Zoop_env$Sample.Month.x, func = "r.g", control = how(nperm=999))
 summary(inv)
 ```
+## Clustering
+
+gap statistic: do this to determine number of clusters
+```{r}
+library(factoextra)
+res.km<-eclust(RE2, FUNcluster = "hclust", hc_metric = "euclidean", graph = FALSE)
+fviz_gap_stat(res.km$gap_stat)
+
+#silhouette plot
+fviz_silhouette(res.km)
+```
+9 is the ultimate number of clusters
+
+
+bray-curtis heirarchical clustering
+```{r}
+library(vegan)
+dist<-vegdist(RE2, method='bray',trymax = 200)
+cluster <- hclust(dist, method = "average")
+plot(cluster)
+grp <- cutree(cluster, 3)
+grp
+```
+I'm choosing 5 clusters, cutting off at 55% similarity
+
+nmds
+```{r}
+ord <- metaMDS(RE2)
+```
+
+```{r}
+col <- c("red2", "green4", "mediumblue","pink","purple","lightblue","black","lightgreen","yellow","orange")
+col[grp]
+```
+
+plot
+```{r}
+plot(ord, type = "n", display = "sites")
+points(ord, col = col[grp], bg = col[grp], pch = 21)
+legend("topright", legend = paste("Cluster", 1:3),
+       col = col, pt.bg = col, bty = "n", pch = 21)
+```
+
 
 
 ## PERMANOVA
 ```{r}
 dist<-vegdist(RE2, method='bray')
-perm<-adonis2(dist~Year.x*STATION_NO*Month.x, data=Zoop_env, permutations = 999, method="bray")
+Zoop_env$STATION_NO<-as.factor(Zoop_env$STATION_NO)
+Zoop_env$Year<-as.factor(Zoop_env$Year)
+Zoop_env$Month<-as.factor(Zoop_env$Month)
+perm<-adonis(dist~Year*STATION_NO*Month, data=Zoop_env, permutations = 999, method="bray")
 perm
 ```
-It looks like year, station, and month are significant. Additionally, the interaction between year and month and station and month are different.
+It looks like Sample.Year, station, and Sample.Month are significant. Additionally, the interaction between Sample.Year and Sample.Month and station and Sample.Month are different, need to split up
 
 See pairwise differences
 ```{r}
 #make sure factors are formatted right
-Zoop_env$Year.x=as.factor(Zoop_env$Year.x)
+Zoop_env$Year=as.factor(Zoop_env$Year)
 Zoop_env$STATION_NO=as.factor(Zoop_env$STATION_NO)
-Zoop_env$Month.x=as.factor(Zoop_env$Month.x)
+Zoop_env$Month=as.factor(Zoop_env$Month)
 adonis.pair(vegdist(RE2),Zoop_env$STATION_NO)
-adonis.pair(vegdist(RE2),Zoop_env$Year.x)
-adonis.pair(vegdist(RE2),Zoop_env$Month.x)
+adonis.pair(vegdist(RE2),Zoop_env$Year)
+adonis.pair(vegdist(RE2),Zoop_env$Month)
 ```
 
 all stations are different from one another
@@ -296,7 +369,7 @@ all stations are different from one another
 2020 is similar to 2021
 2020 is similar to 2022
 
-all months are different from one another
+all Sample.Months are different from one another
 
 
 check for dispersion
@@ -307,22 +380,24 @@ Zoop.bd
 anova(Zoop.bd)
 permutest(Zoop.bd)
 
-#year
-Zoop.bd <- betadisper(dist, Zoop_env$Year.x)
+#Sample.Year
+Zoop.bd <- betadisper(dist, Zoop_env$Year)
 Zoop.bd
 anova(Zoop.bd)
 permutest(Zoop.bd)
 
-#month
-Zoop.bd <- betadisper(dist, Zoop_env$Month.x)
+#Sample.Month
+Zoop.bd <- betadisper(dist, Zoop_env$Month)
 Zoop.bd
 anova(Zoop.bd)
 permutest(Zoop.bd)
 ```
 
-station and year are significant
+only year is significant
 
-### All months NMDS
+### All Sample.Months NMDS
+
+
 ```{r}
 NMDSmodel <- metaMDS(RE2, distance = "bray",trymax = 200)
 NMDSmodel
@@ -334,11 +409,12 @@ data.scores<-scores(NMDSmodel,display="sites")
 data.scores<- as.data.frame(data.scores)
 ```
 
-add station, month, year back in
+add group, station, Sample.Month, Sample.Year back in
 ```{r}
 data.scores$Station = Zoop_env$STATION_NO
-data.scores$Year = Zoop_env$Year.x
-data.scores$Month = Zoop_env$Month.x
+data.scores$Sample.Year = Zoop_env$Year
+data.scores$Sample.Month = Zoop_env$Month
+data.scores$group = as.factor(grp)
 ```
 
 add environmental variables back in
@@ -355,6 +431,7 @@ data.scores$nitrate_surface = Zoop_env$NITRATE_UMOL_L_Surface...13
 data.scores$temp_surf_anom = Zoop_env$CTDTMP_DEG_C_ITS90_Surface...16
 data.scores$temp_deep_anom = Zoop_env$CTDTMP_DEG_C_ITS90_Deep...15
 data.scores$oxy_deep_anom = Zoop_env$OXYGEN_MG_L_1_Deep...19
+data.scores$chla = Zoop_env$chla
 ```
 
 plot data scores
@@ -363,12 +440,15 @@ xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour=Station)) +stat_ellips
                                                                                            panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 xx
 
-xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Year)) +stat_ellipse()+geom_point(aes(colour = Year))+theme_bw()+theme(panel.grid.major = element_blank(),
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Sample.Year)) +stat_ellipse()+geom_point(aes(colour = Sample.Year))+theme_bw()+theme(panel.grid.major = element_blank(),
                                                                                            panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 xx
 
-xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Month)) +stat_ellipse()+geom_point(aes(colour = Month))+theme_bw()+theme(panel.grid.major = element_blank(),
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Sample.Month)) +stat_ellipse()+geom_point(aes(colour = Sample.Month))+theme_bw()+theme(panel.grid.major = element_blank(),
                                                                                            panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+xx
+
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = group)) +stat_ellipse()+geom_point(aes(colour = group))+theme_bw()+theme(panel.grid.major = element_blank(),  panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 xx
 ```
 
@@ -380,11 +460,11 @@ create environmetal fit table
 #check for correlation among environmental variables.
 #remove nutrients other than nitrate because of autocorrelation
 
-data.scores.cor<- data.scores[ -c(1:5) ]
+data.scores.cor<- data.scores[ -c(1:6) ]
 cor_matrix <- cor(data.scores.cor)
 corrplot(cor_matrix, method = "number", type = "lower", tl.pos = 'd')
 
-Zoo.env <- data.frame(matrix(ncol = 0, nrow=151))
+Zoo.env <- data.frame(matrix(ncol = 0, nrow=139))
 colnames(data.scores)
 Zoo.env$temp_deep<-as.numeric(data.scores$temp_deep)
 Zoo.env$temp_surface<-as.numeric(data.scores$temp_surface)
@@ -395,6 +475,7 @@ Zoo.env$oxygen_surface<-as.numeric(data.scores$oxygen_surface)
 Zoo.env$temp_deep_anom<-as.numeric(data.scores$temp_deep_anom)
 Zoo.env$temp_surf_anom<-as.numeric(data.scores$temp_surf_anom)
 Zoo.env$oxy_deep_anom<-as.numeric(data.scores$oxy_deep_anom)
+Zoo.env$chla<-as.numeric(data.scores$chla)
 
 env <- envfit(NMDSmodel, Zoo.env, na.rm = TRUE,perm = 999)
 env
@@ -426,41 +507,38 @@ spp.scrs
 
 ```
 ### all data with species
-extract hulls
+extract month hulls
 ```{r}
-P12 <- data.scores[data.scores$Station == "P12", ][chull(data.scores[data.scores$Station ==                                                           "P12", c("NMDS1", "NMDS2")]), ]  
-P22 <- data.scores[data.scores$Station == "P22", ][chull(data.scores[data.scores$Station ==                                                           "P22", c("NMDS1", "NMDS2")]), ]  
-P28 <- data.scores[data.scores$Station == "P28", ][chull(data.scores[data.scores$Station ==                                                           "P28", c("NMDS1", "NMDS2")]), ]
-P38 <- data.scores[data.scores$Station == "P38", ][chull(data.scores[data.scores$Station ==                                                           "P38", c("NMDS1", "NMDS2")]), ]  
-P4 <- data.scores[data.scores$Station == "P4", ][chull(data.scores[data.scores$Station ==                                                           "P4", c("NMDS1", "NMDS2")]), ]  
-P402 <- data.scores[data.scores$Station == "P402", ][chull(data.scores[data.scores$Station ==                                                           "P402", c("NMDS1", "NMDS2")]), ]  
-P8 <- data.scores[data.scores$Station == "P8", ][chull(data.scores[data.scores$Station ==                                                           "P8", c("NMDS1", "NMDS2")]), ]  
+G1 <- data.scores[data.scores$group == "1", ][chull(data.scores[data.scores$group ==                                                           "1", c("NMDS1", "NMDS2")]), ]  
+G2 <- data.scores[data.scores$group == "2", ][chull(data.scores[data.scores$group ==                                                           "2", c("NMDS1", "NMDS2")]), ]  
+G3 <- data.scores[data.scores$group == "3", ][chull(data.scores[data.scores$group ==                                                           "3", c("NMDS1", "NMDS2")]), ]
 ```
 get hull data
 ```{r}
-hull.data <- rbind(P12, P22, P28,P38,P4,P402,P8)  #combine grp.a and grp.b
+hull.data <- rbind(G1,G2,G3)
 hull.data
 
 ```
+
 ```{r,fig.width=6.5,fig.height=5, dpi=600}
 
-Species_plot <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+Species_plot <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = Sample.Month))+theme_bw()+theme(panel.grid.major = element_blank(),
                                                                                            panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ 
-  geom_polygon(data=hull.data,aes(x=NMDS1,y=NMDS2,fill=Station,group=Station),alpha=0.20, size=0.1, linetype=1, colour="black") +
-  annotate("text", label = "2D Stress: 0.16", x = 0.5, y = 0.57, size = 5, colour = "black")+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7")) +
-  scale_fill_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7"))+ geom_segment(data = spp.scrs,size=0.2,
+  geom_polygon(data=hull.data,aes(x=NMDS1,y=NMDS2,group=group),alpha=0.20, size=0.1, linetype=1, colour="black") +
+  annotate("text", label = "2D Stress: 0.18", x = 0.8, y = 1.3, size = 5, colour = "black")+ geom_segment(data = spp.scrs,size=0.2,
                aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
                arrow = arrow(length = unit(0.08, "cm")), colour = "black")+
   geom_label_repel(data = spp.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
                   size = 1.5, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), box.padding = unit(0.16, "lines"), label.size = 0.05)
 Species_plot
 ```
+
 ```{r,fig.width=6.5,fig.height=5, dpi=600}
 
 Species_plot <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = temp_deep_anom))+theme_bw()+theme(panel.grid.major = element_blank(),
                                                                                            panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ 
   geom_polygon(data=hull.data,aes(x=NMDS1,y=NMDS2,group=Station),alpha=0.05, size=0.1, linetype=1, colour="black") +
-  annotate("text", label = "2D Stress: 0.16", x = 0.5, y = 0.57, size = 5, colour = "black")+ geom_segment(data = spp.scrs,size=0.2,
+  annotate("text", label = "2D Stress: 0.18", x = 1, y = 1, size = 5, colour = "black")+ geom_segment(data = spp.scrs,size=0.2,
                aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
                arrow = arrow(length = unit(0.08, "cm")), colour = "black")+
   geom_label_repel(data = spp.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
@@ -469,11 +547,28 @@ Species_plot <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(c
 Species_plot
 ```
 
+
+color by group
+```{r,fig.width=6.5,fig.height=5, dpi=600}
+
+Species_plot <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = group))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ 
+  geom_polygon(data=hull.data,aes(x=NMDS1,y=NMDS2,fill=Station,group=Station),alpha=0.20, size=0.1, linetype=1, colour="black") +
+  annotate("text", label = "2D Stress: 0.18", x = 1, y = 1, size = 5, colour = "black")+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7","yellow","red","orange")) +
+  scale_fill_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7","yellow","red","orange"))+ geom_segment(data = spp.scrs,size=0.2,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.08, "cm")), colour = "black")+
+  geom_label_repel(data = spp.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
+                  size = 1.5, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), box.padding = unit(0.16, "lines"), label.size = 0.05)
+Species_plot
+```
+
+
 ## plot only April
 
 subset data scores
 ```{r}
-APR_datascores<-subset(data.scores,Month=="APR")
+APR_datascores<-subset(data.scores,Sample.Month=="APR")
 ```
 extract hulls
 ```{r}
@@ -560,7 +655,7 @@ April
 
 subset data scores
 ```{r}
-JUL_datascores<-subset(data.scores,Month=="JUL")
+JUL_datascores<-subset(data.scores,Sample.Month=="JUL")
 ```
 extract hulls
 ```{r}
@@ -606,7 +701,7 @@ ggsave(filename = "NMDS_July.png", plot = July, width = 5, height = 5.5, device=
 
 subset data scores
 ```{r}
-SEP_datascores<-subset(data.scores,Month=="SEP")
+SEP_datascores<-subset(data.scores,Sample.Month=="SEP")
 ```
 extract hulls
 ```{r}
@@ -676,11 +771,11 @@ ggsave(filename = "NMDS_September_Sp.png", plot = September_sp, width = 5, heigh
 ### try group 1
 remove non-data columns, convert to proportionas, and arcsine sqrt transformation
 ```{r}
-group1<-subset(Zoop_env,STATION_NO!="P22")
-group1<-subset(group1,STATION_NO!="P8")
-group1<-subset(group1,STATION_NO!="P38")
-group1<-subset(group1,STATION_NO!="P28")
+Zoop_env$group = as.factor(grp)
+group1<-subset(Zoop_env,group=="1")
+
 RE2<- group1[,28:ncol(group1)]
+RE2 <- RE2[, -ncol(RE2)]
 #replace N/A with 0
 RE2[is.na(RE2)] <- 0
 #convert to proportions
@@ -695,18 +790,60 @@ RE2 <- RE2[, non_zero_counts >= 9]
 
 ## PERMANOVA
 ```{r}
+colnames(group1)
 dist<-vegdist(RE2, method='bray')
-perm<-adonis2(dist~Station*Month.x, data=group1, permutations = 999, method="bray")
+perm<-adonis2(dist~STATION_NO*Year, data=group1, permutations = 999, method="bray")
 perm
 ```
 See pairwise differences
 ```{r}
 #make sure factors are formatted right
-group1$STATION_NO=as.factor(group1$Station)
-group1$Month.x=as.factor(group1$Month.x)
-adonis.pair(vegdist(RE2),group1$Station)
-adonis.pair(vegdist(RE2),group1$Month.x)
+group1$STATION_NO<-as.factor(group1$STATION_NO)
+group1$Year=as.factor(group1$Year)
+adonis.pair(vegdist(RE2),group1$STATION_NO)
+adonis.pair(vegdist(RE2),group1$Year)
 ```
+
+## Clustering
+
+gap statistic: do this to determine number of clusters
+```{r}
+library(factoextra)
+res.km<-eclust(RE2, FUNcluster = "hclust", hc_metric = "euclidean", graph = FALSE)
+fviz_gap_stat(res.km$gap_stat)
+
+#silhouette plot
+fviz_silhouette(res.km)
+```
+9 is the ultimate number of clusters
+
+bray-curtis heirarchical clustering
+```{r}
+dist<-vegdist(RE2, method='bray',trymax = 200)
+cluster <- hclust(dist, method = "average")
+plot(cluster)
+grp <- cutree(cluster, 9)
+grp
+```
+
+nmds
+```{r}
+ord <- metaMDS(RE2)
+```
+
+```{r}
+col <- c("red2", "green4", "mediumblue","pink","purple","lightblue","black","orange","yellow")
+col[grp]
+```
+
+plot
+```{r}
+plot(ord, type = "n", display = "sites")
+points(ord, col = col[grp], bg = col[grp], pch = 21)
+legend("topright", legend = paste("Cluster", 1:3),
+       col = col, pt.bg = col, bty = "n", pch = 21)
+```
+
 ## Run NMDS
 ```{r}
 NMDSmodel <- metaMDS(RE2, distance = "bray",trymax = 200)
@@ -721,11 +858,12 @@ data.scores<-scores(NMDSmodel,display="sites")
 data.scores<- as.data.frame(data.scores)
 ```
 
-add station, month, year back in
+add station, Sample.Month, Sample.Year back in
 ```{r}
 data.scores$Station = group1$STATION_NO
-data.scores$Year = group1$Year.x
-data.scores$Month = group1$Month.x
+data.scores$Sample.Year = group1$Sample.Year.x
+data.scores$Sample.Month = group1$Sample.Month.x
+data.scores$group = grp
 ```
 
 add environmental variables back in
@@ -741,6 +879,7 @@ data.scores$nitrate_surface = group1$NITRATE_UMOL_L_Surface...13
 data.scores$temp_surf_anom = group1$CTDTMP_DEG_C_ITS90_Surface...16
 data.scores$temp_deep_anom = group1$CTDTMP_DEG_C_ITS90_Deep...15
 data.scores$oxy_deep_anom = group1$OXYGEN_MG_L_1_Deep...19
+data.scores$chla = group1$chla
 ```
 
 plot data scores
@@ -753,7 +892,7 @@ xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Year)) +stat_ellipse
                                                                                            panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 xx
 
-xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Month)) +stat_ellipse()+geom_point(aes(colour = Month))+theme_bw()+theme(panel.grid.major = element_blank(),
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Sample.Month)) +stat_ellipse()+geom_point(aes(colour = Sample.Month))+theme_bw()+theme(panel.grid.major = element_blank(),
                                                                                            panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 xx
 
@@ -762,12 +901,49 @@ xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2))+geom_point(aes(colour = tem
 xx
 ```
 
+### all data with species
+extract hulls
+```{r}
+G1 <- data.scores[data.scores$group == "1", ][chull(data.scores[data.scores$group ==                                                           "1", c("NMDS1", "NMDS2")]), ]  
+G2 <- data.scores[data.scores$group == "2", ][chull(data.scores[data.scores$group ==                                                           "2", c("NMDS1", "NMDS2")]), ]  
+G3 <- data.scores[data.scores$group == "3", ][chull(data.scores[data.scores$group ==                                                           "3", c("NMDS1", "NMDS2")]), ]
+G4 <- data.scores[data.scores$group == "4", ][chull(data.scores[data.scores$group ==                                                           "4", c("NMDS1", "NMDS2")]), ]  
+G5 <- data.scores[data.scores$group == "5", ][chull(data.scores[data.scores$group ==                                                           "5", c("NMDS1", "NMDS2")]), ]  
+G6 <- data.scores[data.scores$group == "6", ][chull(data.scores[data.scores$group ==                                                           "6", c("NMDS1", "NMDS2")]), ]  
+G7 <- data.scores[data.scores$group == "7", ][chull(data.scores[data.scores$group ==                                                           "7", c("NMDS1", "NMDS2")]), ] 
+G8 <- data.scores[data.scores$group == "8", ][chull(data.scores[data.scores$group ==                                                           "8", c("NMDS1", "NMDS2")]), ]
+G9 <- data.scores[data.scores$group == "9", ][chull(data.scores[data.scores$group ==                                                           "9", c("NMDS1", "NMDS2")]), ]
+```
+get hull data
+```{r}
+hull.data <- rbind(G1,G2,G3,G4,G5,G6,G7,G8,G9)  #combine grp.a and grp.b
+hull.data
+
+```
+
+```{r,fig.width=6.5,fig.height=5, dpi=600}
+
+Species_plot <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ 
+  geom_polygon(data=hull.data,aes(x=NMDS1,y=NMDS2,fill=as.factor(group),group=as.factor(group)),alpha=0.20, size=0.1, linetype=1, colour="black") +
+  annotate("text", label = "2D Stress: 0.16", x = 0.5, y = 0.57, size = 5, colour = "black")+ geom_segment(data = spp.scrs,size=0.2,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.08, "cm")), colour = "black")+
+  geom_label_repel(data = spp.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
+                  size = 1.5, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), box.padding = unit(0.16, "lines"), label.size = 0.05)
+Species_plot
+```
+
+
+
+
 ## NMDS: Subset to April
 subset to April
 ```{r}
-Zoop_env_april<-subset(Zoop_env,Month.x=="APR")
+Zoop_env_april<-subset(Zoop_env,Month=="APR")
 ```
 
+## prep data
 remove non-data columns, convert to proportionas, and arcsine sqrt transformation
 ```{r}
 RE2<- Zoop_env_april[,28:ncol(Zoop_env_april)]
@@ -784,37 +960,100 @@ non_zero_counts <- colSums(RE2 != 0)
 RE2 <- RE2[, non_zero_counts >= 9]
 ```
 
-PERMANOVA
+
+## Clustering
+
+gap statistic: do this to determine number of clusters
 ```{r}
-dist<-vegdist(RE2, method='bray')
-perm<-adonis2(dist~Year.x*STATION_NO, data=Zoop_env_april, permutations = 999, method="bray")
-perm
+library(factoextra)
+res.km<-eclust(RE2, FUNcluster = "hclust", hc_metric = "euclidean", graph = FALSE)
+fviz_gap_stat(res.km$gap_stat)
+
+#silhouette plot
+fviz_silhouette(res.km)
 ```
-indicator species
+4 is the ultimate number of clusters
+
+bray-curtis heirarchical clustering
 ```{r}
-inv = multipatt(RE2, Zoop_env_april$Year.x, func = "r.g", control = how(nperm=999))
-summary(inv)
+dist<-vegdist(RE2, method='bray',trymax = 200)
+cluster <- hclust(dist, method = "average")
+plot(cluster)
+grp <- cutree(cluster, 4)
+grp
 ```
 
+
+nmds
+```{r}
+ord <- metaMDS(RE2)
+```
+
+```{r}
+col <- c("red2", "green4", "mediumblue","pink","purple","lightblue","black")
+col[grp]
+```
+
+plot
+```{r}
+plot(ord, type = "n", display = "sites")
+points(ord, col = col[grp], bg = col[grp], pch = 21)
+legend("topright", legend = paste("Cluster", 1:3),
+       col = col, pt.bg = col, bty = "n", pch = 21)
+```
+
+
+## PERMANOVA
+```{r}
+dist<-vegdist(RE2, method='bray')
+perm<-adonis(dist~STATION_NO, data=Zoop_env_april, permutations = 999, method="bray")
+perm
+```
+It looks like Sample.Year, station, and Sample.Month are significant. Additionally, the interaction between Sample.Year and Sample.Month and station and Sample.Month are different.
+
+See pairwise differences
+```{r}
+#make sure factors are formatted right
+Zoop_env_april$STATION_NO=as.factor(Zoop_env_april$STATION_NO)
+adonis.pair(vegdist(RE2),Zoop_env_april$STATION_NO)
+```
+
+all stations are different from one another
+
+
+check for dispersion
+```{r}
+#station
+Zoop.bd <- betadisper(dist, Zoop_env_april$STATION_NO)
+Zoop.bd
+anova(Zoop.bd)
+permutest(Zoop.bd)
+```
+no dispersion issues!
+
+NMDS
 ```{r}
 NMDSmodel <- metaMDS(RE2, distance = "bray",trymax = 200)
 NMDSmodel
 ```
+
 get datascores
 ```{r}
 data.scores<-scores(NMDSmodel,display="sites")
 data.scores<- as.data.frame(data.scores)
 ```
 
-add station, month, year back in
+add group, station, Sample.Month, Sample.Year back in
 ```{r}
 data.scores$Station = Zoop_env_april$STATION_NO
-data.scores$Year = Zoop_env_april$Year.x
-data.scores$Month = Zoop_env_april$Month.x
+data.scores$Sample.Year = Zoop_env_april$Year
+data.scores$Sample.Month = Zoop_env_april$Month
+data.scores$group = as.factor(grp)
 ```
 
 add environmental variables back in
 ```{r}
+colnames(Zoop_env_april)
 data.scores$temp_deep = Zoop_env_april$CTDTMP_DEG_C_ITS90_Deep...6
 data.scores$temp_surface = Zoop_env_april$CTDTMP_DEG_C_ITS90_Surface...7
 data.scores$salinity_deep = Zoop_env_april$CTDSAL_PSS78_Deep...8
@@ -826,21 +1065,35 @@ data.scores$nitrate_surface = Zoop_env_april$NITRATE_UMOL_L_Surface...13
 data.scores$temp_surf_anom = Zoop_env_april$CTDTMP_DEG_C_ITS90_Surface...16
 data.scores$temp_deep_anom = Zoop_env_april$CTDTMP_DEG_C_ITS90_Deep...15
 data.scores$oxy_deep_anom = Zoop_env_april$OXYGEN_MG_L_1_Deep...19
+data.scores$chla = Zoop_env_april$chla
 ```
+
+plot data scores
+```{r}
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour=Station)) +stat_ellipse()+geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+xx
+
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Sample.Year)) +stat_ellipse()+geom_point(aes(colour = Sample.Year))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+xx
+
+```
+
 
 ## environmental fitting
 create environmetal fit table
 ```{r}
 #check for correlation among environmental variables.
 #remove nutrients other than nitrate because of autocorrelation
+#remove temperature deep because of correlation
 
-data.scores.cor<- data.scores[ -c(1:5) ]
+data.scores.cor<- data.scores[ -c(1:6) ]
 cor_matrix <- cor(data.scores.cor)
 corrplot(cor_matrix, method = "number", type = "lower", tl.pos = 'd')
 
-Zoo.env <- data.frame(matrix(ncol = 0, nrow=46))
+Zoo.env <- data.frame(matrix(ncol = 0, nrow=38))
 colnames(data.scores)
-Zoo.env$temp_deep<-as.numeric(data.scores$temp_deep)
 Zoo.env$temp_surface<-as.numeric(data.scores$temp_surface)
 Zoo.env$salinity_deep<-as.numeric(data.scores$salinity_deep)
 Zoo.env$salinity_surface<-as.numeric(data.scores$salinity_surface)
@@ -849,6 +1102,7 @@ Zoo.env$oxygen_surface<-as.numeric(data.scores$oxygen_surface)
 Zoo.env$temp_deep_anom<-as.numeric(data.scores$temp_deep_anom)
 Zoo.env$temp_surf_anom<-as.numeric(data.scores$temp_surf_anom)
 Zoo.env$oxy_deep_anom<-as.numeric(data.scores$oxy_deep_anom)
+Zoo.env$chla<-as.numeric(data.scores$chla)
 
 env <- envfit(NMDSmodel, Zoo.env, na.rm = TRUE,perm = 999)
 env
@@ -857,7 +1111,6 @@ env
 env.scrs <- as.data.frame(scores(env, display = "vectors")) 
 env.scrs <- cbind(env.scrs, Species = rownames(env.scrs), Pvalues = env$vectors$pvals, R_squared = env$vectors$r)
 env.scrs <- subset(env.scrs, Pvalues < 0.05)
-env.scrs <- subset(env.scrs, R_squared > 0.3)
 
 
 env.scrs
@@ -880,9 +1133,10 @@ spp.scrs <- subset(spp.scrs, R_squared > 0.3)
 spp.scrs
 
 ```
-
+### all data with species
 
 extract hulls
+
 ```{r}
 P12 <- data.scores[data.scores$Station == "P12", ][chull(data.scores[data.scores$Station ==                                                           "P12", c("NMDS1", "NMDS2")]), ]  
 P22 <- data.scores[data.scores$Station == "P22", ][chull(data.scores[data.scores$Station ==                                                           "P22", c("NMDS1", "NMDS2")]), ]  
@@ -892,26 +1146,1005 @@ P4 <- data.scores[data.scores$Station == "P4", ][chull(data.scores[data.scores$S
 P402 <- data.scores[data.scores$Station == "P402", ][chull(data.scores[data.scores$Station ==                                                           "P402", c("NMDS1", "NMDS2")]), ]  
 P8 <- data.scores[data.scores$Station == "P8", ][chull(data.scores[data.scores$Station ==                                                           "P8", c("NMDS1", "NMDS2")]), ]  
 ```
+
+
 get hull data
 ```{r}
-hull.data <- rbind(P12, P22, P28,P38,P4,P402,P8)  #combine grp.a and grp.b
+apr.hull.data <- rbind(P12, P22, P28,P38,P4,P402,P8)  #combine grp.a and grp.b
+apr.hull.data
+```
+
+```{r,fig.width=6.5,fig.height=5, dpi=600}
+
+April_Species <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ 
+  geom_polygon(data=apr.hull.data,aes(x=NMDS1,y=NMDS2,group=Station, fill=Station),alpha=0.20, size=0.1, linetype=1, colour = "black") +
+  annotate("text", label = "2D Stress: 0.15", x = 0.66, y = 0.66, size = 4, colour = "black")+ geom_segment(data = env.scrs,size=0.2,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.08, "cm")), colour = "black")+
+  geom_label_repel(data = env.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
+                  size = 2.5, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), box.padding = unit(0.16, "lines"), label.size = 0.05)+ scale_colour_manual(values=c("#00B6EB","#F8766D","#00C094","#FB61D7","#C49A00","#A69AFF","#53B400")) +
+  scale_fill_manual(values=c("#00B6EB","#F8766D","#00C094","#FB61D7","#C49A00","#A69AFF","#53B400"))
+April_Species
+
+```
+save dendogram
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "April_Species_month.png", plot = April_Species, width = 6.5, height = 5.5, device='png', dpi=700)
+```
+
+```{r}
+G1 <- data.scores[data.scores$group == "1", ][chull(data.scores[data.scores$group ==                                                           "1", c("NMDS1", "NMDS2")]), ]  
+G2 <- data.scores[data.scores$group == "2", ][chull(data.scores[data.scores$group ==                                                           "2", c("NMDS1", "NMDS2")]), ]  
+G3 <- data.scores[data.scores$group == "3", ][chull(data.scores[data.scores$group ==                                                           "3", c("NMDS1", "NMDS2")]), ]
+G4 <- data.scores[data.scores$group == "4", ][chull(data.scores[data.scores$group ==                                                           "4", c("NMDS1", "NMDS2")]), ]  
+
+```
+get hull data
+```{r}
+hull.data <- rbind(G1,G2,G3,G4)  #combine grp.a and grp.b
+hull.data
+
+```
+
+
+```{r,fig.width=6.5,fig.height=5, dpi=600}
+
+April_Species_vect <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ 
+  geom_polygon(data=hull.data,aes(x=NMDS1,y=NMDS2,group=group),alpha=0.20, size=0.1, linetype=1, fill=NA, colour = "black") +
+  annotate("text", label = "2D Stress: 0.15", x = 0.66, y = 0.66, size = 4, colour = "black")+ geom_segment(data = spp.scrs,size=0.2,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.08, "cm")), colour = "gray")+
+  geom_label_repel(data = spp.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
+                  size = 2, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), box.padding = unit(0.16, "lines"), label.size = 0.05)+ scale_colour_manual(values=c("#00B6EB","#F8766D","#00C094","#FB61D7","#C49A00","#A69AFF","#53B400"))+ geom_segment(data = env.scrs,size=0.2,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.08, "cm")), colour = "red")
+April_Species_vect
+
+```
+save
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "April_Species_vect.png", plot = April_Species_vect, width = 6.5, height = 5.5, device='png', dpi=700)
+```
+
+```{r,fig.width=6.5,fig.height=5, dpi=600}
+
+April_Species_plot <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ 
+  geom_polygon(data=hull.data,aes(x=NMDS1,y=NMDS2,group=group),alpha=0.20, size=0.1, linetype=1, fill=NA, colour = "black") +
+  annotate("text", label = "2D Stress: 0.15", x = 0.66, y = 0.66, size = 4, colour = "black")+ geom_segment(data = env.scrs,size=0.2,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.08, "cm")), colour = "black")+
+  geom_label_repel(data = env.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
+                  size = 2.5, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), box.padding = unit(0.16, "lines"), label.size = 0.05)+ 
+  geom_text_repel(aes(label = Sample.Year), size = 2.5)+ scale_colour_manual(values=c("#00B6EB","#F8766D","#00C094","#FB61D7","#C49A00","#A69AFF","#53B400"))
+April_Species_plot
+
+```
+
+save
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "April_Species_cluster.png", plot = April_Species_plot, width = 6.5, height = 5.5, device='png', dpi=700)
+```
+
+
+## NMDS: Subset to July
+subset to July
+```{r}
+Zoop_env_april<-subset(Zoop_env,Month=="JUL")
+```
+
+## prep data
+remove non-data columns, convert to proportionas, and arcsine sqrt transformation
+```{r}
+RE2<- Zoop_env_april[,28:ncol(Zoop_env_april)]
+#replace N/A with 0
+RE2[is.na(RE2)] <- 0
+#convert to proportions
+RE2<-RE2/rowSums(RE2)
+
+#arcsine sqrt transformation
+RE2<-asin(sqrt(RE2))
+
+#remove columns with fewer than 9 rows with nonzero numbers
+non_zero_counts <- colSums(RE2 != 0)
+RE2 <- RE2[, non_zero_counts >= 9]
+```
+
+indicator species
+```{r}
+inv = multipatt(RE2, Zoop_env_april$Month, func = "r.g", control = how(nperm=999))
+summary(inv)
+```
+## Clustering
+
+gap statistic: do this to determine number of clusters
+```{r}
+library(factoextra)
+res.km<-eclust(RE2, FUNcluster = "hclust", hc_metric = "euclidean", graph = FALSE)
+fviz_gap_stat(res.km$gap_stat)
+
+#silhouette plot
+fviz_silhouette(res.km)
+```
+6 is the ultimate number of clusters
+
+bray-curtis heirarchical clustering
+```{r}
+dist<-vegdist(RE2, method='bray',trymax = 200)
+cluster <- hclust(dist, method = "average")
+plot(cluster)
+grp <- cutree(cluster, 6)
+grp
+```
+
+
+nmds
+```{r}
+ord <- metaMDS(RE2)
+```
+
+```{r}
+col <- c("red2", "green4", "mediumblue","pink","purple","lightblue","black")
+col[grp]
+```
+
+plot
+```{r}
+plot(ord, type = "n", display = "sites")
+points(ord, col = col[grp], bg = col[grp], pch = 21)
+legend("topright", legend = paste("Cluster", 1:3),
+       col = col, pt.bg = col, bty = "n", pch = 21)
+```
+
+
+## PERMANOVA
+```{r}
+dist<-vegdist(RE2, method='bray')
+perm<-adonis(dist~Year*STATION_NO, data=Zoop_env_april, permutations = 999, method="bray")
+perm
+```
+It looks like Sample.Year, station, and Sample.Month are significant. Additionally, the interaction between Sample.Year and Sample.Month and station and Sample.Month are different.
+
+See pairwise differences
+```{r}
+#make sure factors are formatted right
+Zoop_env_april$Year=as.factor(Zoop_env_april$Year)
+Zoop_env_april$STATION_NO=as.factor(Zoop_env_april$STATION_NO)
+adonis.pair(vegdist(RE2),Zoop_env_april$STATION_NO)
+adonis.pair(vegdist(RE2),Zoop_env_april$Year)
+```
+
+all stations are different from one another
+
+years are similar
+
+
+check for dispersion
+```{r}
+#station
+Zoop.bd <- betadisper(dist, Zoop_env_april$STATION_NO)
+Zoop.bd
+anova(Zoop.bd)
+permutest(Zoop.bd)
+
+#Sample.Year
+Zoop.bd <- betadisper(dist, Zoop_env_april$Year)
+Zoop.bd
+anova(Zoop.bd)
+permutest(Zoop.bd)
+
+```
+no dispersion issues!
+
+NMDS
+```{r}
+NMDSmodel <- metaMDS(RE2, distance = "bray",trymax = 200)
+NMDSmodel
+```
+
+get datascores
+```{r}
+data.scores<-scores(NMDSmodel,display="sites")
+data.scores<- as.data.frame(data.scores)
+```
+
+add group, station, Sample.Month, Sample.Year back in
+```{r}
+data.scores$Station = Zoop_env_april$STATION_NO
+data.scores$Sample.Year = Zoop_env_april$Year
+data.scores$Sample.Month = Zoop_env_april$Month
+data.scores$group = as.factor(grp)
+```
+
+add environmental variables back in
+```{r}
+
+data.scores$temp_deep = Zoop_env_april$CTDTMP_DEG_C_ITS90_Deep...6
+data.scores$temp_surface = Zoop_env_april$CTDTMP_DEG_C_ITS90_Surface...7
+data.scores$salinity_deep = Zoop_env_april$CTDSAL_PSS78_Deep...8
+data.scores$salinity_surface = Zoop_env_april$CTDSAL_PSS78_Surface...9
+data.scores$oxygen_deep = Zoop_env_april$OXYGEN_MG_L_1_Deep...10
+data.scores$oxygen_surface = Zoop_env_april$OXYGEN_MG_L_1_Surface...11
+data.scores$nitrate_deep = Zoop_env_april$NITRATE_UMOL_L_Deep...12
+data.scores$nitrate_surface = Zoop_env_april$NITRATE_UMOL_L_Surface...13
+data.scores$temp_surf_anom = Zoop_env_april$CTDTMP_DEG_C_ITS90_Surface...16
+data.scores$temp_deep_anom = Zoop_env_april$CTDTMP_DEG_C_ITS90_Deep...15
+data.scores$oxy_deep_anom = Zoop_env_april$OXYGEN_MG_L_1_Deep...19
+data.scores$chla = Zoop_env_april$chla
+```
+
+plot data scores
+```{r}
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour=Station)) +stat_ellipse()+geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+xx
+
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Sample.Year)) +stat_ellipse()+geom_point(aes(colour = Sample.Year))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+xx
+
+```
+
+
+## environmental fitting
+create environmetal fit table
+```{r}
+#check for correlation among environmental variables.
+#remove nutrients other than nitrate because of autocorrelation
+
+data.scores.cor<- data.scores[ -c(1:6) ]
+cor_matrix <- cor(data.scores.cor)
+corrplot(cor_matrix, method = "number", type = "lower", tl.pos = 'd')
+
+Zoo.env <- data.frame(matrix(ncol = 0, nrow=44))
+colnames(data.scores)
+Zoo.env$temp_deep<-as.numeric(data.scores$temp_deep)
+Zoo.env$temp_surface<-as.numeric(data.scores$temp_surface)
+Zoo.env$salinity_deep<-as.numeric(data.scores$salinity_deep)
+Zoo.env$salinity_surface<-as.numeric(data.scores$salinity_surface)
+Zoo.env$oxygen_deep<-as.numeric(data.scores$oxygen_deep)
+Zoo.env$oxygen_surface<-as.numeric(data.scores$oxygen_surface)
+Zoo.env$temp_deep_anom<-as.numeric(data.scores$temp_deep_anom)
+Zoo.env$temp_surf_anom<-as.numeric(data.scores$temp_surf_anom)
+Zoo.env$oxy_deep_anom<-as.numeric(data.scores$oxy_deep_anom)
+Zoo.env$chla<-as.numeric(data.scores$chla)
+
+env <- envfit(NMDSmodel, Zoo.env, na.rm = TRUE,perm = 999)
+env
+
+
+env.scrs <- as.data.frame(scores(env, display = "vectors")) 
+env.scrs <- cbind(env.scrs, Species = rownames(env.scrs), Pvalues = env$vectors$pvals, R_squared = env$vectors$r)
+env.scrs <- subset(env.scrs, Pvalues < 0.05)
+
+
+env.scrs
+```
+
+## Species fitting
+```{r}
+vf <- envfit(NMDSmodel, RE2, perm = 999)
+
+spp.scrs <- as.data.frame(scores(vf, display = "vectors"))
+spp.scrs <- cbind(spp.scrs, Species = rownames(spp.scrs))
+####for ggplot
+arrow_factor <- ordiArrowMul(vf)
+spp.scrs <- as.data.frame(scores(vf, display = "vectors")) * arrow_factor
+spp.scrs <- cbind(spp.scrs, Species = rownames(spp.scrs), Pvalues = vf$vectors$pvals, R_squared = vf$vectors$r)
+
+# select significance similarly to `plot(vf, p.max = 0.01)`
+spp.scrs <- subset(spp.scrs, Pvalues < 0.05)
+spp.scrs <- subset(spp.scrs, R_squared > 0.3)
+spp.scrs
+
+```
+### all data with species
+extract hulls
+
+```{r}
+P12 <- data.scores[data.scores$Station == "P12", ][chull(data.scores[data.scores$Station ==                                                           "P12", c("NMDS1", "NMDS2")]), ]  
+P22 <- data.scores[data.scores$Station == "P22", ][chull(data.scores[data.scores$Station ==                                                           "P22", c("NMDS1", "NMDS2")]), ]  
+P28 <- data.scores[data.scores$Station == "P28", ][chull(data.scores[data.scores$Station ==                                                           "P28", c("NMDS1", "NMDS2")]), ]
+P38 <- data.scores[data.scores$Station == "P38", ][chull(data.scores[data.scores$Station ==                                                           "P38", c("NMDS1", "NMDS2")]), ]  
+P4 <- data.scores[data.scores$Station == "P4", ][chull(data.scores[data.scores$Station ==                                                           "P4", c("NMDS1", "NMDS2")]), ]  
+P402 <- data.scores[data.scores$Station == "P402", ][chull(data.scores[data.scores$Station ==                                                           "P402", c("NMDS1", "NMDS2")]), ]  
+P8 <- data.scores[data.scores$Station == "P8", ][chull(data.scores[data.scores$Station ==                                                           "P8", c("NMDS1", "NMDS2")]), ]  
+```
+
+
+get hull data
+```{r}
+sep.hull.data <- rbind(P12, P22, P28,P38,P4,P402,P8)  #combine grp.a and grp.b
+sep.hull.data
+```
+
+```{r,fig.width=6.5,fig.height=5, dpi=600}
+
+July_Species <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ 
+  geom_polygon(data=sep.hull.data,aes(x=NMDS1,y=NMDS2,group=Station, fill=Station),alpha=0.20, size=0.1, linetype=1, colour = "black") +
+  annotate("text", label = "2D Stress: 0.18", x = 0.5, y = 0.66, size = 4, colour = "black")+ geom_segment(data = env.scrs,size=0.2,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.08, "cm")), colour = "black")+
+  geom_label_repel(data = env.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
+                  size = 2.5, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), box.padding = unit(0.16, "lines"), label.size = 0.05)+ scale_colour_manual(values=c("#00B6EB","#F8766D","#00C094","#FB61D7","#C49A00","#A69AFF","#53B400")) +
+  scale_fill_manual(values=c("#00B6EB","#F8766D","#00C094","#FB61D7","#C49A00","#A69AFF","#53B400"))
+July_Species
+
+```
+save 
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "July_Species_month.png", plot = July_Species, width = 6.5, height = 5.5, device='png', dpi=700)
+```
+extract hulls
+```{r}
+G1 <- data.scores[data.scores$group == "1", ][chull(data.scores[data.scores$group ==                                                           "1", c("NMDS1", "NMDS2")]), ]  
+G2 <- data.scores[data.scores$group == "2", ][chull(data.scores[data.scores$group ==                                                           "2", c("NMDS1", "NMDS2")]), ]  
+G3 <- data.scores[data.scores$group == "3", ][chull(data.scores[data.scores$group ==                                                           "3", c("NMDS1", "NMDS2")]), ]
+G4 <- data.scores[data.scores$group == "4", ][chull(data.scores[data.scores$group ==                                                           "4", c("NMDS1", "NMDS2")]), ]  
+G5 <- data.scores[data.scores$group == "5", ][chull(data.scores[data.scores$group ==                                                           "5", c("NMDS1", "NMDS2")]), ] 
+G6 <- data.scores[data.scores$group == "6", ][chull(data.scores[data.scores$group ==                                                           "6", c("NMDS1", "NMDS2")]), ] 
+
+```
+get hull data
+```{r}
+hull.data <- rbind(G1,G2,G3,G4,G5,G6)  #combine grp.a and grp.b
 hull.data
 
 ```
 ```{r,fig.width=6.5,fig.height=5, dpi=600}
 
-Species_plot <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+July_Species_plot <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
                                                                                            panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ 
-  geom_polygon(data=hull.data,aes(x=NMDS1,y=NMDS2,fill=Station,group=Station),alpha=0.20, size=0.1, linetype=1, colour="black") +
-  annotate("text", label = "2D Stress: 0.16", x = 0.5, y = 0.57, size = 5, colour = "black")+ scale_colour_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7")) +
-  scale_fill_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A69AFF","#FB61D7"))+ geom_segment(data = spp.scrs,size=0.2,
+  geom_polygon(data=hull.data,aes(x=NMDS1,y=NMDS2,group=group),alpha=0.20, size=0.1, linetype=1, fill=NA, colour = "black") +
+  annotate("text", label = "2D Stress: 0.18", x = 0.5, y = 0.66, size = 4, colour = "black")+ geom_segment(data = env.scrs,size=0.2,
                aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
                arrow = arrow(length = unit(0.08, "cm")), colour = "black")+
-  geom_label_repel(data = spp.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
-                  size = 1.5, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), box.padding = unit(0.16, "lines"), label.size = 0.05)+geom_segment(data = env.scrs,size=0.5,
-               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
-               arrow = arrow(length = unit(0.5, "cm")), colour = "black")+
   geom_label_repel(data = env.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
-                  size = 5, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), point.padding = unit(15, "lines"), label.size = 0.05)
-Species_plot
+                  size = 2.5, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), box.padding = unit(0.16, "lines"), label.size = 0.05)+ scale_colour_manual(values=c("#00B6EB","#F8766D","#00C094","#FB61D7","#C49A00","#A69AFF","#53B400"))+ geom_segment(data = spp.scrs,size=0.2,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.08, "cm")), colour = "gray")+
+  geom_label_repel(data = spp.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
+                  size = 2, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), box.padding = unit(0.16, "lines"), label.size = 0.05)
+July_Species_plot
+
 ```
+save
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "July_Species_cluster.png", plot =July_Species_plot, width = 6.5, height = 5.5, device='png', dpi=700)
+```
+
+```{r,fig.width=6.5,fig.height=5, dpi=600}
+
+July_Species_year <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ 
+  geom_polygon(data=hull.data,aes(x=NMDS1,y=NMDS2,group=group),alpha=0.20, size=0.1, linetype=1, fill=NA, colour = "black") +
+  annotate("text", label = "2D Stress: 0.18", x = 0.5, y = 0.66, size = 4, colour = "black")+ 
+  geom_text_repel(aes(label = Sample.Year), size = 2.5)+ scale_colour_manual(values=c("#00B6EB","#F8766D","#00C094","#FB61D7","#C49A00","#A69AFF","#53B400"))
+July_Species_year
+
+```
+save
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "July_Species_year.png", plot =July_Species_year, width = 6.5, height = 5.5, device='png', dpi=700)
+```
+
+
+
+
+
+## NMDS: Subset to September
+subset to september
+```{r}
+Zoop_env_september<-subset(Zoop_env,Month=="SEP")
+```
+
+## prep data
+remove non-data columns, convert to proportionas, and arcsine sqrt transformation
+```{r}
+RE2<- Zoop_env_september[,28:ncol(Zoop_env_september)]
+#replace N/A with 0
+RE2[is.na(RE2)] <- 0
+#convert to proportions
+RE2<-RE2/rowSums(RE2)
+
+#arcsine sqrt transformation
+RE2<-asin(sqrt(RE2))
+
+#remove columns with fewer than 9 rows with nonzero numbers
+non_zero_counts <- colSums(RE2 != 0)
+RE2 <- RE2[, non_zero_counts >= 9]
+```
+
+
+## Clustering
+
+gap statistic: do this to determine number of clusters
+```{r}
+library(factoextra)
+res.km<-eclust(RE2, FUNcluster = "hclust", hc_metric = "euclidean", graph = FALSE)
+fviz_gap_stat(res.km$gap_stat)
+
+#silhouette plot
+fviz_silhouette(res.km)
+```
+7 is the ultimate number of clusters
+
+bray-curtis heirarchical clustering
+```{r}
+dist<-vegdist(RE2, method='bray',trymax = 200)
+cluster <- hclust(dist, method = "average")
+plot(cluster)
+grp <- cutree(cluster, 7)
+grp
+```
+
+
+nmds
+```{r}
+ord <- metaMDS(RE2)
+```
+
+```{r}
+col <- c("red2", "green4", "mediumblue","pink","purple","lightblue","black")
+col[grp]
+```
+
+plot
+```{r}
+plot(ord, type = "n", display = "sites")
+points(ord, col = col[grp], bg = col[grp], pch = 21)
+legend("topright", legend = paste("Cluster", 1:3),
+       col = col, pt.bg = col, bty = "n", pch = 21)
+```
+
+
+## PERMANOVA
+```{r}
+dist<-vegdist(RE2, method='bray')
+perm<-adonis(dist~Year*STATION_NO, data=Zoop_env_september, permutations = 999, method="bray")
+perm
+```
+It looks like Sample.Year, station, and Sample.Month are significant. Additionally, the interaction between Sample.Year and Sample.Month and station and Sample.Month are different.
+
+See pairwise differences
+```{r}
+#make sure factors are formatted right
+Zoop_env_september$Year=as.factor(Zoop_env_september$Year)
+Zoop_env_september$STATION_NO=as.factor(Zoop_env_september$STATION_NO)
+adonis.pair(vegdist(RE2),Zoop_env_september$STATION_NO)
+adonis.pair(vegdist(RE2),Zoop_env_september$Year)
+```
+
+all stations are different from one another
+
+years are similar
+
+
+check for dispersion
+```{r}
+#station
+Zoop.bd <- betadisper(dist, Zoop_env_september$STATION_NO)
+Zoop.bd
+anova(Zoop.bd)
+permutest(Zoop.bd)
+
+#Sample.Year
+Zoop.bd <- betadisper(dist, Zoop_env_september$Year)
+Zoop.bd
+anova(Zoop.bd)
+permutest(Zoop.bd)
+
+```
+
+
+NMDS
+```{r}
+NMDSmodel <- metaMDS(RE2, distance = "bray",trymax = 200)
+NMDSmodel
+```
+
+get datascores
+```{r}
+data.scores<-scores(NMDSmodel,display="sites")
+data.scores<- as.data.frame(data.scores)
+```
+
+add group, station, Sample.Month, Sample.Year back in
+```{r}
+data.scores$Station = Zoop_env_september$STATION_NO
+data.scores$Sample.Year = Zoop_env_september$Year
+data.scores$Sample.Month = Zoop_env_september$Month
+data.scores$group = as.factor(grp)
+```
+
+add environmental variables back in
+```{r}
+
+data.scores$temp_deep = Zoop_env_september$CTDTMP_DEG_C_ITS90_Deep...6
+data.scores$temp_surface = Zoop_env_september$CTDTMP_DEG_C_ITS90_Surface...7
+data.scores$salinity_deep = Zoop_env_september$CTDSAL_PSS78_Deep...8
+data.scores$salinity_surface = Zoop_env_september$CTDSAL_PSS78_Surface...9
+data.scores$oxygen_deep = Zoop_env_september$OXYGEN_MG_L_1_Deep...10
+data.scores$oxygen_surface = Zoop_env_september$OXYGEN_MG_L_1_Surface...11
+data.scores$nitrate_deep = Zoop_env_september$NITRATE_UMOL_L_Deep...12
+data.scores$nitrate_surface = Zoop_env_september$NITRATE_UMOL_L_Surface...13
+data.scores$temp_surf_anom = Zoop_env_september$CTDTMP_DEG_C_ITS90_Surface...16
+data.scores$temp_deep_anom = Zoop_env_september$CTDTMP_DEG_C_ITS90_Deep...15
+data.scores$oxy_deep_anom = Zoop_env_september$OXYGEN_MG_L_1_Deep...19
+data.scores$chla = Zoop_env_september$chla
+```
+
+plot data scores
+```{r}
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour=Station)) +stat_ellipse()+geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+xx
+
+xx <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2,colour = Sample.Year)) +stat_ellipse()+geom_point(aes(colour = Sample.Year))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+xx
+
+```
+
+
+## environmental fitting
+create environmetal fit table
+```{r}
+#check for correlation among environmental variables.
+#remove nutrients other than nitrate because of autocorrelation
+
+data.scores.cor<- data.scores[ -c(1:6) ]
+cor_matrix <- cor(data.scores.cor)
+corrplot(cor_matrix, method = "number", type = "lower", tl.pos = 'd')
+
+Zoo.env <- data.frame(matrix(ncol = 0, nrow=57))
+colnames(data.scores)
+Zoo.env$temp_deep<-as.numeric(data.scores$temp_deep)
+Zoo.env$temp_surface<-as.numeric(data.scores$temp_surface)
+Zoo.env$salinity_deep<-as.numeric(data.scores$salinity_deep)
+Zoo.env$salinity_surface<-as.numeric(data.scores$salinity_surface)
+Zoo.env$oxygen_deep<-as.numeric(data.scores$oxygen_deep)
+Zoo.env$oxygen_surface<-as.numeric(data.scores$oxygen_surface)
+Zoo.env$temp_deep_anom<-as.numeric(data.scores$temp_deep_anom)
+Zoo.env$temp_surf_anom<-as.numeric(data.scores$temp_surf_anom)
+Zoo.env$oxy_deep_anom<-as.numeric(data.scores$oxy_deep_anom)
+Zoo.env$chla<-as.numeric(data.scores$chla)
+
+env <- envfit(NMDSmodel, Zoo.env, na.rm = TRUE,perm = 999)
+env
+
+
+env.scrs <- as.data.frame(scores(env, display = "vectors")) 
+env.scrs <- cbind(env.scrs, Species = rownames(env.scrs), Pvalues = env$vectors$pvals, R_squared = env$vectors$r)
+env.scrs <- subset(env.scrs, Pvalues < 0.05)
+
+
+env.scrs
+```
+
+## Species fitting
+```{r}
+vf <- envfit(NMDSmodel, RE2, perm = 999)
+
+spp.scrs <- as.data.frame(scores(vf, display = "vectors"))
+spp.scrs <- cbind(spp.scrs, Species = rownames(spp.scrs))
+####for ggplot
+arrow_factor <- ordiArrowMul(vf)
+spp.scrs <- as.data.frame(scores(vf, display = "vectors")) * arrow_factor
+spp.scrs <- cbind(spp.scrs, Species = rownames(spp.scrs), Pvalues = vf$vectors$pvals, R_squared = vf$vectors$r)
+
+# select significance similarly to `plot(vf, p.max = 0.01)`
+spp.scrs <- subset(spp.scrs, Pvalues < 0.05)
+spp.scrs <- subset(spp.scrs, R_squared > 0.3)
+spp.scrs
+
+```
+### all data with species
+extract hulls
+
+```{r}
+P12 <- data.scores[data.scores$Station == "P12", ][chull(data.scores[data.scores$Station ==                                                           "P12", c("NMDS1", "NMDS2")]), ]  
+P22 <- data.scores[data.scores$Station == "P22", ][chull(data.scores[data.scores$Station ==                                                           "P22", c("NMDS1", "NMDS2")]), ]  
+P28 <- data.scores[data.scores$Station == "P28", ][chull(data.scores[data.scores$Station ==                                                           "P28", c("NMDS1", "NMDS2")]), ]
+P38 <- data.scores[data.scores$Station == "P38", ][chull(data.scores[data.scores$Station ==                                                           "P38", c("NMDS1", "NMDS2")]), ]  
+P4 <- data.scores[data.scores$Station == "P4", ][chull(data.scores[data.scores$Station ==                                                           "P4", c("NMDS1", "NMDS2")]), ]  
+P402 <- data.scores[data.scores$Station == "P402", ][chull(data.scores[data.scores$Station ==                                                           "P402", c("NMDS1", "NMDS2")]), ]  
+P8 <- data.scores[data.scores$Station == "P8", ][chull(data.scores[data.scores$Station ==                                                           "P8", c("NMDS1", "NMDS2")]), ]  
+```
+
+
+get hull data
+```{r}
+sep.hull.data <- rbind(P12, P22, P28,P38,P4,P402,P8)  #combine grp.a and grp.b
+sep.hull.data
+```
+
+```{r,fig.width=6.5,fig.height=5, dpi=600}
+
+sep_Species <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ 
+  geom_polygon(data=sep.hull.data,aes(x=NMDS1,y=NMDS2,group=Station, fill=Station),alpha=0.20, size=0.1, linetype=1, colour = "black") +
+  annotate("text", label = "2D Stress: 0.16", x = 0.65, y = 0.8, size = 4, colour = "black")+ geom_segment(data = env.scrs,size=0.2,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.08, "cm")), colour = "black")+
+  geom_label_repel(data = env.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
+                  size = 2.5, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), box.padding = unit(0.16, "lines"), label.size = 0.05)+ scale_colour_manual(values=c("#00B6EB","#F8766D","#00C094","#FB61D7","#C49A00","#A69AFF","#53B400")) +
+  scale_fill_manual(values=c("#00B6EB","#F8766D","#00C094","#FB61D7","#C49A00","#A69AFF","#53B400"))
+sep_Species
+
+```
+save 
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "Sep_Species_month.png", plot = sep_Species, width = 6.5, height = 5.5, device='png', dpi=700)
+```
+extract hulls
+```{r}
+G1 <- data.scores[data.scores$group == "1", ][chull(data.scores[data.scores$group ==                                                           "1", c("NMDS1", "NMDS2")]), ]  
+G2 <- data.scores[data.scores$group == "2", ][chull(data.scores[data.scores$group ==                                                           "2", c("NMDS1", "NMDS2")]), ]  
+G3 <- data.scores[data.scores$group == "3", ][chull(data.scores[data.scores$group ==                                                           "3", c("NMDS1", "NMDS2")]), ]
+G4 <- data.scores[data.scores$group == "4", ][chull(data.scores[data.scores$group ==                                                           "4", c("NMDS1", "NMDS2")]), ]  
+G5 <- data.scores[data.scores$group == "5", ][chull(data.scores[data.scores$group ==                                                           "5", c("NMDS1", "NMDS2")]), ] 
+G6 <- data.scores[data.scores$group == "6", ][chull(data.scores[data.scores$group ==                                                           "6", c("NMDS1", "NMDS2")]), ] 
+G7 <- data.scores[data.scores$group == "7", ][chull(data.scores[data.scores$group ==                                                           "7", c("NMDS1", "NMDS2")]), ] 
+
+```
+get hull data
+```{r}
+hull.data <- rbind(G1,G2,G3,G4,G5,G6,G7)  #combine grp.a and grp.b
+hull.data
+
+```
+```{r,fig.width=6.5,fig.height=5, dpi=600}
+
+sep_Species_plot <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ 
+  geom_polygon(data=hull.data,aes(x=NMDS1,y=NMDS2,group=group),alpha=0.20, size=0.1, linetype=1, fill=NA, colour = "black") +
+  annotate("text", label = "2D Stress: 0.16", x = 0.65, y = 0.8, size = 4, colour = "black")+ geom_segment(data = env.scrs,size=0.2,
+               aes(x = 0, xend = NMDS1, y = 0, yend = NMDS2),
+               arrow = arrow(length = unit(0.08, "cm")), colour = "black")+
+  geom_label_repel(data = env.scrs, aes(x = NMDS1, y = NMDS2, label = Species),
+                  size = 2.5, fontface="bold", fill="white", label.padding = unit(0.15, "lines"), box.padding = unit(0.16, "lines"), label.size = 0.05)+ scale_colour_manual(values=c("#00B6EB","#F8766D","#00C094","#FB61D7","#C49A00","#A69AFF","#53B400"))
+sep_Species_plot
+
+```
+save
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "Sep_Species_cluster.png", plot =sep_Species_plot, width = 6.5, height = 5.5, device='png', dpi=700)
+```
+
+```{r,fig.width=6.5,fig.height=5, dpi=600}
+
+sep_Species_year <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +geom_point(aes(colour = Station))+theme_bw()+theme(panel.grid.major = element_blank(),
+                                                                                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+ 
+  geom_polygon(data=hull.data,aes(x=NMDS1,y=NMDS2,group=group),alpha=0.20, size=0.1, linetype=1, fill=NA, colour = "black") +
+  annotate("text", label = "2D Stress: 0.16", x = 0.65, y = 0.8, size = 4, colour = "black")+ 
+  geom_text_repel(aes(label = Sample.Year), size = 2.5)+ scale_colour_manual(values=c("#00B6EB","#F8766D","#00C094","#FB61D7","#C49A00","#A69AFF","#53B400"))
+sep_Species_year
+
+```
+save
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "Sep_Species_year.png", plot =sep_Species_year, width = 6.5, height = 5.5, device='png', dpi=700)
+```
+
+
+
+# heatmap April P28
+```{r}
+unique(Zoop_sub$Station)
+Zoop_april<-subset(Zoop_sub,Sample.Month=="APR")
+Zoop_april<-subset(Zoop_april,Station=="P28")
+Zoop_sub_heat<-dcast(Zoop_april, Sample.Code~ Genus.species,value.var = "zoop_density")
+Zoop_sub_heat <- Zoop_sub_heat %>% replace(is.na(.), 0)
+#convert to proportions
+Zoop_sub_heat_data  = subset(Zoop_sub_heat, select = -c(Sample.Code) )
+
+Zoop_sub_heat_data1<-as.matrix(Zoop_sub_heat_data)
+Zoop_sub_heat_data1 <- matrix( 
+  as.numeric(Zoop_sub_heat_data1), ncol = 100)  
+rownames(Zoop_sub_heat_data1)<-Zoop_sub_heat$Sample.Code
+column<-colnames(Zoop_sub_heat_data)
+colnames(Zoop_sub_heat_data1)<-column
+
+heatmap(Zoop_sub_heat_data1,show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+
+heatmap(Zoop_sub_heat_data1, scale="column",show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+```
+#heatmap July P28
+```{r}
+unique(Zoop_sub$Station)
+Zoop_april<-subset(Zoop_sub,Sample.Month=="JUL")
+Zoop_april<-subset(Zoop_april,Station=="P28")
+Zoop_sub_heat<-dcast(Zoop_april, Sample.Code~ Genus.species,value.var = "zoop_density")
+Zoop_sub_heat <- Zoop_sub_heat %>% replace(is.na(.), 0)
+#convert to proportions
+Zoop_sub_heat_data  = subset(Zoop_sub_heat, select = -c(Sample.Code) )
+
+Zoop_sub_heat_data1<-as.matrix(Zoop_sub_heat_data)
+Zoop_sub_heat_data1 <- matrix( 
+  as.numeric(Zoop_sub_heat_data1), ncol = 92)  
+rownames(Zoop_sub_heat_data1)<-Zoop_sub_heat$Sample.Code
+column<-colnames(Zoop_sub_heat_data)
+colnames(Zoop_sub_heat_data1)<-column
+
+heatmap(Zoop_sub_heat_data1,show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+
+heatmap(Zoop_sub_heat_data1, scale="column",show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+```
+
+#heatmap September P28
+```{r}
+unique(Zoop_sub$Station)
+Zoop_april<-subset(Zoop_sub,Sample.Month=="SEP")
+Zoop_april<-subset(Zoop_april,Station=="P28")
+Zoop_sub_heat<-dcast(Zoop_april, Sample.Code~ Genus.species,value.var = "zoop_density")
+Zoop_sub_heat <- Zoop_sub_heat %>% replace(is.na(.), 0)
+#convert to proportions
+Zoop_sub_heat_data  = subset(Zoop_sub_heat, select = -c(Sample.Code) )
+
+Zoop_sub_heat_data1<-as.matrix(Zoop_sub_heat_data)
+Zoop_sub_heat_data1 <- matrix( 
+  as.numeric(Zoop_sub_heat_data1), ncol = 61)  
+rownames(Zoop_sub_heat_data1)<-Zoop_sub_heat$Sample.Code
+column<-colnames(Zoop_sub_heat_data)
+colnames(Zoop_sub_heat_data1)<-column
+
+heatmap(Zoop_sub_heat_data1,show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+
+heatmap(Zoop_sub_heat_data1, scale="column",show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+```
+
+#heatmap April P402
+```{r}
+unique(Zoop_sub$Station)
+Zoop_april<-subset(Zoop_sub,Sample.Month=="APR")
+Zoop_april<-subset(Zoop_april,Station=="P402")
+Zoop_sub_heat<-dcast(Zoop_april, Sample.Code~ Genus.species,value.var = "zoop_density")
+Zoop_sub_heat <- Zoop_sub_heat %>% replace(is.na(.), 0)
+#convert to proportions
+Zoop_sub_heat_data  = subset(Zoop_sub_heat, select = -c(Sample.Code) )
+
+Zoop_sub_heat_data1<-as.matrix(Zoop_sub_heat_data)
+Zoop_sub_heat_data1 <- matrix( 
+  as.numeric(Zoop_sub_heat_data1), ncol = 103)  
+rownames(Zoop_sub_heat_data1)<-Zoop_sub_heat$Sample.Code
+column<-colnames(Zoop_sub_heat_data)
+colnames(Zoop_sub_heat_data1)<-column
+
+heatmap(Zoop_sub_heat_data1,show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+
+heatmap(Zoop_sub_heat_data1, scale="column",show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+```
+
+#heatmap July P402
+```{r}
+unique(Zoop_sub$Station)
+Zoop_april<-subset(Zoop_sub,Sample.Month=="JUL")
+Zoop_april<-subset(Zoop_april,Station=="P402")
+Zoop_sub_heat<-dcast(Zoop_april, Sample.Code~ Genus.species,value.var = "zoop_density")
+Zoop_sub_heat <- Zoop_sub_heat %>% replace(is.na(.), 0)
+#convert to proportions
+Zoop_sub_heat_data  = subset(Zoop_sub_heat, select = -c(Sample.Code) )
+
+Zoop_sub_heat_data1<-as.matrix(Zoop_sub_heat_data)
+Zoop_sub_heat_data1 <- matrix( 
+  as.numeric(Zoop_sub_heat_data1), ncol = 89)  
+rownames(Zoop_sub_heat_data1)<-Zoop_sub_heat$Sample.Code
+column<-colnames(Zoop_sub_heat_data)
+colnames(Zoop_sub_heat_data1)<-column
+
+heatmap(Zoop_sub_heat_data1,show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+
+heatmap(Zoop_sub_heat_data1, scale="column",show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+```
+
+#heatmap September P402
+```{r}
+unique(Zoop_sub$Station)
+Zoop_april<-subset(Zoop_sub,Sample.Month=="SEP")
+Zoop_april<-subset(Zoop_april,Station=="P402")
+Zoop_sub_heat<-dcast(Zoop_april, Sample.Code~ Genus.species,value.var = "zoop_density")
+Zoop_sub_heat <- Zoop_sub_heat %>% replace(is.na(.), 0)
+#convert to proportions
+Zoop_sub_heat_data  = subset(Zoop_sub_heat, select = -c(Sample.Code) )
+
+Zoop_sub_heat_data1<-as.matrix(Zoop_sub_heat_data)
+Zoop_sub_heat_data1 <- matrix( 
+  as.numeric(Zoop_sub_heat_data1), ncol = 85)  
+rownames(Zoop_sub_heat_data1)<-Zoop_sub_heat$Sample.Code
+column<-colnames(Zoop_sub_heat_data)
+colnames(Zoop_sub_heat_data1)<-column
+
+heatmap(Zoop_sub_heat_data1,show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+
+heatmap(Zoop_sub_heat_data1, scale="column",show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+```
+
+#heatmap April P12
+```{r}
+unique(Zoop_sub$Station)
+Zoop_april<-subset(Zoop_sub,Sample.Month=="APR")
+Zoop_april<-subset(Zoop_april,Station=="P12")
+Zoop_sub_heat<-dcast(Zoop_april, Sample.Code~ Genus.species,value.var = "zoop_density")
+Zoop_sub_heat <- Zoop_sub_heat %>% replace(is.na(.), 0)
+#convert to proportions
+Zoop_sub_heat_data  = subset(Zoop_sub_heat, select = -c(Sample.Code) )
+
+Zoop_sub_heat_data1<-as.matrix(Zoop_sub_heat_data)
+Zoop_sub_heat_data1 <- matrix( 
+  as.numeric(Zoop_sub_heat_data1), ncol = 106)  
+rownames(Zoop_sub_heat_data1)<-Zoop_sub_heat$Sample.Code
+column<-colnames(Zoop_sub_heat_data)
+colnames(Zoop_sub_heat_data1)<-column
+
+heatmap(Zoop_sub_heat_data1,show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+
+heatmap(Zoop_sub_heat_data1, scale="column",show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+```
+
+#heatmap July P12
+```{r}
+unique(Zoop_sub$Station)
+Zoop_april<-subset(Zoop_sub,Sample.Month=="JUL")
+Zoop_april<-subset(Zoop_april,Station=="P12")
+Zoop_sub_heat<-dcast(Zoop_april, Sample.Code~ Genus.species,value.var = "zoop_density")
+Zoop_sub_heat <- Zoop_sub_heat %>% replace(is.na(.), 0)
+#convert to proportions
+Zoop_sub_heat_data  = subset(Zoop_sub_heat, select = -c(Sample.Code) )
+
+Zoop_sub_heat_data1<-as.matrix(Zoop_sub_heat_data)
+Zoop_sub_heat_data1 <- matrix( 
+  as.numeric(Zoop_sub_heat_data1), ncol = 93)  
+rownames(Zoop_sub_heat_data1)<-Zoop_sub_heat$Sample.Code
+column<-colnames(Zoop_sub_heat_data)
+colnames(Zoop_sub_heat_data1)<-column
+
+heatmap(Zoop_sub_heat_data1,show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+
+heatmap(Zoop_sub_heat_data1, scale="column",show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+```
+
+#heatmap Sep P12
+```{r}
+unique(Zoop_sub$Station)
+Zoop_april<-subset(Zoop_sub,Sample.Month=="SEP")
+Zoop_april<-subset(Zoop_april,Station=="P12")
+Zoop_sub_heat<-dcast(Zoop_april, Sample.Code~ Genus.species,value.var = "zoop_density")
+Zoop_sub_heat <- Zoop_sub_heat %>% replace(is.na(.), 0)
+#convert to proportions
+Zoop_sub_heat_data  = subset(Zoop_sub_heat, select = -c(Sample.Code) )
+
+Zoop_sub_heat_data1<-as.matrix(Zoop_sub_heat_data)
+Zoop_sub_heat_data1 <- matrix( 
+  as.numeric(Zoop_sub_heat_data1), ncol = 73)  
+rownames(Zoop_sub_heat_data1)<-Zoop_sub_heat$Sample.Code
+column<-colnames(Zoop_sub_heat_data)
+colnames(Zoop_sub_heat_data1)<-column
+
+heatmap(Zoop_sub_heat_data1,show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+
+heatmap(Zoop_sub_heat_data1, scale="column",show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+```
+
+#heatmap April P4
+```{r}
+unique(Zoop_sub$Station)
+Zoop_april<-subset(Zoop_sub,Sample.Month=="APR")
+Zoop_april<-subset(Zoop_april,Station=="P4")
+Zoop_sub_heat<-dcast(Zoop_april, Sample.Code~ Genus.species,value.var = "zoop_density")
+Zoop_sub_heat <- Zoop_sub_heat %>% replace(is.na(.), 0)
+#convert to proportions
+Zoop_sub_heat_data  = subset(Zoop_sub_heat, select = -c(Sample.Code) )
+
+Zoop_sub_heat_data1<-as.matrix(Zoop_sub_heat_data)
+Zoop_sub_heat_data1 <- matrix( 
+  as.numeric(Zoop_sub_heat_data1), ncol = 86)  
+rownames(Zoop_sub_heat_data1)<-Zoop_sub_heat$Sample.Code
+column<-colnames(Zoop_sub_heat_data)
+colnames(Zoop_sub_heat_data1)<-column
+
+heatmap(Zoop_sub_heat_data1,show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+
+heatmap(Zoop_sub_heat_data1, scale="column",show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+```
+
+#heatmap July P4
+```{r}
+unique(Zoop_sub$Station)
+Zoop_april<-subset(Zoop_sub,Sample.Month=="JUL")
+Zoop_april<-subset(Zoop_april,Station=="P4")
+Zoop_sub_heat<-dcast(Zoop_april, Sample.Code~ Genus.species,value.var = "zoop_density")
+Zoop_sub_heat <- Zoop_sub_heat %>% replace(is.na(.), 0)
+#convert to proportions
+Zoop_sub_heat_data  = subset(Zoop_sub_heat, select = -c(Sample.Code) )
+
+Zoop_sub_heat_data1<-as.matrix(Zoop_sub_heat_data)
+Zoop_sub_heat_data1 <- matrix( 
+  as.numeric(Zoop_sub_heat_data1), ncol = 98)  
+rownames(Zoop_sub_heat_data1)<-Zoop_sub_heat$Sample.Code
+column<-colnames(Zoop_sub_heat_data)
+colnames(Zoop_sub_heat_data1)<-column
+
+heatmap(Zoop_sub_heat_data1,show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+
+heatmap(Zoop_sub_heat_data1, scale="column",show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+```
+
+#heatmap September P4
+```{r}
+unique(Zoop_sub$Station)
+Zoop_april<-subset(Zoop_sub,Sample.Month=="SEP")
+Zoop_april<-subset(Zoop_april,Station=="P4")
+Zoop_sub_heat<-dcast(Zoop_april, Sample.Code~ Genus.species,value.var = "zoop_density")
+Zoop_sub_heat <- Zoop_sub_heat %>% replace(is.na(.), 0)
+#convert to proportions
+Zoop_sub_heat_data  = subset(Zoop_sub_heat, select = -c(Sample.Code) )
+
+Zoop_sub_heat_data1<-as.matrix(Zoop_sub_heat_data)
+Zoop_sub_heat_data1 <- matrix( 
+  as.numeric(Zoop_sub_heat_data1), ncol = 100)  
+rownames(Zoop_sub_heat_data1)<-Zoop_sub_heat$Sample.Code
+column<-colnames(Zoop_sub_heat_data)
+colnames(Zoop_sub_heat_data1)<-column
+
+heatmap(Zoop_sub_heat_data1,show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+
+heatmap(Zoop_sub_heat_data1, scale="column",show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+```
+
+#heatmap April P8
+```{r}
+unique(Zoop_sub$Station)
+Zoop_april<-subset(Zoop_sub,Sample.Month=="APR")
+Zoop_april<-subset(Zoop_april,Station=="P8")
+Zoop_sub_heat<-dcast(Zoop_april, Sample.Code~ Genus.species,value.var = "zoop_density")
+Zoop_sub_heat <- Zoop_sub_heat %>% replace(is.na(.), 0)
+#convert to proportions
+Zoop_sub_heat_data  = subset(Zoop_sub_heat, select = -c(Sample.Code) )
+
+Zoop_sub_heat_data1<-as.matrix(Zoop_sub_heat_data)
+Zoop_sub_heat_data1 <- matrix( 
+  as.numeric(Zoop_sub_heat_data1), ncol = 111)  
+rownames(Zoop_sub_heat_data1)<-Zoop_sub_heat$Sample.Code
+column<-colnames(Zoop_sub_heat_data)
+colnames(Zoop_sub_heat_data1)<-column
+
+heatmap(Zoop_sub_heat_data1,show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+
+heatmap(Zoop_sub_heat_data1, scale="column",show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+```
+
+#heatmap July P8 organize by phylum
+```{r}
+unique(Zoop_sub$Station)
+Zoop_april<-subset(Zoop_sub,Sample.Month=="JUL")
+Zoop_april<-subset(Zoop_april,Station=="P8")
+Zoop_sub_heat<-dcast(Zoop_april, Sample.Code~ Genus.species,value.var = "zoop_density")
+Zoop_sub_heat <- Zoop_sub_heat %>% replace(is.na(.), 0)
+#convert to proportions
+Zoop_sub_heat_data  = subset(Zoop_sub_heat, select = -c(Sample.Code) )
+
+Zoop_sub_heat_data1<-as.matrix(Zoop_sub_heat_data)
+Zoop_sub_heat_data1 <- matrix( 
+  as.numeric(Zoop_sub_heat_data1), ncol = 111)  
+rownames(Zoop_sub_heat_data1)<-Zoop_sub_heat$Sample.Code
+column<-colnames(Zoop_sub_heat_data)
+colnames(Zoop_sub_heat_data1)<-column
+
+heatmap(Zoop_sub_heat_data1,show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+
+heatmap(Zoop_sub_heat_data1, scale="column",show_row_names=TRUE,show_col_names=TRUE,mar = c(15, 15))
+```
+

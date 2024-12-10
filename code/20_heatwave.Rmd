@@ -1,0 +1,74 @@
+---
+title: "20_heatwave"
+date: "2024-11-12"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,         # Display code chunks
+  eval = TRUE,        # Evaluate code chunks
+  warning = FALSE,     # Hide warnings
+  message = FALSE,     # Hide messages
+  fig.width = 10,       # Set plot width in inches
+  fig.height = 6,      # Set plot height in inches
+  fig.align = "center" # Align plots to the center
+)
+```
+
+Read data into R
+```{r}
+Environmental <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/WOAC_Chem_data_2014-2022_all-niskins.csv")
+```
+
+convert date format
+```{r}
+temp <- Environmental %>% 
+  mutate(date_convert = as.Date(Date, format = "%m/%d/%y"))
+```
+
+subset to P12
+```{r}
+temp_P12<- subset(temp, Station=='P12')
+```
+
+
+## max temperature
+summarize
+```{r}
+temp_heatwave<-temp_P12 %>%
+  group_by(date_convert) %>%
+  summarise(
+    temp = max(CTDTMP_DEG_C_ITS90))
+```
+
+rename column
+```{r}
+colnames(temp_heatwave)[colnames(temp_heatwave) == 'date_convert'] <- 't'
+```
+
+## calculate heatwave
+```{r}
+library(dplyr)
+library(ggplot2)
+library(heatwaveR)
+
+# Detect the events in a time series
+ts <- ts2clm(temp_heatwave, climatologyPeriod = c("2014-07-16", "2022-06-29"))
+mhw <- detect_event(ts)
+
+# View just a few metrics
+mhw$event %>% 
+  dplyr::ungroup() %>%
+  dplyr::select(event_no, duration, date_start, date_peak, intensity_max, intensity_cumulative) %>% 
+  dplyr::arrange(-intensity_max) %>% 
+  head(5)
+```
+```{r}
+event_line(mhw, spread = 180, metric = intensity_max, 
+           start_date = "2014-07-14", end_date = "2022-10-15")
+```
+

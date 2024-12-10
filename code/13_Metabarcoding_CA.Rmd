@@ -10,6 +10,13 @@ output:
 
 correspondence analysis of presence-absence data: https://r.qcbs.ca/workshop09/book-en/correspondence-analysis.html
 
+load packages
+```{r}
+library(dplyr)
+library(reshape2)
+library(vegan)
+library(stringr)
+```
 
 
 ```{r}
@@ -480,3 +487,17 @@ text(scores(spe.ca, display = "species", choices = c(1), scaling = 2),
     col = "red", cex = 0.8)
 
 ```
+
+plot cca using ggplot
+```{r}
+# Enable the r-universe repo
+options(repos = c(
+    fawda123 = 'https://fawda123.r-universe.dev',
+    CRAN = 'https://cloud.r-project.org'))
+
+# Install ggord
+install.packages('ggord')
+library(ggord)
+ggord(spe.ca, MOL_pa_wide_y$Station) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) # looking at the raw code, this is plotting the 'wa scores'
+```
+

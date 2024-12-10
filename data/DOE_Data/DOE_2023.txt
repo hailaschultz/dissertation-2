@@ -1,0 +1,460 @@
+File MarineWaterProfilesAndNutrientsYear2023.nc (NC_FORMAT_NETCDF4):
+
+     75 variables (excluding dimension variables):
+        byte PO4_QA[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality assessment level for discrete phosphate in seawater
+            flag_values: 0 1 2 3
+            flag_meanings: None Preliminary Reviewed Final
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        char PO4_QF[max_string_length,obs]   (Chunking: [6,1])  (Compression: level 5)
+            long_name: Quality flag for discrete phosphate in seawater
+            flag_values: 0 JB JE JH J JM M NAF NC R U UJ OOR
+            flag_meanings: No_specification Blank_contamination Calibration_exceedance Holding_time_exceedance Estimate Method_modification Missing_result Not_analyzed_for Not_calculated Rejected Undetected Undetected_but_limits_insufficient_to_generate_accurate_results Out_of_range
+            coordinates: FieldDate Latitude Longitude Depth Station
+        byte PO4_QC[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality code for discrete phosphate in seawater
+            flag_values: 0 1 2
+            flag_meanings: None Fail Pass
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        float PO4[obs]   (Chunking: [1024])  (Compression: level 5)
+            units: micromoles L-1
+            standard_name: mole_concentration_of_phosphate_in_sea_water
+            long_name: Discrete phosphate
+            coordinates: FieldDate Latitude Longitude Depth Station
+            ancillary variables: PO4_QC PO4_QF PO4_QA
+            _FillValue: -99999.8984375
+        byte SiOH4_QA[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality assessment level for discrete silicate in seawater
+            flag_values: 0 1 2 3
+            flag_meanings: None Preliminary Reviewed Final
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        char SiOH4_QF[max_string_length,obs]   (Chunking: [6,1])  (Compression: level 5)
+            long_name: Quality flag for discrete silicate in seawater
+            flag_values: 0 JB JE JH J JM M NAF NC R U UJ OOR
+            flag_meanings: No_specification Blank_contamination Calibration_exceedance Holding_time_exceedance Estimate Method_modification Missing_result Not_analyzed_for Not_calculated Rejected Undetected Undetected_but_limits_insufficient_to_generate_accurate_results Out_of_range
+            coordinates: FieldDate Latitude Longitude Depth Station
+        byte SiOH4_QC[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality code for discrete silicate in seawater
+            flag_values: 0 1 2
+            flag_meanings: None Fail Pass
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        float SiOH4[obs]   (Chunking: [1024])  (Compression: level 5)
+            units: micromoles L-1
+            standard_name: mole_concentration_of_silicate_in_sea_water
+            long_name: Discrete silicate
+            coordinates: FieldDate Latitude Longitude Depth Station
+            ancillary variables: SiOH4_QC SiOH4_QF SiOH4_QA
+            _FillValue: -99999.8984375
+        byte NH4_QA[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality assessment level for discrete ammonium in seawater
+            flag_values: 0 1 2 3
+            flag_meanings: None Preliminary Reviewed Final
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        char NH4_QF[max_string_length,obs]   (Chunking: [6,1])  (Compression: level 5)
+            long_name: Quality flag for discrete ammonium in seawater
+            flag_values: 0 JB JE JH J JM M NAF NC R U UJ OOR
+            flag_meanings: No_specification Blank_contamination Calibration_exceedance Holding_time_exceedance Estimate Method_modification Missing_result Not_analyzed_for Not_calculated Rejected Undetected Undetected_but_limits_insufficient_to_generate_accurate_results Out_of_range
+            coordinates: FieldDate Latitude Longitude Depth Station
+        byte NH4_QC[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality code for discrete ammonium in seawater
+            flag_values: 0 1 2
+            flag_meanings: None Fail Pass
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        float NH4[obs]   (Chunking: [1024])  (Compression: level 5)
+            units: micromoles L-1
+            standard_name: mole_concentration_of_ammonium_in_sea_water
+            long_name: Discrete ammonium
+            coordinates: FieldDate Latitude Longitude Depth Station
+            ancillary variables: NH4_QC NH4_QF NH4_QA
+            _FillValue: -99999.8984375
+        byte NO2_QA[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality assessment level for discrete nitrite in seawater
+            flag_values: 0 1 2 3
+            flag_meanings: None Preliminary Reviewed Final
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        char NO2_QF[max_string_length,obs]   (Chunking: [6,1])  (Compression: level 5)
+            long_name: Quality flag for discrete nitrite in seawater
+            flag_values: 0 JB JE JH J JM M NAF NC R U UJ OOR
+            flag_meanings: No_specification Blank_contamination Calibration_exceedance Holding_time_exceedance Estimate Method_modification Missing_result Not_analyzed_for Not_calculated Rejected Undetected Undetected_but_limits_insufficient_to_generate_accurate_results Out_of_range
+            coordinates: FieldDate Latitude Longitude Depth Station
+        byte NO2_QC[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality code for discrete nitrite in seawater
+            flag_values: 0 1 2
+            flag_meanings: None Fail Pass
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        float NO2[obs]   (Chunking: [1024])  (Compression: level 5)
+            units: micromoles L-1
+            standard_name: mole_concentration_of_nitrite_in_sea_water
+            long_name: Discrete nitrite
+            coordinates: FieldDate Latitude Longitude Depth Station
+            ancillary variables: NO2_QC NO2_QF NO2_QA
+            _FillValue: -99999.8984375
+        byte NO3_QA[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality assessment level for discrete nitrate in seawater
+            flag_values: 0 1 2 3
+            flag_meanings: None Preliminary Reviewed Final
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        char NO3_QF[max_string_length,obs]   (Chunking: [6,1])  (Compression: level 5)
+            long_name: Quality flag for discrete nitrate in seawater
+            flag_values: 0 JB JE JH J JM M NAF NC R U UJ OOR
+            flag_meanings: No_specification Blank_contamination Calibration_exceedance Holding_time_exceedance Estimate Method_modification Missing_result Not_analyzed_for Not_calculated Rejected Undetected Undetected_but_limits_insufficient_to_generate_accurate_results Out_of_range
+            coordinates: FieldDate Latitude Longitude Depth Station
+        byte NO3_QC[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality code for discrete nitrate in seawater
+            flag_values: 0 1 2
+            flag_meanings: None Fail Pass
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        float NO3[obs]   (Chunking: [1024])  (Compression: level 5)
+            units: micromole L-1
+            standard_name: mole_concentration_of_nitrate_in_sea_water
+            long_name: Discrete nitrate
+            coordinates: FieldDate Latitude Longitude Depth Station
+            ancillary variables: NO3_QC NO3_QF NO3_QA
+            _FillValue: -99999.8984375
+        byte Xmiss_25cmQA[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality assessment level for in situ transmission in seawater
+            flag_values: 0 1 2 3
+            flag_meanings: None Preliminary Reviewed Final
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        char Xmiss_25cmQF[max_string_length,obs]   (Chunking: [6,1])  (Compression: level 5)
+            long_name: Quality flag for in situ transmission in seawater
+            flag_values: 0 1 2 3 4 5 6 7 8 9
+            flag_meanings: No_specification Sensor_or_equipment_performance Procedure_modification Method_limitation Outlier Data_behavior Out_of_range Estimate_or_missing_information Non-survey Calculated
+            coordinates: FieldDate Latitude Longitude Depth Station
+        byte Xmiss_25cmQC[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality code for in situ transmission in seawater
+            flag_values: 0 1 2
+            flag_meanings: None Fail Pass
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        float Xmiss_25cm[obs]   (Chunking: [1024])  (Compression: level 5)
+            units: %
+            long_name: In situ seawater tranmission using 25-cm path length
+            coordinates: FieldDate Latitude Longitude Depth Station
+            ancillary_variables: Xmiss_25cmQC Xmiss_25cmQF Xmiss_25cmQA
+            _FillValue: -99999.8984375
+        byte BatCQA[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality assessment level for in situ beam attenuation in seawater
+            flag_values: 0 1 2 3
+            flag_meanings: None Preliminary Reviewed Final
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        char BatCQF[max_string_length,obs]   (Chunking: [6,1])  (Compression: level 5)
+            long_name: Quality flag for in situ beam attenuation in seawater
+            flag_values: 0 1 2 3 4 5 6 7 8 9
+            flag_meanings: No_specification Sensor_or_equipment_performance Procedure_modification Method_limitation Outlier Data_behavior Out_of_range Estimate_or_missing_information Non-survey Calculated
+            coordinates: FieldDate Latitude Longitude Depth Station
+        byte BatCQC[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality code for in situ beam attenuation in seawater
+            flag_values: 0 1 2
+            flag_meanings: None Fail Pass
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        float BatC[obs]   (Chunking: [1024])  (Compression: level 5)
+            units: 1 m-1
+            long_name: In situ beam attenuation in seawater
+            coordinates: FieldDate Latitude Longitude Depth Station
+            ancillary_variables: BatCQC BatCQF BatCQA
+            _FillValue: -99999.8984375
+        byte FluorAdjustedQA[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality assessment level for in situ chlorophyll fluorescence in seawater
+            flag_values: 0 1 2 3
+            flag_meanings: None Preliminary Reviewed Final
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        char FluorAdjustedQF[max_string_length,obs]   (Chunking: [6,1])  (Compression: level 5)
+            long_name: Quality flag for in situ chlorophyll fluorescence in seawater
+            flag_values: 0 1 2 3 4 5 6 7 8 9
+            flag_meanings: No_specification Sensor_or_equipment_performance Procedure_modification Method_limitation Outlier Data_behavior Out_of_range Estimate_or_missing_information Non-survey Calculated
+            coordinates: FieldDate Latitude Longitude Depth Station
+        byte FluorAdjustedQC[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality code for in situ chlorophyll fluorescence in seawater
+            flag_values: 0 1 2
+            flag_meanings: None Fail Pass
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        float FluorAdjusted[obs]   (Chunking: [1024])  (Compression: level 5)
+            units: mg m-3
+            long_name: In situ chlorophyll fluorescence in seawater
+            coordinates: FieldDate Latitude Longitude Depth Station
+            ancillary_variables: FluorAdjustedQC FluorAdjustedQF FluorAdjustedQA
+            _FillValue: -99999.8984375
+        byte TurbQA[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality assessment level for in situ seawater turbidity
+            flag_values: 0 1 2 3
+            flag_meanings: None Preliminary Reviewed Final
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        char TurbQF[max_string_length,obs]   (Chunking: [6,1])  (Compression: level 5)
+            long_name: Quality flag for in situ seawater turbidity
+            flag_values: 0 1 2 3 4 5 6 7 8 9
+            flag_meanings: No_specification Sensor_or_equipment_performance Procedure_modification Method_limitation Outlier Data_behavior Out_of_range Estimate_or_missing_information Non-survey Calculated
+            coordinates: FieldDate Latitude Longitude Depth Station
+        byte TurbQC[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality code for in situ seawater turbidity
+            flag_values: 0 1 2
+            flag_meanings: None Fail Pass
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        float Turb[obs]   (Chunking: [1024])  (Compression: level 5)
+            units: NTU
+            standard_name: sea_water_turbidity
+            long_name: In situ seawater turbidity
+            coordinates: FieldDate Latitude Longitude Depth Station
+            ancillary_variables: TurbQC TurbQF TurbQA
+            _FillValue: -99999.8984375
+        byte DOSatAdjustedQA[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality assessment level for saturation of in situ dissolved oxygen in seawater
+            flag_values: 0 1 2 3
+            flag_meanings: None Preliminary Reviewed Final
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        char DOSatAdjustedQF[max_string_length,obs]   (Chunking: [6,1])  (Compression: level 5)
+            long_name: Quality flag for saturation of in situ dissolved oxygen in seawater
+            flag_values: 0 1 2 3 4 5 6 7 8 9
+            flag_meanings: No_specification Sensor_or_equipment_performance Procedure_modification Method_limitation Outlier Data_behavior Out_of_range Estimate_or_missing_information Non-survey Calculated
+            coordinates: FieldDate Latitude Longitude Depth Station
+        byte DOSatAdjustedQC[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality code for saturation of in situ dissolved oxygen in seawater
+            flag_values: 0 1 2
+            flag_meanings: None Fail Pass
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        float DOSatAdjusted[obs]   (Chunking: [1024])  (Compression: level 5)
+            units: %
+            long_name: Saturation of in situ dissolved oxygen in seawater;  adjusted for sensor drift.
+            coordinates: FieldDate Latitude Longitude Depth Station
+            ancillary_variables: DOSatAdjustedQC DOSatAdjustedQF DOSatAdjustedQA
+            _FillValue: -99999.8984375
+        byte DOAdjustedQA[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality assessment level for concentration of in situ dissolved oxygen in seawater
+            flag_values: 0 1 2 3
+            flag_meanings: None Preliminary Reviewed Final
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        char DOAdjustedQF[max_string_length,obs]   (Chunking: [6,1])  (Compression: level 5)
+            long_name: Quality flag for concentration of in situ dissolved oxygen in seawater
+            flag_values: 0 1 2 3 4 5 6 7 8 9
+            flag_meanings: No_specification Sensor_or_equipment_performance Procedure_modification Method_limitation Outlier Data_behavior Out_of_range Estimate_or_missing_information Non-survey Calculated
+            coordinates: FieldDate Latitude Longitude Depth Station
+        byte DOAdjustedQC[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality code for concentration of in situ dissolved oxygen in seawater
+            flag_values: 0 1 2
+            flag_meanings: None Fail Pass
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        float DOAdjusted[obs]   (Chunking: [1024])  (Compression: level 5)
+            units: mg L-1
+            long_name: Concentration of in situ dissolved oxygen in seawater;  adjusted for sensor drift.
+            coordinates: FieldDate Latitude Longitude Depth Station
+            ancillary_variables: DOAdjustedQC DOAdjustedQF DOAdjustedQA
+            _FillValue: -99999.8984375
+        byte SalinityQA[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality assessment level for in situ seawater salinity
+            flag_values: 0 1 2 3
+            flag_meanings: None Preliminary Reviewed Final
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        char SalinityQF[max_string_length,obs]   (Chunking: [6,1])  (Compression: level 5)
+            long_name: Quality flag for in situ seawater salinity
+            flag_values: 0 1 2 3 4 5 6 7 8 9
+            flag_meanings: No_specification Sensor_or_equipment_performance Procedure_modification Method_limitation Outlier Data_behavior Out_of_range Estimate_or_missing_information Non-survey Calculated
+            coordinates: FieldDate Latitude Longitude Depth Station
+        byte SalinityQC[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality code for in situ seawater salinity
+            flag_values: 0 1 2
+            flag_meanings: None Fail Pass
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        float Salinity[obs]   (Chunking: [1024])  (Compression: level 5)
+            units: PSU
+            standard_name: sea_water_practical_salinity
+            long_name: in situ seawater salinity
+            coordinates: FieldDate Latitude Longitude Depth Station
+            ancillary_variables: SalinityQC SalinityQF SalinityQA
+            _FillValue: -99999.8984375
+        byte DensityQA[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality assessment level for in situ seawater density
+            flag_values: 0 1 2 3
+            flag_meanings: None Preliminary Reviewed Final
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        char DensityQF[max_string_length,obs]   (Chunking: [6,1])  (Compression: level 5)
+            long_name: Quality flag for in situ seawater density
+            flag_values: 0 1 2 3 4 5 6 7 8 9
+            flag_meanings: No_specification Sensor_or_equipment_performance Procedure_modification Method_limitation Outlier Data_behavior Out_of_range Estimate_or_missing_information Non-survey Calculated
+            coordinates: FieldDate Latitude Longitude Depth Station
+        byte DensityQC[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality code for in situ seawater density
+            flag_values: 0 1 2
+            flag_meanings: None Fail Pass
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        float Density[obs]   (Chunking: [1024])  (Compression: level 5)
+            units: kg m-3
+            standard_name: sea_water_sigma-t
+            long_name: in situ seawater density in sigma-t, kg/m^3
+            coordinates: FieldDate Latitude Longitude Depth Station
+            ancillary_variables: DensityQC DensityQF DensityQA
+            _FillValue: -99999.8984375
+        byte CondQA[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality assessment level for in situ seawater conductivity
+            flag_values: 0 1 2 3
+            flag_meanings: None Preliminary Reviewed Final
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        char CondQF[max_string_length,obs]   (Chunking: [6,1])  (Compression: level 5)
+            long_name: Quality flag for in situ seawater conductivity
+            flag_values: 0 1 2 3 4 5 6 7 8 9
+            flag_meanings: No_specification Sensor_or_equipment_performance Procedure_modification Method_limitation Outlier Data_behavior Out_of_range Estimate_or_missing_information Non-survey Calculated
+            coordinates: FieldDate Latitude Longitude Depth Station
+        byte CondQC[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality code for in situ seawater conductivity
+            flag_values: 0 1 2
+            flag_meanings: None Fail Pass
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        float Cond[obs]   (Chunking: [1024])  (Compression: level 5)
+            units: S m-1
+            standard_name: sea_water_electrical_conductivity
+            long_name: in situ seawater conductivity
+            coordinates: FieldDate Latitude Longitude Depth Station
+            ancillary_variables: CondQC CondQF CondQA
+            _FillValue: -99999.8984375
+        byte TempQA[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality assessment level for in situ seawater temperature
+            flag_values: 0 1 2 3
+            flag_meanings: None Preliminary Reviewed Final
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        char TempQF[max_string_length,obs]   (Chunking: [6,1])  (Compression: level 5)
+            long_name: Quality flag for in situ seawater temperature
+            flag_values: 0 1 2 3 4 5 6 7 8 9
+            flag_meanings: No_specification Sensor_or_equipment_performance Procedure_modification Method_limitation Outlier Data_behavior Out_of_range Estimate_or_missing_information Non-survey Calculated
+            coordinates: FieldDate Latitude Longitude Depth Station
+        byte TempQC[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality code for in situ seawater temperature
+            flag_values: 0 1 2
+            flag_meanings: None Fail Pass
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        float Temp[obs]   (Chunking: [1024])  (Compression: level 5)
+            units: degree_C
+            standard_name: sea_water_temperature
+            long_name: in situ seawater temperature
+            coordinates: FieldDate Latitude Longitude Depth Station
+            ancillary_variables: TempQC TempQF TempQA
+            _FillValue: -99999.8984375
+        byte PresQA[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality assessment level for seawater pressure
+            flag_values: 0 1 2 3
+            flag_meanings: None Preliminary Reviewed Final
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        char PresQF[max_string_length,obs]   (Chunking: [6,1])  (Compression: level 5)
+            long_name: Quality flag for seawater pressure
+            flag_values: 0 1 2 3 4 5 6 7 8 9
+            flag_meanings: No_specification Sensor_or_equipment_performance Procedure_modification Method_limitation Outlier Data_behavior Out_of_range Estimate_or_missing_information Non-survey Calculated
+            coordinates: FieldDate Latitude Longitude Depth Station
+        byte PresQC[obs]   (Chunking: [4096])  (Compression: level 5)
+            long_name: Quality code for seawater pressure
+            flag_values: 0 1 2
+            flag_meanings: None Fail Pass
+            coordinates: FieldDate Latitude Longitude Depth Station
+            _FillValue: -99
+        float Pres[obs]   (Chunking: [1024])  (Compression: level 5)
+            units: dbar
+            standard_name: sea_water_pressure
+            long_name: seawater pressure
+            positive: down
+            coordinates: FieldDate Latitude Longitude Depth Station
+            ancillary_variables: PresQC PresQF PresQA
+            _FillValue: -99999.8984375
+        float Depth[obs]   (Chunking: [1024])  (Compression: level 5)
+            units: m
+            standard_name: depth
+            long_name: Depth below water surface as measured by CTD and then binned into intervals of 0.5 m.
+            positive: down
+            axis: Z
+        float UTCDatetime[obs]   (Chunking: [1024])  (Compression: level 5)
+            units: seconds since 1970-01-01 00:00:00
+            long_name: UTC date-time stamp for depth bin.
+            coordinates: FieldDate Latitude Longitude Depth Station
+        short obs_index[obs]   (Chunking: [2048])  (Compression: level 5)
+            long_name: Index number of profile in obs dimension;  matches profile_index in profiles dimension.
+        short row_size[profiles]   (Chunking: [297])  (Compression: level 5)
+            long_name: Number of observations - depth intervals - for this profile.
+            sample_dimension: obs
+        short station_index[profiles]   (Chunking: [297])  (Compression: level 5)
+            long_name: Index number of station this profile is for;  matches station_number in stations dimension.
+            instance_dimension: station
+        int FieldDate[profiles]   (Chunking: [297])  (Compression: level 5)
+            units: days since 1970-01-01
+            long_name: Field date of vertical profile sensor measurements and discrete samples;  converted from PST/PDT to UTC.
+        short profile_index[profiles]   (Chunking: [297])  (Compression: level 5)
+            long_name: Index number of profile in profiles dimension;  matches obs_index in obs dimension.
+            cf_role: profile_id
+        float Longitude[stations]   (Chunking: [39])  (Compression: level 5)
+            units: degrees_east
+            standard_name: longitude
+            long_name: station longitude
+            content_type: coordinate
+            _FillValue: -99999.8984375
+        float Latitude[stations]   (Chunking: [39])  (Compression: level 5)
+            units: degrees_north
+            standard_name: latitude
+            long_name: station latitude
+            content_type: coordinate
+            _FillValue: -99999.8984375
+        short station_number[stations]   (Chunking: [39])  (Compression: level 5)
+            long_name: Station number;  matches station_index field in profiles dimension.
+        char Station[max_string_length,stations]   (Chunking: [6,39])  (Compression: level 5)
+            standard_name: station_name
+            long_name: Station name of vertical profile of sensor measurements and discrete samples.
+            cf_role: timeseries_id
+
+     4 dimensions:
+        stations  Size:39 (no dimvar)
+        profiles  Size:297 (no dimvar)
+        obs  Size:43290   *** is unlimited *** (no dimvar)
+        max_string_length  Size:6 (no dimvar)
+
+    17 global attributes:
+        Conventions: CF-1.11-draft; ACDD 1-3
+        title: Vertical in situ sensor and discrete water quality data collected monthly at Washington State Department of Ecology's 
+	long-term marine monitoring stations in US waters of the Salish Sea, Willapa Bay, and Grays Harbor.
+        institution: Washington State Department of Ecology
+        project: Long-term Marine Water Quality Monitoring Program
+        geospatial_lat_min: 46.4
+        geospatial_lat_max: 49
+        geospatial_lon_min: -124.1
+        geospatial_lon_max: -122.3
+        geospatial_vertical_positive: down
+        time_coverage_start: 1999-01-05T17:22:02Z
+        time_coverage_end: 2024-03-22T23:38:54Z
+        source: 0.5 m bin averaged in situ sensor profiling data from CTD and auxiliary sensors collected during downcast.  Analytical 
+	results of water quality variables collected at target depths during upcast.
+        date_created: 2024-04-09T21:42:38Z
+        history: File created using R software and RNetCDF package.
+        featureType: timeSeriesProfile
+        references: https://apps.ecology.wa.gov/publications/summarypages/2103108.html; 
+	https://apps.ecology.wa.gov/publications/summarypages/2203103.html; 
+	https://apps.ecology.wa.gov/publications/summarypages/2303109.html; 
+	https://apps.ecology.wa.gov/publications/SummaryPages/2303118.html; 
+	https://ecology.wa.gov/research-data/monitoring-assessment/puget-sound-and-marine-monitoring/water-column-data
+        comment: 1) We adjust sensor data for drift for chlorophyll fluorescence and for dissolved oxygen concentration and saturation after data review.
+
+    2) Data that fail quality control (QC) have a QC flag of 1 and value of -99999.9.
+
+    3) We associate discrete 0 m surface samples with the CTD's 1.5-m depth bin for cases when a) the CTD package failed to automatically trigger and record the firing depth (Oct 2001 to present), or b) in absence of an automated system (1999 to September 2001).

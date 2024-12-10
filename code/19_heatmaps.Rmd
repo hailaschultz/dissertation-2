@@ -1,0 +1,457 @@
+---
+title: "19_heatmaps"
+date: "2024-10-22"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+editor_options: 
+  chunk_output_type: console
+---
+```{r}
+library(tidyr)
+library(data.table)
+library(vegan)
+library(EcolUtils)
+library(ggplot2)
+library(corrplot)
+library(ggrepel)
+library(indicspecies)
+library(dplyr)
+library(reshape2)
+library(lubridate)
+```
+
+# Zooplankton data
+Read data into R
+```{r}
+Zooplankton <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/WOAC_2014-2022_Species_Data_Keister_Lab.csv")
+```
+remove low quality zooplankton data
+```{r}
+unique(Zooplankton$Confidence)
+Zoop_sub<-subset(Zooplankton,Confidence!="low- flow high")
+Zoop_sub<-subset(Zoop_sub,Confidence!="LOW")
+Zoop_sub<-subset(Zoop_sub,Confidence!="Low-low flow")
+```
+
+
+subset to stations sampled during WOAC cruises
+```{r}
+unique(Zoop_sub$Station)
+Zoop_sub<-subset(Zoop_sub,Station!="P381")
+Zoop_sub<-subset(Zoop_sub,Station!="P105")
+Zoop_sub<-subset(Zoop_sub,Station!="P136")
+Zoop_sub<-subset(Zoop_sub,Station!="P7")
+Zoop_sub<-subset(Zoop_sub,Station!="P123")
+Zoop_sub<-subset(Zoop_sub,Station!="P132")
+unique(Zoop_sub$Station)
+#recode p4
+Zoop_sub$Station <- recode(Zoop_sub$Station, 
+                                 "p4" = "P4")
+#remove october and november samples
+Zoop_sub<-subset(Zoop_sub,Sample.Month!="NOV")
+Zoop_sub<-subset(Zoop_sub,Sample.Month!="OCT")
+Zoop_sub<-subset(Zoop_sub,Sample.Month!="MAR")
+
+#recode month names to match
+unique(Zoop_sub$Sample.Month)
+Zoop_sub$Month <- recode(Zoop_sub$Sample.Month, 
+                                 "Jul" = "JUL",
+                         "Sep"="SEP")
+#remove oblique samples
+Zoop_sub<-subset(Zoop_sub,Tow.Type!="Oblique")
+```
+
+
+recode species
+```{r}
+Zoop_sub$Genus.species <- recode(Zoop_sub$Genus.species, 
+                                 "Cancridae Lg" = "Cancridae",
+                         "Cancridae Sm"="Cancridae",
+                         "PSEUDOCALANUS Lg"="PSEUDOCALANUS",
+                         "PSEUDOCALANUS Sm"="PSEUDOCALANUS",
+                         "Aglantha digitale"="AGLANTHA DIGITALE",
+                         "Clytia gregaria"="CLYTIA GREGARIA",
+                         "Muggiaea atlantica"="MUGGIAEA ATLANTICA",
+                         "Pleurobrachia bachei"="PLEUROBRACHIA BACHEI",
+                       "AEQUOREA Victoria"="AEQUOREA VICTORIA")
+#exclude weird taxa
+Zoop_sub<-subset(Zoop_sub,WOAC.Group!="Exclude")
+```
+
+change date format
+```{r}
+#manually change weird dates
+unique(Zoop_sub$Sample.Date)
+Zoop_sub$Sample.Date <- recode(Zoop_sub$Sample.Date, 
+                                 "07/12/2021" = "7/12/21",
+                         "07/13/2021"="7/13/21",
+                         "07/14/2021"="7/14/21",
+                         "07/16/2021"="7/16/21",
+                        "06/27/2022"="6/27/22",
+                        "06/28/2022"="6/28/22",
+                        "06/29/2022"="6/29/22")
+# convert date format
+Zoop_sub$Date.Convert <- mdy(Zoop_sub$Sample.Date)
+```
+
+
+
+# stacked barplot
+sum by taxonomic group
+```{r}
+Zoop_group <- Zoop_sub %>%
+  group_by(Sample.Code,Station,Basin,Sample.Year,Date.Convert,Sample.Month,Crustaceans.vs.Gelatinous,Broad.Group) %>%
+  summarise(
+    zoop_density = sum(Density....m3.))
+```
+
+combing year, date,station
+```{r}
+Zoop_group$Sample<-paste(Zoop_group$Sample.Month, sep="_",Zoop_group$Sample.Year,Zoop_group$Station)
+```
+
+
+stacked barplot
+```{r}
+ggplot(Zoop_group, aes(fill = Crustaceans.vs.Gelatinous, y = zoop_density, x = reorder(Sample, Date.Convert))) + 
+  geom_bar(position = "stack", stat = "identity") + 
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),  # Adjusts x-axis text
+    axis.title.x = element_text(margin = margin(t = 10))  # Adds margin to x-axis title
+  ) + 
+  facet_wrap(~ Station, scales = "free")
+```
+
+proportions
+```{r}
+ggplot(Zoop_group, aes(fill = Crustaceans.vs.Gelatinous, y = zoop_density, x = reorder(Sample, Date.Convert))) + 
+  geom_bar(position = "fill", stat = "identity") + 
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),  # Adjusts x-axis text
+    axis.title.x = element_text(margin = margin(t = 10))  # Adds margin to x-axis title
+  ) + 
+  facet_wrap(~ Station, scales = "free")
+```
+stacked barplot
+```{r}
+ggplot(Zoop_group, aes(fill = Broad.Group, y = zoop_density, x = reorder(Sample, Date.Convert))) + 
+  geom_bar(position = "stack", stat = "identity") + 
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),  # Adjusts x-axis text
+    axis.title.x = element_text(margin = margin(t = 10))  # Adds margin to x-axis title
+  ) 
+```
+
+aggregated
+```{r}
+library(RColorBrewer)
+nb.cols <- 36
+mycolors <- colorRampPalette(brewer.pal(8, "Set2"))(nb.cols)
+ggplot(Zoop_group, aes(fill = Broad.Group, y = zoop_density, x = reorder(Sample, Date.Convert))) + 
+  geom_bar(position = "identity", stat = "identity") + 
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),  # Adjusts x-axis text
+    axis.title.x = element_text(margin = margin(t = 10))  # Adds margin to x-axis title
+  ) +
+  scale_fill_manual(values = mycolors)
+```
+
+# Species Stacked Barplot
+
+subset to copepods
+```{r}
+Zoop_copepod<-subset(Zoop_sub,Broad.Group=="Copepod")
+```
+
+subset to april
+```{r}
+Zoop_copepod<-subset(Zoop_copepod,Sample.Month=="APR")
+```
+
+```{r}
+Zoop_copepod$Sample<-paste(Zoop_copepod$Sample.Month, sep="_",Zoop_copepod$Sample.Year,Zoop_copepod$Station)
+```
+
+sum by Genus.Species
+```{r}
+Zoop_copepod <- Zoop_copepod %>%
+  group_by(Sample.Code,Sample,Station,Basin,Sample.Year,Date.Convert,Sample.Month,Crustaceans.vs.Gelatinous,Broad.Group,Genus.species) %>%
+  summarise(
+    zoop_density = sum(Density....m3.))
+```
+
+stacked barplot
+```{r}
+ggplot(Zoop_copepod, aes(fill = Genus.species, y = zoop_density, x = reorder(Sample, Date.Convert))) + 
+  geom_bar(position = "stack", stat = "identity") + 
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),  # Adjusts x-axis text
+    axis.title.x = element_text(margin = margin(t = 10))  # Adds margin to x-axis title
+  ) + 
+  facet_wrap(~ Station, scales = "free")
+```
+
+# Gelatinous Stacked Barplot
+
+```{r}
+Zoop_gelatinous<-subset(Zoop_sub,Crustaceans.vs.Gelatinous=="Gelatinous")
+Zoop_gelatinous<-subset(Zoop_gelatinous,Genus.species!="PANDEIDAE")
+```
+
+subset to month
+```{r}
+Zoop_gelatinous<-subset(Zoop_gelatinous,Sample.Month=="APR")
+```
+
+```{r}
+Zoop_gelatinous$Sample<-paste(Zoop_gelatinous$Sample.Month, sep="_",Zoop_gelatinous$Sample.Year,Zoop_gelatinous$Station)
+```
+
+sum by Genus.Species
+```{r}
+Zoop_gelatinous <- Zoop_gelatinous %>%
+  group_by(Sample.Code,Station,Sample,Basin,Sample.Year,Date.Convert,Sample.Month,Crustaceans.vs.Gelatinous,Broad.Group,Genus.species) %>%
+  summarise(
+    zoop_density = sum(Density....m3.))
+```
+
+stacked barplot
+```{r}
+ggplot(Zoop_gelatinous, aes(fill = Genus.species, y = zoop_density, x = reorder(Sample, Date.Convert))) + 
+  geom_bar(position = "stack", stat = "identity") + 
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),  # Adjusts x-axis text
+    axis.title.x = element_text(margin = margin(t = 10))  # Adds margin to x-axis title
+  ) + 
+  facet_wrap(~ Station, scales = "free")
+```
+
+# Crustacean Stacked Barplot
+
+subset to copepods
+```{r}
+Zoop_crustacean<-subset(Zoop_sub,Crustaceans.vs.Gelatinous=="Crustaceans")
+```
+
+subset to april
+```{r}
+Zoop_crustacean<-subset(Zoop_crustacean,Month=="APR")
+```
+
+
+sum by Genus.Species
+```{r}
+Zoop_crustacean <- Zoop_crustacean %>%
+  group_by(Code,Station,Basin,Year,Date.Convert,Month,Crustaceans.vs.Gelatinous,Broad.Group,Genus.species) %>%
+  summarise(
+    zoop_density = sum(Density....m3.))
+```
+
+stacked barplot
+```{r}
+ggplot(Zoop_crustacean, aes(fill = Broad.Group, y = zoop_density, x = reorder(Code, Date.Convert))) + 
+  geom_bar(position = "stack", stat = "identity") + 
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),  # Adjusts x-axis text
+    axis.title.x = element_text(margin = margin(t = 10))  # Adds margin to x-axis title
+  ) + 
+  facet_wrap(~ Station, scales = "free")
+```
+
+# Mollusc Stacked Plot
+
+subset to molluscs
+```{r}
+Zoop_mollusc<-subset(Zoop_sub,Crustaceans.vs.Gelatinous=="Molluscs")
+```
+
+combing year, date,station
+```{r}
+Zoop_mollusc$Sample<-paste(Zoop_mollusc$Sample.Month, sep="_",Zoop_mollusc$Sample.Year,Zoop_mollusc$Station)
+```
+sum by Genus.Species
+```{r}
+Zoop_mollusc <- Zoop_mollusc %>%
+  group_by(Sample.Code,Station,Sample,Basin,Sample.Year,Date.Convert,Sample.Month,Crustaceans.vs.Gelatinous,Broad.Group,Genus.species) %>%
+  summarise(
+    zoop_density = sum(Density....m3.))
+```
+
+
+
+stacked barplot
+```{r}
+ggplot(Zoop_mollusc, aes(fill = Genus.species, y = zoop_density, x = reorder(Sample, Date.Convert))) + 
+  geom_bar(position = "stack", stat = "identity") + 
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),  # Adjusts x-axis text
+    axis.title.x = element_text(margin = margin(t = 10))  # Adds margin to x-axis title
+  ) + 
+  facet_wrap(~ Station, scales = "free")
+```
+
+stacked barplot aggregated
+```{r}
+Zoop_mollusc$Month_Yr <- format(as.Date(Zoop_mollusc$Date.Convert), "%Y-%m")
+ggplot(Zoop_mollusc, aes(fill = Broad.Group, y = zoop_density, x = Month_Yr)) + 
+  geom_bar(position = "stack", stat = "identity") + 
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),  # Adjusts x-axis text
+    axis.title.x = element_text(margin = margin(t = 10))  # Adds margin to x-axis title
+  ) + 
+  facet_wrap(~ Sample.Month, scales = "free")
+```
+# heatmaps
+add up multiple lines per station
+```{r}
+Zoop_sub <- Zoop_sub %>%
+  group_by(Code,Station,Basin,Year,Month,Crustaceans.vs.Gelatinous,Broad.Group,Genus.species) %>%
+  summarise(
+    zoop_density = sum(Density....m3.))
+```
+
+combine larger group and species
+```{r}
+Zoop_sub$taxa<-paste(Zoop_sub$Crustaceans.vs.Gelatinous,Zoop_sub$Broad.Group,Zoop_sub$Genus.species,sep="_")
+```
+
+#make heatmaps
+```{r}
+# Get unique stations and months
+stations <- unique(Zoop_sub$Station)
+months <- unique(Zoop_sub$Month)
+
+# Loop through each station and month
+for (station in stations) {
+  for (month in months) {
+    # Subset data for the current station and month
+    Zoop_subset <- subset(Zoop_sub, Month == month & Station == station)
+    
+    # Check if the subset is not empty
+    if (nrow(Zoop_subset) > 0) {
+      Zoop_sub_heat <- dcast(Zoop_subset, Code ~ taxa, value.var = "zoop_density")
+      Zoop_sub_heat <- Zoop_sub_heat %>% replace(is.na(.), 0)
+
+      # Convert to proportions
+      Zoop_sub_heat_data <- subset(Zoop_sub_heat, select = -c(Code))
+
+      Zoop_sub_heat_data1 <- as.matrix(Zoop_sub_heat_data)
+      Zoop_sub_heat_data1 <- matrix(as.numeric(Zoop_sub_heat_data1), ncol = ncol(Zoop_sub_heat_data))
+      rownames(Zoop_sub_heat_data1) <- Zoop_sub_heat$Code
+      column <- colnames(Zoop_sub_heat_data)
+      colnames(Zoop_sub_heat_data1) <- column
+
+      # Check dimensions before creating heatmap
+      if (nrow(Zoop_sub_heat_data1) >= 2 && ncol(Zoop_sub_heat_data1) >= 2) {
+        # Specify the file name
+        file_name <- paste0("heatmap_", station, "_", month, ".png")
+
+        # Save heatmap as PNG with higher resolution
+        png(file_name, width = 5000, height = 5000, res = 300)  # Adjust width and height as needed
+
+        # Create heatmap
+        heatmap(Zoop_sub_heat_data1, Colv = NA, show_row_names = TRUE, show_col_names = TRUE, mar = c(15, 15))
+        
+
+        dev.off()  # Close the device to save the file
+      } else {
+        message(paste("Skipping heatmap for", station, "in", month, "- not enough data."))
+      }
+    }
+  }
+}
+
+```
+
+#make normalized heatmaps
+```{r}
+library(dplyr)
+library(reshape2)
+
+# Get unique stations and months
+stations <- unique(Zoop_sub$Station)
+months <- unique(Zoop_sub$Month)
+
+# Loop through each station and month
+for (station in stations) {
+  for (month in months) {
+    # Subset data for the current station and month
+    Zoop_subset <- subset(Zoop_sub, Month == month & Station == station)
+    
+    # Check if the subset is not empty
+    if (nrow(Zoop_subset) > 0) {
+      Zoop_sub_heat <- dcast(Zoop_subset, Code ~ taxa, value.var = "zoop_density")
+      Zoop_sub_heat <- Zoop_sub_heat %>% replace(is.na(.), 0)
+
+      # Convert to proportions
+      Zoop_sub_heat_data <- subset(Zoop_sub_heat, select = -c(Code))
+
+      Zoop_sub_heat_data1 <- as.matrix(Zoop_sub_heat_data)
+      Zoop_sub_heat_data1 <- matrix(as.numeric(Zoop_sub_heat_data1), ncol = ncol(Zoop_sub_heat_data))
+      rownames(Zoop_sub_heat_data1) <- Zoop_sub_heat$Code
+      column <- colnames(Zoop_sub_heat_data)
+      colnames(Zoop_sub_heat_data1) <- column
+
+      # Check dimensions before creating heatmap
+      if (nrow(Zoop_sub_heat_data1) >= 2 && ncol(Zoop_sub_heat_data1) >= 2) {
+        # Specify the file name
+        file_name <- paste0("normheatmap_", station, "_", month, ".png")
+
+        # Save heatmap as PNG with higher resolution
+        png(file_name, width = 5000, height = 5000, res = 300)  # Adjust width and height as needed
+
+        # Create heatmap
+        heatmap(Zoop_sub_heat_data1, Colv = NA, show_row_names = TRUE, show_col_names = TRUE, mar = c(15, 15))
+        heatmap(Zoop_sub_heat_data1, scale = "column", show_row_names = TRUE, Colv = NA, show_col_names = TRUE, mar = c(15, 15))
+
+        dev.off()  # Close the device to save the file
+      } else {
+        message(paste("Skipping heatmap for", station, "in", month, "- not enough data."))
+      }
+    }
+  }
+}
+
+```
+
+
+# Broad group heatmap
+Subset to month and group
+```{r}
+Zoop_broad<-Zoop_sub
+Zoop_broad<-subset(Zoop_broad,Month=="JUL")
+Zoop_broad<-subset(Zoop_broad,Station=="P402")
+```
+
+add up multiple lines per station
+```{r}
+Zoop_broad[is.na(Zoop_broad)] <- 0
+Zoop_broad <- Zoop_broad %>%
+  group_by(Year,Crustaceans.vs.Gelatinous) %>%
+  summarise(
+    zoop_density = sum(Density....m3.))
+```
+
+wide format
+```{r}
+Zoop_broad_wide<-dcast(Zoop_broad, Year ~ Crustaceans.vs.Gelatinous )
+```
+make heatmap
+```{r}
+Zoop_broad_wide_col <-Zoop_broad_wide[, -c(1)]
+Zoop_broad_wide1<- as.matrix(Zoop_broad_wide_col)
+Zoop_broad_wide1 <- matrix(as.numeric(Zoop_broad_wide1), ncol =ncol(Zoop_broad_wide_col))
+      rownames(Zoop_broad_wide1) <- Zoop_broad_wide$Year
+      column <- colnames(Zoop_broad_wide_col)
+      colnames(Zoop_broad_wide1) <- column
+      
+# Create heatmap
+heatmap(Zoop_broad_wide1, Rowv=NA, Colv=NA,scale = "column",  show_row_names = TRUE, show_col_names = TRUE)
+
+```
+
+
+

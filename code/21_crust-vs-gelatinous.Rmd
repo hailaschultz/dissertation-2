@@ -1,0 +1,474 @@
+---
+title: "21_crustaceans_vs_gelatinous"
+date: "2024-11-21"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,         # Display code chunks
+  eval = TRUE,        # Evaluate code chunks
+  warning = FALSE,     # Hide warnings
+  message = FALSE,     # Hide messages
+  fig.width = 10,       # Set plot width in inches
+  fig.height = 6,      # Set plot height in inches
+  fig.align = "center" # Align plots to the center
+)
+```
+
+```{r}
+library(lubridate)
+```
+
+# Load Zooplankton Data
+This dataset is from our WOAC zooplankton database and includes morphological abundance and biomass data for each species identified in each sample collected. Vertical and oblique tows are included and represent samples that are integrated through the water column.
+
+Read data into R
+```{r}
+Zooplankton <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/WOAC_2014-2022_Species_Data_Keister_Lab.csv")
+```
+Read environmental data into R
+```{r}
+Environmental <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/WOAC_Chem_data_2014-2022_all-niskins.csv")
+```
+
+# Environmental Data Summary
+recode months to match with zooplankton data
+```{r}
+unique(Environmental$Month)
+Environmental$Month <- recode(Environmental$Month, 
+                                 "Jul" = "JUL",
+                         "Sep"="SEP",
+                         "Oct"="SEP",
+                         "Apr"="APR",
+                         "May"="MAY",
+                         "Nov"="NOV",
+                         "Aug"="AUG",
+                         "Jun"="JUL",
+                         "OCT"="SEP")
+#remove unnecessary sample dates
+unique(Environmental$Date)
+unique(Zooplankton$Date)
+Environmental<-subset(Environmental,Date!="10/30/14")
+Environmental<-subset(Environmental,Date!="10/31/14")
+Environmental<-subset(Environmental,Date!="10/23/14")
+Environmental<-subset(Environmental,Date!="10/29/14")
+Environmental<-subset(Environmental,Date!="5/24/15")
+Environmental<-subset(Environmental,Date!="11/18/15")
+Environmental<-subset(Environmental,Date!="11/16/15")
+Environmental<-subset(Environmental,Date!="11/17/15")
+Environmental<-subset(Environmental,Date!="10/27/16")
+Environmental<-subset(Environmental,Date!="5/3/17")
+Environmental<-subset(Environmental,Date!="5/4/17")
+Environmental<-subset(Environmental,Date!="10/18/17")
+Environmental<-subset(Environmental,Date!="5/24/18")
+Environmental<-subset(Environmental,Date!="10/18/18")
+Environmental<-subset(Environmental,Date!="10/19/18")
+Environmental<-subset(Environmental,Date!="5/23/19")
+Environmental<-subset(Environmental,Date!="8/31/20")
+Environmental<-subset(Environmental,Date!="10/1/21")
+Environmental<-subset(Environmental,Date!="5/6/22")
+Environmental<-subset(Environmental,Date!="10/14/22")
+Environmental<-subset(Environmental,Date!="10/15/22")
+Environmental<-subset(Environmental,Date!="9/29/21")
+Environmental<-subset(Environmental,Date!="7/4/20")
+Environmental<-subset(Environmental,Date!="9/30/20")
+Environmental<-subset(Environmental,Date!="9/18/17")
+```
+
+Temp: summarize by depth category
+```{r}
+temp<-Environmental %>%
+  group_by(Station,Date,Depth,Year,Month) %>%
+  summarise(
+    temp = mean(CTDTMP_DEG_C_ITS90))
+
+#subset to surface samples
+temp_surf<-subset(temp,Depth=="Surface")
+#make unique column
+temp_surf$code<-paste(temp_surf$Station, temp_surf$Year,temp_surf$Month,sep="-")
+```
+
+
+pH: remove missing rows and remove weird values
+```{r}
+pH<-Environmental %>% drop_na(pH)
+pH <- subset(pH, pH != 2130.2)
+```
+summarize by depth category
+```{r}
+pH<-pH %>%
+  group_by(Station,Date,Depth,Year,Month) %>%
+  summarise(
+    pH = mean(pH))
+#subset to surface samples
+pH_surf<-subset(pH,Depth=="Deep")
+#make unique column
+pH_surf$code<-paste(pH_surf$Station, pH_surf$Year,pH_surf$Month,sep="-")
+```
+
+
+O2: remove missing rows and remove weird values
+```{r}
+Oxygen<-Environmental %>% drop_na(O2.in.mg.l)
+```
+
+summarize by depth category
+```{r}
+Oxygen<-Oxygen %>%
+  group_by(Station,Date,Depth,Year,Month) %>%
+  summarise(
+    Oxygen = mean(O2.in.mg.l))
+#subset to surface samples
+Oxygen_surf<-subset(Oxygen,Depth=="Deep")
+#make unique column
+Oxygen_surf$code<-paste(Oxygen_surf$Station, Oxygen_surf$Year,Oxygen_surf$Month,sep="-")
+```
+
+Merge environmental tables
+```{r}
+joined <- merge(temp_surf, pH_surf, by.x = "code", 
+             by.y = "code", all.x = TRUE, all.y = TRUE)
+joined <- merge(joined, Oxygen_surf, by.x = "code", 
+             by.y = "code", all.x = TRUE, all.y = TRUE)
+#remove excess columns
+env_joined <- joined[ -c(8:12,14:18) ]
+```
+
+remove low quality zooplankton data
+```{r}
+unique(Zooplankton$Confidence)
+Zoop_sub<-subset(Zooplankton,Confidence!="low- flow high")
+Zoop_sub<-subset(Zoop_sub,Confidence!="LOW")
+Zoop_sub<-subset(Zoop_sub,Confidence!="Low-low flow")
+```
+
+
+subset to stations sampled during WOAC cruises
+```{r}
+unique(Zoop_sub$Station)
+Zoop_sub<-subset(Zoop_sub,Station!="P381")
+Zoop_sub<-subset(Zoop_sub,Station!="P105")
+Zoop_sub<-subset(Zoop_sub,Station!="P136")
+Zoop_sub<-subset(Zoop_sub,Station!="P7")
+Zoop_sub<-subset(Zoop_sub,Station!="P123")
+Zoop_sub<-subset(Zoop_sub,Station!="P132")
+unique(Zoop_sub$Station)
+#recode p4
+Zoop_sub$Station <- recode(Zoop_sub$Station, 
+                                 "p4" = "P4")
+#remove october and november samples
+Zoop_sub<-subset(Zoop_sub,Sample.Month!="NOV")
+Zoop_sub<-subset(Zoop_sub,Sample.Month!="OCT")
+Zoop_sub<-subset(Zoop_sub,Sample.Month!="MAR")
+
+#recode month names to match
+unique(Zoop_sub$Sample.Month)
+Zoop_sub$Month <- recode(Zoop_sub$Sample.Month, 
+                                 "Jul" = "JUL",
+                         "Sep"="SEP")
+#exclude weird taxa
+Zoop_sub<-subset(Zoop_sub,WOAC.Group!="Exclude")
+# convert date format
+Zoop_sub$Date.Convert <- mdy(Zoop_sub$Sample.Date)
+```
+get # per m2
+```{r}
+Zoop_sub$density_squared<-Zoop_sub$Density....m3.*Zoop_sub$Station.Depth..m.
+```
+## get zoop abundance
+add up multiple lines per station
+```{r}
+colnames(Zoop_sub)
+#remove NA values in density
+Zoop_sub<-Zoop_sub[!is.na(Zoop_sub$Density....m3.),]
+Zoop_sub <- Zoop_sub %>%
+  group_by(Sample.Code,Date.Convert,Station,Basin,Sample.Year,Sample.Month,Crustaceans.vs.Gelatinous) %>%
+  summarise(
+    zoop_density = sum(Density....m3.),
+    zoop_density_squared=sum(density_squared))
+```
+
+```{r}
+#make unique column
+Zoop_sub$code<-paste(Zoop_sub$Station, Zoop_sub$Sample.Year,Zoop_sub$Sample.Month,sep="-")
+unique(Zoop_sub$code)
+```
+
+# Combine env and zoop
+```{r}
+Zoop_env <- merge(env_joined,Zoop_sub, by.x = "code", 
+             by.y = "code", all.x = TRUE, all.y = TRUE)
+#remove excess columns
+Zoop_env <- Zoop_env[ -c(12:15) ]
+#remove rows with NA
+Zoop_env<-Zoop_env[!is.na(Zoop_env$Year.x),]
+#make year a factor
+Zoop_env$Year.x<-as.factor(Zoop_env$Year.x)
+```
+
+```{r}
+ggplot(Zoop_env, aes(x=as.factor(Year.x), y=log(zoop_density_squared))) + 
+    geom_boxplot(alpha=0.2)+ylab("#/m2")+xlab("Station")+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"),panel.border = element_rect(colour = "black", fill=NA))+facet_wrap(~Crustaceans.vs.Gelatinous, scale="free")
+```
+
+# Gelatinous to crustacean ratio
+```{r}
+CZ<-subset(Zoop_env, Zoop_env$Crustaceans.vs.Gelatinous %in% c("Crustaceans","Gelatinous"))
+```
+
+remove ethanol samples
+```{r}
+CZ<-CZ[- grep("EtOH", CZ$Sample.Code),]
+```
+
+```{r}
+CZ_wide<- subset(CZ, select=-c(zoop_density_squared))
+CZ_wide<-dcast(CZ_wide, code+Month.x+Year.x+Date.Convert+Station.x+temp+pH+Oxygen ~ Crustaceans.vs.Gelatinous )
+```
+
+```{r}
+CZ_wide$Gelatinous[is.na(CZ_wide$Gelatinous)] <- 0
+CZ_wide$GvsC<-CZ_wide$Gelatinous/CZ_wide$Crustaceans
+```
+
+```{r}
+ggplot(CZ_wide, aes(x=GvsC)) + geom_histogram()
+ggplot(CZ_wide, aes(x=temp)) + geom_histogram()
+ggplot(CZ_wide, aes(x=log(GvsC))) + geom_histogram()
+```
+
+```{r}
+CZ_wide_april<-subset(CZ_wide,Month.x=="SEP")
+ggplot(CZ_wide_april, aes(x=temp, y=log(GvsC),color=Station.x))+ geom_point()+ 
+  geom_smooth(method=lm, se=FALSE)
+```
+```{r}
+CZ_wide$gvscp1<-CZ_wide$GvsC+0.00000001
+model <- lm(gvscp1 ~ temp, data = CZ_wide)
+
+# Summary of the regression model
+summary(model)
+
+r_squared <- summary(model)$r.squared
+p_value <- summary(model)$coefficients[2, 4]
+```
+
+```{r}
+ggplot(CZ_wide, aes(x=temp, y=log(GvsC)))+ geom_point()+ 
+  geom_smooth(method=lm,se=FALSE)+theme_bw()+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) +
+  annotate("text", 
+           x = 18, y = -10, 
+           label = paste0("R² = ", round(r_squared, 3), 
+                          "\nP-value = ", signif(p_value, 3)),
+           hjust = 0, color = "black", size = 7)+
+  xlab("Temperature (°C)")+
+  ylab("Gelatinous/Crustaceans")+
+  theme(
+    axis.text = element_text(size = 20), 
+    axis.title = element_text(size = 20))
+```
+
+
+
+
+```{r}
+ggplot(CZ_wide, aes(x=Oxygen, y=log(GvsC),color=Station.x))+ geom_point()+ 
+  geom_smooth(method=lm, se=FALSE)
+```
+
+```{r}
+ggplot(CZ_wide, aes(x=Oxygen, y=log(GvsC),color=Station.x))+ geom_point()+ 
+  geom_smooth(method=lm,se=FALSE)
+```
+
+```{r}
+ggplot(CZ_wide, aes(x=Oxygen, y=log(GvsC), color=Station.x))+
+    facet_wrap(~Station.x, scales = "free") + geom_point()
+```
+```{r,fig.width=5,fig.height=5.5, dpi=600}
+CZ_wide_april<-subset(CZ_wide,Month.x=="APR")
+CZ_wide_april$Station.x <- factor(CZ_wide_april$Station.x, levels = c("P22", "P8", "P12","P402","P28","P38","P4"))
+facet_labels<-c("P22"="Strait of Juan de Fuca", "P8"="Hood Canal Sill", "P12"="Hood Canal 1","P402"="Hood Canal 2","P28"="Main Basin","P38"="South Sound","P4"="Whidbey Basin")
+ggplot(CZ_wide_april, aes(x=Date.Convert, y=GvsC,color=Station.x)) + 
+    geom_point()+
+    geom_line()+ylab("Gelatinous/Crustaceans")+xlab("Year")+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"),panel.border = element_rect(colour = "black", fill=NA))+
+    facet_wrap(~Station.x,ncol=2, scales = "free_y", labeller = as_labeller(facet_labels))+ scale_colour_manual(values=c("#F8766D","#53B400","#00B6EB","#A69AFF","#00C094","#FB61D7","#C49A00"))+
+  scale_x_date(
+    date_breaks = "1 year",   # Tick mark every year
+    date_labels = "%Y"       # Format labels as "YYYY"
+  ) +theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+```{r,fig.width=4,fig.height=4, dpi=600}
+ggplot(CZ_wide_april, aes(x=Date.Convert, y=temp,color=Station.x)) + 
+    geom_point()+geom_line()+ylab("Temperature (C)")+xlab("Year")+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"),panel.border = element_rect(colour = "black", fill=NA))+ scale_colour_manual(values=c("#F8766D","#53B400","#00B6EB","#A69AFF","#00C094","#FB61D7","#C49A00"))+
+  scale_x_date(
+    date_breaks = "1 year",   # Tick mark every year
+    date_labels = "%Y"       # Format labels as "YYYY"
+  )+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+```{r}
+ggplot(CZ_wide, aes(x=temp, y=GvsC, color=Month.x))+
+    facet_wrap(~Station.x, scales = "free") + geom_point()
+```
+```{r}
+ggplot(CZ_wide, aes(x=Oxygen, y=log(GvsC), color=Station.x))+
+    facet_wrap(~Station.x, scales = "free") + geom_point()
+```
+
+```{r}
+ggplot(CZ_wide, aes(x=as.factor(Date.Convert), y=GvsC, color=Station.x))+
+    facet_wrap(~Station.x, scales = "free") + geom_bar(position = "stack", stat = "identity")+ 
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),  # Adjusts x-axis text
+    axis.title.x = element_text(margin = margin(t = 10))  # Adds margin to x-axis title
+  ) 
+```
+
+
+```{r}
+CZ_wide$Station.x <- factor(CZ_wide$Station.x, levels = c("P22", "P8", "P12","P402","P28","P38","P4"))
+ggplot(CZ_wide, aes(x=as.factor(Station.x), y=log(GvsC),color=Station.x,fill=Station.x)) + 
+    geom_boxplot(alpha=0.2)+ylab("log(Gelatinous/Crustaceans)")+xlab("Station")+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"),panel.border = element_rect(colour = "black", fill=NA))+
+  scale_fill_manual(values = c("P22"="#F8766D", "P8"="#53B400", "P12"="#00B6EB","P402"="#A69AFF","P28"="#00C094","P38"="#FB61D7","P4"="#C49A00"))+
+scale_color_manual(values = c("P22"="#F8766D", "P8"="#53B400", "P12"="#00B6EB","P402"="#A69AFF","P28"="#00C094","P38"="#FB61D7","P4"="#C49A00"))+
+  scale_x_discrete(labels = c("P22"="Strait of Juan de Fuca", "P8"="Hood Canal Sill", "P12"="Hood Canal 1","P402"="Hood Canal 2","P28"="Main Basin","P38"="South Sound","P4"="Whidbey Basin"))+
+  theme(axis.text.y=element_text(size=20,colour="black"),
+        legend.position="none",
+        axis.title.y=element_text(size=20,colour="black"),
+        axis.line = element_line(colour = "black"),
+        axis.title.x=element_blank(),
+        axis.text.x = element_text(angle = 90, hjust = 1,size=15,colour="black"))+
+  geom_vline(xintercept = 4.5, linetype = "dashed", color = "black")+geom_vline(xintercept = 6.5, linetype = "dashed", color = "black")
+```
+```{r}
+
+Mod6 <- aov(log(gvscp1) ~ Station.x, data = CZ_wide)
+
+summary(Mod6)
+qqnorm(Mod6$residuals)
+qqline(Mod6$residuals)
+shapiro.test(Mod6$residuals)
+TukeyHSD(Mod6, which = "Station.x")
+```
+```{r}
+
+Mod6 <- aov(temp ~ Station.x, data = CZ_wide)
+
+summary(Mod6)
+qqnorm(Mod6$residuals)
+qqline(Mod6$residuals)
+shapiro.test(Mod6$residuals)
+TukeyHSD(Mod6, which = "Station.x")
+```
+```{r}
+CZ_wide$Station.x <- factor(CZ_wide$Station.x, levels = c("P22", "P8", "P12","P402","P28","P38","P4"))
+ggplot(CZ_wide, aes(x=as.factor(Station.x), y=temp,color=Station.x,fill=Station.x)) + 
+    geom_boxplot(alpha=0.2)+ylab("Temperature (°C)")+xlab("Station")+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"),panel.border = element_rect(colour = "black", fill=NA))+
+  scale_fill_manual(values = c("P22"="#F8766D", "P8"="#53B400", "P12"="#00B6EB","P402"="#A69AFF","P28"="#00C094","P38"="#FB61D7","P4"="#C49A00"))+
+scale_color_manual(values = c("P22"="#F8766D", "P8"="#53B400", "P12"="#00B6EB","P402"="#A69AFF","P28"="#00C094","P38"="#FB61D7","P4"="#C49A00"))+
+  scale_x_discrete(labels = c("P22"="Strait of Juan de Fuca", "P8"="Hood Canal Sill", "P12"="Hood Canal 1","P402"="Hood Canal 2","P28"="Main Basin","P38"="South Sound","P4"="Whidbey Basin"))+
+  theme(axis.text.y=element_text(size=20,colour="black"),
+        legend.position="none",
+        axis.title.y=element_text(size=20,colour="black"),
+        axis.line = element_line(colour = "black"),
+        axis.title.x=element_blank(),
+        axis.text.x = element_text(angle = 90, hjust = 1,size=15,colour="black"))+
+  geom_vline(xintercept = 4.5, linetype = "dashed", color = "black")+geom_vline(xintercept = 6.5, linetype = "dashed", color = "black")
+```
+
+```{r}
+ggplot(CZ_wide, aes(x=as.factor(Year.x), y=GvsC)) + 
+    geom_boxplot(alpha=0.2)+ylab("gelatinous/crustacean")+xlab("Station")+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"),panel.border = element_rect(colour = "black", fill=NA))+
+    facet_wrap(~Station.x, scales = "free")
+```
+
+
+# Mollusc to crustacean ratio
+```{r}
+unique(Zoop_env$Crustaceans.vs.Gelatinous)
+MC<-subset(Zoop_env, Zoop_env$Crustaceans.vs.Gelatinous %in% c("Crustaceans","Molluscs"))
+```
+
+remove ethanol samples
+```{r}
+MC<-MC[- grep("EtOH", MC$Sample.Code),]
+```
+
+```{r}
+MC_wide<-dcast(MC, code+Month.x+Year.x+Date.Convert+Station.x+temp+pH+Oxygen ~ Crustaceans.vs.Gelatinous )
+```
+
+```{r}
+MC_wide$MvsC<-MC_wide$Molluscs/MC_wide$Crustaceans
+```
+
+```{r}
+ggplot(MC_wide, aes(x=MvsC)) + geom_histogram()
+ggplot(MC_wide, aes(x=temp)) + geom_histogram()
+ggplot(MC_wide, aes(x=log(MvsC))) + geom_histogram()
+```
+
+```{r}
+ggplot(MC_wide, aes(x=pH, y=log(MvsC),color=Station.x))+ geom_point()+ 
+  geom_smooth(method=lm, se=FALSE)
+```
+
+```{r}
+ggplot(MC_wide, aes(x=as.factor(Month.x), y=log(MvsC))) + 
+    geom_boxplot(alpha=0.2)+ylab("log(mollsc vs. crustacean)")+xlab("Station")+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"),panel.border = element_rect(colour = "black", fill=NA))
+```
+
+```{r}
+ggplot(MC_wide, aes(x=Date.Convert, y=temp,color=Station.x)) + 
+    geom_point()+geom_line()+ylab("Surface temperature")+xlab("Year")+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"),panel.border = element_rect(colour = "black", fill=NA))+
+    facet_wrap(~Month.x, scales = "free")
+```
+
+```{r}
+ggplot(MC_wide, aes(x=as.factor(Station.x), y=temp)) + 
+    geom_boxplot(alpha=0.2)+ylab("temperature")+xlab("Station")+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"),panel.border = element_rect(colour = "black", fill=NA))
+```
+```{r}
+ggplot(MC_wide, aes(x=as.factor(Station.x), y=pH)) + 
+    geom_boxplot(alpha=0.2)+ylab("pH")+xlab("Station")+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"),panel.border = element_rect(colour = "black", fill=NA))+
+    facet_wrap(~Month.x)
+```
+```{r}
+ggplot(MC_wide, aes(x=as.factor(Station.x), y=Oxygen)) + 
+    geom_boxplot(alpha=0.2)+ylab("Oxygen")+xlab("Station")+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"),panel.border = element_rect(colour = "black", fill=NA))+
+    facet_wrap(~Month.x)
+```
+
+
+
+```{r}
+ggplot(MC_wide, aes(x=Date.Convert, y=Oxygen,color=Station.x)) + 
+    geom_point()+geom_line()+ylab("Deep Oxygen")+xlab("Year")+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"),panel.border = element_rect(colour = "black", fill=NA))+
+    facet_wrap(~Month.x, scales = "free")
+```
+
+```{r}
+ggplot(MC_wide, aes(x=Date.Convert, y=pH,color=Station.x)) + 
+    geom_point()+geom_line()+ylab("Deep pH")+xlab("Year")+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"),panel.border = element_rect(colour = "black", fill=NA))+
+    facet_wrap(~Month.x, scales = "free")
+```

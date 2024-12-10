@@ -20,6 +20,7 @@ I first went to https://nvs.nanoos.org/CruiseSalish and downloaded all relevant 
 pwd
 ```
 
+# Upcast Bottle Measurements
 move all upcast files to the upcast folder
 ```{bash}
 #move directories
@@ -156,3 +157,231 @@ subset_df <- combined_df[combined_df$STATION_NO %in% named_stations, ]
 subset_df$STATION_NO <- paste0("P", subset_df$STATION_NO)
 ```
 Depth categories
+
+# Downcast CTD data
+
+import and merge excel files(2016-2022)
+```{r}
+downcast_dir<-"/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/NANOOS_files/woac_downcasts"
+
+downcast_excel_files <- list.files(path = downcast_dir, pattern = "\\.xlsx$", full.names = TRUE)
+
+# Initialize an empty list to store the data frames
+dfs <- list()
+
+# Loop through each Excel file and read it into a data frame
+for (file in downcast_excel_files) {
+  # Read the Excel file into a data frame
+  df <- read_excel(file)
+  
+  # Store the data frame in the list
+  dfs[[length(dfs) + 1]] <- df
+}
+```
+See which columns all of the dataframes have in common
+```{r}
+# Get column names of the first data frame
+common_columns <- names(dfs[[1]])
+
+# Loop through the remaining data frames and find common column names
+for (i in 2:length(dfs)) {
+  # Get column names of the current data frame
+  current_columns <- names(dfs[[i]])
+  
+  # Find common column names with previous data frames
+  common_columns <- intersect(common_columns, current_columns)
+}
+
+# 'common_columns' now contains the column names that are common across all data frames
+print(common_columns)
+```
+
+subset to common columns
+```{r}
+# Loop through each data frame in the list
+for (i in seq_along(dfs)) {
+  # Subset the data frame to only the common columns
+  dfs[[i]] <- dfs[[i]][, common_columns, drop = FALSE]
+}
+```
+
+
+combine datasheets vertically
+```{r}
+combined_df <- do.call(rbind, dfs)
+```
+
+remove units rows
+```{r}
+combined_df<-subset(combined_df,NMEAtimeUTC!="[]")
+```
+
+convert all dates to the correct format
+```{r}
+library(dplyr)
+
+# Define a helper function to process each entry
+convert_NMEAtime <- function(x) {
+  if (grepl("^[0-9]+\\.[0-9]+$", x)) {
+    # Convert Excel numeric date to POSIXct
+    as.POSIXct(as.numeric(x) * 86400, origin = "1899-12-30", tz = "UTC") # Excel epoch starts on 1899-12-30
+  } else {
+    # Parse human-readable datetime
+    as.POSIXct(x, format = "%b %d %Y %H:%M:%S", tz = "UTC")
+  }
+}
+
+
+# Apply the conversion function to standardize the column
+combined_df <- combined_df %>%
+  mutate(
+    # Convert all entries in NMEAtimeUTC to POSIXct format
+    NMEAtimeUTC = sapply(NMEAtimeUTC, convert_NMEAtime)
+  ) %>%
+  # Convert POSIXct to desired character format
+  mutate(
+    NMEAtimeUTC = format(as.POSIXct(NMEAtimeUTC), "%b %d %Y %H:%M:%S")
+  )
+```
+
+extract month
+```{r}
+combined_df$Month <- substr(combined_df$NMEAtimeUTC, 1, 3)
+unique(combined_df$Month)
+combined_df$Month <- recode_factor(combined_df$Month, 
+                              'Apr' = "APR", 'Jul' = "JUL", 'Jun'="JUL",
+                              '6' = "JUL", 'Sep' = "SEP")
+```
+
+extract year
+```{r}
+combined_df$Year <- substr(combined_df$NMEAtimeUTC, 8, 11)
+unique(combined_df$Year)
+```
+
+Subset stations
+```{r}
+unique(combined_df$Station)
+# Define the seven named stations
+named_stations <- c("P4", "P8", "P12", "P28", "P38", "P402", "P22")
+
+# Subset the dataframe based on the named stations
+subset_df <- combined_df[combined_df$Station %in% named_stations, ]
+unique(subset_df$Station)
+```
+
+
+imoort and merge csv files (2014-2015)
+```{r}
+# Directory containing the CSV files
+downcast_dir <- "/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/NANOOS_files/CSV_files"
+
+# List all CSV files in the directory
+downcast_csv_files <- list.files(path = downcast_dir, pattern = "\\.csv$", full.names = TRUE)
+
+# Initialize an empty list to store the data frames
+dfs <- list()
+
+# Loop through each CSV file and read it into a data frame
+for (file in downcast_csv_files) {
+  # Read the CSV file into a data frame
+  df <- read.csv(file, stringsAsFactors = FALSE)
+  
+  # Store the data frame in the list
+  dfs[[length(dfs) + 1]] <- df
+}
+```
+
+See which columns all of the dataframes have in common
+```{r}
+# Get column names of the first data frame
+common_columns <- names(dfs[[1]])
+
+# Loop through the remaining data frames and find common column names
+for (i in 2:length(dfs)) {
+  # Get column names of the current data frame
+  current_columns <- names(dfs[[i]])
+  
+  # Find common column names with previous data frames
+  common_columns <- intersect(common_columns, current_columns)
+}
+
+# 'common_columns' now contains the column names that are common across all data frames
+print(common_columns)
+```
+
+subset to common columns
+```{r}
+# Loop through each data frame in the list
+for (i in seq_along(dfs)) {
+  # Subset the data frame to only the common columns
+  dfs[[i]] <- dfs[[i]][, common_columns, drop = FALSE]
+}
+```
+
+
+combine datasheets vertically
+```{r}
+csv_combined_df <- do.call(rbind, dfs)
+```
+
+remove units rows
+```{r}
+csv_combined_df<-subset(csv_combined_df,Pressure!="CTD")
+csv_combined_df<-subset(csv_combined_df,Pressure!="[db]")
+```
+
+extract month
+```{r}
+csv_combined_df$Month <- substr(csv_combined_df$UTC.Time, 1, 3)
+unique(csv_combined_df$Month)
+csv_combined_df$Month <- recode_factor(csv_combined_df$Month, 
+                              'Apr' = "APR", 'Jul' = "JUL", 'Jun'="JUL",
+                              '6' = "JUL", 'Sep' = "SEP",'Oct'="OCT")
+```
+
+extract year
+```{r}
+csv_combined_df$Year <- substr(csv_combined_df$UTC.Time, 8, 11)
+unique(csv_combined_df$Year)
+```
+
+Subset stations
+```{r}
+unique(csv_combined_df$Station)
+# Define the seven named stations
+named_stations <- c("P4", "P8", "P12", "P28", "P38", "P402", "P22")
+
+# Subset the dataframe based on the named stations
+csv_subset_df <- csv_combined_df[csv_combined_df$Station %in% named_stations, ]
+unique(csv_subset_df$Station)
+```
+
+
+## merge two datasets
+```{r}
+colnames(subset_df)
+colnames(csv_subset_df)
+```
+rename columns from first dataset
+```{r}
+subset_df<-subset_df %>% rename(Cruise.ID = CruiseID, 
+                                Depth = "depSM: Depth",
+                                Potential.Temperature="potemp090C: Potential Temperature",
+                                Salinity="sal00: Salinity  Practical",
+                                Oxygen.Concentration.MG="sbeox0Mg/L: Oxygen  SBE 43",
+                                Chlorophyll.Fluorescence="flECO-AFL: Fluorescence  WET Labs ECO-AFL/FL")
+```
+
+```{r}
+# Find common columns
+common_columns <- intersect(names(subset_df), names(csv_subset_df))
+
+# Subset each data frame to only the common columns
+subset_df_common <- subset_df[, common_columns, drop = FALSE]
+csv_subset_df_common <- csv_subset_df[, common_columns, drop = FALSE]
+
+# Combine the data frames vertically
+downcasts_combined <- rbind(subset_df_common, csv_subset_df_common)
+```
+

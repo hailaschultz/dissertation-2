@@ -25,7 +25,7 @@ This dataset is from our WOAC zooplankton database and includes morphological ab
 
 Read data into R
 ```{r}
-Zooplankton <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/WOAC_Species_Densities_2014-2022.csv")
+Zooplankton <- read.csv("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/data/WOAC_2014-2022_Species_Data_Keister_Lab.csv")
 ```
 Read environmental data into R
 ```{r}
@@ -102,7 +102,7 @@ pH<-pH %>%
   summarise(
     pH = mean(pH))
 #subset to surface samples
-pH_surf<-subset(pH,Depth=="Surface")
+pH_surf<-subset(pH,Depth=="Deep")
 #make unique column
 pH_surf$code<-paste(pH_surf$Station, pH_surf$Year,pH_surf$Month,sep="-")
 ```
@@ -134,13 +134,19 @@ joined <- merge(joined, Oxygen_surf, by.x = "code",
 #remove excess columns
 env_joined <- joined[ -c(8:12,14:18) ]
 ```
+
+remove low quality zooplankton data
+```{r}
+unique(Zooplankton$Confidence)
+Zoop_sub<-subset(Zooplankton,Confidence!="low- flow high")
+Zoop_sub<-subset(Zoop_sub,Confidence!="LOW")
+Zoop_sub<-subset(Zoop_sub,Confidence!="Low-low flow")
+```
+
+
 subset to stations sampled during WOAC cruises
 ```{r}
-unique(Zooplankton$Station)
-Zoop_sub<-subset(Zooplankton,Station!="PEFS1d")
-Zoop_sub<-subset(Zoop_sub,Station!="PEFN1d")
-Zoop_sub<-subset(Zoop_sub,Station!="PEFN2")
-Zoop_sub<-subset(Zoop_sub,Station!="PEFS2")
+unique(Zoop_sub$Station)
 Zoop_sub<-subset(Zoop_sub,Station!="P381")
 Zoop_sub<-subset(Zoop_sub,Station!="P105")
 Zoop_sub<-subset(Zoop_sub,Station!="P136")
@@ -148,37 +154,44 @@ Zoop_sub<-subset(Zoop_sub,Station!="P7")
 Zoop_sub<-subset(Zoop_sub,Station!="P123")
 Zoop_sub<-subset(Zoop_sub,Station!="P132")
 unique(Zoop_sub$Station)
-#remove october and november samples
-Zoop_sub<-subset(Zoop_sub,Month!="NOV")
-Zoop_sub<-subset(Zoop_sub,Month!="OCT")
-Zoop_sub<-subset(Zoop_sub,Month!="MAR")
 #recode p4
 Zoop_sub$Station <- recode(Zoop_sub$Station, 
                                  "p4" = "P4")
-#remove ethanol samples
-Zoop_sub<-Zoop_sub[!grepl('_EtOH', Zoop_sub$Code),]
+#remove october and november samples
+Zoop_sub<-subset(Zoop_sub,Sample.Month!="NOV")
+Zoop_sub<-subset(Zoop_sub,Sample.Month!="OCT")
+Zoop_sub<-subset(Zoop_sub,Sample.Month!="MAR")
+
 #recode month names to match
-unique(Zoop_sub$Month)
-Zoop_sub$Month <- recode(Zoop_sub$Month, 
+unique(Zoop_sub$Sample.Month)
+Zoop_sub$Month <- recode(Zoop_sub$Sample.Month, 
                                  "Jul" = "JUL",
                          "Sep"="SEP")
+#exclude weird taxa
+Zoop_sub<-subset(Zoop_sub,WOAC.Group!="Exclude")
+```
+get # per m2
+```{r}
+Zoop_sub$density_squared<-Zoop_sub$Density....m3.*Zoop_sub$Station.Depth..m.
 ```
 
 ## get total zoop abundance
 add up multiple lines per station
 ```{r}
+colnames(Zoop_sub)
 #remove NA values in density
 Zoop_sub<-Zoop_sub[!is.na(Zoop_sub$Density....m3.),]
 Zoop_sub <- Zoop_sub %>%
-  group_by(Code,Station,Basin,Year,Month) %>%
+  group_by(Sample.Code,Station,Basin,Sample.Year,Sample.Month) %>%
   summarise(
-    zoop_density = sum(Density....m3.))
+    zoop_density = sum(Density....m3.),
+    zoop_density_squared=sum(density_squared))
 ```
 
 ```{r}
 #make unique column
-Zoop_sub$code<-paste(Zoop_sub$Station, Zoop_sub$Year,Zoop_sub$Month,sep="-")
-unique(Zoop_sub$Code)
+Zoop_sub$code<-paste(Zoop_sub$Station, Zoop_sub$Sample.Year,Zoop_sub$Sample.Month,sep="-")
+unique(Zoop_sub$code)
 ```
 # Combine env and zoop
 ```{r}
@@ -188,9 +201,56 @@ Zoop_env <- merge(env_joined,Zoop_sub, by.x = "code",
 Zoop_env <- Zoop_env[ -c(11,13:14) ]
 #remove rows with NA
 Zoop_env<-Zoop_env[!is.na(Zoop_env$Year.x),]
+#make year a factor
+Zoop_env$Year.x<-as.factor(Zoop_env$Year.x)
 ```
 
+distribution of zoop density
+```{r}
+colnames(Zoop_env)
+ggplot(Zoop_env, aes(x=zoop_density_squared)) + geom_histogram()
+ggplot(Zoop_env, aes(x=sqrt(zoop_density_squared))) + geom_histogram()
+```
+
+
 # scatterplot
+```{r}
+ggplot(Zoop_env, aes(x=temp, y=sqrt(zoop_density),color=Station.x)) + geom_point()+
+    facet_wrap(~Month.x)+ 
+  geom_smooth(method=lm, se=FALSE)+ylab("log(Total Zooplankton Density)")+xlab("Temperature")+ labs(color = "Station")
+```
+```{r}
+model <- lm(sqrt(zoop_density) ~ pH, data = Zoop_env)
+
+# Summary of the regression model
+summary(model)
+
+ggplot(Zoop_env, aes(x=pH, y=sqrt(zoop_density))) + geom_point()+ 
+  geom_smooth(method=lm, se=FALSE)
+```
+```{r}
+model <- lm(sqrt(zoop_density) ~ Oxygen, data = Zoop_env)
+
+# Summary of the regression model
+summary(model)
+ggplot(Zoop_env, aes(x=Oxygen, y=sqrt(zoop_density))) + geom_point()+ 
+  geom_smooth(method=lm, se=FALSE)
+```
+
+
+```{r}
+ggplot(Zoop_env, aes(x=Oxygen, y=sqrt(zoop_density))) + geom_point()+ 
+  geom_smooth(method=lm, se=FALSE)+theme_bw()+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) +
+  annotate("text", 
+           x = 7.15, y = 150, 
+           label = "p-value = 0.13 ",
+           hjust = 0, color = "black", size = 7)+xlab(expression(plain('Deep Oxygen') ~ plain('(mg/L)')))+ylab(expression(plain('sqrt (Total Zooplankton Abundance)') ~ plain('(#/' ~ m^2 ~ ')')))+
+  theme(
+    axis.text = element_text(size = 20), 
+    axis.title = element_text(size = 20),  
+    plot.margin = margin(20, 20, 20, 20))
+```
+
 ```{r}
 ggplot(Zoop_env, aes(x=temp, y=zoop_density, color=Station.x)) + geom_point()+
     facet_wrap(~Month.x)+ 
@@ -203,27 +263,352 @@ ggplot(Zoop_env, aes(x=temp, y=zoop_density, color=as.factor(Year.x))) + geom_po
 ```
 
 ```{r}
-ggplot(Zoop_env, aes(x=temp, y=zoop_density, color=Month.x)) + geom_point()+
+ggplot(Zoop_env, aes(x=temp, y=log(zoop_density), color=Month.x)) + geom_point()+
     facet_wrap(~Station.x)+ 
   geom_smooth(method=lm, se=FALSE)
 ```
 
 #boxplot
 ```{r}
-ggplot(Zoop_sub, aes(x=as.factor(Year), y=zoop_density)) + 
+ggplot(Zoop_env, aes(x=as.factor(Year.x), y=sqrt(zoop_density))) + 
     geom_boxplot(alpha=0.2) +
-    facet_wrap(~Month)
+    facet_wrap(~Month.x)+ylab("sqrt(Total Zooplankton Density)")+xlab("Year")  +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"),panel.border = element_rect(colour = "black", fill=NA))
+```
+```{r}
+ggplot(Zoop_env, aes(x=as.factor(Station.x), y=sqrt(zoop_density_squared))) + 
+    geom_boxplot(alpha=0.2) +
+    facet_wrap(~Month.x)+ylab("sqrt(Number of zooplankton/m2)")+xlab("Station")+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"),panel.border = element_rect(colour = "black", fill=NA))
+```
+
+untransformed model
+```{r}
+Mod1 <- aov(zoop_density_squared ~ Station.x+Year.x+Month.x+Station.x:Year.x+Station.x:Month.x+Month.x:Year.x, data = Zoop_env)
+
+summary(Mod1)
+
+TukeyHSD(Mod1, which = "Station.x")
+```
+Station, month and year are significant, significant interactions with station and year
+
+check normality assumptions
+```{r}
+ggplot(Zoop_env, aes(x=zoop_density_squared)) + geom_histogram()
+qqnorm(Mod1$residuals)
+qqline(Mod1$residuals)
+shapiro.test(Mod1$residuals)
+```
+Histogram is right skewed, qqplot looks weird, and shapiro test is significant, need to transform
+
+log transformation
+```{r}
+Mod2 <- aov(log(zoop_density) ~ Station.x+Year.x+Month.x+Station.x:Year.x+Station.x:Month.x+Month.x:Year.x, data = Zoop_env)
+
+summary(Mod2)
+ggplot(Zoop_env, aes(x=log(zoop_density))) + geom_histogram()
+qqnorm(Mod2$residuals)
+qqline(Mod2$residuals)
+shapiro.test(Mod2$residuals)
+TukeyHSD(Mod2, which = "Station.x")
+```
+histogram looks better, but shapiro wilk is still significang
+
+square root
+```{r}
+Mod3 <- aov(sqrt(zoop_density_squared) ~ Station.x+Year.x+Month.x+Station.x:Year.x+Station.x:Month.x+Month.x:Year.x, data = Zoop_env)
+
+summary(Mod3)
+ggplot(Zoop_env, aes(x=sqrt(zoop_density))) + geom_histogram()
+qqnorm(Mod3$residuals)
+qqline(Mod3$residuals)
+shapiro.test(Mod3$residuals)
+TukeyHSD(Mod3, which = "Station.x")
+TukeyHSD(Mod3, which = "Month.x")
+TukeyHSD(Mod3, which = "Year.x")
+```
+square root looks best
+- station, month, and year are significant
+- no significant interactions
+```{r}
+Zoop_env$Station.x <- factor(Zoop_env$Station.x, levels = c("P22", "P8", "P12","P402","P28","P38","P4"))
+Station_Total_zoop<-ggplot(Zoop_env, aes(x=as.factor(Station.x), y=sqrt(zoop_density_squared),fill=Station.x,color=Station.x)) + 
+    geom_boxplot(alpha=0.2) +ylab(expression(plain('sqrt (Total Zooplankton Abundance)') ~ plain('(#/' ~ m^2 ~ ')')))+xlab("Station")+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"),panel.border = element_rect(colour = "black", fill=NA)) +
+  scale_fill_manual(values = c("P22"="#F8766D", "P8"="#53B400", "P12"="#00B6EB","P402"="#A69AFF","P28"="#00C094","P38"="#FB61D7","P4"="#C49A00"))+
+scale_color_manual(values = c("P22"="#F8766D", "P8"="#53B400", "P12"="#00B6EB","P402"="#A69AFF","P28"="#00C094","P38"="#FB61D7","P4"="#C49A00"))+
+  scale_x_discrete(labels = c("P22"="Strait of Juan de Fuca", "P8"="Hood Canal Sill", "P12"="Hood Canal 1","P402"="Hood Canal 2","P28"="Main Basin","P38"="South Sound","P4"="Whidbey Basin"))+
+  theme(axis.text.y=element_text(size=15,colour="black"),
+        legend.position="none",
+        legend.text=element_text(size=15,colour="black"),
+        legend.title=element_text(size=15,colour="black"),
+        axis.title.y=element_text(size=15,colour="black"),
+        axis.line = element_line(colour = "black"),
+        axis.title.x=element_blank(),
+        axis.text.x = element_text(angle = 90, hjust = 1,size=15,colour="black"))+
+  geom_vline(xintercept = 4.5, linetype = "dashed", color = "black")+geom_vline(xintercept = 6.5, linetype = "dashed", color = "black")
+Station_Total_zoop
+```
+save plot
+```{r, eval=FALSE}
+setwd("/Users/hailaschultz/Dropbox/Schultz_Dissertation/Data_Analysis/Schultz_dissertation-2/figures")
+ggsave(filename = "Station_Total_zoop.png", plot = Station_Total_zoop, width = 200, height = 164, units="mm", device='png', dpi=600)
+
 ```
 
 ```{r}
-ggplot(Zoop_env, aes(x=as.factor(Station.x), y=zoop_density)) + 
-    geom_boxplot(alpha=0.2) +
+ggplot(Zoop_env, aes(x=pH, y=sqrt(zoop_density_squared),color=Station.x)) + geom_point()+
+    facet_wrap(~Month.x)+ 
+  geom_smooth(method=lm, se=FALSE)+ylab("sqrt(Total Zooplankton Density)")+xlab("Temperature")+ labs(color = "Station")
+```
+```{r}
+ggplot(Zoop_env, aes(x=Oxygen, y=sqrt(zoop_density_squared),color=Station.x)) + geom_point()+ 
+  geom_smooth(method=lm, se=FALSE)+ylab("sqrt(Total Zooplankton Density)")+xlab("Oxygen")+ labs(color = "Station")+
     facet_wrap(~Month.x)
 ```
 
 
+
 ```{r}
-ggplot(Zoop_env, aes(x=Oxygen, y=zoop_density, color=Station.x)) + geom_point()+
+ggplot(Zoop_env, aes(x=as.factor(Year.x), y=sqrt(zoop_density_squared))) + 
+    geom_boxplot(alpha=0.2) +ylab("sqrt(Number of zooplankton/m2)")+xlab("Station")+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"),panel.border = element_rect(colour = "black", fill=NA))
+```
+
+
+### April anova
+```{r}
+Zoop_env_APR<-subset(Zoop_env,Month.x=="APR")
+```
+
+log is best transformation
+```{r}
+
+Mod6 <- aov(log10(zoop_density) ~ Station.x+Year.x+Station.x:Year.x, data = Zoop_env_APR)
+
+summary(Mod6)
+ggplot(Zoop_env_APR, aes(x=log10(zoop_density))) + geom_histogram()
+qqnorm(Mod6$residuals)
+qqline(Mod6$residuals)
+shapiro.test(Mod6$residuals)
+TukeyHSD(Mod6, which = "Year.x")
+TukeyHSD(Mod6, which = "Station.x")
+```
+Year and Station are significant
+
+### July anova
+```{r}
+Zoop_env_JUL<-subset(Zoop_env,Month.x=="JUL")
+```
+
+square root transformed is best
+```{r}
+Mod6 <- aov(sqrt(zoop_density) ~ Station.x+Year.x+Station.x:Year.x, data = Zoop_env_JUL)
+
+summary(Mod6)
+ggplot(Zoop_env_JUL, aes(x=sqrt(zoop_density))) + geom_histogram()
+qqnorm(Mod6$residuals)
+qqline(Mod6$residuals)
+shapiro.test(Mod6$residuals)
+TukeyHSD(Mod6, which = "Year.x")
+TukeyHSD(Mod6, which = "Station.x")
+```
+Year was significant 
+
+### September anova
+```{r}
+Zoop_env_SEP<-subset(Zoop_env,Month.x=="SEP")
+```
+
+square root transformed is best
+```{r}
+Mod6 <- aov(sqrt(zoop_density) ~ Station.x+Year.x+Station.x:Year.x, data = Zoop_env_SEP)
+
+summary(Mod6)
+ggplot(Zoop_env_SEP, aes(x=sqrt(zoop_density))) + geom_histogram()
+qqnorm(Mod6$residuals)
+qqline(Mod6$residuals)
+shapiro.test(Mod6$residuals)
+TukeyHSD(Mod6, which = "Year.x")
+```
+square root is best, no year and station are not significant
+
+```{r}
+ggplot(Zoop_env, aes(x=as.factor(Station.x), y=log(zoop_density))) + 
+    geom_boxplot(alpha=0.2) + facet_wrap(~Month.x)+ylab("log(Total Zooplankton Density)")+xlab("Station")
+```
+
+```{r}
+ggplot(Zoop_env, aes(x=pH, y=log(zoop_density), color=Station.x)) + geom_point()+
     facet_wrap(~Month.x)+ 
   geom_smooth(method=lm, se=FALSE)
 ```
+
+oxygen
+
+```{r}
+Zoop_env$Station.x <- factor(Zoop_env$Station.x, levels = c("P22", "P8", "P12","P402","P28","P38","P4"))
+Station_Total_zoop<-ggplot(Zoop_env, aes(x=as.factor(Station.x), y=Oxygen,fill=Station.x,color=Station.x)) + 
+    geom_boxplot(alpha=0.2) +ylab(expression(plain('Deep Oxygen') ~ plain('(mg/L)')))+xlab("Station")+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"),panel.border = element_rect(colour = "black", fill=NA)) +
+  scale_fill_manual(values = c("P22"="#F8766D", "P8"="#53B400", "P12"="#00B6EB","P402"="#A69AFF","P28"="#00C094","P38"="#FB61D7","P4"="#C49A00"))+
+scale_color_manual(values = c("P22"="#F8766D", "P8"="#53B400", "P12"="#00B6EB","P402"="#A69AFF","P28"="#00C094","P38"="#FB61D7","P4"="#C49A00"))+
+  scale_x_discrete(labels = c("P22"="Strait of Juan de Fuca", "P8"="Hood Canal Sill", "P12"="Hood Canal 1","P402"="Hood Canal 2","P28"="Main Basin","P38"="South Sound","P4"="Whidbey Basin"))+
+  theme(axis.text.y=element_text(size=15,colour="black"),
+        legend.position="none",
+        axis.title.y=element_text(size=30,colour="black"),
+        axis.line = element_line(colour = "black"),
+        axis.title.x=element_blank(),
+        axis.text.x = element_text(angle = 90, hjust = 1,size=20,colour="black"))+
+  geom_vline(xintercept = 4.5, linetype = "dashed", color = "black")+geom_vline(xintercept = 6.5, linetype = "dashed", color = "black")
+Station_Total_zoop
+```
+pH
+
+```{r}
+Zoop_env$Station.x <- factor(Zoop_env$Station.x, levels = c("P22", "P8", "P12","P402","P28","P38","P4"))
+Station_Total_zoop<-ggplot(Zoop_env, aes(x=as.factor(Station.x), y=pH,fill=Station.x,color=Station.x)) + 
+    geom_boxplot(alpha=0.2) +ylab("Deep pH")+xlab("Station")+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"),panel.border = element_rect(colour = "black", fill=NA)) +
+  scale_fill_manual(values = c("P22"="#F8766D", "P8"="#53B400", "P12"="#00B6EB","P402"="#A69AFF","P28"="#00C094","P38"="#FB61D7","P4"="#C49A00"))+
+scale_color_manual(values = c("P22"="#F8766D", "P8"="#53B400", "P12"="#00B6EB","P402"="#A69AFF","P28"="#00C094","P38"="#FB61D7","P4"="#C49A00"))+
+  scale_x_discrete(labels = c("P22"="Strait of Juan de Fuca", "P8"="Hood Canal Sill", "P12"="Hood Canal 1","P402"="Hood Canal 2","P28"="Main Basin","P38"="South Sound","P4"="Whidbey Basin"))+
+  theme(axis.text.y=element_text(size=15,colour="black"),
+        legend.position="none",
+        axis.title.y=element_text(size=30,colour="black"),
+        axis.line = element_line(colour = "black"),
+        axis.title.x=element_blank(),
+        axis.text.x = element_text(angle = 90, hjust = 1,size=20,colour="black"))+
+  geom_vline(xintercept = 4.5, linetype = "dashed", color = "black")+geom_vline(xintercept = 6.5, linetype = "dashed", color = "black")
+Station_Total_zoop
+```
+
+
+# GLM
+## Examine Data
+Histograms of Jellyfish Density and Copepod Density
+```{r}
+colnames(Zoop_env)
+```
+
+```{r}
+hist(Zoop_env$zoop_density) 
+hist(Zoop_env$temp) 
+hist(Zoop_env$pH) 
+hist(Zoop_env$Oxygen)
+```
+environmental variables are relatively normally distributed, but zoop density has log distribution
+
+##investigate effect of year
+```{r}
+Zoop_env$Year.x<-as.factor(Zoop_env$Year.x)
+Year<-glm(zoop_density~Year.x,data=Zoop_env,family = Gamma(link="log"))
+summary(Year)
+plot(sqrt(zoop_density)~Year.x,data=Zoop_env)
+```
+
+year seems to be significant
+
+
+##investigate effect of Month
+```{r}
+Zoop_env$Month.x<-as.factor(Zoop_env$Month.x)
+Month<-glm(zoop_density~Month.x,data=Zoop_env,family = Gamma(link="log"))
+summary(Month)
+plot(zoop_density~Month.x,data=Zoop_env)
+```
+
+month seems to be significant
+
+##investigate effect of Station
+```{r}
+Zoop_env$Station.x<-as.factor(Zoop_env$Station.x)
+Station<-glm(zoop_density~Station.x,data=Zoop_env,family = Gamma(link="log"))
+summary(Station)
+plot(sqrt(zoop_density)~Station.x,data=Zoop_env)
+```
+## Family Options
+### Negative Binomial Distribution
+```{r}
+library(MASS)
+#round to integers
+Zoop_env$Zoop_density_round<-round(as.numeric(Zoop_env$zoop_density), 0)
+#run model
+Zoop_env_model1 <- glm.nb(Zoop_density_round~temp+pH+Oxygen, data = Zoop_env)
+summary(Zoop_env_model1)
+plot(Zoop_env_model1)
+```
+
+### Gaussian Distribution
+```{r}
+Zoop_env_model2 <- glm(Zoop_density_round~temp+pH+Oxygen, data = Zoop_env,family="gaussian")
+summary(Zoop_env_model2)
+plot(Zoop_env_model2)
+```
+
+worse than NB!
+
+### Gamma distribution
+```{r}
+Zoop_env <- Zoop_env[complete.cases(Zoop_env), ]
+Zoop_env_model3 <- glm(zoop_density~temp+pH+Oxygen, data = Zoop_env,family="Gamma"(link="log"))
+summary(Zoop_env_model3)
+plot(Zoop_env_model3)
+```
+
+### NB and gamma with log link are similar, choose NB
+
+check for multicollinearity
+```{r}
+Data1 = subset(Zoop_env, select = c(temp,pH,Oxygen,zoop_density) )
+pairs(Data1 , panel = panel.smooth)
+```
+oxygen and temp have slight relationship, remove oxygen
+
+```{r}
+Zoop_env_model4 <- glm.nb(Zoop_density_round~temp+pH+Year.x+Month.x+Station.x, data = Zoop_env,
+            na.action = "na.fail")
+summary(Zoop_env_model4)
+plot(Zoop_env_model4)
+```
+temp not significant
+
+get best model
+```{r}
+library(MuMIn)
+allperms <- dredge(Zoop_env_model4)
+mod.table1 <- data.frame(allperms)
+mod.table1
+```
+
+station as random effect
+```{r}
+Zoop_env_model4 <- glmer.nb(Zoop_density_round~pH+Year.x+Month.x+(1|Station.x), data = Zoop_env,
+            na.action = "na.fail")
+summary(Zoop_env_model4)
+plot(Zoop_env_model4)
+```
+get best model
+```{r}
+library(MuMIn)
+allperms <- dredge(Zoop_env_model4)
+mod.table1 <- data.frame(allperms)
+mod.table1
+```
+best model: pH, month, and year are in best model
+
+best model
+```{r}
+Zoop_env_model5<-glmer.nb(Zoop_density_round~pH+Month.x+Year.x+(1|Station.x), data = Zoop_env,
+            na.action = "na.fail")
+summary(Zoop_env_model5)
+plot(Zoop_env_model5)
+```
+station and month as random effect (no year)
+```{r}
+Zoop_env_model6 <- glmer.nb(Zoop_density_round~temp+pH+(1|Month.x)+(1|Station.x), data = Zoop_env,
+            na.action = "na.fail")
+summary(Zoop_env_model6)
+plot(Zoop_env_model6)
+```
+
